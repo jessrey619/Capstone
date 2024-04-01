@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <p>Lahat SISIMHUTIN PATI BOLBOL SA UTIN</p>
+      <p>Lahat SISIMHUTIN PATI</p>
       {/* THIS SHOULD BE THE LANDING PAGE BUT IF NAAY MU HIMO CHILL */}
     </div>
   );

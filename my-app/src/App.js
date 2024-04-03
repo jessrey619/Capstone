@@ -1,16 +1,21 @@
 import './App.css';
 import { BrowserRouter as Router, Swtih, Route} from 'react-router-dom';
-import Navbar from './Components/Navbar';
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'remixicon/fonts/remixicon.css'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+
+import Header from './Components/Header/Header';
+import SideBar from './Components/SideBar/SideBar';
+
 
 
 function App() {
   return (
     <>
     <Router>
-      <Navbar/>
-      {/* <Switch>
-        <Route path="/" exact />
-      </Switch> */}
+      <Header/>
     </Router>
     </>
   );

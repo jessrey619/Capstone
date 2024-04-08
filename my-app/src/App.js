@@ -16,6 +16,7 @@ function App() {
     <>
     <Router>
       <Header/>
+      <SideBar/>
     </Router>
     </>
   );

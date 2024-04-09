@@ -3,11 +3,13 @@ const navList = [
         _id: 1,
         name: 'Dashboard',
         icon: 'ri-dashboard-line',
+        link: '/dashboard'
     },
     {
         _id: 2,
         name: 'Application List',
         icon: 'bi bi-person-lines-fill',
+        link: '/application-list'
     },
     {
         _id: 3,

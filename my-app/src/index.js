@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import LogsEmployee from './pages/Logs';
 import TheHeader from './components/Header';
+// import LogsEmployee from './pages/Logs';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
    {/* <LogsEmployee/> */}
-  <TheHeader/>
+<TheHeader></TheHeader>
   </React.StrictMode>
 );
 

@@ -1,32 +1,59 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import GoogleFontsLink from '../responsive/googleFont';
+import React, { useEffect, useState } from 'react';
+import DropdownMenu from '../responsive/menu';
+import '../CSS/HeaderUser.css';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: 'Kumbh Sans, sans-serif', 
-    fontWeight: 'Bold',
-  },
-});
+const TheHeader = () => {
+  const [isMobile, setIsMobile] = useState(false);
 
-export default function TheHeader() {
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 660);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Initial check for mobile viewport width
+    handleResize();
+
+    // Clean up function to remove event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Create a link element
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap';
+
+    // Append the link element to the document head
+    document.head.appendChild(link);
+
+    // Clean up function to remove the link when the component is unmounted
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ flexGrow: 1 }}>
-            <Grid item xs={12}>
-              <img src="/citu-logoSmall.png" alt="HeaderLogo" className="headerImage" style={{ width: '300px', marginRight: '20px' }}/>
-           <GoogleFontsLink/>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Home
-            </Typography>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              About Us
-            </Typography>
-            </Grid>
-      </Box>
-    </ThemeProvider>
+    <div className={`header ${isMobile ? 'mobile' : ''}`}>
+      <div className="logo-container">
+        <img src="/citu-logoSmall.png" alt="HeaderLogo" className="headerImage" />
+      </div>
+      <nav className="nav">
+        {isMobile ? (
+          <DropdownMenu/>
+        ) : (
+          <>
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+          </>
+        )}
+      </nav>
+    </div>
   );
 }
+
+export default TheHeader;

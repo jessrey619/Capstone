@@ -10,7 +10,7 @@
   
 .logo-container {
     width: 300px;
-    margin-left: 25px;
+    margin-left: 40px;
   }
   
 .headerImage {
@@ -19,6 +19,7 @@
   
 .nav {
     display: flex;
+    margin-right: 25px;
   }
   
 .nav a {
@@ -38,25 +39,25 @@
   /* Media Query for Responsive Design */
 
   @media (max-width: 660px) {
-
     .header {
-      flex-direction: row; 
-      justify-content: space-between; 
-      align-items: center; 
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
     }
-
+  
     .logo-container {
-      margin-right: 20px; 
-      width: auto; 
-      transition: width 12s ease-in-out;
+      margin-right: 20px;
+      width: auto;
+      margin-left: 20px;
+      transition: width 0.5s ease-in-out; 
     }
   
     .nav {
-      margin-left: auto; 
-      margin-right: 20px; 
+      margin-left: auto;
+      margin-right: 20px;
     }
   
     .nav a {
-      margin-left: 20px; 
+      margin-left: 20px;
+    }
   }
-}

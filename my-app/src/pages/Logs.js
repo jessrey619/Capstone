@@ -21,7 +21,7 @@ function LogsEmployee() {
 
     return (
         <ThemeProvider theme={theme}>
-              {/* <img src="/backgroundEmployee.png" alt="background" className="background-image" /> */}
+              {/* <img src="/employee_bg.png" alt="background" className="background-image" /> */}
             <TheHeader/>
             <div>
             </div>

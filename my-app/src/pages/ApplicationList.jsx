@@ -1,10 +1,12 @@
 import React from 'react'
+import '../Components/Main/main.css';
 
-export default function ApplicationList() {
+function ApplicationList() {
   return (
-    <>
-      {/* Add your dashboard content here, like charts, graphs, or data tables */}
-      <p>This is where you can see the list of application from pending, approved and declined.</p>
-    </>
+    <main id='main' className='main'>
+      <h1>Application List</h1>
+    </main>
   )
 }
+
+export default ApplicationList

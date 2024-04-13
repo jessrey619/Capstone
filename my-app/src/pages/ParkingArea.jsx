@@ -1,12 +1,12 @@
 import React from 'react'
 import '../Components/Main/main.css';
 
-function Dashboard() {
+function ParkingArea() {
   return (
     <main id='main' className='main'>
-      <h1>Dashboard</h1>
+      <h1>Parking Area</h1>
     </main>
   )
 }
 
-export default Dashboard
+export default ParkingArea

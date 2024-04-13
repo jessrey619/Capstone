@@ -1,12 +1,12 @@
 import React from 'react'
 import '../Components/Main/main.css';
 
-function Dashboard() {
+function Statistics() {
   return (
     <main id='main' className='main'>
-      <h1>Dashboard</h1>
+      <h1>Statistics</h1>
     </main>
   )
 }
 
-export default Dashboard
+export default Statistics

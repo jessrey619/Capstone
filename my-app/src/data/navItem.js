@@ -3,7 +3,7 @@ const navList = [
         _id: 1,
         name: 'Dashboard',
         icon: 'ri-dashboard-line',
-        link: '/dashboard'
+        link: '/'
     },
     {
         _id: 2,
@@ -15,21 +15,25 @@ const navList = [
         _id: 3,
         name: 'Logs',
         icon: 'bi bi-journal-text',
+        link: '/logs'
     },
     {
         _id: 4,
         name: 'Statistics',
         icon: 'ri-bar-chart-2-line',
+        link: '/statistics'
     },
     {
         _id: 5,
         name: 'Parking Area',
         icon: 'ri-parking-line',
+        link: '/parking-area'
     },
     {
         _id: 6,
         name: 'Configuration',
         icon: 'bi bi-gear',
+        link: '/configuration'
     },
 ];
 

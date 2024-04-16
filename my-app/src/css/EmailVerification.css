@@ -1,0 +1,30 @@
+.icon {
+    width: 50%;
+}
+
+.btnNewRegistration {
+    width: 10vw; /* Use viewport width instead of viewport height for button width */
+    font-size: 1vw; /* Use viewport width for font size */
+}
+
+body {
+    background-image: url('../../public/landingPageBackground.png');
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* Media query for screens smaller than 768px (typical mobile devices) */
+@media only screen and (max-width: 768px) {
+    .icon {
+        width: 70%; /* Full width for icons on smaller screens */
+    }
+
+    .btnNewRegistration {
+        width: 30vw; /* Adjust button width for smaller screens */
+        font-size: 3.5vw; /* Adjust font size for smaller screens */
+        overflow: auto;
+        
+    }
+}

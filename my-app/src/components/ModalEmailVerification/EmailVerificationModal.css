@@ -1,0 +1,102 @@
+/* EmailVerificationModal.css */
+
+.modal-main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  width: 90%; /* Adjusted width for smaller screens */
+  max-width: 400px; /* Added max-width for larger screens */
+  margin: 0 auto; /* Center the modal on smaller screens */
+}
+
+.email,
+.otp {
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%; /* Full width for input fields on smaller screens */
+  max-width: 300px; /* Added max-width for larger screens */
+}
+
+.btnGetOtp,
+.btnSubmit,
+.btnResend,
+.resend {
+  padding: 5px 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  width: 100%; /* Full width for buttons on smaller screens */
+  max-width: 200px; /* Added max-width for larger screens */
+}
+
+.countdown {
+  margin-top: 10px;
+}
+
+.countdown span {
+  font-weight: bold;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Adjusted width for smaller screens */
+  max-width: 400px; /* Added max-width for larger screens */
+}
+
+.modal-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.modal-body {
+  margin-bottom: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+}
+
+.close-btn:hover {
+  color: #555;
+}
+
+/* Media query for screens smaller than 768px (typical mobile devices) */
+@media only screen and (max-width: 768px) {
+  .modal-main-content,
+  .modal-content {
+      width: 90%; /* Adjusted width for smaller screens */
+      max-width: 300px; /* Added max-width for larger screens */
+  }
+
+  .email,
+  .otp {
+      max-width: 250px; /* Adjusted max-width for larger screens */
+  }
+
+  .btnGetOtp,
+  .btnSubmit,
+  .btnResend,
+  .resend {
+      max-width: 150px; /* Adjusted max-width for larger screens */
+  }
+}

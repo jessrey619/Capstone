@@ -27,6 +27,7 @@ function App() {
         <Route index element={<ViewImages/>} path='/Images/'/>
         <Route index element={<AddImage/>} path='/Images/add'/>
         <Route index element={<PhotoGallery/>} path='/photos/'/>
+        <Route index element={<ChangePassword/>} path='/Account/ChangePassword' />
       </Routes>
     </div>
   );

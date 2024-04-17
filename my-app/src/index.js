@@ -20,7 +20,6 @@ ReactDOM.render(
       <Routes>
         <Route>
           <Route path='/' element={<App/>} />
-          <Route path='/Account/ChangePassword' element={<ChangePassword/>} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,0 +1,47 @@
+import React, { useEffect } from 'react';
+import '../CSS/Footer.css';
+
+const TheFooter = () => {
+useEffect(() => {
+    // Create a link element
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap';
+
+    // Append the link element to the document head
+    document.head.appendChild(link);
+
+    // Clean up function to remove the link when the component is unmounted
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
+  return (
+    <div className="footer">
+      <div className="logoContainer">
+        <img src="/citu-logoBig.png" alt="FooterLogo" className="footerImage" />
+      </div>
+
+      <div className='info1'>
+        <div>
+            <h6 className='this'>Contact Us</h6>
+                <p>N. Bacalso Avenue, Cebu City <br/> Philippines 6000</p>
+                <p>+63 32 411 2000 (trunkline)</p> 
+                <p>info@cit.edu</p>
+        </div>
+        <div className='info2'>
+            <h6 className='title'>Quick Links</h6>
+                <nav className="nav-footer">
+                    <a href="#home">Cit.edu</a>
+                    <a href="#about">Lair</a>
+                    <a href="#about">AIMS</a>
+                </nav>
+        </div>
+
+        </div>
+    </div>
+  );
+}
+
+export default TheFooter;

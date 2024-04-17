@@ -15,6 +15,7 @@ import EmailVerification from './pages/EmailVerification';
 import ViewImages from './components/InsertImageTest/ViewImages';
 import AddImage from './components/InsertImageTest/AddImage';
 import PhotoGallery from './components/InsertImageTest/PhotoGallery';
+import ChangePassword from './pages/ChangePassword';
 
 
 

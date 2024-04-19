@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
   import * as React from "react";
 
     
@@ -107,12 +108,43 @@
                     <div className="div-33">Cit.edu</div>
                     <div className="div-34">Lair</div>
                     <div className="div-35">AIMS</div>
+=======
+import * as React from "react";
+
+function Homepage() {
+  return (
+    <>
+      <div className="div">
+        <div className="div-2">
+          <div className="div-3">
+            <img
+              loading="lazy"
+              srcSet="..."
+              className="img"
+            />
+            <div className="div-4">
+              <div className="div-5">Home</div>
+              <div className="div-6">About Us</div>
+            </div>
+          </div>
+          <div className="div-7">
+            <div className="div-8">
+              <div className="column">
+                <div className="div-9">Profile</div>
+              </div>
+              <div className="column-2">
+                <div className="div-10">
+                  <div className="div-11">
+                    <div className="div-12">Status</div>
+                    <div className="div-13">Active</div>
+>>>>>>> Stashed changes
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+<<<<<<< Updated upstream
         <style jsx>{`
           .div {
             background-color: #fff;
@@ -646,3 +678,556 @@
   }
 
   export default Homepage;
+=======
+        <div className="div-14">
+          <div className="div-15">
+            <div className="column-3">
+              <div className="div-16">
+                <img
+                  loading="lazy"
+                  srcSet="..."
+                  className="img-2"
+                />
+                <img
+                  loading="lazy"
+                  srcSet="..."
+                  className="img-3"
+                />
+              </div>
+            </div>
+            <div className="column-4">
+              <div className="div-17">
+                <div className="div-18">
+                  <div className="div-19">
+                    <div className="column-5">
+                      <div className="div-20">
+                        <div className="div-21">Disclaimer</div>
+                        <div className="div-22">
+                          Release of stickers starts on Monday!{" "}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="column-6">
+                      <div className="div-23">Register/Renewal</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="div-24">
+                  <div className="div-25">
+                    <div className="column-7">
+                      <div className="div-26">
+                        <div className="div-27">Contact Us</div>
+                        <div className="div-28">
+                          N. Bacalso Avenue, Cebu City Philippines 6000
+                        </div>
+                        <div className="div-29">+63 32 411 2000(trunkline)</div>
+                        <div className="div-30">info@cit.edu</div>
+                      </div>
+                    </div>
+                    <div className="column-8">
+                      <div className="div-31">
+                        <div className="div-32">Quick Links</div>
+                        <div className="div-33">Cit.edu</div>
+                        <div className="div-34">Lair</div>
+                        <div className="div-35">AIMS</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <style jsx>{`
+        .div {
+          background-color: #fff;
+          display: flex;
+          padding-top: 13px;
+          flex-direction: column;
+        }
+        .div-2 {
+          display: flex;
+          width: 100%;
+          padding-left: 80px;
+          flex-direction: column;
+        }
+        @media (max-width: 991px) {
+          .div-2 {
+            max-width: 100%;
+            padding-left: 20px;
+          }
+        }
+        .div-3 {
+          display: flex;
+          margin-left: 17px;
+          width: 100%;
+          gap: 20px;
+          font-size: 20px;
+          color: #000;
+          font-weight: 700;
+          text-align: center;
+          justify-content: space-between;
+        }
+        @media (max-width: 991px) {
+          .div-3 {
+            max-width: 100%;
+            flex-wrap: wrap;
+            padding-right: 20px;
+          }
+        }
+        .img {
+          aspect-ratio: 5;
+          object-fit: auto;
+          object-position: center;
+          width: 478px;
+        }
+        @media (max-width: 991px) {
+          .img {
+            max-width: 100%;
+          }
+        }
+        .div-4 {
+          display: flex;
+          gap: 20px;
+          justify-content: space-between;
+          margin: auto 0;
+        }
+        .div-5 {
+          font-family: Kumbh Sans, sans-serif;
+        }
+        .div-6 {
+          font-family: Kumbh Sans, sans-serif;
+        }
+        .div-7 {
+          align-self: center;
+          width: 1083px;
+          max-width: 100%;
+          margin: 134px 0 0 49px;
+        }
+        @media (max-width: 991px) {
+          .div-7 {
+            margin-top: 40px;
+          }
+        }
+        .div-8 {
+          gap: 20px;
+          display: flex;
+        }
+        @media (max-width: 991px) {
+          .div-8 {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0px;
+          }
+        }
+        .column {
+          display: flex;
+          flex-direction: column;
+          line-height: normal;
+          width: 31%;
+          margin-left: 0px;
+        }
+        @media (max-width: 991px) {
+          .column {
+            width: 100%;
+          }
+        }
+        .div-9 {
+          border-radius: 20px;
+          background-color: #8a252c;
+          flex-grow: 1;
+          align-items: center;
+          color: #fff;
+          white-space: nowrap;
+          text-align: center;
+          justify-content: center;
+          width: 100%;
+          padding: 124px 60px 80px;
+          font: 700 32px Kumbh Sans, -apple-system, Roboto, Helvetica,
+            sans-serif;
+        }
+        @media (max-width: 991px) {
+          .div-9 {
+            margin-top: 20px;
+            white-space: initial;
+            padding: 40px 20px 0;
+          }
+        }
+        .column-2 {
+          display: flex;
+          flex-direction: column;
+          line-height: normal;
+          width: 69%;
+          margin-left: 20px;
+        }
+        @media (max-width: 991px) {
+          .column-2 {
+            width: 100%;
+          }
+        }
+        .div-10 {
+          border-radius: 20px;
+          background-color: #5f191e;
+          display: flex;
+          margin-top: 5px;
+          flex-grow: 1;
+          flex-direction: column;
+          align-items: center;
+          color: #fff;
+          white-space: nowrap;
+          text-align: center;
+          width: 100%;
+          padding: 31px 60px 80px;
+        }
+        @media (max-width: 991px) {
+          .div-10 {
+            max-width: 100%;
+            margin-top: 25px;
+            white-space: initial;
+            padding: 0 20px;
+          }
+        }
+        .div-11 {
+          display: flex;
+          flex-direction: column;
+        }
+        @media (max-width: 991px) {
+          .div-11 {
+            white-space: initial;
+          }
+        }
+        .div-12 {
+          font: 600 36px Kumbh Sans, -apple-system, Roboto, Helvetica,
+            sans-serif;
+        }
+        .div-13 {
+          margin-top: 62px;
+          font: 800 40px Kumbh Sans, -apple-system, Roboto, Helvetica,
+            sans-serif;
+        }
+        @media (max-width: 991px) {
+          .div-13 {
+            margin-top: 40px;
+          }
+        }
+        .div-14 {
+          z-index: 10;
+          margin-top: -157px;
+          width: 100%;
+        }
+        @media (max-width: 991px) {
+          .div-14 {
+            max-width: 100%;
+          }
+        }
+        .div-15 {
+          gap: 20px;
+          display: flex;
+        }
+        @media (max-width: 991px) {
+          .div-15 {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0px;
+          }
+        }
+        .column-3 {
+          display: flex;
+          flex-direction: column;
+          line-height: normal;
+          width: 28%;
+          margin-left: 0px;
+        }
+        @media (max-width: 991px) {
+          .column-3 {
+            width: 100%;
+          }
+        }
+        .div-16 {
+          disply: flex;
+          flex-direction: column;
+          overflow: hidden;
+          position: relative;
+          display: flex;
+          min-height: 892px;
+          flex-grow: 1;
+          align-items: start;
+          padding: 80px 60px 8px;
+        }
+        @media (max-width: 991px) {
+          .div-16 {
+            max-width: 100%;
+            padding: 0 20px;
+          }
+        }
+        .img-2 {
+          position: absolute;
+          inset: 0;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+        .img-3 {
+          aspect-ratio: 1.41;
+          object-fit: auto;
+          object-position: center;
+          width: 332px;
+          margin-top: 569px;
+          max-width: 100%;
+        }
+        @media (max-width: 991px) {
+          .img-3 {
+            margin: 40px 0 0 8px;
+          }
+        }
+        .column-4 {
+          display: flex;
+          flex-direction: column;
+          line-height: normal;
+          width: 72%;
+          margin-left: 20px;
+        }
+        @media (max-width: 991px) {
+          .column-4 {
+            width: 100%;
+          }
+        }
+        .div-17 {
+          display: flex;
+          margin-top: 175px;
+          flex-direction: column;
+        }
+        @media (max-width: 991px) {
+          .div-17 {
+            max-width: 100%;
+            margin-top: 40px;
+          }
+        }
+        .div-18 {
+        }
+        @media (max-width: 991px) {
+          .div-18 {
+            max-width: 100%;
+          }
+        }
+        .div-19 {
+          gap: 20px;
+          display: flex;
+        }
+        @media (max-width: 991px) {
+          .div-19 {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0px;
+          }
+        }
+        .column-5 {
+          display: flex;
+          flex-direction: column;
+          line-height: normal;
+          width: 69%;
+          margin-left: 0px;
+        }
+        @media (max-width: 991px) {
+          .column-5 {
+            width: 100%;
+          }
+        }
+        .div-20 {
+          border-radius: 20px;
+          background-color: #f4c522;
+          display: flex;
+          flex-grow: 1;
+          flex-direction: column;
+          align-items: start;
+          font-size: 32px;
+          color: #000;
+          width: 100%;
+          padding: 31px 46px 80px;
+        }
+        @media (max-width: 991px) {
+          .div-20 {
+            max-width: 100%;
+            margin-top: 30px;
+            padding: 0 20px;
+          }
+        }
+        .div-21 {
+          text-align: center;
+          font-family: Kumbh Sans, sans-serif;
+          font-weight: 700;
+        }
+        @media (max-width: 991px) {
+          .div-21 {
+            max-width: 100%;
+          }
+        }
+        .div-22 {
+          font-family: Kumbh Sans, sans-serif;
+          font-weight: 600;
+          margin-top: 54px;
+        }
+        @media (max-width: 991px) {
+          .div-22 {
+            max-width: 100%;
+            margin-top: 40px;
+          }
+        }
+        .column-6 {
+          display: flex;
+          flex-direction: column;
+          line-height: normal;
+          width: 31%;
+          margin-left: 20px;
+        }
+        @media (max-width: 991px) {
+          .column-6 {
+            width: 100%;
+          }
+        }
+        .div-23 {
+          border-radius: 20px;
+          background-color: #efefef;
+          flex-grow: 1;
+          align-items: center;
+          color: #000;
+          white-space: nowrap;
+          text-align: center;
+          justify-content: center;
+          width: 100%;
+          padding: 101px 60px 80px;
+          font: 700 32px Kumbh Sans, -apple-system, Roboto, Helvetica,
+            sans-serif;
+        }
+        @media (max-width: 991px) {
+          .div-23 {
+            max-width: 100%;
+            margin-top: 30px;
+            white-space: initial;
+            padding: 0 20px;
+          }
+        }
+        .div-24 {
+          align-self: center;
+          margin-top: 232px;
+          width: 806px;
+          max-width: 100%;
+        }
+        @media (max-width: 991px) {
+          .div-24 {
+            margin-top: 40px;
+            padding-right: 20px;
+          }
+        }
+        .div-25 {
+          gap: 20px;
+          display: flex;
+        }
+        @media (max-width: 991px) {
+          .div-25 {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0px;
+          }
+        }
+        .column-7 {
+          display: flex;
+          flex-direction: column;
+          line-height: normal;
+          width: 66%;
+          margin-left: 0px;
+        }
+        @media (max-width: 991px) {
+          .column-7 {
+            width: 100%;
+          }
+        }
+        .div-26 {
+          display: flex;
+          flex-grow: 1;
+          flex-direction: column;
+          font-size: 20px;
+          color: #7d7d7d;
+          font-weight: 400;
+          text-align: center;
+          line-height: 124%;
+        }
+        @media (max-width: 991px) {
+          .div-26 {
+            margin-top: 40px;
+          }
+        }
+        .div-27 {
+          color: #000;
+          align-self: center;
+          font: 600 30px Kumbh Sans, -apple-system, Roboto, Helvetica,
+            sans-serif;
+        }
+        .div-28 {
+          font-family: Kumbh Sans, sans-serif;
+          line-height: 25px;
+          margin-top: 27px;
+        }
+        .div-29 {
+          font-family: Kumbh Sans, sans-serif;
+          margin-top: 27px;
+        }
+        .div-30 {
+          font-family: Kumbh Sans, sans-serif;
+          align-self: center;
+          margin-top: 23px;
+        }
+        .column-8 {
+          display: flex;
+          flex-direction: column;
+          line-height: normal;
+          width: 34%;
+          margin-left: 20px;
+        }
+        @media (max-width: 991px) {
+          .column-8 {
+            width: 100%;
+          }
+        }
+        .div-31 {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: 20px;
+          color: #7d7d7d;
+          font-weight: 400;
+          text-align: center;
+          line-height: 124%;
+        }
+        @media (max-width: 991px) {
+          .div-31 {
+            margin-top: 40px;
+          }
+        }
+        .div-32 {
+          color: #000;
+          align-self: stretch;
+          font: 600 30px Kumbh Sans, -apple-system, Roboto, Helvetica,
+            sans-serif;
+        }
+        .div-33 {
+          font-family: Kumbh Sans, sans-serif;
+          font-weight: 500;
+          margin-top: 18px;
+        }
+        .div-34 {
+          font-family: Kumbh Sans, sans-serif;
+          margin-top: 14px;
+        }
+        .div-35 {
+          font-family: Kumbh Sans, sans-serif;
+          margin-top: 15px;
+        }
+      `}</style>
+    </>
+  );
+}
+export default Homepage;
+>>>>>>> Stashed changes

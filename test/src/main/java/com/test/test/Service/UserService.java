@@ -41,4 +41,25 @@ public class UserService {
     public boolean verifyPassword(String plainTextPassword, String hashedPassword) {
         return BCrypt.checkpw(plainTextPassword, hashedPassword);
     }
+    
+    //Change Password
+    public boolean changePassword(String username, String oldPassword, String newPassword, String confirmNewPassword) {
+        UserEntity user = userRepository.findByUsername(username);
+        if (user == null) {
+            return false; // User not found
+        }
+        if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
+            return false; // Old password is incorrect
+        }
+        if (!newPassword.equals(confirmNewPassword)) {
+            return false; // New passwords do not match
+        }
+
+        // Hash the new password
+        String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+        user.setPassword(hashedPassword);
+        userRepository.save(user);
+        return true; // Password changed successfully
+    }
+
 }

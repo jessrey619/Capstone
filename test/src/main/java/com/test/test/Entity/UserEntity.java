@@ -13,11 +13,11 @@ import jakarta.persistence.Table;
 @Table(name="tbluser")
 public class UserEntity {
 
-	@Id
+  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="id")
   private int id;
-	private String username;
+  private String username;
 	private String password;
 	private String fname;
 	private String mname;
@@ -33,7 +33,7 @@ public class UserEntity {
 	private Date datePaid;
 	private Boolean isVerified;
 	private Boolean isApproved;
-	
+	private Boolean isEnabled;
 	
 	
 	public UserEntity() {
@@ -176,6 +176,14 @@ public class UserEntity {
 
 	public void setIsApproved(Boolean isApproved) {
 		this.isApproved = isApproved;
+	}
+
+	public Boolean getIsEnabled() {
+		return isEnabled;
+	}
+
+	public void setIsEnabled(Boolean isEnabled) {
+		this.isEnabled = isEnabled;
 	}
 	
 }

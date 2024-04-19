@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import DropdownMenu from '../responsive/menu';
-import '../CSS/HeaderUser.css';
+import '../css/HeaderUser.css';
 
 const TheHeader = () => {
   const [isMobile, setIsMobile] = useState(false);

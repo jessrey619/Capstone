@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
-import TheHeader from './components/Header';
-
+import TheHeader from './Components/OtherHeader';
 import {BrowserRouter, Route, Routes } from 'react-router-dom';
+import LogsEmployee from './pages/Logs';
+
 
 
 
@@ -15,7 +16,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route>
-          <Route path='/' element={<App/>} />
+          <Route path='/' element={<LogsEmployee/>} />
         </Route>
       </Routes>
     </BrowserRouter>

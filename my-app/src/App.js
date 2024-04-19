@@ -15,6 +15,7 @@ import ViewImages from './components/InsertImageTest/ViewImages';
 import AddImage from './components/InsertImageTest/AddImage';
 import PhotoGallery from './components/InsertImageTest/PhotoGallery';
 import ChangePassword from './pages/ChangePassword';
+import TheHeader from './components/Header';
 
 
 
@@ -22,7 +23,7 @@ function App() {
   return (
 
     <div className='app'>
-
+      <TheHeader/>
       <Routes>
         <Route index element={<EmailVerification/>} path='/Register/EmailVerification'/>
         <Route index element={<ViewImages/>} path='/Images/'/>

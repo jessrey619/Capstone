@@ -1,24 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import TheHeader from './Components/OtherHeader';
-import {BrowserRouter, Route, Routes } from 'react-router-dom';
-import LogsEmployee from './pages/Logs';
+
+import {BrowserRouter } from 'react-router-dom';
 
 
 
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 ReactDOM.render(
   <React.StrictMode>
-    <TheHeader/>
     <BrowserRouter>
-      <Routes>
-        <Route>
-          <Route path='/' element={<LogsEmployee/>} />
-        </Route>
-      </Routes>
+  <App/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

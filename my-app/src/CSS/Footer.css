@@ -7,6 +7,7 @@
     background-color: rgba(255, 255, 255, 0.5); 
     font-family: 'Kumbh Sans', sans-serif;
     height: min-content;
+    background-color: white;
   }
   
 .logoContainer {
@@ -45,12 +46,12 @@
   }
 
 .title {
-  
+  font-family: 'Kumbh Sans', sans-serif;
     margin-bottom: 10px;
 }
 
 .info2 {
-    
+  font-family: 'Kumbh Sans', sans-serif;
     margin: auto;
     margin-left: 100px;
     margin-top: -2px;
@@ -62,11 +63,13 @@ h6 {
     padding: 3px;
     align-items: center;
     justify-content: center;
+    font-family: 'Kumbh Sans', sans-serif;
    
 }
 
 .this {
     margin-bottom: 10px;
+    font-family: 'Kumbh Sans', sans-serif;
 }
 
 .info1{

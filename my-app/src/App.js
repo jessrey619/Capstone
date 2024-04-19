@@ -3,7 +3,11 @@
 // import logo from './logo.svg';
 // import Axios from 'axios'
 
+import { Route , Routes} from 'react-router-dom';
 import './App.css';
+// import TheHeader from './Components/OtherHeader';
+import LogsEmployee from './pages/LogsEmployee';
+// 
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 // import 'bootstrap-icons/font/bootstrap-icons.css'
 // import 'remixicon/fonts/remixicon.css'
@@ -19,10 +23,12 @@ function App() {
   return (
 
     <div className='app'>
-      {/* <Routes>
+      {/* <TheHeader/> */}
+      <Routes>
+        <Route index element={<LogsEmployee/>} path='/Employee/Logs'/>
       </Routes>
-       */}
-    </div>
+      
+       </div>
   );
 };
 

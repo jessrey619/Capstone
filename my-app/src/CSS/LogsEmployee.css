@@ -1,18 +1,67 @@
+body{
+    background-color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
 .background-image {
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire container */
+    right: 0;
+    width: 400px;
+    height: max-content;
     z-index: -1; /* Move the image behind other content */
 }
 
-.sample {
-    background-color: magenta;
-    max-height: max-content;
+.liveContainer {
+    background-color: white;
+    font: 100;
+    height: 180px;
+    width: 60%;
+    margin: auto;
+    margin-right: 90px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.25);
 }
+
+.total {    
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.liveCount {
+  background-color: #F4C522;
+  border: 1px solid #CEA61A;
+  border-radius: 10px;
+  width: 30%;
+  
+}
+
+.liveContent {
+    padding: 10px;
+    font-weight: 700;
+    color: black;
+    border-bottom: 1px solid #CEA61A; 
+    
+}
+
+.liveContent1 {
+    padding: 10px;
+    font-weight: 700;
+    color: black;
+    padding-right: 20px;
+    text-align: center;
+}
+
+.liveContent1 td:first-child {
+    border-right: 1px solid #CEA61A; 
+    padding: 10px;
+    
+}
+
 p {
  font-weight: 700;
- color: aqua;
+ font-family: 'Kumbh Sans', sans-serif;
+ color: black;
 }

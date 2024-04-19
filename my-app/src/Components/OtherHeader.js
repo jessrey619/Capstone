@@ -48,8 +48,8 @@ const TheHeader = () => {
           <DropdownMenu/>
         ) : (
           <>
-          <Link to="/">Home</Link> 
-            <Link to="/">About Us</Link> 
+          <Link to="/Home">Home</Link> 
+            <Link to="/AboutUs">About Us</Link> 
           </>
         )}
       </nav>

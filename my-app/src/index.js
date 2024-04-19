@@ -10,20 +10,14 @@ import ChangePassword from './pages/ChangePassword';
 import Registration from './pages/Registration';
 import LoginTrial from './pages/LoginTrial';
 
-
 import {BrowserRouter, Route, Routes } from 'react-router-dom';
+import App from './App';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <TheHeader/>
     <BrowserRouter>
-      <Routes>
-        <Route>
-          <Route path='/' element={<App/>} />
-          <Route path='/Account/ChangePassword' element={<ChangePassword/>} />
-        </Route>
-      </Routes>
+      <App/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

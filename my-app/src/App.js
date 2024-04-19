@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
 // Phoebe
-import Header from './Components/Header/Header';
+import Header from './Components/AdminHeader/Header';
 import SideBar from './Components/SideBar/SideBar';
 import Dashboard from './pages/admin/Dashboard'
 import ApplicationList from './pages/admin/ApplicationList'
@@ -31,8 +31,7 @@ import Submit from './pages/submit';
 import ChangePassword from './pages/ChangePassword';
 
 // Reina
-import TheHeader from './Components/Header/UserHeader';
-
+import TheHeader from './Components/UserHeader/UserHeader';
 
 function App() {
   return (

@@ -7,7 +7,7 @@ const LoginTrial = () => {
   return (
     <div className="login-container">
       <div className="image-container">
-        {/* Your image or container for picture */}
+      {/* <img src={require('./bckground.jpg')} alt="BackgroundImage" /> */}
       </div>
       <div className="form-container" style={{marginLeft:'60%', marginTop:'10%'}}>
         <form className="form">

@@ -1,16 +1,15 @@
 
+
+//import logo from './logo.svg';
 import Axios from 'axios'
 
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import 'remixicon/fonts/remixicon.css'
+import Homepage from './pages/homepage';
+import Homepage_Employee from './pages/homepage_employee';
+import Submit from './pages/submit';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
 
-// import Header from './Components/Header/Header';
-// import SideBar from './Components/SideBar/SideBar';
 import EmailVerification from './pages/EmailVerification';
 import ViewImages from './components/InsertImageTest/ViewImages';
 import AddImage from './components/InsertImageTest/AddImage';
@@ -23,12 +22,15 @@ function App() {
   return (
 
     <div className='app'>
+
       <Routes>
         <Route index element={<EmailVerification/>} path='/Register/EmailVerification'/>
         <Route index element={<ViewImages/>} path='/Images/'/>
         <Route index element={<AddImage/>} path='/Images/add'/>
         <Route index element={<PhotoGallery/>} path='/photos/'/>
         <Route index element={<ChangePassword/>} path='/Account/ChangePassword' />
+        <Route index element={<Homepage_Employee/>} path='/Home/Employee' />
+          
       </Routes>
     </div>
   );

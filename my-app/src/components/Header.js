@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DropdownMenu from '../responsive/menu';
-import '../css/HeaderUser.css';
+import '../CSS/HeaderUser.css';
 
 const TheHeader = () => {
   const [isMobile, setIsMobile] = useState(false);

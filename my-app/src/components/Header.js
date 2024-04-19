@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import DropdownMenu from '../responsive/menu';
 import '../CSS/HeaderUser.css';
 
@@ -23,7 +24,7 @@ const TheHeader = () => {
   }, []);
 
   useEffect(() => {
-    // Create a link element
+  
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = 'https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap';
@@ -47,8 +48,8 @@ const TheHeader = () => {
           <DropdownMenu/>
         ) : (
           <>
-            <a href="#home">Home</a>
-            <a href="#about">About Us</a>
+          <Link to="/">Home</Link> 
+            <Link to="/">About Us</Link> 
           </>
         )}
       </nav>

@@ -1,20 +1,12 @@
-
-
-// import logo from './logo.svg';
-// import Axios from 'axios'
 import Axios from 'axios'
 
 import './App.css';
 import { Route, Routes} from 'react-router-dom';
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import 'remixicon/fonts/remixicon.css'
+// import 'bootstrap-icons/font/bootstrap-icons.css'
+// import 'remixicon/fonts/remixicon.css'
 
 // import 'bootstrap/dist/css/bootstrap.min.css'
 // import 'bootstrap/dist/js/bootstrap.min.js'
-
-// import Header from './Components/Header/Header';
-// import SideBar from './Components/SideBar/SideBar';
-
 
 // Phoebe
 import Header from './Components/Header/Header';
@@ -25,6 +17,10 @@ import Logs from './pages/admin/Logs'
 import Statistics from './pages/admin/Statistics'
 import ParkingArea from './pages/admin/ParkingArea'
 import Configuration from './pages/admin/Configuration';
+
+// Tracy
+import Login from './Components/Login/Login'
+import LoginBgm from './pages/LoginPage'
  
 // Therese
 import Homepage from './pages/homepage';
@@ -36,7 +32,7 @@ import Submit from './pages/submit';
 
 
 //Tracy
-import ChangePassword from './pages/ChangePassword';
+// import ChangePassword from './pages/ChangePassword';
 
 // Reina
 import TheHeader from './Components/Header/UserHeader';
@@ -44,14 +40,18 @@ import TheHeader from './Components/Header/UserHeader';
 
 function App() {
   return (
-
-    <div className='app'>
-      {/* <Routes>
-      </Routes> */}
-
-      <LoginBgm/>
-    </div>
-   
+    <>
+      <Routes>
+        {/* Admin */}
+        <Route path='/' element={<Dashboard/>} />
+        <Route path='/application-list' element={<ApplicationList/>} />
+        <Route path='/logs' element={<Logs/>} />
+        <Route path='/statistics' element={<Statistics/>} />
+        <Route path='/parking-area' element={<ParkingArea/>} />
+        <Route path='/configuration' element={<Configuration/>} />
+        <Route path='/login' element={<LoginBgm/>} />
+      </Routes>
+    </>
   );
   
 };

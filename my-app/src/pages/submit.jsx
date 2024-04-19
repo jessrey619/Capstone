@@ -8,6 +8,7 @@ function Submit() {
           <img
             loading="lazy"
             srcSet="..."
+            alt=""
             className="img"
           />
           <div className="div-3">

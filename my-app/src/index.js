@@ -13,7 +13,7 @@ import LoginTrial from './pages/LoginTrial';
 import {BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 
-
+const root = ReactDOM.createRoot(document.getElementById('root'));
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

@@ -40,12 +40,15 @@ function Homepage_Employee() {
             </div>
           </div>
         </div>
-        {/* <div className="div-10">Employee Features</div> */}
+        <div className="div-10">
         <button
                       onClick={clickSample}
                     >
                         Employee Features
                     </button>
+
+        </div>
+        
         <div className="div-11">
           <div className="div-12">
             <div className="column-3">
@@ -257,29 +260,29 @@ function Homepage_Employee() {
           }
         }
         .div-10 {
-          border-radius: 20px;
-          background-color: #f4c522;
+          border-radius: 10px;
+          
           align-self: center;
           margin-top: 18px;
           width: 991px;
-          max-width: 100%;
+          max-width: 150%;
           align-items: center;
           color: #000;
           text-align: center;
           justify-content: center;
-          padding: 117px 60px 92px;
+          padding: 117px 12px 82px;
           font: 700 36px Kumbh Sans, -apple-system, Roboto, Helvetica,
             sans-serif;
         }
         .div-10 button {
-          width:100%;
-            font-size: 200%;
+          width: 100%;
+            font-size: 100%;
             font-weight: bold;
-            background-color: #5f191e;
-            color: white;
+            background-color: #F4C522;
+            color: black;
             border-radius: 30px;
-            padding-top: 35%;
-            padding-bottom: 35%
+            padding-top: 15%;
+            padding-bottom: 15%
         }
         @media (max-width: 991px) {
           .div-10 {

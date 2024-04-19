@@ -19,16 +19,14 @@ import TheHeader from './Components/Header';
 
 
 
+
 function App() {
   return (
 
     <div className='app'>
       <TheHeader/>
       <Routes>
-        <Route index element={<EmailVerification/>} path='/Register/EmailVerification'/>
-        {/* <Route index element={<ViewImages/>} path='/Images/'/>
-        <Route index element={<AddImage/>} path='/Images/add'/>
-        <Route index element={<PhotoGallery/>} path='/photos/'/> */}
+        {/* <Route index element={<UserHomepage/>} path='/Register/EmailVerification'/> */}
         <Route index element={<ChangePassword/>} path='/Account/ChangePassword' />
         <Route index element={<Homepage_Employee/>} path='/Home/Employee' />
         <Route index element={<Homepage/>} path='/Home/User'/>

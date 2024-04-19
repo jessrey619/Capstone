@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/Menu.css'
+import '../CSS/Menu.css'
 
 const DropdownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);

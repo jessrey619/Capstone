@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { EmailVerificationModal } from "../components/ModalEmailVerification/EmailVerificationModal";
-import "../css/EmailVerification.css"
+import "../CSS/EmailVerification.css"
 
 function EmailVerification() {
 

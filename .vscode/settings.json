@@ -1,0 +1,7 @@
+{
+<<<<<<< HEAD
+    "java.configuration.updateBuildConfiguration": "interactive"
+=======
+    "java.compile.nullAnalysis.mode": "disabled"
+>>>>>>> origin/JessreyBranch
+}

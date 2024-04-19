@@ -24,10 +24,10 @@ public class OtpEntity {
     private String email;
     private String otp;
     private Date expirationDate;
+    private Boolean isUsed;
 //    @Column(name = "verification_code", length = 64)
 //    private String verificationCode;
      
-    private boolean enabled;
     
     
     
@@ -42,7 +42,6 @@ public class OtpEntity {
 		this.password = password;
 		this.email = email;
 		this.otp = otp;
-		this.enabled = enabled;
 		this.expirationDate = expirationDate;
 	}
     
@@ -53,7 +52,6 @@ public class OtpEntity {
 		this.password = "";
 		this.email = email;
 		this.otp = otp;
-		this.enabled = false;
 		this.expirationDate =expirationDate;
 	}
 
@@ -69,12 +67,7 @@ public class OtpEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean isEnabled() {
-		return enabled;
-	}
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+
 	public int getId() {
 		return id;
 	}
@@ -106,6 +99,14 @@ public class OtpEntity {
 
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
+	}
+
+	public Boolean getIsUsed() {
+		return isUsed;
+	}
+
+	public void setIsUsed(Boolean isUsed) {
+		this.isUsed = isUsed;
 	}
 	
 	

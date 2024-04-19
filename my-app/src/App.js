@@ -10,8 +10,11 @@ import Homepage_Employee from './pages/homepage_employee';
 import Submit from './pages/submit';
 
 
-//import Header from './Components/Header/Header';
-//import SideBar from './Components/SideBar/SideBar';
+import EmailVerification from './pages/EmailVerification';
+import ViewImages from './components/InsertImageTest/ViewImages';
+import AddImage from './components/InsertImageTest/AddImage';
+import PhotoGallery from './components/InsertImageTest/PhotoGallery';
+import ChangePassword from './pages/ChangePassword';
 
 
 
@@ -19,10 +22,16 @@ function App() {
   return (
 
     <div className='app'>
-      {/* <Routes>
-        
-      </Routes> */}
-      <Homepage_Employee/>
+
+      <Routes>
+        <Route index element={<EmailVerification/>} path='/Register/EmailVerification'/>
+        <Route index element={<ViewImages/>} path='/Images/'/>
+        <Route index element={<AddImage/>} path='/Images/add'/>
+        <Route index element={<PhotoGallery/>} path='/photos/'/>
+        <Route index element={<ChangePassword/>} path='/Account/ChangePassword' />
+        <Route index element={<Homepage_Employee/>} path='/Home/Employee' />
+          
+      </Routes>
     </div>
   );
 };

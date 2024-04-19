@@ -40,6 +40,13 @@ function App() {
       <Header/>
       <SideBar/>
       <Routes>
+        <Route index element={<EmailVerification/>} path='/Register/EmailVerification'/>
+        <Route index element={<ViewImages/>} path='/Images/'/>
+        <Route index element={<AddImage/>} path='/Images/add'/>
+        <Route index element={<PhotoGallery/>} path='/photos/'/>
+        <Route index element={<ChangePassword/>} path='/Account/ChangePassword' />
+        <Route index element={<Homepage_Employee/>} path='/Home/Employee' />
+        <Route index element={<Homepage/>} path='/Home/User' />
         {/* Admin */}
         <Route path='/' element={<Dashboard/>} />
         <Route path='/application-list' element={<ApplicationList/>} />

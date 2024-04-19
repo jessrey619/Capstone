@@ -4,7 +4,7 @@
     const [disclaimer, setDisclaimer] = React.useState("Release of stickers on Monday!")
     const [Profile, setProfile] = React.useState("Profile")
     const clickSample = () => {
-        alert("bitchOten");
+        alert("SampleAlert");
     }
     return (
       <>

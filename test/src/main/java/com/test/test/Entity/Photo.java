@@ -18,7 +18,7 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String applicantSchoolId;
+    private String studentSchoolId;
     private String name;
     
 //  This sets the database so that it wont have any other values aside from 0-2
@@ -73,11 +73,11 @@ public class Photo {
 	}
 
 	public String getApplicantSchoolId() {
-		return applicantSchoolId;
+		return studentSchoolId;
 	}
 
-	public void setApplicantSchoolId(String applicantSchoolId) {
-		this.applicantSchoolId = applicantSchoolId;
+	public void setApplicantSchoolId(String studentSchoolId) {
+		this.studentSchoolId = studentSchoolId;
 	}
 
     // getters and setters

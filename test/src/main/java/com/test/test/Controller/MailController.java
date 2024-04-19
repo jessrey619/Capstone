@@ -20,9 +20,7 @@ public class MailController {
 	@CrossOrigin
 	@PostMapping("/OTPSend/")
 	public String sendOtpToMail(@RequestParam("email") String email) {
-		mailService.sendOtp(email);
-		
-		return "otp sent successfully";
+		return mailService.sendOtp(email);
 	}
 	
 	@CrossOrigin

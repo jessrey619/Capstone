@@ -1,6 +1,6 @@
 import React from 'react'
-import '../Components/Main/main.css';
-import PageTitle from '../Components/Main/PageTitle';
+import '../../Components/Main/main.css';
+import PageTitle from '../../Components/Main/PageTitle';
 
 function ParkingArea() {
   return (

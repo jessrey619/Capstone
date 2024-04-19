@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import '../Components/Main/main.css';
-import PageTitle from '../Components/Main/PageTitle';
+import '../../Components/Main/main.css';
+import PageTitle from '../../Components/Main/PageTitle';
 
 function Dashboard() {
   return (

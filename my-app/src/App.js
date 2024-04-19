@@ -31,7 +31,7 @@ function App() {
         <Route index element={<PhotoGallery/>} path='/photos/'/>
         <Route index element={<ChangePassword/>} path='/Account/ChangePassword' />
         <Route index element={<Homepage_Employee/>} path='/Home/Employee' />
-          
+        <Route index element={<Homepage/>} path='/Home/User' />
       </Routes>
     </div>
   );

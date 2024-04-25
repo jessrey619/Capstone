@@ -55,12 +55,6 @@
 		  <artifactId>httpclient5</artifactId>
 		  <scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>com.SanJuanPunchMan</groupId>
-			<artifactId>SystemInteg</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 		
 		<dependency>
 		    <groupId>javax.servlet</groupId>

@@ -11,6 +11,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.test.test.Entity.OtpEntity;
+import com.test.test.Entity.Role;
 import com.test.test.Entity.UserEntity;
 import com.test.test.Repository.OtpRepository;
 import com.test.test.Repository.UserRepository;
@@ -46,46 +47,60 @@ public class MailService {
 	}
 	
 	private String generateOtp(String email) {
-        OtpEntity existingOtp = otpRepository.findByEmail(email);
-        OtpEntity user;
+	    OtpEntity existingOtp = otpRepository.findByEmail(email);
+	    
+	    SecureRandom random = new SecureRandom();
+        String otp = String.valueOf(Math.abs(100000 + random.nextInt(900000)));
+        String hashOtp = hash(otp);
 
-        if(userRepository.findByUsername(modifyEmail(email))!= null) {
-        	if (existingOtp != null) {
-                user = existingOtp;
-            } else {
-                user = new OtpEntity();
-            }
+	    if (existingOtp == null || existingOtp.getIsUsed() || isExpired(existingOtp.getExpirationDate())) {
+	        // Generate new OTP
+	        Date date = new Date();
+	        Calendar calendar = Calendar.getInstance();
+	        calendar.setTime(date);
+	        calendar.add(Calendar.MINUTE, 5);
+	        Date expirationDate = calendar.getTime();
 
-            Date date = new Date();
+	        
 
-            // Set expiration date to 5 minutes after creation
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            calendar.add(Calendar.MINUTE, 5);
-            Date expirationDate = calendar.getTime();
+	        if (existingOtp == null) {
+	            existingOtp = new OtpEntity();
+	            existingOtp.setEmail(email);
+	        }
 
-            String otp;
-            SecureRandom random = new SecureRandom();   
-            otp = String.valueOf(Math.abs(100000 * random.nextInt()));
+	        existingOtp.setOtp(hashOtp);
+	        existingOtp.setUsername("");
+	        existingOtp.setPassword("");
+	        existingOtp.setIsUsed(false);
+	        existingOtp.setExpirationDate(expirationDate);
 
-            String hashOtp = hash(otp);
+	        otpRepository.save(existingOtp);
 
-            user.setEmail(email);
-            user.setOtp(hashOtp);
-            user.setUsername("");
-            user.setPassword("");
-            user.setIsUsed(false);
-            user.setExpirationDate(expirationDate);
+	    } else {
+	        // Update expiration date
+	        Date date = new Date();
+	        Calendar calendar = Calendar.getInstance();
+	        calendar.setTime(date);
+	        calendar.add(Calendar.MINUTE, 5);
+	        Date expirationDate = calendar.getTime();
 
-            otpRepository.save(user);
+	        existingOtp.setOtp(hashOtp);
+	        existingOtp.setExpirationDate(expirationDate);
+	        otpRepository.save(existingOtp);
+	        
+	    }
+	    return otp;
+	}
 
-            return otp;
-        } else {
-        	return null;
-        }
+
+	private boolean isExpired(Date expirationDate) {
+	    Date currentDate = new Date();
+	    return expirationDate.before(currentDate);
+	}
+
+
 
         
-    }
 	
 	private String hash(String plainText){
 		return BCrypt.hashpw(plainText, BCrypt.gensalt());
@@ -121,9 +136,11 @@ public class MailService {
 					
 					//Make a new UserAccount
 					UserEntity newUser = new UserEntity();
+					String password = generatePassword();
 					newUser.setEmail(email);
 					newUser.setUsername(modifyEmail(email));
-					newUser.setPassword(hash(generatePassword()));
+					newUser.setPassword(hash(password));
+					newUser.setRole(Role.USER);
 					userRepository.save(newUser);					
 					
 					user.setIsUsed(true);
@@ -136,7 +153,7 @@ public class MailService {
 					//We can Edit the Text Later On
 					mimeMessageHelper.setText("Email is Verified and here are your login credentials: \n"
 							+ "Username: "+newUser.getUsername()+"\n"
-									+ "Password: "+newUser.getPassword()+"");
+									+ "Password: "+password+"");
 					
 					javaMailSender.send(mimeMessage);
 				}

@@ -17,21 +17,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/add")
-    public UserEntity addUser(@RequestBody UserEntity user) {
-        return userService.saveUser(user);
-    }
-
-    @GetMapping("/all")
-    public Iterable<UserEntity> getAllUsers() {
-        return userService.getAllUsers();
-    }
-
-    @GetMapping("/{id}")
-    public UserEntity getUserById(@PathVariable int id) {
-        return userService.getUserById(id);
-    }
-    
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
         String username = request.get("username");
@@ -41,8 +26,10 @@ public class UserController {
         if (user != null) {
             return ResponseEntity.ok("Login successful!");
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credentials");
         }
     }
+
+    
 }
 

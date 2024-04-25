@@ -35,7 +35,7 @@ public class OtpEntity {
     	super();
     }
 
-	public OtpEntity(int id, String username, String password, String email, String otp, boolean enabled, Date expirationDate) {
+	public OtpEntity(int id, String username, String password, String email, String otp, Date expirationDate) {
 		super();
 		this.id = id;
 		this.username = username;

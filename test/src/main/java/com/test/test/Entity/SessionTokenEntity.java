@@ -7,8 +7,9 @@ import jakarta.persistence.Id;
 
 @Entity
 public class SessionTokenEntity {
+	
     @Id
-    private Long userId;
+    private int userId;
     private String sessionToken;
     private LocalDateTime expirationTime;
     
@@ -20,7 +21,7 @@ public class SessionTokenEntity {
 	
 	
 	
-	public SessionTokenEntity(Long userId, String sessionToken, LocalDateTime expirationTime) {
+	public SessionTokenEntity(int userId, String sessionToken, LocalDateTime expirationTime) {
 		super();
 		this.userId = userId;
 		this.sessionToken = sessionToken;
@@ -29,10 +30,10 @@ public class SessionTokenEntity {
 
 
 
-	public Long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	public String getSessionToken() {

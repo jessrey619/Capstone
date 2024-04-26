@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.test.test.Entity.AdminEntity;
 import com.test.test.Entity.AuthenticationResponse;
 import com.test.test.Entity.UserEntity;
 import com.test.test.Service.AuthenticationService;
@@ -35,4 +36,23 @@ public class AuthenticationController {
 		
 	}
 	
+	
+	
+	@CrossOrigin
+	@PostMapping("/admin-register")
+	public ResponseEntity<AuthenticationResponse> adminRegister(
+			@RequestBody AdminEntity request
+			){
+				return ResponseEntity.ok(authService.adminRegister(request));
+		
+	}
+	
+	@CrossOrigin
+	@PostMapping("/admin-login")
+	public ResponseEntity<AuthenticationResponse> adminLogin(
+			@RequestBody AdminEntity request
+			){
+				return ResponseEntity.ok(authService.adminAuthenticate(request));
+		
+	}
 }

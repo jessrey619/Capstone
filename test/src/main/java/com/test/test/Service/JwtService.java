@@ -50,7 +50,8 @@ public class JwtService {
                 .getPayload();
     }
 
-	public String generateToken(UserEntity user) {
+//	changed from userEntity to UserDetails so that it can accept User and Admin
+	public String generateToken(UserDetails user) {
         String token = Jwts
                 .builder()
                 .subject(user.getUsername())

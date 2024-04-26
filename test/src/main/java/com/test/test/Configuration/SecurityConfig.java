@@ -35,7 +35,9 @@ public class SecurityConfig {
 		SecurityFilterChain sc = http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req->req.requestMatchers("/jwt/login/**","/jwt/register/**", "/OTPSend/**","/OTPVerify/**")
+                        req->req.requestMatchers("/jwt/login**","/jwt/register**", "/OTPSend/**","/OTPVerify/**",
+//                        		for testing Admin
+                        		"/jwt/admin-register**", "/jwt/admin-login")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

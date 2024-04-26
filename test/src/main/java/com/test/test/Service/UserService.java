@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.test.test.Entity.UserEntity;
+import com.test.test.Repository.AdminRepository;
 import com.test.test.Repository.UserRepository;
 
 @Service
@@ -15,6 +16,12 @@ public class UserService implements UserDetailsService{
 
     @Autowired
     private UserRepository userRepository;
+    
+//    Update for Admin
+    @Autowired
+    private AdminRepository adminRepository;
+    
+//    Update for Admin
     
     //forLogin
     public UserEntity login(String username, String password) {
@@ -51,13 +58,16 @@ public class UserService implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
+		// UPDATE FOR ADMIN
 		if(userRepository.findByUsername(username)==null) {
-			throw new UsernameNotFoundException("Username Not Found");
+			if(adminRepository.findByUsername(username)==null) {
+				throw new UsernameNotFoundException("Username Not Found");
+			} else {
+				return adminRepository.findByUsername(username);
+			}
 		} else {
 			return userRepository.findByUsername(username);
 		}
-		
 	}
 
     

@@ -37,7 +37,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         req->req.requestMatchers("/jwt/login**","/jwt/register**", "/OTPSend/**","/OTPVerify/**",
 //                        		for testing Admin
-                        		"/jwt/admin-register**", "/jwt/admin-login")
+                        		"/jwt/admin-register**", "/jwt/admin-login",
+                        		// for Employee
+                        		"/jwt/employee-register**", "/jwt/employee-login**"
+                        		)
+//                       
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

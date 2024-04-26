@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.test.test.Entity.AdminEntity;
 import com.test.test.Entity.AuthenticationResponse;
+import com.test.test.Entity.EmployeeEntity;
 import com.test.test.Entity.UserEntity;
 import com.test.test.Service.AuthenticationService;
 
@@ -37,7 +38,7 @@ public class AuthenticationController {
 	}
 	
 	
-	
+//	Admin Side
 	@CrossOrigin
 	@PostMapping("/admin-register")
 	public ResponseEntity<AuthenticationResponse> adminRegister(
@@ -53,6 +54,26 @@ public class AuthenticationController {
 			@RequestBody AdminEntity request
 			){
 				return ResponseEntity.ok(authService.adminAuthenticate(request));
+		
+	}
+	
+	
+//	Employee Side
+	@CrossOrigin
+	@PostMapping("/employee-register")
+	public ResponseEntity<AuthenticationResponse> employeeRegister(
+			@RequestBody EmployeeEntity request
+			){
+				return ResponseEntity.ok(authService.employeeRegister(request));
+		
+	}
+	
+	@CrossOrigin
+	@PostMapping("/employee-login")
+	public ResponseEntity<AuthenticationResponse> employeeLogin(
+			@RequestBody EmployeeEntity request
+			){
+				return ResponseEntity.ok(authService.employeeAuthenticate(request));
 		
 	}
 }

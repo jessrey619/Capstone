@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.test.test.Entity.UserEntity;
 import com.test.test.Repository.AdminRepository;
+import com.test.test.Repository.EmployeeRepository;
 import com.test.test.Repository.UserRepository;
 
 @Service
@@ -20,8 +21,10 @@ public class UserService implements UserDetailsService{
 //    Update for Admin
     @Autowired
     private AdminRepository adminRepository;
-    
-//    Update for Admin
+
+//    Update for Employee
+    @Autowired
+    private EmployeeRepository employeeRepository;
     
     //forLogin
     public UserEntity login(String username, String password) {
@@ -61,7 +64,11 @@ public class UserService implements UserDetailsService{
 		// UPDATE FOR ADMIN
 		if(userRepository.findByUsername(username)==null) {
 			if(adminRepository.findByUsername(username)==null) {
-				throw new UsernameNotFoundException("Username Not Found");
+				if(employeeRepository.findByUsername(username)==null) {
+					throw new UsernameNotFoundException("Username Not Found");
+				} else {
+					return employeeRepository.findByUsername(username);
+				}
 			} else {
 				return adminRepository.findByUsername(username);
 			}

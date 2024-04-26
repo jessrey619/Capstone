@@ -1,9 +1,8 @@
-// Login.jsx
-
 import React from 'react';
-import './Login.css';
+import './LoginCard.css';
 
-const Login = () => {
+
+function LoginCard() {
   return (
     <div className="login-container">
       <div className="form-container">
@@ -28,4 +27,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginCard;

@@ -1,12 +1,10 @@
-// ChangePassword.jsx
-
 import React from 'react';
-import './ChangePassword.css';
+import './ChangePasswordCard.css';
 
-const ChangePassword = () => {
+function ChangePasswordCard () {
   return (
     <div className="change-password-container">
-      <div className="form-container" style={{ marginLeft: '60%', marginTop: '5%' }}>
+      <div className="form-container" >
         <form className="form">
           <p className="form-title">Change Password</p>
           <div className="input-container">
@@ -27,4 +25,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword;
+export default ChangePasswordCard;

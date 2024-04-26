@@ -9,7 +9,7 @@ import { Route, Routes} from 'react-router-dom';
 // import 'bootstrap/dist/js/bootstrap.min.js'
 
 // Phoebe
-import Header from './Components/Header/Header';
+import Header from './Components/AdminHeader/Header';
 import SideBar from './Components/SideBar/SideBar';
 import Dashboard from './pages/admin/Dashboard'
 import ApplicationList from './pages/admin/ApplicationList'
@@ -19,8 +19,8 @@ import ParkingArea from './pages/admin/ParkingArea'
 import Configuration from './pages/admin/Configuration';
 
 // Tracy
-import Login from './Components/Login/Login'
-import LoginBgm from './pages/LoginPage'
+import LoginPage from './pages/LoginPage'
+import ChangePassPage from './pages/ChangePassPage';
  
 // Therese
 import Homepage from './pages/homepage';
@@ -30,17 +30,16 @@ import Submit from './pages/submit';
 // Jessrey
 // import EmailVerification from './pages/EmailVerification';
 
-
-//Tracy
-// import ChangePassword from './pages/ChangePassword';
-
 // Reina
-import TheHeader from './Components/Header/UserHeader';
-
+import TheHeader from './Components/UserHeader/UserHeader';
+import TheFooter from './Components/Footer/Footer';
 
 function App() {
   return (
     <>
+
+      <TheHeader/>
+
       <Routes>
         <Route index element={<EmailVerification/>} path='/Register/EmailVerification'/>
         <Route index element={<ViewImages/>} path='/Images/'/>
@@ -49,15 +48,11 @@ function App() {
         <Route index element={<ChangePassword/>} path='/Account/ChangePassword' />
         <Route index element={<Homepage_Employee/>} path='/Home/Employee' />
         <Route index element={<Homepage/>} path='/Home/User' />
-        {/* Admin */}
-        <Route path='/' element={<Dashboard/>} />
-        <Route path='/application-list' element={<ApplicationList/>} />
-        <Route path='/logs' element={<Logs/>} />
-        <Route path='/statistics' element={<Statistics/>} />
-        <Route path='/parking-area' element={<ParkingArea/>} />
-        <Route path='/configuration' element={<Configuration/>} />
-        <Route path='/login' element={<LoginBgm/>} />
+        {/* User*/}
+        {/* <Route path='/' element={<LoginPage/>} /> */}
+        <Route path='/' element={<ChangePassPage/>} /> 
       </Routes>
+
     </>
   );
   

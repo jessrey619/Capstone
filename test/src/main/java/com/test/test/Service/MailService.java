@@ -69,8 +69,6 @@ public class MailService {
 	        }
 
 	        existingOtp.setOtp(hashOtp);
-	        existingOtp.setUsername("");
-	        existingOtp.setPassword("");
 	        existingOtp.setIsUsed(false);
 	        existingOtp.setExpirationDate(expirationDate);
 
@@ -138,7 +136,7 @@ public class MailService {
 					UserEntity newUser = new UserEntity();
 					String password = generatePassword();
 					newUser.setEmail(email);
-					newUser.setUsername(modifyEmail(email));
+					newUser.setUsername(email);
 					newUser.setPassword(hash(password));
 					newUser.setRole(Role.USER);
 					userRepository.save(newUser);					

@@ -8,10 +8,4 @@ import org.springframework.transaction.annotation.Transactional;
 import com.test.test.Entity.PricesEntity;
 
 public interface PricesRepository extends JpaRepository<PricesEntity, Integer> {
-
-    @Transactional
-    @Modifying
-    @Query("UPDATE PricesEntity p SET p.twoWheelPickup = :twoWheelPickup, p.fourWheelPickup = :fourWheelPickup, p.twoWheelParking = :twoWheelParking, p.fourWheelParking = :fourWheelParking WHERE p.id = :id")
-    void editValues(int id, Double twoWheelPickup, Double fourWheelPickup, Double twoWheelParking, Double fourWheelParking);
-    
 }

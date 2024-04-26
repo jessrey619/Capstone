@@ -14,7 +14,7 @@ public class PricesController {
     private PricesService pricesService;
 
     @PutMapping("/{id}")
-    public void editPrices(@PathVariable int id, @RequestBody PricesEntity pricesEntity) {
-        pricesService.editPrices(id, pricesEntity.getTwoWheelPickup(), pricesEntity.getFourWheelPickup(), pricesEntity.getTwoWheelParking(), pricesEntity.getFourWheelParking());
+    public void editPrices(@PathVariable int id, @RequestBody PricesEntity prices) {
+        pricesService.editPrices(id, prices);
     }
 }

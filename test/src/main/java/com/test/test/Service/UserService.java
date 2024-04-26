@@ -2,32 +2,29 @@ package com.test.test.Service;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.test.test.Entity.UserEntity;
+import com.test.test.Repository.AdminRepository;
+import com.test.test.Repository.EmployeeRepository;
 import com.test.test.Repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
 
     @Autowired
     private UserRepository userRepository;
+    
+//    Update for Admin
+    @Autowired
+    private AdminRepository adminRepository;
 
-    public UserEntity saveUser(UserEntity user) {
-        return userRepository.save(user);
-    }
-
-    public Iterable<UserEntity> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public UserEntity getUserById(int id) {
-        return userRepository.findById(id).orElse(null);
-    }
-
-    public void deleteUser(int id) {
-        userRepository.deleteById(id);
-    }
+//    Update for Employee
+    @Autowired
+    private EmployeeRepository employeeRepository;
     
     //forLogin
     public UserEntity login(String username, String password) {
@@ -61,5 +58,25 @@ public class UserService {
         userRepository.save(user);
         return true; // Password changed successfully
     }
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// UPDATE FOR ADMIN
+		if(userRepository.findByUsername(username)==null) {
+			if(adminRepository.findByUsername(username)==null) {
+				if(employeeRepository.findByUsername(username)==null) {
+					throw new UsernameNotFoundException("Username Not Found");
+				} else {
+					return employeeRepository.findByUsername(username);
+				}
+			} else {
+				return adminRepository.findByUsername(username);
+			}
+		} else {
+			return userRepository.findByUsername(username);
+		}
+	}
+
+    
 
 }

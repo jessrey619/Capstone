@@ -16,7 +16,7 @@ public class SessionService {
     @Autowired
     private SessionRepository sessionRepository;
 
-    public String createSession(Long userId) {
+    public String createSession(int userId) {
         String sessionToken = SessionUtil.generateSessionToken();
         LocalDateTime expirationTime = LocalDateTime.now().plusHours(1); // Expires in 1 hour
         SessionTokenEntity sessionTokenEntity = new SessionTokenEntity(userId, sessionToken, expirationTime);

@@ -24,7 +24,7 @@ public class MailController {
 	}
 	
 	@CrossOrigin
-	@PostMapping("/OTPVerify")
+	@PostMapping("/OTPVerify/")
 	public String checkOtp(@RequestParam("otp") String otp, @RequestParam("email") String email) {
 	    // Your code here
 		try {

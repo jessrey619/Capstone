@@ -19,8 +19,8 @@ import ParkingArea from './pages/admin/ParkingArea'
 import Configuration from './pages/admin/Configuration';
 
 // Tracy
-import Login from './Components/Login/Login'
-import LoginBgm from './pages/LoginPage'
+import LoginPage from './pages/LoginPage'
+import ChangePassPage from './pages/ChangePassPage';
  
 // Therese
 import Homepage from './pages/homepage';
@@ -30,27 +30,22 @@ import Submit from './pages/submit';
 // Jessrey
 // import EmailVerification from './pages/EmailVerification';
 
-
-//Tracy
-// import ChangePassword from './pages/ChangePassword';
-
 // Reina
 import TheHeader from './Components/UserHeader/UserHeader';
-
+import TheFooter from './Components/Footer/Footer';
 
 function App() {
   return (
     <>
+
+      <TheHeader/>
+
       <Routes>
-        {/* Admin */}
-        <Route path='/' element={<Dashboard/>} />
-        <Route path='/application-list' element={<ApplicationList/>} />
-        <Route path='/logs' element={<Logs/>} />
-        <Route path='/statistics' element={<Statistics/>} />
-        <Route path='/parking-area' element={<ParkingArea/>} />
-        <Route path='/configuration' element={<Configuration/>} />
-        <Route path='/login' element={<LoginBgm/>} />
+        {/* User*/}
+        {/* <Route path='/' element={<LoginPage/>} /> */}
+        <Route path='/' element={<ChangePassPage/>} /> 
       </Routes>
+
     </>
   );
   

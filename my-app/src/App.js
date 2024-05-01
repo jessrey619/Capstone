@@ -41,16 +41,16 @@ function App() {
       <TheHeader/>
 
       <Routes>
-        <Route index element={<EmailVerification/>} path='/Register/EmailVerification'/>
+        {/* <Route index element={<EmailVerification/>} path='/Register/EmailVerification'/>
         <Route index element={<ViewImages/>} path='/Images/'/>
         <Route index element={<AddImage/>} path='/Images/add'/>
         <Route index element={<PhotoGallery/>} path='/photos/'/>
-        <Route index element={<ChangePassword/>} path='/Account/ChangePassword' />
+        <Route index element={<ChangePassword/>} path='/Account/ChangePassword' /> */}
         <Route index element={<Homepage_Employee/>} path='/Home/Employee' />
         <Route index element={<Homepage/>} path='/Home/User' />
         {/* User*/}
-        {/* <Route path='/' element={<LoginPage/>} /> */}
-        <Route path='/' element={<ChangePassPage/>} /> 
+        <Route path='/login' element={<LoginPage/>} />
+        <Route path='/user/changepassword' element={<ChangePassPage/>} /> 
       </Routes>
 
     </>

@@ -3,11 +3,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    color: white;
     background-color: rgba(255, 255, 255, 0.5); 
     font-family: 'Kumbh Sans', sans-serif;
     height: min-content;
     background-color: white;
+    flex-shrink: 0; 
   }
   
 .logoContainer {
@@ -79,8 +79,7 @@ h6 {
     justify-content: center;
     text-align: center; 
     margin: auto;
-    margin-left: 300px;
-    margin-top: -35px;   
+    margin-left: 300px;  
 }
 
 
@@ -88,7 +87,8 @@ h6 {
     color: #7D7D7D;
     text-decoration: none;
     font-weight: 500;
-    margin: 0; 
+    margin: 0 auto;
+    justify-content: center; 
     margin-bottom: 15px;
 }
   /* Media Query for Responsive Design */
@@ -139,7 +139,7 @@ h6 {
     }
 }
 
-@media (max-width: 660px) {
+@media (max-width: 320px) {
     .footer {
       flex-direction: column;
       align-items: center;
@@ -149,13 +149,12 @@ h6 {
       order: 2; 
       margin-top: -10px; 
       width: 200px;
-      margin-left: 40px;
+      margin-left: 50px;
     }
   
     .info1,
     .info2 {
       margin-top: 0; 
-    
     }
 
     .info1 {
@@ -164,14 +163,13 @@ h6 {
   
     .info1,
     .info2 {
-      text-align: center;
       width: 100%;
       
     }
   
     .info1 > div,
     .info2 > div {
-      width: 40%;
+      width: 50%;
     }
   
     .nav-footer {

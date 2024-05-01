@@ -9,7 +9,7 @@ function Logo() {
   return (
     <div className='d-flex align-items-center justify-content-between'>
         <a href='/' className='logo d-flex align-items-center'>
-            <img src="./cit-logo.png" alt="University Logo and Name" />
+            <img src="/cit-logo.png" alt="University Logo and Name" />
         </a>
         <i className='bi bi-list toggle-sidebar-btn'
             onClick={handleToggleSideBar}

@@ -33,9 +33,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 		private String lname;
 		private String schoolId;
 		private String schoolIdOwner;
-		private Boolean isStaff;
+		private Boolean isStaff; //para different rates for Student/Staff
 		private Boolean isParking; //type of application
 		private String contactNumber;
+		private Boolean isVIP;
 		private String email;
 		private String address;
 		private Date dateApplied;
@@ -233,6 +234,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 		public boolean isEnabled() {
 			// TODO Auto-generated method stub
 			return true;
+		}
+
+		public Boolean getIsVIP() {
+			return isVIP;
+		}
+
+		public void setIsVIP(Boolean isVIP) {
+			this.isVIP = isVIP;
 		}
 		
 		

@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.test.test.Entity.AdminEntity;
+import com.test.test.Entity.EmployeeEntity;
 import com.test.test.Entity.UserEntity;
 import com.test.test.Repository.AdminRepository;
 import com.test.test.Repository.EmployeeRepository;
@@ -61,7 +63,6 @@ public class UserService implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// UPDATE FOR ADMIN
 		if(userRepository.findByUsername(username)==null) {
 			if(adminRepository.findByUsername(username)==null) {
 				if(employeeRepository.findByUsername(username)==null) {
@@ -77,6 +78,30 @@ public class UserService implements UserDetailsService{
 		}
 	}
 
-    
+    public String toVIP(UserEntity user) {
+    	
+    	if(userRepository.findByUsername(user.getUsername())==null) {
+			if(adminRepository.findByUsername(user.getUsername())==null) {
+				if(employeeRepository.findByUsername(user.getUsername())==null) {
+					throw new UsernameNotFoundException("Username Not Found");
+				} else {
+					UserEntity existingUser = (UserEntity) loadUserByUsername(user.getUsername());
+			    	user.setIsVIP(true);
+			    	userRepository.save(existingUser);
+					return "User Updated";
+				}
+			} else {
+				AdminEntity existingUser = (AdminEntity) loadUserByUsername(user.getUsername());
+		    	user.setIsVIP(true);
+		    	adminRepository.save(existingUser);
+				return "Admin Updated";
+			}
+		} else {
+			EmployeeEntity existingUser = (EmployeeEntity) loadUserByUsername(user.getUsername());
+	    	user.setIsVIP(true);
+	    	employeeRepository.save(existingUser);
+			return "Employee Updated";
+		} 
+    }
 
 }

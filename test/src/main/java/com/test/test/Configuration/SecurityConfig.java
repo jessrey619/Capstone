@@ -40,6 +40,10 @@ public class SecurityConfig {
                         		"/jwt/admin-register**", "/jwt/admin-login",
                         		// for Employee
                         		"/jwt/employee-register**", "/jwt/employee-login**"
+//                        		//to delete
+                        		,"/photos/upload**", "/photos**", "/photos/get-photo-by-name/**", "/applicants/**"
+                        		, "/photos/get-photo-by-username/**"
+                        		,"vehicles/create**","vehicles/update**", "vehicles/find-by-username/**"
                         		)
 //                       
                                 .permitAll()

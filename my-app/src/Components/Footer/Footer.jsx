@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../Footer/Footer.css';
+import './Footer.css';
 
 const TheFooter = () => {
 useEffect(() => {
@@ -33,9 +33,9 @@ useEffect(() => {
         <div className='info2'>
             <h6 className='title'>Quick Links</h6>
                 <nav className="nav-footer">
-                    <a href="#home">Cit.edu</a>
-                    <a href="#about">Lair</a>
-                    <a href="#about">AIMS</a>
+                <a href="https://cit.edu">Cit.edu</a>
+                <a href="https://lair.education">Lair</a>
+                <a href="https://cituweb.pinnacle.com.ph/aims/students/">AIMS</a>
                 </nav>
         </div>
 

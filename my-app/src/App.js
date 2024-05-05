@@ -32,7 +32,6 @@ import LogsEmployee from './pages/LogsEmployee';
 
 // Reina
 import TheHeader from './Components/UserHeader/UserHeader';
-// import TheFooter from './Components/Footer/Footer';
 
 function App() {
   return (

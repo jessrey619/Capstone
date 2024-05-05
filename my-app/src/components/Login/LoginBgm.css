@@ -19,7 +19,8 @@ body {
 
   .image-container img {
     width: auto;
-    height: 20;
+    height: 100vh;
+    border-radius: 100px;
   }
   
   .bkg2 {

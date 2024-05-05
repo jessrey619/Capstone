@@ -29,17 +29,18 @@ public class ApplicantEntity {
     private String contactNumber;
     private String address;
     
+//  @TODO make the vehicleEntity chuchu
     private String vehicleMake;
 	private String plateNo;
 	private String color;
 	private Boolean vehicleType; // 0 if twoWheeler, 1 if 4 wheeler
+	private Boolean isParking;
 	
 //	private String orcrimg;	//file name of the files
 //	private String licenseimg;
 //	private String proofofpaymentimg;
     
     private Date datesubmitted;
-    private String dateDay;
     
     private boolean verified;
     private boolean approved;
@@ -208,16 +209,7 @@ public class ApplicantEntity {
 //	}
 //	public void setLicenseimg(String licenseimg) {
 //		this.licenseimg = licenseimg;
-//	}
-
-	public String getDateDay() {
-		return dateDay;
-	}
-
-	public void setDateDay(String dateDay) {
-		this.dateDay = dateDay;
-	}
-
+//	
 //	public String getProofofpaymentimg() {
 //		return proofofpaymentimg;
 //	}
@@ -225,4 +217,12 @@ public class ApplicantEntity {
 //	public void setProofofpaymentimg(String proofofpaymentimg) {
 //		this.proofofpaymentimg = proofofpaymentimg;
 //	}
+
+	public Boolean getIsParking() {
+		return isParking;
+	}
+
+	public void setIsParking(Boolean isParking) {
+		this.isParking = isParking;
+	}
 }

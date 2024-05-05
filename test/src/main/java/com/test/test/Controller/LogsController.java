@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/logs")
+
 public class LogsController {
 
     @Autowired
@@ -22,6 +23,7 @@ public class LogsController {
         return new ResponseEntity<>(newLog, HttpStatus.CREATED);
     }
 
+    @CrossOrigin
     @GetMapping("/all")
     public ResponseEntity<List<LogsEntity>> getAllLogs() {
         List<LogsEntity> logs = logsService.getAllLogs();

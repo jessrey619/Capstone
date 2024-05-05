@@ -1,16 +1,36 @@
-import React from "react";
-import '../css/LogsEmployee.css';
+import React, { useEffect, useState } from "react";
+import '../CSS/LogsEmployee.css';
 import TheFooter from "../Components/Footer/Footer"
 import SideBar from "../Components/SideBar/SideBar";
-import Header from "../Components/Header/Header";
+import axios from "axios";
+// import Header from "../Components/Header/Header";
 
 // @TODO live count of LOGS and count of vehicles, toggle status based on counts. 
 
 function LogsEmployee() {
 
+    const [logs, setLogs] = useState([]);
+    const [filterBy, setFilterBy] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/logs/all')
+          .then(response => {
+            setLogs(response.data);
+          })
+          .catch(error => {
+            console.error('Error fetching logs:', error);
+          });
+      }, []);
+
+    const handleFilterChange = (event) => {
+        setFilterBy(event.target.value);
+    };
+
+    const filteredLogs = logs.filter(log => filterBy === '' || log.type === filterBy);
+
     return (
         <div>
-            <Header/>
+            {/* <Header/> */}
             <div className="side">
             <SideBar/>
             </div>
@@ -84,109 +104,43 @@ function LogsEmployee() {
                 <div className="outer">
                     <div className="inner">
                         <div className="filterPart">
-                        <label for="filter">Filter By:</label>
-                        <input type="text" id="filter" name="filter"></input>
+                        <label htmlFor="filter">Filter By:</label>
+                        <select id="filter" name="filter" onChange={handleFilterChange}>
+                            <option value="">All</option>
+                            <option value="Parking">Parking</option>
+                            <option value="OtherType">Other Type</option>
+                        </select>
                         </div>
                         <div className="logs">
-                    <table class="container">
-	<thead>
-		<tr>
-			<th><h1>Log ID</h1></th>
-			<th><h1>Type</h1></th>
+                    <table className="container">
+    <thead>
+        <tr>
+            <th><h1>Log ID</h1></th>
+            <th><h1>Type</h1></th>
             <th><h1>Sticker ID</h1></th>
             <th><h1>V-Type</h1></th>
-			<th><h1>Color</h1></th>
-			<th><h1>Plate No.</h1></th>
+            <th><h1>Color</h1></th>
+            <th><h1>Plate No.</h1></th>
             <th><h1>Name</h1></th>
             <th><h1>Time In</h1></th>
             <th><h1>Time Out</h1></th>
-		</tr>
-	</thead>
-	<tbody>
-        {/* placeholder data */}
-		<tr>
-			<td>1</td>
-			<td>Parking</td>
-			<td>1020437</td>
-			<td>car</td>
-            <td>red</td>
-            <td>PDF-609</td>
-            <td>Diddy</td>
-            <td>09:51:22 AM</td>
-            <td>01:51:22 PM</td>
-		</tr>
-        <tr>
-			<td>1</td>
-			<td>Parking</td>
-			<td>1020437</td>
-			<td>car</td>
-            <td>red</td>
-            <td>PDF-609</td>
-            <td>Diddy</td>
-            <td>09:51:22 AM</td>
-            <td>01:51:22 PM</td>
-		</tr>	<tr>
-			<td>1</td>
-			<td>Parking</td>
-			<td>1020437</td>
-			<td>car</td>
-            <td>red</td>
-            <td>PDF-609</td>
-            <td>Diddy</td>
-            <td>09:51:22 AM</td>
-            <td>01:51:22 PM</td>
-		</tr>	<tr>
-			<td>1</td>
-			<td>Parking</td>
-			<td>1020437</td>
-			<td>car</td>
-            <td>red</td>
-            <td>PDF-609</td>
-            <td>Diddy</td>
-            <td>09:51:22 AM</td>
-            <td>01:51:22 PM</td>
-		</tr>	<tr>
-			<td>1</td>
-			<td>Parking</td>
-			<td>1020437</td>
-			<td>car</td>
-            <td>red</td>
-            <td>PDF-609</td>
-            <td>Diddy</td>
-            <td>09:51:22 AM</td>
-            <td>01:51:22 PM</td>
-		</tr>	<tr>
-			<td>1</td>
-			<td>Parking</td>
-			<td>1020437</td>
-			<td>car</td>
-            <td>red</td>
-            <td>PDF-609</td>
-            <td>Diddy</td>
-            <td>09:51:22 AM</td>
-            <td>01:51:22 PM</td>
-		</tr>	<tr>
-			<td>1</td>
-			<td>Parking</td>
-			<td>1020437</td>
-			<td>car</td>
-            <td>red</td>
-            <td>PDF-609</td>
-            <td>Diddy</td>
-            <td>09:51:22 AM</td>
-            <td>01:51:22 PM</td>
-		</tr>	<tr>
-			<td>1</td>
-			<td>Parking</td>
-			<td>1020437</td>
-			<td>car</td>
-            <td>red</td>
-            <td>PDF-609</td>
-            <td>Diddy</td>
-            <td>09:51:22 AM</td>
-            <td>01:51:22 PM</td>
-		</tr>
-	</tbody>
+        </tr>
+    </thead>
+    <tbody>
+    {filteredLogs.map(log => (
+    <tr key={log.id}>
+        <td>{log.id}</td>
+        <td>{log.isParking ? 'Parking' : 'Drop Off/Pickup'}</td>
+        <td>{log.stickerId}</td>
+        <td>{log.vehicleType}</td>
+        <td>{log.color}</td>
+        <td>{log.plateNo}</td>
+        <td>{log.name}</td>
+        <td>{new Date(log.timeIn).toLocaleString()}</td>
+        <td>{new Date(log.timeOut).toLocaleString()}</td>
+    </tr>
+))}
+    </tbody>
 </table>
                         </div>
                     </div>

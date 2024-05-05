@@ -43,6 +43,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 		private Date datePaid;
 		private Boolean isVerified;
 		private Boolean isApproved;
+		private Boolean isPaid;
 		private Boolean isEnabled;
 		@Enumerated(value = EnumType.STRING)
 		private Role role;
@@ -242,6 +243,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 		public void setIsVIP(Boolean isVIP) {
 			this.isVIP = isVIP;
+		}
+
+		public Boolean getIsPaid() {
+			return isPaid;
+		}
+
+		public void setIsPaid(Boolean isPaid) {
+			this.isPaid = isPaid;
 		}
 		
 		

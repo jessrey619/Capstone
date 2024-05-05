@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.test.test.Entity.AdminEntity;
 import com.test.test.Entity.AuthenticationResponse;
+import com.test.test.Entity.ChangePasswordRequest;
 import com.test.test.Entity.EmployeeEntity;
 import com.test.test.Entity.UserEntity;
 import com.test.test.Service.AuthenticationService;
+import com.test.test.Service.UserService;
 
 @RequestMapping("/jwt")
 @RestController
@@ -20,6 +22,9 @@ public class AuthenticationController {
 
 	@Autowired
 	private AuthenticationService authService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@CrossOrigin
 	@PostMapping("/register")
@@ -76,4 +81,14 @@ public class AuthenticationController {
 				return ResponseEntity.ok(authService.employeeAuthenticate(request));
 		
 	}
+	
+	@PostMapping("/change-password")
+    public boolean changePassword(@RequestBody ChangePasswordRequest request) {
+        return userService.changePassword(
+            request.getUsername(),
+            request.getOldPassword(),
+            request.getNewPassword(),
+            request.getConfirmNewPassword()
+        );
+    }
 }

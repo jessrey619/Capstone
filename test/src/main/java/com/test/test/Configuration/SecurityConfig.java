@@ -39,11 +39,14 @@ public class SecurityConfig {
 //                        		for testing Admin
                         		"/jwt/admin-register**", "/jwt/admin-login",
                         		// for Employee
-                        		"/jwt/employee-register**", "/jwt/employee-login**"
+                        		"/jwt/employee-register**", "/jwt/employee-login**", "/jwt/**"
 //                        		//to delete
                         		,"/photos/upload**", "/photos**", "/photos/get-photo-by-name/**", "/applicants/**"
                         		, "/photos/get-photo-by-username/**"
                         		,"vehicles/create**","vehicles/update**", "vehicles/find-by-username/**"
+                        		,"/logs/add**","/logs/all**"
+                        		,"/applicants/**"
+                        		,"/parking/**"
                         		)
 //                       
                                 .permitAll()

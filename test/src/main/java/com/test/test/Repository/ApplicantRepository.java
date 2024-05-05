@@ -10,4 +10,5 @@ public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Long
     ApplicantEntity findByApplicantid(String applicantid);
 
     ApplicantEntity findByEmail(String email);
+    
 }

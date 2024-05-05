@@ -28,38 +28,57 @@ public class UserService implements UserDetailsService{
     @Autowired
     private EmployeeRepository employeeRepository;
     
-    //forLogin
-    public UserEntity login(String username, String password) {
-        UserEntity user = userRepository.findByUsername(username);
-        if (user != null) {
-            return user;
-        }
-        return null;
-    }
-    
     public boolean verifyPassword(String plainTextPassword, String hashedPassword) {
         return BCrypt.checkpw(plainTextPassword, hashedPassword);
     }
     
-    //Change Password
     public boolean changePassword(String username, String oldPassword, String newPassword, String confirmNewPassword) {
-        UserEntity user = userRepository.findByUsername(username);
-        if (user == null) {
-            return false; // User not found
+    	String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+    	
+        if(userRepository.findByUsername(username)!=null) {
+        	
+        	UserEntity user = userRepository.findByUsername(username);
+        	if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
+                return false; // Old password is incorrect
+            }
+        	if (!newPassword.equals(confirmNewPassword)) {
+                return false; // New passwords do not match
+            }
+        	 user.setPassword(hashedPassword);
+             userRepository.save(user);
+             return true;
         }
-        if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
-            return false; // Old password is incorrect
-        }
-        if (!newPassword.equals(confirmNewPassword)) {
-            return false; // New passwords do not match
+        
+        if(employeeRepository.findByUsername(username)!=null) {
+        	EmployeeEntity user = employeeRepository.findByUsername(username);
+        	if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
+                return false; // Old password is incorrect
+            }
+        	if (!newPassword.equals(confirmNewPassword)) {
+                return false; // New passwords do not match
+            }
+        	 user.setPassword(hashedPassword);
+        	 employeeRepository.save(user);
+             return true;
         }
 
-        // Hash the new password
-        String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
-        user.setPassword(hashedPassword);
-        userRepository.save(user);
-        return true; // Password changed successfully
+        if(adminRepository.findByUsername(username)!=null) {
+        	AdminEntity user = adminRepository.findByUsername(username);
+        	if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
+                return false; // Old password is incorrect
+            }
+        	if (!newPassword.equals(confirmNewPassword)) {
+                return false; // New passwords do not match
+            }
+        	 user.setPassword(hashedPassword);
+        	 adminRepository.save(user);
+             return true;
+        }
+        else {
+        	return false;
+        }
     }
+
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -78,6 +97,8 @@ public class UserService implements UserDetailsService{
 		}
 	}
 
+	
+//	This allows a user to become a vip and will be able to register 2 vehicles
     public String toVIP(UserEntity user) {
     	
     	if(userRepository.findByUsername(user.getUsername())==null) {

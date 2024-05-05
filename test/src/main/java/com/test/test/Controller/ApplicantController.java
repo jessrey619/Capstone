@@ -6,6 +6,7 @@ import java.security.GeneralSecurityException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,7 @@ public class ApplicantController {
         return applicantService.registerApplicant(applicant);
     }
 	
+	
 //    @PostMapping("/uploadReq")
 //    public String uploadRequirementsApplicant(@RequestParam String email, @RequestParam("orcrimg") MultipartFile orcrimg, @RequestParam("licenseimg") MultipartFile licenseimg) throws IOException, GeneralSecurityException, IllegalStateException, java.io.IOException {
 //    	File tmpor = File.createTempFile("temp", null);
@@ -48,24 +50,35 @@ public class ApplicantController {
     public List<ApplicantEntity> getAllApplicants() {
         return applicantService.getAllApplicants();
     }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> getApplicantByEmail(@PathVariable String email) {
+        ApplicantEntity applicant = applicantService.getApplicantByEmail(email);
+        if (applicant != null) {
+            return ResponseEntity.ok().body(applicant);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
     
     @GetMapping("/{applicantid}")
     public ApplicantEntity getApplicantById(@PathVariable String applicantid) {
         return applicantService.getApplicantById(applicantid);
     }
     
-    @PutMapping("/updatePreApprovedStatus/{applicantid}")
-    public String updatePreApprovedStatus(@PathVariable String applicantid) {
-        return applicantService.updateApplicant(applicantid);
+    @PutMapping("/updateVerifiedStatus/{email}")
+    public String updatePreApprovedStatus(@PathVariable String email) {
+        return applicantService.updateApplicant(email);
     }
     
-    @PutMapping("/updatePaidStatus/{applicantid}")
-    public String updatePaidStatus(@PathVariable String applicantid) {
-        return applicantService.updatePaidApplicant(applicantid);
+    @PutMapping("/updatePaidStatus/{email}")
+    public String updatePaidStatus(@PathVariable String email) {
+        return applicantService.updatePaidApplicant(email);
     }
     
-    @PutMapping("/approveApplicant/{applicantid}")
-    public String approveApplicant(@PathVariable String applicantid) {
-        return applicantService.approveApplicant(applicantid);
+    @PutMapping("/approveApplicant/{email}")
+    public String approveApplicant(@PathVariable String email) {
+        return applicantService.approveApplicant(email);
     }
+    
+    
 }

@@ -17,6 +17,7 @@ public class VehicleEntity {
 	private String vehicleMake;
 	private String plateNo;
 	private String color;
+	private String stickerId;
 	private Boolean vehicleType; // 0 if twoWheeler, 1 if 4 wheeler
 	
 	public VehicleEntity() {
@@ -69,6 +70,14 @@ public class VehicleEntity {
 
 	public void setVehicleType(Boolean vehicleType) {
 		this.vehicleType = vehicleType;
+	}
+
+	public String getStickerId() {
+		return stickerId;
+	}
+
+	public void setStickerId(String stickerId) {
+		this.stickerId = stickerId;
 	}
 	
 	

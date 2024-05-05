@@ -1,9 +1,16 @@
 package com.test.test.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.test.test.Entity.ApplicantEntity;
+import com.test.test.Entity.UserEntity;
+import com.test.test.Entity.VehicleEntity;
 import com.test.test.Repository.ApplicantRepository;
+import com.test.test.Repository.UserRepository;
+import com.test.test.Repository.VehicleRepository;
+
+import jakarta.validation.constraints.Email;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +27,12 @@ public class ApplicantService {
 
 	@Autowired
     private ApplicantRepository applicantRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private VehicleRepository vehicleRepository;
 
 	
 //	@UPLOAD PHOTOS WILL BE DONE IN THE PHOTO CONTROLLER
@@ -50,7 +63,17 @@ public class ApplicantService {
         }
 
         ApplicantEntity existingApplicant = applicantRepository.findByEmail(applicant.getEmail());
+        UserEntity user = userRepository.findByUsername(applicant.getEmail());
+        
+        if(user == null) {
+        	return "User not Found";
+        }
+        
         if (existingApplicant != null) {
+        	
+        	user.setDateApplied(new Date());
+        	userRepository.save(user);
+        	
             // Update existing applicant
             existingApplicant.setFirstName(applicant.getFirstName());
             existingApplicant.setLastName(applicant.getLastName());
@@ -64,18 +87,21 @@ public class ApplicantService {
             existingApplicant.setPlateNo(applicant.getPlateNo());
             existingApplicant.setColor(applicant.getColor());
             existingApplicant.setVehicleType(applicant.getVehicleType());
+            existingApplicant.setApplicantid(applicant.getApplicantid());
 
             existingApplicant.setDatesubmitted(applicant.getDatesubmitted());
-            existingApplicant.setDateDay(applicant.getDateDay());
             existingApplicant.setVerified(applicant.getVerified());
             existingApplicant.setApproved(applicant.isApproved());
             existingApplicant.setPaid(applicant.isPaid());
 
             applicantRepository.save(existingApplicant);
             
+            
         } else {
             // Create new applicant
+        	user.setDateApplied(new Date());
         	applicantRepository.save(applicant);
+            userRepository.save(user);
         }
         
         return "Registration Submitted Successfully";
@@ -115,36 +141,99 @@ public class ApplicantService {
         return applicantRepository.findByApplicantid(applicantid);
     }
 
-    public String updateApplicant(String applicantid) {
-        ApplicantEntity applicant = applicantRepository.findByApplicantid(applicantid);
+    
+//  @TODO may be updated through get by ID instead of email but to be continued...
+//  Verification
+    public String updateApplicant(String email) {
+    	ApplicantEntity applicant = applicantRepository.findByEmail(email);
+        UserEntity user = userRepository.findByUsername(email);
         if (applicant != null) {
-            applicant.setVerified(true);
-            applicantRepository.save(applicant);
-            return "Applicant verified status updated successfully!";
+        	if(user != null) {
+        		applicant.setVerified(true);
+                applicantRepository.save(applicant);
+                user.setIsVerified(applicant.getVerified());
+                userRepository.save(user);
+                return "Applicant verified status updated successfully!";
+        	}
+        	else {
+        		return "User Account not Found";
+        	}
         } else {
             return "Applicant not found!";
         }
     }
 
-    public String updatePaidApplicant(String applicantid) {
-        ApplicantEntity applicant = applicantRepository.findByApplicantid(applicantid);
+//  Payment
+    public String updatePaidApplicant(String email) {
+        ApplicantEntity applicant = applicantRepository.findByEmail(email);
+        UserEntity user = userRepository.findByUsername(email);
         if (applicant != null) {
-            applicant.setPaid(true);
-            applicantRepository.save(applicant);
-            return "Applicant payment status updated successfully!";
+        	if(user != null) {
+        		applicant.setPaid(true);
+                applicantRepository.save(applicant);
+                user.setIsPaid(true);
+                user.setDatePaid(new Date());
+                userRepository.save(user);
+                return "Applicant payment status updated successfully!";
+        	}
+        	else {
+        		return "User Account not found";
+        	}
         } else {
             return "Applicant not found!";
         }
     }
 
-    public String approveApplicant(String applicantid) {
-        ApplicantEntity applicant = applicantRepository.findByApplicantid(applicantid);
+//  Approval
+    public String approveApplicant(String email) {
+        ApplicantEntity applicant = applicantRepository.findByEmail(email);
+        UserEntity user = userRepository.findByUsername(email);
+        VehicleEntity vehicle = vehicleRepository.findByUsername(email);
+        
         if (applicant != null) {
-            applicant.setApproved(true);
-            applicantRepository.save(applicant);
-            return "Application approved successfully!";
+        	if(user != null) {
+        		
+        		applicant.setApproved(true);
+        		
+        		user.setAddress(applicant.getAddress());
+        		user.setContactNumber(applicant.getContactNumber());
+        		user.setIsApproved(true);
+        		user.setFname(applicant.getFirstName());
+        		user.setMname(applicant.getMiddleInitial());
+        		user.setSchoolId(applicant.getIdNumber());
+        		user.setSchoolIdOwner(applicant.getStudentName());
+        		user.setIsParking(applicant.getIsParking());
+        		
+        		if(vehicle!=null) {
+        			vehicle.setColor(applicant.getColor());
+            		vehicle.setPlateNo(applicant.getPlateNo());
+            		vehicle.setUsername(email);
+            		vehicle.setVehicleMake(applicant.getVehicleMake());
+            		vehicle.setVehicleType(applicant.getVehicleType());
+        		} else {
+        			vehicle = new VehicleEntity();
+            		vehicle.setColor(applicant.getColor());
+            		vehicle.setPlateNo(applicant.getPlateNo());
+            		vehicle.setUsername(email);
+            		vehicle.setVehicleMake(applicant.getVehicleMake());
+            		vehicle.setVehicleType(applicant.getVehicleType());
+            		
+        		}
+//@TODO TEST THIS LATER
+        		vehicleRepository.save(vehicle);
+                applicantRepository.save(applicant);
+                userRepository.save(user);
+                return "Application approved successfully!";
+        	}
+        	else {
+        		return "User Account not found";
+        	}
         } else {
             return "Applicant not found!";
         }
+    }
+    
+    public ApplicantEntity getApplicantByEmail(String email) {
+        return applicantRepository.findByEmail(email);
     }
 }

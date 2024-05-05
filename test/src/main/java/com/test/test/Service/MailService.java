@@ -46,6 +46,21 @@ public class MailService {
 			
 	}
 	
+	public String forgetPassSendOtp (String email) {
+		String otp = generateOtp(email);
+		if(userRepository.findByUsername(modifyEmail(email))!=null) {
+			return "Email Already Verified";
+		} else {
+			try {
+				sendForgetPassOtpToMail(email, otp);
+				return "OTP Sent Successfully";
+			}catch (MessagingException e) {
+				throw new RuntimeException("Unable to send OTP");
+			}
+		}
+			
+	}
+	
 	private String generateOtp(String email) {
 	    OtpEntity existingOtp = otpRepository.findByEmail(email);
 	    
@@ -60,8 +75,6 @@ public class MailService {
 	        calendar.setTime(date);
 	        calendar.add(Calendar.MINUTE, 5);
 	        Date expirationDate = calendar.getTime();
-
-	        
 
 	        if (existingOtp == null) {
 	            existingOtp = new OtpEntity();
@@ -97,9 +110,6 @@ public class MailService {
 	}
 
 
-
-        
-	
 	private String hash(String plainText){
 		return BCrypt.hashpw(plainText, BCrypt.gensalt());
 	}
@@ -116,6 +126,19 @@ public class MailService {
 		javaMailSender.send(mimeMessage);
 	}
 	
+	private void sendForgetPassOtpToMail(String email, String otp) throws MessagingException{
+		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+		MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+		mimeMessageHelper.setTo(email);
+		mimeMessageHelper.setSubject("Forgot Password OTP");
+		
+        //@TODO We can Edit the Text Later On 
+		mimeMessageHelper.setText("Your Verification Code is "+ otp+"");
+		javaMailSender.send(mimeMessage);
+	}
+	
+	
+	
 	//USE LATER WHEN CHECKING FOR OTP :)
 	public String checkOtp(String otp, String email) throws MessagingException{
 		String res ="";
@@ -123,8 +146,6 @@ public class MailService {
 		
 		OtpEntity user = otpRepository.findByEmail(email);
 		String hashedOtp = user.getOtp();
-		
-		
 		
 		if(user.getExpirationDate().after(currentDate)) {
 			if (BCrypt.checkpw(otp, hashedOtp)) {
@@ -168,6 +189,36 @@ public class MailService {
 		return res;
 	}
 	
+	
+	
+	public String forgetPasswordCheckOtp(String otp, String email) throws MessagingException{
+		String res ="";
+		Date currentDate = new Date(); 
+		
+		OtpEntity user = otpRepository.findByEmail(email);
+		String hashedOtp = user.getOtp();
+		
+		if(user.getExpirationDate().after(currentDate)) {
+			if (BCrypt.checkpw(otp, hashedOtp)) {
+				if(user.getIsUsed()==false) {
+					res = "Success";
+				}
+				else {
+					res = "code already used please send again";
+				}
+			}
+			else
+				res = "Code Mismatch";
+		} else {
+			res = "Code has Already Expired";
+		}
+		System.out.print(res);
+		return res;
+	}
+	
+	
+
+	
 	//	method used to remove the address in the email for username purposes
 	private String modifyEmail(String email) {
 	    int atIndex = email.indexOf('@');
@@ -176,6 +227,8 @@ public class MailService {
 	    }
 	    return email; // Return the original email if no @ symbol is found
 	}
+	
+	
 
 	// Character Password Generator
 	private static String generatePassword() {

@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap');
+/*body*/
+
+body {
+    background-color: rgb(120, 17, 17);
+    font-family: 'Kumbh Sans', sans-serif;
+    background-image: url('C:\Users\REINA LUZ\Documents\GitHub\Capstone\my-app\public\RFID_background.png'); /* Adjust the path to your image */
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 90vw;  
+    overflow: hidden; 
+}
+
+
+.topImage{
+    width:20vw;
+    left:0;
+    z-index: -9000;
+}
+
+.top{
+    top:0;
+    background-color:aqua;
+    height: max-content;
+    z-index: 2;
+}
+
+/* .display{
+    display:relative;
+    flex-direction: row;
+} */
+
+ /*CONTENT*/
+
+.StickerContainer{
+    z-index: 1;
+    width: 40vw;
+    height: 40vh;
+    background-color: #F4C522;
+    margin: 0 auto;
+    visibility: hidden;
+}

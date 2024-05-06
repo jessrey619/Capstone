@@ -11,6 +11,10 @@ function LogsEmployee() {
 
     const [logs, setLogs] = useState([]);
     const [filterBy, setFilterBy] = useState('');
+    const [twoWheels, setTwoWheels] = useState([]);
+    const [fourWheels, setFourWheels] = useState([]);
+    const [totalVehiclesInside, setTotalVehicles] = useState([]);
+    const [parkingAreas, setParkingAreas] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:8080/logs/all')
@@ -19,6 +23,27 @@ function LogsEmployee() {
           })
           .catch(error => {
             console.error('Error fetching logs:', error);
+          });
+
+          axios.get('http://localhost:8080/logs/vehicle-types/count')
+          .then(response => {
+            const fourWheel = response.data.fourWheelCount;
+            const twoWheel = response.data.otherCount;
+            const total = fourWheel + twoWheel;
+            setTwoWheels(twoWheel)
+            setTotalVehicles(total);
+            setFourWheels(fourWheel);
+          })
+          .catch(error => {
+            console.error('Error fetching Counting:', error);
+          });
+
+          axios.get('http://localhost:8080/parking/active')
+          .then(response => {
+            setParkingAreas(response.data)
+          })
+          .catch(error => {
+            console.error('Error fetching Counting:', error);
           });
       }, []);
 
@@ -45,15 +70,18 @@ function LogsEmployee() {
                     <tr>
                         <th className="totalLive">Total</th>
                         <th className="totalLive">
-                            120  {/* need to be live count */}
+                            {totalVehiclesInside}
                         </th>
                     </tr>
                 </thead>
                         <tbody>
                             <tr className="liveContent">
-                        <td>Cars: 60 
-                            {/* need to be live count */} </td>
-                        <td>Motors: 60</td>
+                        <td>
+                            Cars: {fourWheels}
+                        </td>
+                        <td>
+                            Motors: {twoWheels}
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -68,27 +96,14 @@ function LogsEmployee() {
         </tr>
         </thead>
         <tbody>
-        <tr className="secondCont">
-            <td>Parking Area 1:</td>
-            {/* needs live content  */}
-            <td>23</td>
-            <td>10</td>
-            <td>FULL</td>
+        {parkingAreas.map(area => (
+        <tr key={area.id} className="secondCont">
+            <td>{area.name}</td>
+            <td>{area.occupiedSpace}</td>
+            <td>{area.totalSpace}</td>
+            <td>{area.isActive? 'Active': 'Inactive'}</td>
         </tr>
-        <tr className="secondCont">
-            <td>Parking Area 2:</td>
-             {/* needs live content  */}
-            <td>6</td> 
-            <td>10</td>
-            <td>Available</td>
-        </tr>
-        <tr className="secondCont">
-            <td>Parking Area 3:</td>
-            {/* needs live content  */}
-            <td>10</td>
-            <td>5</td>
-            <td>Available</td>
-        </tr>
+    ))}
     </tbody>
 </table>
         </div>
@@ -130,9 +145,9 @@ function LogsEmployee() {
     {filteredLogs.map(log => (
     <tr key={log.id}>
         <td>{log.id}</td>
-        <td>{log.isParking ? 'Parking' : 'Drop Off/Pickup'}</td>
+        <td>{log.isParking ? 'Parking' : 'Pickup/Drop off'}</td>
         <td>{log.stickerId}</td>
-        <td>{log.vehicleType}</td>
+        <td>{log.isFourWheel ? 'Four Wheel': 'Two Wheel'}</td>
         <td>{log.color}</td>
         <td>{log.plateNo}</td>
         <td>{log.name}</td>

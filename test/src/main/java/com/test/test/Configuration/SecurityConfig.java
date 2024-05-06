@@ -44,7 +44,7 @@ public class SecurityConfig {
                         		,"/photos/upload**", "/photos**", "/photos/get-photo-by-name/**", "/applicants/**"
                         		, "/photos/get-photo-by-username/**"
                         		,"vehicles/create**","vehicles/update**", "vehicles/find-by-username/**"
-                        		,"/logs/add**","/logs/all**"
+                        		,"/logs/add**","/logs/all**", "/logs/**"
                         		,"/applicants/**"
                         		,"/parking/**"
                         		)

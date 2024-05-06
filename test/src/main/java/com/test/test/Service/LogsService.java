@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.test.test.Entity.LogsEntity;
+import com.test.test.Entity.VehicleTypeCountResponse;
 import com.test.test.Repository.LogsRepository;
 
 @Service
@@ -37,7 +38,7 @@ public class LogsService {
 
         existingLog.setIsParking(updatedLog.getIsParking());
         existingLog.setStickerId(updatedLog.getStickerId());
-        existingLog.setVehicleType(updatedLog.getVehicleType());
+        existingLog.setIsFourWheel(updatedLog.getIsFourWheel());
         existingLog.setColor(updatedLog.getColor());
         existingLog.setPlateNo(updatedLog.getPlateNo());
         existingLog.setName(updatedLog.getName());
@@ -45,5 +46,12 @@ public class LogsService {
         existingLog.setTimeOut(updatedLog.getTimeOut());
 
         return logsRepository.save(existingLog);
+    }
+    
+    public VehicleTypeCountResponse countVehicleTypes() {
+        List<LogsEntity> logs = logsRepository.findAll();
+        int countFourWheel = (int) logs.stream().filter(LogsEntity::getIsFourWheel).count();
+        int countOther = (int) logs.stream().filter(log -> !log.getIsFourWheel()).count();
+        return new VehicleTypeCountResponse(countFourWheel, countOther);
     }
 }

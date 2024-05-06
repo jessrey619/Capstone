@@ -19,7 +19,9 @@ public class LogsEntity {
 	private int id;
 	private Boolean isParking;
 	private String stickerId;
-	private String vehicleType;
+	
+	@Column(name="vehicleType")
+	private Boolean isFourWheel;
 	private String color;
 	private String plateNo;
 	private String name;
@@ -52,14 +54,6 @@ public class LogsEntity {
 
 	public void setStickerId(String stickerId) {
 		this.stickerId = stickerId;
-	}
-
-	public String getVehicleType() {
-		return vehicleType;
-	}
-
-	public void setVehicleType(String vehicleType) {
-		this.vehicleType = vehicleType;
 	}
 
 	public String getColor() {
@@ -100,6 +94,14 @@ public class LogsEntity {
 
 	public void setTimeOut(Date timeOut) {
 		this.timeOut = timeOut;
+	}
+
+	public Boolean getIsFourWheel() {
+		return isFourWheel;
+	}
+
+	public void setIsFourWheel(Boolean isFourWheel) {
+		this.isFourWheel = isFourWheel;
 	}
 	
 	

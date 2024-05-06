@@ -24,7 +24,7 @@ public class ParkingAreaService {
         if (existingParkingArea != null) {
         	existingParkingArea.setTotalSpace(parkingArea.getTotalSpace());
         	existingParkingArea.setAvailableSpace(parkingArea.getAvailableSpace());
-        	existingParkingArea.setOccupiedSpace(parkingArea.getTotalSpace());
+        	existingParkingArea.setOccupiedSpace(parkingArea.getOccupiedSpace());
         	existingParkingArea.setIsFull(parkingArea.getIsFull());
         	existingParkingArea.setIsActive(parkingArea.getIsActive());
             parkingAreaRepository.save(existingParkingArea);

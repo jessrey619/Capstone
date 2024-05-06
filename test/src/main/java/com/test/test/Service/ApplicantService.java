@@ -217,6 +217,8 @@ public class ApplicantService {
             		vehicle.setUsername(email);
             		vehicle.setVehicleMake(applicant.getVehicleMake());
             		vehicle.setVehicleType(applicant.getVehicleType());
+            		vehicle.setIsParking(applicant.getIsParking());
+            		vehicle.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
             		
         		}
 //@TODO TEST THIS LATER

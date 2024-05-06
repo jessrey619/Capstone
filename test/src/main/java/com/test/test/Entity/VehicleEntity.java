@@ -15,10 +15,12 @@ public class VehicleEntity {
 	
 	private String username;
 	private String vehicleMake;
+	private String name;
 	private String plateNo;
 	private String color;
 	private String stickerId;
 	private Boolean vehicleType; // 0 if twoWheeler, 1 if 4 wheeler
+	private Boolean isParking; //1 if parking 0 if dropoff/pickup
 	
 	public VehicleEntity() {
 		super();
@@ -78,6 +80,22 @@ public class VehicleEntity {
 
 	public void setStickerId(String stickerId) {
 		this.stickerId = stickerId;
+	}
+
+	public Boolean getIsParking() {
+		return isParking;
+	}
+
+	public void setIsParking(Boolean isParking) {
+		this.isParking = isParking;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

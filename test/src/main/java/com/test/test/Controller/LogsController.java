@@ -1,6 +1,7 @@
 package com.test.test.Controller;
 
 import com.test.test.Entity.LogsEntity;
+import com.test.test.Entity.VehicleTypeCountResponse;
 import com.test.test.Service.LogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,5 +48,12 @@ public class LogsController {
     public ResponseEntity<Void> deleteLog(@PathVariable int id) {
         logsService.deleteLog(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+//    TODO ISUMPAY SA FRONTEND
+    @GetMapping("/vehicle-types/count")
+    public ResponseEntity<VehicleTypeCountResponse> countVehicleTypes() {
+        VehicleTypeCountResponse response = logsService.countVehicleTypes();
+        return ResponseEntity.ok(response);
     }
 }

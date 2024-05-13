@@ -5,52 +5,109 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="tblprices")
 public class PricesEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-	private Double twoWheelPickup;
-	private Double fourWheelPickup;
-	private Double twoWheelParking;
-	private Double fourWheelParking;
+	private Double studentTwoWheelPickup; 
+	private Double studentFourWheelPickup;
+	private Double studentTwoWheelParking;
+	private Double studentFourWheelParking;
+	
+	private Double staffTwoWheelPickup;		
+	private Double staffFourWheelPickup;
+	private Double staffTwoWheelParking;
+	private Double staffFourWheelParking;
+	
 	public PricesEntity() {
-		super();
+		this.studentTwoWheelPickup = 0.0;
+		this.studentFourWheelPickup = 0.0;
+		this.studentTwoWheelParking = 0.0;
+		this.studentFourWheelParking = 0.0;
+		
+		this.staffTwoWheelPickup = 0.0;
+		this.staffFourWheelPickup = 0.0;
+		this.staffTwoWheelParking = 0.0;
+		this.staffFourWheelParking = 0.0;
 	}
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Double getTwoWheelPickup() {
-		return twoWheelPickup;
+
+	public Double getStudentTwoWheelPickup() {
+		return studentTwoWheelPickup;
 	}
-	public void setTwoWheelPickup(Double twoWheelPickup) {
-		this.twoWheelPickup = twoWheelPickup;
+
+	public void setStudentTwoWheelPickup(Double studentTwoWheelPickup) {
+		this.studentTwoWheelPickup = studentTwoWheelPickup;
 	}
-	public Double getFourWheelPickup() {
-		return fourWheelPickup;
+
+	public Double getStudentFourWheelPickup() {
+		return studentFourWheelPickup;
 	}
-	public void setFourWheelPickup(Double fourWheelPickup) {
-		this.fourWheelPickup = fourWheelPickup;
+
+	public void setStudentFourWheelPickup(Double studentFourWheelPickup) {
+		this.studentFourWheelPickup = studentFourWheelPickup;
 	}
-	public Double getTwoWheelParking() {
-		return twoWheelParking;
+
+	public Double getStudentTwoWheelParking() {
+		return studentTwoWheelParking;
 	}
-	public void setTwoWheelParking(Double twoWheelParking) {
-		this.twoWheelParking = twoWheelParking;
+
+	public void setStudentTwoWheelParking(Double studentTwoWheelParking) {
+		this.studentTwoWheelParking = studentTwoWheelParking;
 	}
-	public Double getFourWheelParking() {
-		return fourWheelParking;
+
+	public Double getStudentFourWheelParking() {
+		return studentFourWheelParking;
 	}
-	public void setFourWheelParking(Double fourWheelParking) {
-		this.fourWheelParking = fourWheelParking;
+
+	public void setStudentFourWheelParking(Double studentFourWheelParking) {
+		this.studentFourWheelParking = studentFourWheelParking;
 	}
-	
+
+	public Double getStaffTwoWheelPickup() {
+		return staffTwoWheelPickup;
+	}
+
+	public void setStaffTwoWheelPickup(Double staffTwoWheelPickup) {
+		this.staffTwoWheelPickup = staffTwoWheelPickup;
+	}
+
+	public Double getStaffFourWheelPickup() {
+		return staffFourWheelPickup;
+	}
+
+	public void setStaffFourWheelPickup(Double staffFourWheelPickup) {
+		this.staffFourWheelPickup = staffFourWheelPickup;
+	}
+
+	public Double getStaffTwoWheelParking() {
+		return staffTwoWheelParking;
+	}
+
+	public void setStaffTwoWheelParking(Double staffTwoWheelParking) {
+		this.staffTwoWheelParking = staffTwoWheelParking;
+	}
+
+	public Double getStaffFourWheelParking() {
+		return staffFourWheelParking;
+	}
+
+	public void setStaffFourWheelParking(Double staffFourWheelParking) {
+		this.staffFourWheelParking = staffFourWheelParking;
+	}
+
 	
 	
 	

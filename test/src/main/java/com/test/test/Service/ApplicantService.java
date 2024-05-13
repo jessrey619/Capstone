@@ -3,9 +3,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.test.test.Entity.AccountExpirationEntity;
 import com.test.test.Entity.ApplicantEntity;
 import com.test.test.Entity.UserEntity;
 import com.test.test.Entity.VehicleEntity;
+import com.test.test.Repository.AccountExpirationRepository;
 import com.test.test.Repository.ApplicantRepository;
 import com.test.test.Repository.UserRepository;
 import com.test.test.Repository.VehicleRepository;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ApplicantService {
@@ -34,6 +37,8 @@ public class ApplicantService {
 	@Autowired
 	private VehicleRepository vehicleRepository;
 
+	@Autowired
+	private AccountExpirationRepository accountExpirationRepository;
 	
 //	@UPLOAD PHOTOS WILL BE DONE IN THE PHOTO CONTROLLER
 	
@@ -88,17 +93,22 @@ public class ApplicantService {
             existingApplicant.setColor(applicant.getColor());
             existingApplicant.setVehicleType(applicant.getVehicleType());
             existingApplicant.setApplicantid(applicant.getApplicantid());
-
+            existingApplicant.setIsParking(applicant.getIsParking());
+            existingApplicant.setIsStaff(applicant.getIsStaff());
+            
             existingApplicant.setDatesubmitted(applicant.getDatesubmitted());
             existingApplicant.setVerified(applicant.getVerified());
             existingApplicant.setApproved(applicant.isApproved());
             existingApplicant.setPaid(applicant.isPaid());
+            existingApplicant.setRejected(false);
+
 
             applicantRepository.save(existingApplicant);
             
             
         } else {
             // Create new applicant
+        	applicant.setRejected(false);
         	user.setDateApplied(new Date());
         	applicantRepository.save(applicant);
             userRepository.save(user);
@@ -189,6 +199,7 @@ public class ApplicantService {
         ApplicantEntity applicant = applicantRepository.findByEmail(email);
         UserEntity user = userRepository.findByUsername(email);
         VehicleEntity vehicle = vehicleRepository.findByUsername(email);
+        Optional<AccountExpirationEntity> expirationEntity = accountExpirationRepository.findById(1);
         
         if (applicant != null) {
         	if(user != null) {
@@ -200,9 +211,20 @@ public class ApplicantService {
         		user.setIsApproved(true);
         		user.setFname(applicant.getFirstName());
         		user.setMname(applicant.getMiddleInitial());
+        		user.setLname(applicant.getLastName());
         		user.setSchoolId(applicant.getIdNumber());
         		user.setSchoolIdOwner(applicant.getStudentName());
         		user.setIsParking(applicant.getIsParking());
+        		user.setIsStaff(applicant.getIsStaff());
+        		user.setIsEnabled(true);
+        		
+        		if(expirationEntity!=null) {
+        			if(user.getIsStaff()) {
+        				user.setExpirationDate(expirationEntity.get().getStaffExpirationDate());
+        			}else {
+        				user.setExpirationDate(expirationEntity.get().getStudentExpirationDate());
+        			}
+        		}
         		
         		if(vehicle!=null) {
         			vehicle.setColor(applicant.getColor());
@@ -210,6 +232,9 @@ public class ApplicantService {
             		vehicle.setUsername(email);
             		vehicle.setVehicleMake(applicant.getVehicleMake());
             		vehicle.setVehicleType(applicant.getVehicleType());
+            		vehicle.setIsParking(applicant.getIsParking());
+            		vehicle.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
+            		
         		} else {
         			vehicle = new VehicleEntity();
             		vehicle.setColor(applicant.getColor());
@@ -220,8 +245,14 @@ public class ApplicantService {
             		vehicle.setIsParking(applicant.getIsParking());
             		vehicle.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
             		
+            		Integer maxStickerId = vehicleRepository.findMaxStickerId();
+                    if (maxStickerId == null) {
+                        maxStickerId = 0;
+                    }
+                    vehicle.setStickerId(maxStickerId + 1);
+            		
         		}
-//@TODO TEST THIS LATER
+        		//@TODO TEST THIS LATER
         		vehicleRepository.save(vehicle);
                 applicantRepository.save(applicant);
                 userRepository.save(user);

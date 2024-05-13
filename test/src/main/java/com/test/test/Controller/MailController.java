@@ -1,6 +1,8 @@
 package com.test.test.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,4 +37,20 @@ public class MailController {
 		}
 		return "Finished OTP Verification";
 	}
+	
+	@PostMapping("/forget-password/send-otp")
+    public ResponseEntity<String> forgetPassword(@RequestParam String email) {
+        String result = mailService.forgetPassSendOtp(email);
+        return ResponseEntity.ok(result);
+    }
+	
+	@PostMapping("/forget-password/check-otp")
+    public ResponseEntity<String> forgetPasswordCheckOtp(@RequestParam String email, @RequestParam String otp) {
+        try {
+            String result = mailService.forgetPasswordCheckOtp(otp, email);
+            return ResponseEntity.ok(result);
+        } catch (MessagingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to verify OTP");
+        }
+    }
 }

@@ -13,8 +13,13 @@ public class PricesController {
     @Autowired
     private PricesService pricesService;
 
-    @PutMapping("/{id}")
-    public void editPrices(@PathVariable int id, @RequestBody PricesEntity prices) {
-        pricesService.editPrices(id, prices);
+    @PutMapping("/update-student-prices")
+    public void editStudentPrices(@RequestBody PricesEntity prices) {
+        pricesService.editStudentPrices(prices);
+    }
+    
+    @PutMapping("/update-staff-prices")
+    public void editStaffPrices(@RequestBody PricesEntity prices) {
+        pricesService.editStaffPrices(prices);
     }
 }

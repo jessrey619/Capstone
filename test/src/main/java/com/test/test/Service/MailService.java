@@ -33,7 +33,7 @@ public class MailService {
 	
 	public String sendOtp (String email) {
 		String otp = generateOtp(email);
-		if(userRepository.findByUsername(modifyEmail(email))!=null) {
+		if(userRepository.findByUsername(email)!=null) {
 			return "Email Already Verified";
 		} else {
 			try {
@@ -48,15 +48,16 @@ public class MailService {
 	
 	public String forgetPassSendOtp (String email) {
 		String otp = generateOtp(email);
-		if(userRepository.findByUsername(modifyEmail(email))!=null) {
-			return "Email Already Verified";
-		} else {
+		if(userRepository.findByUsername(email)!=null) {
 			try {
 				sendForgetPassOtpToMail(email, otp);
 				return "OTP Sent Successfully";
 			}catch (MessagingException e) {
 				throw new RuntimeException("Unable to send OTP");
 			}
+			
+		} else {
+			return "Email is not Registered";
 		}
 			
 	}
@@ -201,6 +202,8 @@ public class MailService {
 		if(user.getExpirationDate().after(currentDate)) {
 			if (BCrypt.checkpw(otp, hashedOtp)) {
 				if(user.getIsUsed()==false) {
+					user.setIsUsed(true);
+					otpRepository.save(user);
 					res = "Success";
 				}
 				else {
@@ -219,15 +222,15 @@ public class MailService {
 	
 
 	
-	//	method used to remove the address in the email for username purposes
-	private String modifyEmail(String email) {
-	    int atIndex = email.indexOf('@');
-	    if (atIndex != -1) {
-	        return email.substring(0, atIndex);
-	    }
-	    return email; // Return the original email if no @ symbol is found
-	}
-	
+//	//	method used to remove the address in the email for username purposes
+//	private String modifyEmail(String email) {
+//	    int atIndex = email.indexOf('@');
+//	    if (atIndex != -1) {
+//	        return email.substring(0, atIndex);
+//	    }
+//	    return email; // Return the original email if no @ symbol is found
+//	}
+//	
 	
 
 	// Character Password Generator

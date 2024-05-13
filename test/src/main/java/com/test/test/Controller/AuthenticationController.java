@@ -1,11 +1,14 @@
 package com.test.test.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.test.Entity.AdminEntity;
@@ -91,4 +94,21 @@ public class AuthenticationController {
             request.getConfirmNewPassword()
         );
     }
+	
+	@PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestParam String username, @RequestParam String newPassword, @RequestParam String confirmPassword) {
+        try {
+            boolean success = userService.forgotPassword(username, newPassword, confirmPassword);
+            if (success) {
+                return ResponseEntity.ok("Password updated successfully");
+            } else {
+                return ResponseEntity.ok("Failed to update password");
+            }
+        } catch (UsernameNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Username not found");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Passwords do not match");
+        }
+    }
+	
 }

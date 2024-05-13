@@ -18,7 +18,8 @@ public class LogsEntity {
 	@Column(name="id")
 	private int id;
 	private Boolean isParking;
-	private String stickerId;
+	private int stickerId;
+	private String parkingAreaName; 
 	
 	@Column(name="vehicleType")
 	private Boolean isFourWheel;
@@ -48,11 +49,11 @@ public class LogsEntity {
 		this.isParking = isParking;
 	}
 
-	public String getStickerId() {
+	public int getStickerId() {
 		return stickerId;
 	}
 
-	public void setStickerId(String stickerId) {
+	public void setStickerId(int stickerId) {
 		this.stickerId = stickerId;
 	}
 
@@ -102,6 +103,14 @@ public class LogsEntity {
 
 	public void setIsFourWheel(Boolean isFourWheel) {
 		this.isFourWheel = isFourWheel;
+	}
+
+	public String getParkingAreaName() {
+		return parkingAreaName;
+	}
+
+	public void setParkingAreaName(String parkingAreaName) {
+		this.parkingAreaName = parkingAreaName;
 	}
 	
 	

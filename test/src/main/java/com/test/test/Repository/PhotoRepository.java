@@ -9,8 +9,6 @@ import com.test.test.Entity.Photo;
 
 @Repository
 public interface PhotoRepository extends JpaRepository<Photo, Long> {
-    Photo findByName(String name);
-    
     Photo getPhotoById(Long id);
     
     Photo getPhotoByName(String name);

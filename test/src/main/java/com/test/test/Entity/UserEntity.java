@@ -45,12 +45,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 		private Boolean isApproved;
 		private Boolean isPaid;
 		private Boolean isEnabled;
+		private Date expirationDate;
 		@Enumerated(value = EnumType.STRING)
 		private Role role;
 		
 		
 		public UserEntity() {
-			super();
+			this.isApproved = false;
+			this.isEnabled = false;
+			this.isPaid = false;
+			this.isVerified = false;
 		}
 	
 		public int getId() {
@@ -251,6 +255,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 		public void setIsPaid(Boolean isPaid) {
 			this.isPaid = isPaid;
+		}
+
+		public Date getExpirationDate() {
+			return expirationDate;
+		}
+
+		public void setExpirationDate(Date expirationDate) {
+			this.expirationDate = expirationDate;
 		}
 		
 		

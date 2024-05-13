@@ -47,6 +47,9 @@ public class SecurityConfig {
                         		,"/logs/add**","/logs/all**", "/logs/**"
                         		,"/applicants/**"
                         		,"/parking/**"
+                        		,"/config/**"
+                        		,"/forget-password/**"
+                        		,"/prices/**"
                         		)
 //                       
                                 .permitAll()

@@ -28,6 +28,7 @@ public class ApplicantEntity {
     private String gradeLevel;
     private String contactNumber;
     private String address;
+    private Boolean isStaff;
     
 //  @TODO make the vehicleEntity chuchu
     private String vehicleMake;
@@ -42,15 +43,16 @@ public class ApplicantEntity {
     
     private Date datesubmitted;
     
-    private boolean verified;
-    private boolean approved;
+    private boolean isVerified;
+    private boolean isApproved;
     private boolean isPaid;
+    private boolean isRejected;
     
     public ApplicantEntity() {
     	super();
-    	this.verified = false;
+    	this.isVerified = false;
     	this.isPaid = false;
-    	this.approved = false;
+    	this.isApproved = false;
     }
     
     public ApplicantEntity(String email, String applicantid, String firstName, String lastName, String middleInitial,
@@ -75,8 +77,8 @@ public class ApplicantEntity {
 //		this.orcrimg = orcrimg;
 //		this.licenseimg = licenseimg;
 		this.datesubmitted = datesubmitted;
-		this.verified = verified;
-		this.approved = approved;
+		this.isApproved = verified;
+		this.isApproved = approved;
 		this.isPaid = isPaid;
 	}
     
@@ -145,10 +147,10 @@ public class ApplicantEntity {
 		this.datesubmitted = datesubmitted;
 	}
 	public boolean getVerified() {
-		return verified;
+		return isVerified;
 	}
 	public void setVerified(boolean verified) {
-		this.verified = verified;
+		this.isVerified = verified;
 	}
 	public boolean isPaid() {
 		return isPaid;
@@ -163,10 +165,10 @@ public class ApplicantEntity {
 		this.studentName = studentName;
 	}
 	public boolean isApproved() {
-		return approved;
+		return isApproved;
 	}
 	public void setApproved(boolean approved) {
-		this.approved = approved;
+		this.isApproved = approved;
 	}
 	public String getEmail() {
 		return email;
@@ -224,5 +226,21 @@ public class ApplicantEntity {
 
 	public void setIsParking(Boolean isParking) {
 		this.isParking = isParking;
+	}
+
+	public Boolean getIsStaff() {
+		return isStaff;
+	}
+
+	public void setIsStaff(Boolean isStaff) {
+		this.isStaff = isStaff;
+	}
+
+	public boolean isRejected() {
+		return isRejected;
+	}
+
+	public void setRejected(boolean isRejected) {
+		this.isRejected = isRejected;
 	}
 }

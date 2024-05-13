@@ -18,7 +18,7 @@ public class VehicleEntity {
 	private String name;
 	private String plateNo;
 	private String color;
-	private String stickerId;
+	private int stickerId;
 	private Boolean vehicleType; // 0 if twoWheeler, 1 if 4 wheeler
 	private Boolean isParking; //1 if parking 0 if dropoff/pickup
 	
@@ -74,11 +74,11 @@ public class VehicleEntity {
 		this.vehicleType = vehicleType;
 	}
 
-	public String getStickerId() {
+	public int getStickerId() {
 		return stickerId;
 	}
 
-	public void setStickerId(String stickerId) {
+	public void setStickerId(int stickerId) {
 		this.stickerId = stickerId;
 	}
 

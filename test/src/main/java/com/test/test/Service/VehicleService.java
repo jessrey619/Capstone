@@ -45,6 +45,12 @@ public class VehicleService {
         return vehicleRepository.findAllByUsername(username);
     }
     
+    //USED FOR LOGS
+    public VehicleEntity findByStickerId(int stickerId) {
+        return vehicleRepository.findByStickerId(stickerId);
+    }
+    
+    
     public VehicleEntity updateVehicle(VehicleEntity vehicle) {
         Optional<VehicleEntity> existingVehicleOptional = vehicleRepository.findById(vehicle.getId());
         if (existingVehicleOptional.isPresent()) {

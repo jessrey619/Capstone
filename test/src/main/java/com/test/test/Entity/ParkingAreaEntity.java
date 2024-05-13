@@ -17,8 +17,14 @@ public class ParkingAreaEntity {
 	private int totalSpace;
 	private int availableSpace;
 	private int occupiedSpace;
+	private int numberOfCars;
+	private int numberOfMotorcycles;
 	private Boolean isFull;
 	private Boolean isActive;
+	
+	private Boolean allowMotorcycles;
+	private Boolean allowCars;
+	
 	
 	public ParkingAreaEntity() {
 		super();
@@ -64,6 +70,30 @@ public class ParkingAreaEntity {
 	}
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+	public int getNumberOfCars() {
+		return numberOfCars;
+	}
+	public void setNumberOfCars(int numberOfCars) {
+		this.numberOfCars = numberOfCars;
+	}
+	public int getNumberOfMotorcycles() {
+		return numberOfMotorcycles;
+	}
+	public void setNumberOfMotorcycles(int numberOfMotorcycles) {
+		this.numberOfMotorcycles = numberOfMotorcycles;
+	}
+	public Boolean getAllowMotorcycles() {
+		return allowMotorcycles;
+	}
+	public void setAllowMotorcycles(Boolean allowMotorcycles) {
+		this.allowMotorcycles = allowMotorcycles;
+	}
+	public Boolean getAllowCars() {
+		return allowCars;
+	}
+	public void setAllowCars(Boolean allowCars) {
+		this.allowCars = allowCars;
 	}
 	
 	

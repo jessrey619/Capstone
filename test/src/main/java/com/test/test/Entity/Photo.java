@@ -18,11 +18,15 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String applicantSchoolId;
+    private String username;
     private String name;
     
-//  This sets the database so that it wont have any other values aside from 0-2
-    @Min(value = 0, message = "Type must be at least 0")
+//  This sets the database so that it wont have any other values aside from 0-3
+    //1 = License
+    //2 = OR/CR
+    //3 = Proof of Payment
+    @Column(columnDefinition = "int default 0")
+    @Min(value = 0, message = "Type must be at least 0") //default
     @Max(value = 3, message = "Type must be at most 2")
     private int type;
     
@@ -72,12 +76,12 @@ public class Photo {
 		this.type = type;
 	}
 
-	public String getApplicantSchoolId() {
-		return applicantSchoolId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setApplicantSchoolId(String applicantSchoolId) {
-		this.applicantSchoolId = applicantSchoolId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
     // getters and setters

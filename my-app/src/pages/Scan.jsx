@@ -7,6 +7,9 @@ function Scans() {
     const [disclaimer, setDisclaimer] = React.useState("0659482206595")
     const [userId, setuserId] = React.useState("18-6969-420")
     const [type, settype] = React.useState("Pick up/ Drop-off")
+    
+    
+    
     return (
         <div>
         <div className="top">

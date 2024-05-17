@@ -3,6 +3,7 @@
 body{
     background-color: rgb(255, 255, 255);
     font-family: 'Kumbh Sans', sans-serif;
+    max-height: 500%;
 }
 
 .background-image {
@@ -19,7 +20,7 @@ body{
     height: 32vh;
     width:70vw;
     margin: auto;
-    margin-right: 90px;
+    margin-right: 65px;
     border-radius: 10px;
     margin-bottom: 20px;
     margin-top: 35px;
@@ -105,30 +106,38 @@ body{
     margin-top: 55px;
     margin-right: 550px;
 }
+.filterPart{
+    margin-top: 10px;
+}
 
 .filterPart, .filterPart label{
     padding: 10px;
+    width: 10vw;
+    height: 10vh;
     justify-content: space-between;
     color: #000000;
     font-weight: 600;
     font-size: larger;
 }
-.filterPart input{
+
+.filterPart select{
     background-color: #6767672c;
     border: none;
     height: 40px;
     border-radius: 5px;
+    width: 10vw;
     font-family: 'Kumbh Sans', sans-serif;
     padding: 0 10px;
+    margin-left: 130px;
 }
 
 .outer{
     background-color: #8A252C;
     max-height: 500vh;
-    height: 60vh;
-    width:70vw;
+    height: 65vh;
+    width:73vw;
     margin: auto;
-    margin-right: 90px;
+    margin-right: 40px;
     border-radius: 5px;
     margin-bottom: 20px;
     margin-top: 30px;
@@ -140,8 +149,8 @@ body{
 
 .inner{
     background-color: #EFEFEF;
-    width:67vw;
-    height: 55vh;
+    width:70vw;
+    height: 61vh;
     border-radius: 10px;  
     margin: auto;
     margin-top: 15px;
@@ -169,34 +178,35 @@ body{
 }
 
 .container tr {
-    max-height: 50%;
+    max-height: 70vh;
+    max-width: 70vw;
     height: 5px;
     color: #000000;
 }
 
 .container {
     text-align: center;
-    width: 130vh;
-    margin: 0 auto;
+    max-width: 60vw;
     display: table;
     padding: 0;
     position: relative;
-    max-height: 100px; 
-    height: 50px;
+    max-height: 60vh;
     font-family: 'Kumbh Sans', sans-serif;
-    margin-top: 5px;
+    margin-top: 55px;
 }
 
 .logs{
-    height: 45vh;
+    max-width: 70vw;
+    max-height: 70vh;
+    width: 70vw;
     margin-right: 5px;
     overflow-y: scroll;
-    
 }
 
 .container td {
-  padding: 10px;
+  padding: 5px;
   border-radius: 2px;
+  height: 5vh;
 }
 
 .container tr:nth-child(odd) {
@@ -218,10 +228,9 @@ body{
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 2;
-    margin-top: 55px;
+    z-index: 3;
+    margin-top: 80px;
 }
-
 .container td:first-child { color: #000000; }
 
 .container tr:hover {
@@ -287,15 +296,23 @@ transition-timing-function: line;
         width:68vw;
         overflow: hidden;
     }
+    .filterPart, .filterPart label{
+        width: 20vw;
+        height: 10vh;
+  
+    }
     
+    .filterPart select{
+        width: 15vw;
+    }
     .Btitle {
         margin-right: 300px;
     }
     .container {
-        width: 105vh;
+        width: 105vw;
         margin: 0 auto;
         max-height: 300px; 
-        height: 50px;
+        height: 70px;
         margin-top: 5px;
     }
     .container td, .container th, .container tr{
@@ -363,19 +380,27 @@ transition-timing-function: line;
         max-height: min-content;
         overflow: hidden;
     }
+
+    .filterPart label{
+        width: 28vw;
+        height: 10vh;
+        font-size: medium;
+    }
+
+    .filterPart select{
+        width: 20vw;
+    }
     
     .Btitle {
         text-align: center;
         margin-right: 400px;
         margin-bottom: 10px;
     }
-    .filterPart input{
-        height: 5vh;
-        width: 150px;
-    }
+
     .filterPart{
         padding: 5px;
     }
+
     .container {
         width: 105vh;
         margin: 0 auto;

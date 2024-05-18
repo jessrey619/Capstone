@@ -42,6 +42,7 @@ public class ApplicantEntity {
 //	private String proofofpaymentimg;
     
     private Date datesubmitted;
+    private Date expirationDate;
     
     private boolean isVerified;
     private boolean isApproved;
@@ -242,5 +243,13 @@ public class ApplicantEntity {
 
 	public void setRejected(boolean isRejected) {
 		this.isRejected = isRejected;
+	}
+
+	public Date getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		this.expirationDate = expirationDate;
 	}
 }

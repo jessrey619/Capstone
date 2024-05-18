@@ -27,7 +27,8 @@ public class AccountExpirationService {
    
     
     public String setStaffGlobalExpiry(@DateTimeFormat(pattern = "yyyy-MM-dd")  Date expirationDate) {
-        List<UserEntity> users = userRepository.findAll();
+        List<UserEntity> staff = userRepository.findAllStaffMembers();
+
         List<AccountExpirationEntity> accountExpiration = accountExpirationRepository.findAll();
         AccountExpirationEntity acc = null;
         if (!accountExpiration.isEmpty()) {
@@ -36,22 +37,20 @@ public class AccountExpirationService {
             acc = new AccountExpirationEntity();
         }
         
-        for (UserEntity user : users) {
-            if (user.getIsStaff()==true) {
-                user.setExpirationDate(expirationDate);
-                acc.setStaffExpirationDate(expirationDate);
-            }
+        for (UserEntity user : staff) {
+        		user.setExpirationDate(expirationDate);
+                
         }
-        
+        acc.setStaffExpirationDate(expirationDate);
         accountExpirationRepository.save(acc);
-        userRepository.saveAll(users);
+        userRepository.saveAll(staff);
         return("Staff Expiration Set");
     }
 
 
     
-    public void setStudentGlobalExpiry(Date expirationDate) {
-        List<UserEntity> users = userRepository.findAll();
+    public String setStudentGlobalExpiry(Date expirationDate) {
+        List<UserEntity> students = userRepository.findAllStudents();
         List<AccountExpirationEntity> accountExpiration = accountExpirationRepository.findAll();
         AccountExpirationEntity acc = null;
         if (!accountExpiration.isEmpty()) {
@@ -60,14 +59,19 @@ public class AccountExpirationService {
             acc = new AccountExpirationEntity();
         }
         
-        for (UserEntity user : users) {
-            if (!user.getIsStaff()) {
-            	user.setExpirationDate(expirationDate);
-                acc.setStudentExpirationDate(expirationDate);
-            }
+        for (UserEntity student : students) {
+            	student.setExpirationDate(expirationDate);
+
         }
+        acc.setStudentExpirationDate(expirationDate);
         accountExpirationRepository.save(acc);
-        userRepository.saveAll(users);
+        userRepository.saveAll(students);
+        return("Student Expiration Set");
+    }
+    
+    public AccountExpirationEntity getAccountExpiration() {
+    	List<AccountExpirationEntity> accountExpirationEntities = accountExpirationRepository.findAll();
+    	return accountExpirationEntities.get(0);
     }
 
 

@@ -88,4 +88,6 @@ public class ImageController {
         imageService.create(image);
         return "redirect:/";
     }
+    
+
 }

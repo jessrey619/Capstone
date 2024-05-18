@@ -50,6 +50,7 @@ public class SecurityConfig {
                         		,"/config/**"
                         		,"/forget-password/**"
                         		,"/prices/**"
+                        		,"/applicants/**"
                         		)
 //                       
                                 .permitAll()

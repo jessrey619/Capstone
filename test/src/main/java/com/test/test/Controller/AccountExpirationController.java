@@ -28,12 +28,12 @@ public class AccountExpirationController {
     }
     
     @PostMapping("/setStaffGlobalExpiry")
-    public void setStaffGlobalExpiry(@RequestParam("expirationDate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate) {
-    	accService.setStaffGlobalExpiry(expirationDate);
+    public String  setStaffGlobalExpiry(@RequestParam("expirationDate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate) {
+    	return accService.setStaffGlobalExpiry(expirationDate);
     }
 
     @PostMapping("/setStudentGlobalExpiry")
-    public void setStudentGlobalExpiry(@RequestParam("expirationDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate) {
-    	accService.setStudentGlobalExpiry(expirationDate);
+    public String setStudentGlobalExpiry(@RequestParam("expirationDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate) {
+    	return accService.setStudentGlobalExpiry(expirationDate);
     }
 }

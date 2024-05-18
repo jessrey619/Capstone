@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.test.test.Entity.AdminEntity;
 import com.test.test.Entity.AuthenticationResponse;
 import com.test.test.Entity.ChangePasswordRequest;
+import com.test.test.Entity.DecodedJwt;
 import com.test.test.Entity.EmployeeEntity;
 import com.test.test.Entity.UserEntity;
 import com.test.test.Service.AuthenticationService;
@@ -111,4 +112,9 @@ public class AuthenticationController {
         }
     }
 	
+	@CrossOrigin
+    @PostMapping("/decode")
+    public DecodedJwt decodeJwt(@RequestParam String token) {
+        return authService.decodeJwt(token);
+    }
 }

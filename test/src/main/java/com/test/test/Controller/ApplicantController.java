@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,14 +46,17 @@ public class ApplicantController {
 //    	licenseimg.transferTo(tmpli);
 //    	return applicantService.save(email, tmpor, tmpli);
 //    }
-    
+    @CrossOrigin
     @GetMapping("/all")
     public List<ApplicantEntity> getAllApplicants() {
         return applicantService.getAllApplicants();
     }
-    @GetMapping("/email/{email}")
-    public ResponseEntity<?> getApplicantByEmail(@PathVariable String email) {
-        ApplicantEntity applicant = applicantService.getApplicantByEmail(email);
+    
+    
+    @CrossOrigin
+    @GetMapping("/email/{id}")
+    public ResponseEntity<?> getApplicantByEmail(@PathVariable int id) {
+        ApplicantEntity applicant = applicantService.getApplicantById(id);
         if (applicant != null) {
             return ResponseEntity.ok().body(applicant);
         } else {
@@ -60,10 +64,17 @@ public class ApplicantController {
         }
     }
     
-    @GetMapping("/{applicantid}")
-    public ApplicantEntity getApplicantById(@PathVariable String applicantid) {
-        return applicantService.getApplicantById(applicantid);
+    @CrossOrigin
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getApplicantById(@PathVariable int id) {
+        ApplicantEntity applicant = applicantService.getApplicantById(id);
+        if (applicant != null) {
+            return ResponseEntity.ok().body(applicant);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+    
     
     @PutMapping("/updateVerifiedStatus/{email}")
     public String updatePreApprovedStatus(@PathVariable String email) {
@@ -78,6 +89,16 @@ public class ApplicantController {
     @PutMapping("/approveApplicant/{email}")
     public String approveApplicant(@PathVariable String email) {
         return applicantService.approveApplicant(email);
+    }
+    
+    @PutMapping("/rejectApplicant/{id}")
+    public String rejectApplicant(@PathVariable int id) {
+    	try {
+    		applicantService.rejectApplication(id);
+    		return "Applicant "+id+" Rejected Successfully";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
     }
     
     

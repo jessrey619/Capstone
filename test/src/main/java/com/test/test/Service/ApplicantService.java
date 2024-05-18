@@ -12,15 +12,19 @@ import com.test.test.Repository.ApplicantRepository;
 import com.test.test.Repository.UserRepository;
 import com.test.test.Repository.VehicleRepository;
 
+import ch.qos.logback.core.joran.conditional.IfAction;
 import jakarta.validation.constraints.Email;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +43,9 @@ public class ApplicantService {
 
 	@Autowired
 	private AccountExpirationRepository accountExpirationRepository;
+	
+	@Autowired
+	private AccountExpirationService expirationService;
 	
 //	@UPLOAD PHOTOS WILL BE DONE IN THE PHOTO CONTROLLER
 	
@@ -67,88 +74,150 @@ public class ApplicantService {
             throw new IllegalArgumentException("Name contains invalid characters");
         }
 
-        ApplicantEntity existingApplicant = applicantRepository.findByEmail(applicant.getEmail());
-        UserEntity user = userRepository.findByUsername(applicant.getEmail());
+    	List<ApplicantEntity> applicantsByEmail = applicantRepository.findAllByEmail(applicant.getEmail());
+    	List<ApplicantEntity> applicantsByName = 
+    			applicantRepository.findAllByFirstNameAndMiddleInitialAndLastName(
+    					applicant.getFirstName().toUpperCase(), 
+    					applicant.getMiddleInitial().toUpperCase(), 
+    					applicant.getLastName().toUpperCase()
+    			);
         
+        UserEntity user = userRepository.findByUsername(applicant.getEmail());
+        AccountExpirationEntity expirationEntity = expirationService.getAccountExpiration();
+        Date expirationDate = new Date();
+        
+        //Checks if user is staff or student and sets expirations accordingly
+        if(applicant.getIsStaff()) {
+        	expirationDate = expirationEntity.getStaffExpirationDate();
+        } else {
+        	expirationDate = expirationEntity.getStudentExpirationDate();
+        }
+        
+        //checks if the user 
         if(user == null) {
         	return "User not Found";
         }
         
-        if (existingApplicant != null) {
-        	
-        	user.setDateApplied(new Date());
-        	userRepository.save(user);
-        	
-            // Update existing applicant
-            existingApplicant.setFirstName(applicant.getFirstName());
-            existingApplicant.setLastName(applicant.getLastName());
-            existingApplicant.setMiddleInitial(applicant.getMiddleInitial());
-            existingApplicant.setStudentName(applicant.getStudentName());
-            existingApplicant.setIdNumber(applicant.getIdNumber());
-            existingApplicant.setGradeLevel(applicant.getGradeLevel());
-            existingApplicant.setContactNumber(applicant.getContactNumber());
-            existingApplicant.setAddress(applicant.getAddress());
-            existingApplicant.setVehicleMake(applicant.getVehicleMake());
-            existingApplicant.setPlateNo(applicant.getPlateNo());
-            existingApplicant.setColor(applicant.getColor());
-            existingApplicant.setVehicleType(applicant.getVehicleType());
-            existingApplicant.setApplicantid(applicant.getApplicantid());
-            existingApplicant.setIsParking(applicant.getIsParking());
-            existingApplicant.setIsStaff(applicant.getIsStaff());
-            
-            existingApplicant.setDatesubmitted(applicant.getDatesubmitted());
-            existingApplicant.setVerified(applicant.getVerified());
-            existingApplicant.setApproved(applicant.isApproved());
-            existingApplicant.setPaid(applicant.isPaid());
-            existingApplicant.setRejected(false);
+        //checks for the applications that have the same name as the current applicant
+        if(applicantsByName.isEmpty()==false) {
 
+            //gets latest application and checks expiration date
+	        boolean expired = applicantsByName.get(applicantsByName.size()-1).getExpirationDate().before(new Date());
+        	if(expired == true){
+//            	return "user with same identity already sent an application \n";
+        		applicant.setRejected(false);
+            	applicant.setExpirationDate(expirationDate);
+            	applicant.setDatesubmitted(new Date());
+            	
+            	user.setAddress(applicant.getAddress());
+        		user.setContactNumber(applicant.getContactNumber());
+        		user.setFname(applicant.getFirstName());
+        		user.setMname(applicant.getMiddleInitial());
+        		user.setLname(applicant.getLastName());
+        		user.setSchoolId(applicant.getIdNumber());
+        		user.setSchoolIdOwner(applicant.getStudentName());
+        		user.setIsParking(applicant.getIsParking());
+        		user.setIsStaff(applicant.getIsStaff());
+        		user.setIsEnabled(false);
+        		user.setEmail(applicant.getEmail());
+        		user.setDateApplied(new Date());
+        		user.setUsername(applicant.getEmail());
+        		
+            	VehicleEntity vehicleEntity = new VehicleEntity();
+            	vehicleEntity.setColor(applicant.getColor());
+            	vehicleEntity.setIsParking(applicant.getIsParking());
+            	vehicleEntity.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
+            	vehicleEntity.setPlateNo(applicant.getPlateNo());
+            	vehicleEntity.setStickerId(0);
+            	vehicleEntity.setUsername(applicant.getEmail());
+            	vehicleEntity.setVehicleMake(applicant.getVehicleMake());
+            	vehicleEntity.setVehicleType(applicant.getVehicleType());
+            		
+            	vehicleRepository.save(vehicleEntity);
+            	applicantRepository.save(applicant);
+                userRepository.save(user);
+                return "Registration Submitted Successfully";
+            } else {
+            	return "User with same Name Already has an Application";
+            }
 
-            applicantRepository.save(existingApplicant);
-            
-            
-        } else {
+        } 
+        
+        //checks if there are applicants that have the same email as the user
+        else if(applicantsByEmail.isEmpty()==false) {
+        	// Set the date to 2025-05-11
+        	SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+            Date date = null;
+            try {
+                date = inputFormat.parse("2025-05-12 00:00:00.0");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+	         
+            //gets latest application and checks expiration date
+	         boolean expired = applicantsByEmail.get(applicantsByEmail.size()-1).getExpirationDate().before(new Date() );
+	         System.out.println(applicantsByEmail.get(applicantsByEmail.size()-1).getExpirationDate());
+        	if(expired == true){
+//            	return "user with same identity already sent an application \n";
+        		applicant.setRejected(false);
+            	applicant.setExpirationDate(expirationDate);
+            	user.setDateApplied(new Date());
+            	applicant.setDatesubmitted(new Date());
+            	applicantRepository.save(applicant);
+                userRepository.save(user);
+                return "Registration Submitted Successfully";
+            } else {
+            	return "User Email Already has an Application";
+            }
+        
+        }else {
             // Create new applicant
         	applicant.setRejected(false);
-        	user.setDateApplied(new Date());
+        	applicant.setExpirationDate(expirationDate);
+        	applicant.setDatesubmitted(new Date());
+        	
+        	user.setAddress(applicant.getAddress());
+    		user.setContactNumber(applicant.getContactNumber());
+    		user.setFname(applicant.getFirstName());
+    		user.setMname(applicant.getMiddleInitial());
+    		user.setLname(applicant.getLastName());
+    		user.setSchoolId(applicant.getIdNumber());
+    		user.setSchoolIdOwner(applicant.getStudentName());
+    		user.setIsParking(applicant.getIsParking());
+    		user.setIsStaff(applicant.getIsStaff());
+    		user.setIsEnabled(false);
+    		user.setEmail(applicant.getEmail());
+    		user.setDateApplied(new Date());
+    		user.setUsername(applicant.getEmail());
+    		
+        	VehicleEntity vehicleEntity = new VehicleEntity();
+        	vehicleEntity.setColor(applicant.getColor());
+        	vehicleEntity.setIsParking(applicant.getIsParking());
+        	vehicleEntity.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
+        	vehicleEntity.setPlateNo(applicant.getPlateNo());
+        	vehicleEntity.setStickerId(0);
+        	vehicleEntity.setUsername(applicant.getEmail());
+        	vehicleEntity.setVehicleMake(applicant.getVehicleMake());
+        	vehicleEntity.setVehicleType(applicant.getVehicleType());
+        		
+        	vehicleRepository.save(vehicleEntity);
         	applicantRepository.save(applicant);
             userRepository.save(user);
+            return "Registration Submitted Successfully";
         }
-        
-        return "Registration Submitted Successfully";
+
     }
     
     private boolean isValidName(String name) {
         return name.matches("^[a-zA-Z ]+$"); // Checks if the name contains only letters and spaces
     }
 
-//    DONE IN PHOTO CONTROLLER
-//    public String uploadRequirements(String email, File orcrimg, File licenseimg) {
-//        try {
-//            String orname = email + ":orcr";
-//            String liname = email + ":license";
-//            String or = uploadImageToDrive(orcrimg, orname);
-//            String li = uploadImageToDrive(licenseimg, liname);
-//            ApplicantEntity applicant = applicantRepository.findByEmail(email);
-//            if (applicant != null) {
-//                applicant.setOrcrimg(or);
-//                applicant.setLicenseimg(li);
-//                applicantRepository.save(applicant);
-//                return "Images Submitted successfully!" + "ORCR: " + or + "\nLICENSE: " + li;
-//            } else {
-//                return "Applicant not found!";
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return "Failed to submit images";
-//        }
-//    }
-
     public List<ApplicantEntity> getAllApplicants() {
         return applicantRepository.findAll();
     }
 
-    public ApplicantEntity getApplicantById(String applicantid) {
-        return applicantRepository.findByApplicantid(applicantid);
+    public ApplicantEntity getApplicantById(int applicantid) {
+        return applicantRepository.findById(applicantid);
     }
 
     
@@ -234,26 +303,13 @@ public class ApplicantService {
             		vehicle.setVehicleType(applicant.getVehicleType());
             		vehicle.setIsParking(applicant.getIsParking());
             		vehicle.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
-            		
+            		vehicle.setStickerId(findMissingStickerId());
+            		vehicleRepository.save(vehicle);
         		} else {
-        			vehicle = new VehicleEntity();
-            		vehicle.setColor(applicant.getColor());
-            		vehicle.setPlateNo(applicant.getPlateNo());
-            		vehicle.setUsername(email);
-            		vehicle.setVehicleMake(applicant.getVehicleMake());
-            		vehicle.setVehicleType(applicant.getVehicleType());
-            		vehicle.setIsParking(applicant.getIsParking());
-            		vehicle.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
-            		
-            		Integer maxStickerId = vehicleRepository.findMaxStickerId();
-                    if (maxStickerId == null) {
-                        maxStickerId = 0;
-                    }
-                    vehicle.setStickerId(maxStickerId + 1);
-            		
+        			return "Vehicle with Username not Found";
         		}
         		//@TODO TEST THIS LATER
-        		vehicleRepository.save(vehicle);
+        		
                 applicantRepository.save(applicant);
                 userRepository.save(user);
                 return "Application approved successfully!";
@@ -269,4 +325,29 @@ public class ApplicantService {
     public ApplicantEntity getApplicantByEmail(String email) {
         return applicantRepository.findByEmail(email);
     }
+    
+    public void rejectApplication(int id) {
+    	ApplicantEntity applicantEntity = applicantRepository.findById(id);
+    	applicantEntity.setRejected(true);
+    	applicantRepository.save(applicantEntity);
+    }
+    
+    
+    public int findMissingStickerId() {
+        // Sort the list based on stickerId
+    	
+    	List<VehicleEntity> vehicles = (List<VehicleEntity>) vehicleRepository.findAll();    	
+        vehicles.sort(Comparator.comparingInt(VehicleEntity::getStickerId));
+
+        // Iterate through the list to find the missing stickerId
+        for (int i = 0; i < vehicles.size() - 1; i++) {
+            if (vehicles.get(i).getStickerId() != vehicles.get(i + 1).getStickerId() - 1) {
+                return vehicles.get(i).getStickerId() + 1;
+            }
+        }
+
+        // If no missing stickerId is found, return the next available stickerId after the last element
+        return vehicles.get(vehicles.size() - 1).getStickerId() + 1;
+    }
+    
 }

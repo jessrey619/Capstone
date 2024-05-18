@@ -332,7 +332,13 @@ public class ApplicantService {
     	applicantRepository.save(applicantEntity);
     }
     
+    public List<ApplicantEntity> searchApplicants(String searchText) {
+        return applicantRepository.findByFirstNameOrLastNameOrEmail(searchText.toLowerCase());
+    }
     
+    
+    
+//    SUPPORTING FUNCTIONS
     public int findMissingStickerId() {
         // Sort the list based on stickerId
     	

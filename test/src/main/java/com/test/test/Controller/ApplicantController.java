@@ -101,5 +101,11 @@ public class ApplicantController {
 		}
     }
     
+    @CrossOrigin
+    @GetMapping("/search")
+    public List<ApplicantEntity> searchApplicants(@RequestParam String searchText) {
+        return applicantService.searchApplicants(searchText);
+    }
+    
     
 }

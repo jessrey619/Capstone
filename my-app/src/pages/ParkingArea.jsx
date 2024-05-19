@@ -8,14 +8,14 @@ import Header from "../Components/Header/Header";
 function ParkingArea() {
     const [disclaimer, setDisclaimer] = useState("55");
     const [status, setStatus] = useState("Close");
-    
+
+    //const [logs, setLogs] = useState([]);
     // const [twoWheels, setTwoWheels] = useState([]);
     // const [fourWheels, setFourWheels] = useState([]);
     // const [totalVehiclesInside, setTotalVehicles] = useState([]);
     // const [parkingAreas, setParkingAreas] = useState([]);
 
 
-    // //AXIOS TO GET ALL THE GOOD SHIT
     // useEffect(() => {
     //     axios.get('http://localhost:8080/logs/all')
     //       .then(response => {

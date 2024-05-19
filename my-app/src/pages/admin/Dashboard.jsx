@@ -4,20 +4,17 @@ import PageTitle from '../../Components/Main/PageTitle';
 import Card from '../../Components/Card/Card';
 
 function Dashboard() {
-
-  const [card, setCards] = useState([])
-
-
   return (
     <main id='main' className='main'>
       <PageTitle page="Dashboard"/>
       <section className='dashboard section'>
         <div className='row'>
-          <div className='col-lg-8'>
+          <div className='col-lg-9'>
             <div className='row'>
+            {/* diri ang mga cards, wala pa kay kay nag tuon pa ko balik sa sql workbench */}
+            <Card/>
             </div>
           </div>
-          <div className='col-lg-4'></div>
         </div>
       </section>
     </main>

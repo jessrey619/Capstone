@@ -52,4 +52,6 @@ public class VehicleController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    
 }

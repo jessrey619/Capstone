@@ -1,33 +1,63 @@
-// import React from 'react'
+// src/components/Card.jsx
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './card.css';
 
-// function Card({ card }) {
-//   return (
-//     <div className='col-xxl-4 col-md-6'>
-//         <div className='card info-card sales-card'>
-//             <CardFilter filterChange={handleFilterCahgne} />
-//             <div className='card-body'>
-//                 <h5 className='card-title'>
-//                     {card.name} <span>{filter}</span>
-//                 </h5>
+const Card = () => {
+    const [vehicleCounts, setVehicleCounts] = useState({
+        totalVehicles: 0,
+        fourWheelers: 0,
+        twoWheelers: 0,
+    });
 
-//                 <div className='d-flex align-items-center'>
-//                     <div className='card-icon rounded-circle d-flex align-items-center justify-content-center'>
-//                         <i className={card.icon}></i>
-//                     </div>
-//                     <div className='ps-3'>
-//                         <h6>
-//                             {card.name === 'Total Vehicles'
-//                                 ? '$' + card.amount.toLocaleString('en-US')
-//                                 : card.amount.toLocaleString('en-US')
-//                             }
-//                         </h6>
-//                     </div>
+    useEffect(() => {
+        axios.get('http://localhost:8080/logs/vehicle-types/count')
+            .then(response => {
+                const fourWheel = response.data.fourWheelCount;
+                const twoWheel = response.data.otherCount;
+                const total = fourWheel + twoWheel;
+                setVehicleCounts({
+                    totalVehicles: total,
+                    fourWheelers: fourWheel,
+                    twoWheelers: twoWheel,
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching vehicle counts:', error);
+            });
+    }, []);
 
-//                 </div>
-//             </div>
-//         </div>
-//     </div>>
-//   )
-// }
+    return (
+        <div className="card-container">
+            <div className="card">
+                <div className="card-content">
+                    <div>
+                        <h5>Total Vehicles</h5>
+                        <p>{vehicleCounts.totalVehicles}</p>
+                    </div>
+                    <i className="bi bi-car-front card-icon"></i>
+                </div>
+            </div>
+            <div className="card">
+                <div className="card-content">
+                    <div>
+                        <h5>Total 4 Wheelers</h5>
+                        <p>{vehicleCounts.fourWheelers}</p>
+                    </div>
+                    <i className="bi bi-truck card-icon"></i>
+                </div>
+            </div>
+            <div className="card">
+                <div className="card-content">
+                    <div>
+                        <h5>Total 2 Wheelers</h5>
+                        <p>{vehicleCounts.twoWheelers}</p>
+                    </div>
+                    <i className="bi bi-bicycle card-icon"></i>
+                </div>
+            </div>
+        </div>
+    );
+};
 
-// export default Card
+export default Card;

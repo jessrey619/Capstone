@@ -14,12 +14,12 @@ public class PricesController {
     private PricesService pricesService;
 
     @PutMapping("/update-student-prices")
-    public void editStudentPrices(@RequestBody PricesEntity prices) {
-        pricesService.editStudentPrices(prices);
+    public String editStudentPrices(@RequestBody PricesEntity prices) {
+        return pricesService.editStudentPrices(prices);
     }
     
     @PutMapping("/update-staff-prices")
-    public void editStaffPrices(@RequestBody PricesEntity prices) {
-        pricesService.editStaffPrices(prices);
+    public String editStaffPrices(@RequestBody PricesEntity prices) {
+        return pricesService.editStaffPrices(prices);
     }
 }

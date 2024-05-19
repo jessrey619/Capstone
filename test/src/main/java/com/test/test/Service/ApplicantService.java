@@ -26,8 +26,10 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ApplicantService {
@@ -56,6 +58,8 @@ public class ApplicantService {
 	public String verifyCredentials(ApplicantEntity applicant) {
 	    ApplicantEntity existingApplicant = applicantRepository.findByEmail(applicant.getEmail());
 	    String res = "";
+	    
+	    
 
 	    if (existingApplicant == null) {
 	        // Applicant with the given email does not exist
@@ -100,9 +104,17 @@ public class ApplicantService {
         
         //checks for the applications that have the same name as the current applicant
         if(applicantsByName.isEmpty()==false) {
+        	
+        	SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+            Date date = null;
+            try {
+                date = inputFormat.parse("2030-05-12 00:00:00.0");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             //gets latest application and checks expiration date
-	        boolean expired = applicantsByName.get(applicantsByName.size()-1).getExpirationDate().before(new Date());
+	        boolean expired = applicantsByName.get(applicantsByName.size()-1).getExpirationDate().before(new Date() );
         	if(expired == true){
 //            	return "user with same identity already sent an application \n";
         		applicant.setRejected(false);
@@ -123,7 +135,20 @@ public class ApplicantService {
         		user.setDateApplied(new Date());
         		user.setUsername(applicant.getEmail());
         		
+        		List<VehicleEntity> vehicles;
+        		
             	VehicleEntity vehicleEntity = new VehicleEntity();
+//            	
+            	if(vehicleRepository.findByPlateNo(applicant.getPlateNo())!=null) {
+            		vehicles = vehicleRepository.findByPlateNo(applicant.getPlateNo());
+            		vehicleEntity = vehicles.get(0);
+            		if(!vehicleEntity.getName().toLowerCase().equals(
+            				applicant.getFirstName().toLowerCase()
+            				+" "+applicant.getMiddleInitial().toLowerCase()
+            				+" "+applicant.getLastName().toLowerCase())) {
+            			return "Vehicle Belongs to Someone Else Please Contact School";
+            		}
+            	}
             	vehicleEntity.setColor(applicant.getColor());
             	vehicleEntity.setIsParking(applicant.getIsParking());
             	vehicleEntity.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
@@ -149,7 +174,7 @@ public class ApplicantService {
         	SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
             Date date = null;
             try {
-                date = inputFormat.parse("2025-05-12 00:00:00.0");
+                date = inputFormat.parse("2030-05-12 00:00:00.0");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -190,7 +215,21 @@ public class ApplicantService {
     		user.setDateApplied(new Date());
     		user.setUsername(applicant.getEmail());
     		
+    		List<VehicleEntity> vehicles;
+    		
         	VehicleEntity vehicleEntity = new VehicleEntity();
+//        	
+        	if(vehicleRepository.findByPlateNo(applicant.getPlateNo())!=null) {
+        		vehicles = vehicleRepository.findByPlateNo(applicant.getPlateNo());
+        		vehicleEntity = vehicles.get(0);
+        		if(!vehicleEntity.getName().toLowerCase().equals(
+        				applicant.getFirstName().toLowerCase()
+        				+" "+applicant.getMiddleInitial().toLowerCase()
+        				+" "+applicant.getLastName().toLowerCase())) {
+        			return "Vehicle Belongs to Someone Else Please Contact School";
+        		}
+        	}
+        	
         	vehicleEntity.setColor(applicant.getColor());
         	vehicleEntity.setIsParking(applicant.getIsParking());
         	vehicleEntity.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
@@ -336,24 +375,44 @@ public class ApplicantService {
         return applicantRepository.findByFirstNameOrLastNameOrEmail(searchText.toLowerCase());
     }
     
+    public List<VehicleEntity> findByPlateNo(String plateNo) {
+    	return vehicleRepository.findByPlateNo(plateNo);
+    }
+    
     
     
 //    SUPPORTING FUNCTIONS
     public int findMissingStickerId() {
-        // Sort the list based on stickerId
-    	
-    	List<VehicleEntity> vehicles = (List<VehicleEntity>) vehicleRepository.findAll();    	
-        vehicles.sort(Comparator.comparingInt(VehicleEntity::getStickerId));
+        // Fetch all vehicle entities
+        List<VehicleEntity> vehicles = vehicleRepository.findAll();
 
-        // Iterate through the list to find the missing stickerId
-        for (int i = 0; i < vehicles.size() - 1; i++) {
-            if (vehicles.get(i).getStickerId() != vehicles.get(i + 1).getStickerId() - 1) {
-                return vehicles.get(i).getStickerId() + 1;
+        // Create a set to store the present sticker IDs
+        Set<Integer> presentStickerIds = new HashSet<>();
+        for (VehicleEntity vehicle : vehicles) {
+            presentStickerIds.add(vehicle.getStickerId());
+        }
+
+        // Find the smallest sticker ID and the largest sticker ID in the list
+        int minStickerId = Integer.MAX_VALUE;
+        int maxStickerId = Integer.MIN_VALUE;
+        for (int stickerId : presentStickerIds) {
+            if (stickerId < minStickerId) {
+                minStickerId = stickerId;
+            }
+            if (stickerId > maxStickerId) {
+                maxStickerId = stickerId;
+            }
+        }
+
+        // Iterate through the range of sticker IDs to find the first missing one
+        for (int stickerId = minStickerId; stickerId <= maxStickerId; stickerId++) {
+            if (!presentStickerIds.contains(stickerId)) {
+                return stickerId;
             }
         }
 
         // If no missing stickerId is found, return the next available stickerId after the last element
-        return vehicles.get(vehicles.size() - 1).getStickerId() + 1;
+        return maxStickerId + 1;
     }
     
 }

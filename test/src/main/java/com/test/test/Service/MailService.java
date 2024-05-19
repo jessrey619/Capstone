@@ -38,7 +38,7 @@ public class MailService {
 		} else {
 			try {
 				sendOtpToMail(email, otp);
-				return "OTP Sent Successfully";
+				return "OTP Sent Successfully: "+otp;
 			}catch (MessagingException e) {
 				throw new RuntimeException("Unable to send OTP");
 			}

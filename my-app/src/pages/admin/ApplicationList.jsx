@@ -4,6 +4,7 @@ import PageTitle from '../../Components/Main/PageTitle';
 import Header from '../../Components/AdminHeader/Header';
 import SideBar from '../../Components/SideBar/SideBar';
 import '../../Components/Table/table.css'
+import Filter from '../../Components/Filter/Filter';
 
 function ApplicationList() {
   const [applications, setApplications] = useState([]);
@@ -55,6 +56,7 @@ function ApplicationList() {
       <Header />
       <SideBar />
       <PageTitle page="Application List" />
+      <Filter/>
       <div className="table-container">
       <table class="table table-hover">
         <thead>

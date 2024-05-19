@@ -113,9 +113,9 @@ function LogsEmployee() {
 </table>
         </div>
 
-            <h2>
+            {/* <h2>
               Status: Available
-            </h2>
+            </h2> */}
 
           </div>
             <div>
@@ -123,14 +123,14 @@ function LogsEmployee() {
                 <div className="outer">
                     <div className="inner">
                          
-                        <div className="filterPart">
+                        {/* <div className="filterPart">
                         <label htmlFor="filter">Filter By:</label>
                         <select id="filter" name="filter" onChange={handleFilterChange}>
                             <option value="">All</option>
                             <option value="Parking">Parking</option>
                             <option value="OtherType">Other Type</option>
                         </select>
-                        </div>
+                        </div> */}
                         <div className="logs">
                     <table className="container">
     <thead>

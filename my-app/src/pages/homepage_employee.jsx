@@ -1,18 +1,19 @@
 import * as React from "react";
 
 function Homepage_Employee() {
-  const [dashboard, setDashboard] = React.useState("Dashboard")
-    const [Profile, setProfile] = React.useState("Profile")
-    const clickSample = () => {
-        alert("bitchOten");
-    }
+  const [activeStatus, setEmployeeFeature] = React.useState("Employee Feature")
+  const [disclaimer, setDashboard] = React.useState("Dashboard")
+  const [Profile, setProfile] = React.useState("Profile")
+  const clickSample = () => {
+      alert("This is Homepage Employee");
+  }
   return (
     <>
       <div className="div">
         <div className="div-2">
           <img
             loading="lazy"
-            srcSet="cit-logo.png"
+            srcSet="..."
             className="img"
           />
           <div className="div-3">
@@ -23,38 +24,20 @@ function Homepage_Employee() {
         <div className="div-6">
           <div className="div-7">
             <div className="column">
-              {/* <div className="div-8">Profile</div> */}
-              <button
-                      onClick={clickSample}
-                    >
-                        Profile
-                    </button>
+              <div className="div-8">Profile</div>
             </div>
             <div className="column-2">
-              {/* {<div className="div-9">Dashboard</div>} */}
-              <button
-                      onClick={clickSample}
-                    >
-                        Dashboard
-                    </button>
+              <div className="div-9">Dashboard</div>
             </div>
           </div>
         </div>
-        <div className="div-10">
-        <button
-                      onClick={clickSample}
-                    >
-                        Employee Features
-                    </button>
-
-        </div>
-        
+        <div className="div-10">Employee Features</div>
         <div className="div-11">
           <div className="div-12">
             <div className="column-3">
               <img
                 loading="lazy"
-                srcSet="footer-logo.png"
+                srcSet="..."
                 className="img-2"
               />
             </div>
@@ -144,16 +127,6 @@ function Homepage_Employee() {
           gap: 20px;
           display: flex;
         }
-        .div-7 button {
-          width:100%;
-            font-size: 200%;
-            font-weight: bold;
-            background-color: #8A252C;
-            color: white;
-            border-radius: 30px;
-            padding-top: 35%;
-            padding-bottom: 35%
-        }
         @media (max-width: 991px) {
           .div-7 {
             flex-direction: column;
@@ -187,16 +160,6 @@ function Homepage_Employee() {
           font: 700 32px Kumbh Sans, -apple-system, Roboto, Helvetica,
             sans-serif;
         }
-        .div-8 button {
-          width:100%;
-            font-size: 200%;
-            font-weight: bold;
-            background-color: #5f191e;
-            color: white;
-            border-radius: 30px;
-            padding-top: 35%;
-            padding-bottom: 35%
-        }
         @media (max-width: 991px) {
           .div-8 {
             margin-top: 20px;
@@ -210,16 +173,6 @@ function Homepage_Employee() {
           line-height: normal;
           width: 69%;
           margin-left: 20px;
-        }
-        .column-2 button {
-          width:100%;
-            font-size: 200%;
-            font-weight: bold;
-            background-color: #5f191e;
-            color: white;
-            border-radius: 30px;
-            padding-top: 20%;
-            padding-bottom: 12%
         }
         @media (max-width: 991px) {
           .column-2 {
@@ -241,16 +194,6 @@ function Homepage_Employee() {
           font: 700 36px Kumbh Sans, -apple-system, Roboto, Helvetica,
             sans-serif;
         }
-        .div-9 button {
-          width:100%;
-            font-size: 100%;
-            font-weight: bold;
-            background-color: #5f191e;
-            color: white;
-            border-radius: 20px;
-            padding-top: 5%;
-            padding-bottom: 25%
-        }
         @media (max-width: 991px) {
           .div-9 {
             max-width: 100%;
@@ -260,29 +203,19 @@ function Homepage_Employee() {
           }
         }
         .div-10 {
-          border-radius: 10px;
-          
+          border-radius: 20px;
+          background-color: #f4c522;
           align-self: center;
           margin-top: 18px;
           width: 991px;
-          max-width: 150%;
+          max-width: 100%;
           align-items: center;
           color: #000;
           text-align: center;
           justify-content: center;
-          padding: 117px 12px 82px;
+          padding: 117px 60px 92px;
           font: 700 36px Kumbh Sans, -apple-system, Roboto, Helvetica,
             sans-serif;
-        }
-        .div-10 button {
-          width: 100%;
-            font-size: 100%;
-            font-weight: bold;
-            background-color: #F4C522;
-            color: black;
-            border-radius: 30px;
-            padding-top: 15%;
-            padding-bottom: 15%
         }
         @media (max-width: 991px) {
           .div-10 {

@@ -1,10 +1,12 @@
   import * as React from "react";
+
+
   function Homepage() {
     const [activeStatus, setActiveStatus] = React.useState("Active")
     const [disclaimer, setDisclaimer] = React.useState("Release of stickers on Monday!")
     const [Profile, setProfile] = React.useState("Profile")
     const clickSample = () => {
-        alert("bitchOten");
+        alert("This is Homepage");
     }
     return (
       <>

@@ -45,7 +45,7 @@ function App() {
   return (
     <>
       <Header/>
-      <SideBar/>
+      <Homepage/>
       <Routes>
         {/* Admin */}
         <Route path='/' element={<Dashboard/>} />
@@ -54,6 +54,7 @@ function App() {
         <Route path='/statistics' element={<Statistics/>} />
         <Route path='/parking-area' element={<ParkingArea/>} />
         <Route path='/configuration' element={<Configuration/>} />
+
       </Routes>
     </>
   );

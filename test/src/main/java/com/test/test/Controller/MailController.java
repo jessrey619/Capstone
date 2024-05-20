@@ -5,9 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.OptBoolean;
+import com.test.test.Entity.OtpEntity;
 import com.test.test.Service.MailService;
 
 import jakarta.mail.MessagingException;
@@ -20,22 +23,21 @@ public class MailController {
 	private MailService mailService;
 	
 	@CrossOrigin
-	@PostMapping("/OTPSend/")
-	public String sendOtpToMail(@RequestParam("email") String email) {
-		return mailService.sendOtp(email);
+	@PostMapping("/register/generateOtp/")
+	public String sendOtpToMail(@RequestBody OtpEntity otp) {
+		return mailService.sendOtp(otp.getEmail());
 	}
 	
 	@CrossOrigin
-	@PostMapping("/OTPVerify/")
-	public String checkOtp(@RequestParam("otp") String otp, @RequestParam("email") String email) {
-	    // Your code here
+	@PostMapping("/register/verifyOtp/")
+	public String checkOtp(@RequestBody OtpEntity otp) {
 		try {
-			return mailService.checkOtp(otp, email);
+			return mailService.checkOtp(otp.getOtp(), otp.getEmail());
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "Finished OTP Verification";
+		return "Error";
 	}
 	
 	@PostMapping("/forget-password/send-otp")
@@ -45,10 +47,13 @@ public class MailController {
     }
 	
 	@PostMapping("/forget-password/check-otp")
-    public ResponseEntity<String> forgetPasswordCheckOtp(@RequestParam String email, @RequestParam String otp) {
+    public ResponseEntity<?> forgetPasswordCheckOtp(@RequestParam String email, @RequestParam String otp) {
         try {
-            String result = mailService.forgetPasswordCheckOtp(otp, email);
-            return ResponseEntity.ok(result);
+            boolean result = mailService.forgetPasswordCheckOtp(otp, email);
+            if(result) {
+            	return ResponseEntity.ok("Success");
+            }
+            return ResponseEntity.badRequest().body("OTP is invalid or has expired");
         } catch (MessagingException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to verify OTP");
         }

@@ -151,7 +151,7 @@ public class MailService {
 		if(user.getExpirationDate().after(currentDate)) {
 			if (BCrypt.checkpw(otp, hashedOtp)) {
 				if(user.getIsUsed()==false) {
-					res = "Success";
+					res = "Matched";
 					//Email to Confirm Verification along with default username and password of user
 					
 					//Make a new UserAccount
@@ -192,8 +192,8 @@ public class MailService {
 	
 	
 	
-	public String forgetPasswordCheckOtp(String otp, String email) throws MessagingException{
-		String res ="";
+	public boolean forgetPasswordCheckOtp(String otp, String email) throws MessagingException{
+		Boolean res =false;
 		Date currentDate = new Date(); 
 		
 		OtpEntity user = otpRepository.findByEmail(email);
@@ -204,16 +204,9 @@ public class MailService {
 				if(user.getIsUsed()==false) {
 					user.setIsUsed(true);
 					otpRepository.save(user);
-					res = "Success";
-				}
-				else {
-					res = "code already used please send again";
+					res = true;
 				}
 			}
-			else
-				res = "Code Mismatch";
-		} else {
-			res = "Code has Already Expired";
 		}
 		System.out.print(res);
 		return res;

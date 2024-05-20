@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         req->req.requestMatchers("/jwt/login**","/jwt/register**", "/OTPSend/**","/OTPVerify/**",
+                        		"/register/**",
 //                        		for testing Admin
                         		"/jwt/admin-register**", "/jwt/admin-login",
                         		// for Employee

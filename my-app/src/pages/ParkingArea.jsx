@@ -1,55 +1,45 @@
 import React, { useEffect, useState } from "react";
-// import axios from "axios";
+import axios from "axios";
 import '../css/ParkingArea.css';
 import TheFooter from "../Components/Footer/Footer"
 import SideBar from "../Components/SideBar/SideBar";
 import Header from "../Components/Header/Header";
 
 function ParkingArea() {
-    const [disclaimer, setDisclaimer] = useState("55");
-    const [status, setStatus] = useState("Close");
+  const [parkingData, setParkingData] = useState([]);
+  const [totalDailyLimit, setTotalDailyLimit] = useState(0);
 
-    //const [logs, setLogs] = useState([]);
-    // const [twoWheels, setTwoWheels] = useState([]);
-    // const [fourWheels, setFourWheels] = useState([]);
-    // const [totalVehiclesInside, setTotalVehicles] = useState([]);
-    // const [parkingAreas, setParkingAreas] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:8080/parking/active')
+      .then(response => {
+        setParkingData(response.data);
+        
+        const dailyLimit = response.data.reduce((acc, area) => acc + area.totalSpace, 0);
+        setTotalDailyLimit(dailyLimit);
+      })
+      .catch(error => {
+        console.error("Error on fetching the parking data:", error);
+      });
+  }, []);
 
-
-    // useEffect(() => {
-    //     axios.get('http://localhost:8080/logs/all')
-    //       .then(response => {
-    //         setLogs(response.data);
-    //         console.log(response.data);
-    //       })
-    //       .catch(error => {
-    //         console.error('Error fetching logs:', error);
-    //       });
-
-    //       axios.get('http://localhost:8080/logs/vehicle-types/count')
-    //       .then(response => {
-    //         const fourWheel = response.data.fourWheelCount;
-    //         const twoWheel = response.data.otherCount;
-    //         const total = fourWheel + twoWheel;
-    //         setTwoWheels(twoWheel)
-    //         setTotalVehicles(total);
-    //         setFourWheels(fourWheel);
-            
-    //       })
-    //       .catch(error => {
-    //         console.error('Error fetching Counting:', error);
-    //       });
-
-    //       axios.get('http://localhost:8080/parking/active')
-    //       .then(response => {
-    //         setParkingAreas(response.data)
-            
-    //       })
-    //       .catch(error => {
-    //         console.error('Error fetching Counting:', error);
-    //       });
-    //   }, []);
-
+      // I DON'T KNOW HOW TO DO THIS ?? BUTTON CAN OPEN AND CLOSE THE STATUS
+    const toggleIsFull = async (id, currentStatus) => {
+        const updatedStatus = !currentStatus;
+        try {
+          console.log(`Toggling isFull for id: ${id} to ${updatedStatus}`); // Debugging log
+    
+          const response = await axios.put(`http://localhost:8080/parking/${id}`, { isFull: updatedStatus });
+          console.log('Update response:', response.data); // Debugging log
+    
+          setParkingData(prevData =>
+            prevData.map(area =>
+              area.id === id ? { ...area, isFull: updatedStatus } : area
+            )
+          );
+        } catch (error) {
+          console.error("There was an error updating the parking data!", error);
+        }
+      };
 
     return (
         <div>
@@ -58,70 +48,40 @@ function ParkingArea() {
         <SideBar/>
         </div>
         <img src="/background.png" alt="background" className="backgroundImage" /> 
+        <section className="top">
+          <h1>Parking Areas</h1>
+          <div className="limit">
+            <p>Daily Limit:</p> <h2>{totalDailyLimit}</h2>
+          </div>
+          
+        </section>
 
-        <div class="wrap">
-    
-  <div class="box">
-  <div className="box-top">
-    <h1 className="box-title">Kelsie Meyer</h1>
-        <img className="box-image" src="/parkingAreaIcon.svg" alt="Parking Area Num"/>
-            <h3>Space:</h3>
-                <p>{disclaimer}</p>
-                <h3>{status}</h3>
-  </div>
-    <a href="#" class="button">Follow Mark</a>
-  </div>
-  <div class="box">
-    <div class="box-top">
-      <img class="box-image" src="https://images.unsplash.com/photo-1456885284447-7dd4bb8720bf?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYyMzMxNTQzNA&ixlib=rb-1.2.1&q=85" alt="Girl Eating Pizza"/>
-      <div class="title-flex">
-        <h3 class="box-title">Taylor Green</h3>
-        <p class="user-follow-info">26 Projects</p>
-      </div>
-      <p class="description">Whipped steamed roast cream beans macchiato skinny grinder café. Iced grinder go mocha steamed grounds cultivar panna aroma.</p>
-    </div>
-    <a href="#" class="button">Follow Taylor</a>
-  </div>
-  <div class="box">
-    <div class="box-top">
-      <img class="box-image" src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYyMzMxNjA1MA&ixlib=rb-1.2.1&q=85" alt="Girl Eating Pizza"/>
-      <div class="title-flex">
-        <h3 class="box-title">Isaiah Jian</h3>
-        <p class="user-follow-info">12 Projects</p>
-      </div>
-      <p class="description">Whipped steamed roast cream beans macchiato skinny grinder café. Iced grinder go mocha steamed grounds cultivar panna aroma.</p>
-    </div>
-    <a href="#" class="button">Follow Isaiah</a>
-  </div>
-</div>
-{/* 
-            <div className="box">
-                <div className="box-top">
-                    <h1 className="box-title">Kelsie Meyer</h1>
-                    <img className="box-image" src="/parkingAreaIcon.svg" alt="Parking Area Num"/>
-                    <h3>Space:</h3>
-                    <p>{disclaimer}</p>
-                    <h2>{status}</h2>
-                </div>
-                <div className="desc">
-                    <h6 className="box-title">Kelsie Meyer</h6>
-                    {/* CHANGE  */}
-                    {/* <p>{disclaimer}</p>
-                    <h6 className="user-follow-info">17 Projects</h6>
-                    <p>{disclaimer}</p>
-                    <h6 className="occupied">Whipped steamed.</h6>
-                    <p>{disclaimer}</p>
-                </div>
-                <button className="toggleBtn" onClick={handleButtonClick}>
-                    {status === "Closed" ? "OPEN" : "CLOSE"}
-                </button>
-            </div> */} 
-
-       
-
-        <TheFooter/>
-    </div>
+        <div className="wrap">
+                {parkingData.map(area => (
+                    <div className="box" key={area.id}>
+                        <div className="box-top">
+                            <h2 className="box-title">{area.name}</h2>
+                            <img className="box-image" src="/parkingAreaIcon.svg" alt="Parking Area Icon" />
+                            <div className="space"><h3>Space:</h3> 
+                            <p>{area.totalSpace}</p>
+                            </div>
+                            <h3 className="status">{area.isFull ? "Full" : "Open"}</h3>
+                            <div className="inner">
+                                <p>Total Space: {area.totalSpace}</p>
+                                <p>Available Space: {area.availableSpace}</p>
+                                <p>Occupied Space: {area.occupiedSpace}</p>
+                            </div>
+                        </div>
+                        <button onClick={() => toggleIsFull(area.id, area.isFull)}>
+                            {area.isFull ? "Open" : "Close"}
+                        </button>
+                    </div>
+                ))}
+            </div>
+            <TheFooter />
+        </div>
     );
+  
 }
 
 export default ParkingArea;

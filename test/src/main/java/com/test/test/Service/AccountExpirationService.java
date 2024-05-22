@@ -69,6 +69,34 @@ public class AccountExpirationService {
         return("Student Expiration Set");
     }
     
+    public String setSchoolYear(String schoolyear) {
+         List<AccountExpirationEntity> accountExpiration = accountExpirationRepository.findAll();
+         AccountExpirationEntity acc = null;
+         if (!accountExpiration.isEmpty()) {
+             acc = accountExpiration.get(0);
+         } else {
+             acc = new AccountExpirationEntity();
+         }
+         
+         acc.setSchoolYear(schoolyear);
+         accountExpirationRepository.save(acc);
+         return("School Year Set");
+    }
+    
+    public String setSemester(String sem) {
+        List<AccountExpirationEntity> accountExpiration = accountExpirationRepository.findAll();
+        AccountExpirationEntity acc = null;
+        if (!accountExpiration.isEmpty()) {
+            acc = accountExpiration.get(0);
+        } else {
+            acc = new AccountExpirationEntity();
+        }
+        
+        acc.setSemester(sem);
+        accountExpirationRepository.save(acc);
+        return("Semester Set");
+   }
+    
     public AccountExpirationEntity getAccountExpiration() {
     	List<AccountExpirationEntity> accountExpirationEntities = accountExpirationRepository.findAll();
     	return accountExpirationEntities.get(0);

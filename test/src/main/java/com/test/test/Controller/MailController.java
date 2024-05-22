@@ -40,13 +40,13 @@ public class MailController {
 		return "Error";
 	}
 	
-	@PostMapping("/forget-password/send-otp")
+	@PostMapping("/forgot-password/generate-otp")
     public ResponseEntity<String> forgetPassword(@RequestParam String email) {
         String result = mailService.forgetPassSendOtp(email);
         return ResponseEntity.ok(result);
     }
 	
-	@PostMapping("/forget-password/check-otp")
+	@PostMapping("/forgot-password/verify-otp")
     public ResponseEntity<?> forgetPasswordCheckOtp(@RequestParam String email, @RequestParam String otp) {
         try {
             boolean result = mailService.forgetPasswordCheckOtp(otp, email);

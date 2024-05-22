@@ -20,14 +20,14 @@ public class PhotoController {
     @Autowired
     private PhotoService photoService;
 
+    @CrossOrigin
     @PostMapping("/photos/upload")
     public ResponseEntity<?> uploadPhoto(@RequestParam("file") MultipartFile file,
-                                         @RequestParam("name") String name, //The name should be username+:+type like ORCR
+                                         @RequestParam("name") String name,
                                          @RequestParam("type") int type,
                                          @RequestParam("username") String username) {
         return photoService.savePhoto(file, name, type, username);
     }
-
 //    @CrossOrigin
 //    @GetMapping("/photos")
 //    public ResponseEntity<List<Photo>> getAllPhotos() {

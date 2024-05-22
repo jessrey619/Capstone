@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.test.test.Entity.AdminEntity;
 import com.test.test.Entity.EmployeeEntity;
+import com.test.test.Entity.Role;
 import com.test.test.Entity.UserEntity;
 import com.test.test.Repository.AdminRepository;
 import com.test.test.Repository.EmployeeRepository;
@@ -154,6 +155,44 @@ public class UserService implements UserDetailsService{
 	    	employeeRepository.save(existingUser);
 			return "Employee Updated";
 		} 
+    }
+    
+    public Role getRole(String email) {
+    	Role role = null;
+    	if(userRepository.findByUsername(email)!=null) {
+    		return userRepository.findByUsername(email).getRole();
+    	} else if(employeeRepository.findByUsername(email)!=null) {
+    		return employeeRepository.findByUsername(email).getRole();
+    	} else if(adminRepository.findByUsername(email)!=null) {
+    		return adminRepository.findByUsername(email).getRole();
+    	}
+    	return role;
+    }
+    
+    public UserEntity getUserByUsername(String username) {
+    	return userRepository.findByUsername(username);
+    }
+    
+    public EmployeeEntity getEmployeeByUsername(String username) {
+    	return employeeRepository.findByUsername(username);
+    }
+    
+    public void updateApprover(String username, Boolean action) {
+    	EmployeeEntity employee = getEmployeeByUsername(username);
+    	employee.setIsApprover(action);
+    	employeeRepository.save(employee);
+    }
+    
+    public void updateVerifier(String username, Boolean action) {
+    	EmployeeEntity employee = getEmployeeByUsername(username);
+    	employee.setIsVerifier(action);
+    	employeeRepository.save(employee);
+    }
+    
+    public void updateLogger(String username, Boolean action) {
+    	EmployeeEntity employee = getEmployeeByUsername(username);
+    	employee.setIsViewLogger(action);
+    	employeeRepository.save(employee);
     }
 
 }

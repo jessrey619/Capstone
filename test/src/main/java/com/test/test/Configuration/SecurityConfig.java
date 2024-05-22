@@ -40,16 +40,16 @@ public class SecurityConfig {
 //                        		for testing Admin
                         		"/jwt/admin-register**", "/jwt/admin-login",
                         		// for Employee
-                        		"/jwt/employee-register**", "/jwt/employee-login**", "/jwt/**"
+                        		"/jwt/employee-register**", "/jwt/employee-login**", "/jwt/**","/forgot-password/**"
 //                        		//to delete
                         		,"/photos/upload**", "/photos**", "/photos/get-photo-by-name/**", "/applicants/**"
                         		, "/photos/get-photo-by-username/**"
-                        		,"vehicles/create**","vehicles/update**", "vehicles/find-by-username/**"
+                        		,"vehicles/**"
                         		,"/logs/add**","/logs/all**", "/logs/**"
                         		,"/applicants/**"
                         		,"/parking/**"
                         		,"/config/**"
-                        		,"/forget-password/**"
+                        		
                         		,"/prices/**"
                         		,"/applicants/**"
                         		)

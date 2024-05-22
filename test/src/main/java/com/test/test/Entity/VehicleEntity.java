@@ -1,5 +1,7 @@
 package com.test.test.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +23,7 @@ public class VehicleEntity {
 	private int stickerId;
 	private Boolean vehicleType; // 0 if twoWheeler, 1 if 4 wheeler
 	private Boolean isParking; //1 if parking 0 if dropoff/pickup
+	private Date expirationDate;
 	
 	public VehicleEntity() {
 		super();
@@ -96,6 +99,14 @@ public class VehicleEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Date getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		this.expirationDate = expirationDate;
 	}
 	
 	

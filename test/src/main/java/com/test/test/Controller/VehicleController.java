@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.test.test.Entity.VehicleEntity;
 import com.test.test.Entity.VehicleUserRequest;
+import com.test.test.Repository.VehicleRepository;
 import com.test.test.Service.VehicleService;
 
 @RestController
@@ -16,6 +17,9 @@ public class VehicleController {
 
     @Autowired
     private VehicleService vehicleService;
+    
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     @PostMapping("/create")
     public ResponseEntity<String> createVehicle(@RequestBody VehicleUserRequest vUserRequest) {
@@ -23,9 +27,15 @@ public class VehicleController {
         return ResponseEntity.ok(createdVehicleResponse);
     }
 
-    @GetMapping("/find/{username}")
+    @GetMapping("/find-by-username/{username}")
     public ResponseEntity<VehicleEntity> findVehicleByUsername(@PathVariable String username) {
-        VehicleEntity vehicle = vehicleService.findVehicleByUsername(username);
+        List<VehicleEntity> vehicles = vehicleService.findVehiclesByUsername(username);
+        VehicleEntity vehicle;
+        if(vehicles.size()>1) {
+        	vehicle = vehicles.get(vehicles.size()-1);
+        } else {
+        	vehicle = vehicles.get(0);
+        }
         if (vehicle != null) {
             return ResponseEntity.ok(vehicle);
         } else {
@@ -43,7 +53,7 @@ public class VehicleController {
         }
     }
     
-    @GetMapping("/find-by-username/{username}")
+    @GetMapping("/find-all-by-username/{username}")
     public ResponseEntity<List<VehicleEntity>> findVehiclesByUsername(@PathVariable String username) {
         List<VehicleEntity> vehicles = vehicleService.findVehiclesByUsername(username);
         if (!vehicles.isEmpty()) {
@@ -51,5 +61,11 @@ public class VehicleController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    
+    @CrossOrigin
+    @GetMapping("/all")
+    public List<VehicleEntity> findAllVehicles(){
+    	return vehicleRepository.findAll();
     }
 }

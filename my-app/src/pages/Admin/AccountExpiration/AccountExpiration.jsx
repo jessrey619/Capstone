@@ -67,7 +67,7 @@ function AccountExpiration() {
           },
         }
       );
-    } else if (type === "faculty") {
+    } else if (type === "student") {
       await axios.post(
         "http://localhost:8080/config/setStudentGlobalExpiry", null,
         {
@@ -113,10 +113,10 @@ function AccountExpiration() {
     setSnackbarMessage("Successfully Updated Account Expiration");
     setSnackbarOpen(true);
 
-    setDate(new Date())
-    setSchoolYear('')
-    setSem('')
-    setType(0)
+    setDate("")
+    setSchoolYear("")
+    setSem("")
+    setType("")
 
   };
 

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.test.test.Entity.ApplicantEntity;
+import com.test.test.Entity.UserEntity;
 
 @Repository
 public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Long> {
@@ -20,4 +21,10 @@ public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Long
     
     @Query("SELECT a FROM ApplicantEntity a WHERE lower(a.firstName) LIKE %:searchText% OR lower(a.lastName) LIKE %:searchText% OR lower(a.email) LIKE %:searchText%")
     List<ApplicantEntity> findByFirstNameOrLastNameOrEmail(String searchText);
+    
+    @Query("SELECT u FROM ApplicantEntity u WHERE u.isStaff = true")
+    List<ApplicantEntity> findAllStaffMembers();
+	
+	@Query("SELECT u FROM ApplicantEntity u WHERE u.isStaff = false")
+    List<ApplicantEntity> findAllStudents();
 }

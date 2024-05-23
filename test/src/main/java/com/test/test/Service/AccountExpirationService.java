@@ -8,8 +8,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import com.test.test.Entity.AccountExpirationEntity;
+import com.test.test.Entity.ApplicantEntity;
 import com.test.test.Entity.UserEntity;
 import com.test.test.Repository.AccountExpirationRepository;
+import com.test.test.Repository.ApplicantRepository;
 import com.test.test.Repository.UserRepository;
 
 @Service
@@ -17,6 +19,9 @@ public class AccountExpirationService {
 
     @Autowired
     private AccountExpirationRepository accountExpirationRepository;
+    
+    @Autowired
+    private ApplicantRepository applicantRepository;
     
     @Autowired
     private UserRepository userRepository;
@@ -28,9 +33,10 @@ public class AccountExpirationService {
     
     public String setStaffGlobalExpiry(@DateTimeFormat(pattern = "yyyy-MM-dd")  Date expirationDate) {
         List<UserEntity> staff = userRepository.findAllStaffMembers();
-
+        List<ApplicantEntity> applications = applicantRepository.findAllStaffMembers();
         List<AccountExpirationEntity> accountExpiration = accountExpirationRepository.findAll();
         AccountExpirationEntity acc = null;
+        
         if (!accountExpiration.isEmpty()) {
             acc = accountExpiration.get(0);
         } else {
@@ -42,6 +48,14 @@ public class AccountExpirationService {
         		user.setExpirationDate(expirationDate);
         	}    
         }
+        
+        for(ApplicantEntity application: applications) {
+        	if(application.getExpirationDate().before(new Date() )) {
+        		application.setExpirationDate(expirationDate);
+        	}
+//        	application.setExpirationDate(expirationDate);
+        }
+        
         acc.setStaffExpirationDate(expirationDate);
         accountExpirationRepository.save(acc);
         userRepository.saveAll(staff);
@@ -52,6 +66,7 @@ public class AccountExpirationService {
     
     public String setStudentGlobalExpiry(Date expirationDate) {
         List<UserEntity> students = userRepository.findAllStudents();
+        List<ApplicantEntity> applications = applicantRepository.findAllStudents();
         List<AccountExpirationEntity> accountExpiration = accountExpirationRepository.findAll();
         AccountExpirationEntity acc = null;
         if (!accountExpiration.isEmpty()) {
@@ -64,11 +79,20 @@ public class AccountExpirationService {
         	if(student.getExpirationDate().before(new Date())) {
         		student.setExpirationDate(expirationDate);
         	}   
-
+//        	student.setExpirationDate(expirationDate);
+        	userRepository.save(student);
+        	System.out.println(student.getExpirationDate());
         }
+        
+        for(ApplicantEntity application: applications) {
+        	if(application.getExpirationDate().before(new Date() )) {
+        		application.setExpirationDate(expirationDate);
+        	}
+//        	application.setExpirationDate(expirationDate);
+        }
+        
         acc.setStudentExpirationDate(expirationDate);
         accountExpirationRepository.save(acc);
-        userRepository.saveAll(students);
         return("Student Expiration Set");
     }
     

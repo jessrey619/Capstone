@@ -51,7 +51,7 @@ const UserAnnouncement = () => {
     const currentDate = new Date();
     const expirationDate = new Date(applications.expirationDate);
 
-    if(applications.approved === false){
+    if(applications.approved === true){
       if (applications.rejected === true || expirationDate < currentDate) {
         return false; // Allow registration
       }else{
@@ -60,6 +60,21 @@ const UserAnnouncement = () => {
     }
   };
 
+  const isActiveUser =() =>{
+    if (Object.keys(applications).length === 0) {
+      return false; // Not Active if No Applications
+    }
+    const currentDate = new Date();
+    const expirationDate = new Date(applications.expirationDate);
+
+    if(applications.approved === true){
+      if (applications.rejected === true || expirationDate < currentDate) {
+        return false;
+      }else{
+        return true;
+      }
+    }
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -88,7 +103,7 @@ const UserAnnouncement = () => {
 
       <div className="userHomepageContainer">
         <div className="userHomepagebuttonContainer">
-          <button className="statusButton">Status<br/><span style={{color: applications.approved ? "green" : "red"}}>{applications.approved ? "Active" : "InActive"}</span></button>
+          <button className="statusButton">Status<br/><span style={{color: isActiveUser() ? "green" : "red"}}>{isActiveUser() ? "Active" : "InActive"}</span></button>
           <button className="infoButton">Info</button>
         </div>
         <div className="userHomepagebuttonContainer">

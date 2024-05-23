@@ -19,18 +19,12 @@ const navList = [
     },
     {
         _id: 4,
-        name: 'Statistics',
-        icon: 'ri-bar-chart-2-line',
-        link: '/statistics'
-    },
-    {
-        _id: 5,
         name: 'Parking Area',
         icon: 'ri-parking-line',
         link: '/parking-area'
     },
     {
-        _id: 6,
+        _id: 5,
         name: 'Configuration',
         icon: 'bi bi-gear',
         link: '/configuration'

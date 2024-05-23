@@ -1,0 +1,19 @@
+.input-container {
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.data-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.data-input label {
+  margin-right: 10px;
+}

@@ -11,7 +11,6 @@ function Dashboard() {
         <div className='row'>
           <div className='col-lg-9'>
             <div className='row'>
-            {/* diri ang mga cards, wala pa kay kay nag tuon pa ko balik sa sql workbench */}
             <Card/>
             </div>
           </div>

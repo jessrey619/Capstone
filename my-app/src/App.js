@@ -17,6 +17,7 @@ import Logs from './pages/admin/Logs'
 import Statistics from './pages/admin/Statistics'
 import ParkingArea from './pages/admin/ParkingArea'
 import Configuration from './pages/admin/Configuration';
+import StickerPricing from './pages/admin/StickerPricing';
  
 // Therese
 import Homepage from './pages/homepage';
@@ -46,6 +47,7 @@ function App() {
         <Route path='/statistics' element={<Statistics/>} />
         <Route path='/parking-area' element={<ParkingArea/>} />
         <Route path='/configuration' element={<Configuration/>} />
+        <Route path="/configuration/sticker-pricing" component={StickerPricing} />
       </Routes>
     </>
   );

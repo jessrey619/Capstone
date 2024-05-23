@@ -1,12 +1,20 @@
 import Axios from 'axios'
 
-import './App.css';
-import { Route, Routes} from 'react-router-dom';
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import 'remixicon/fonts/remixicon.css'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
+// import logo from './logo.svg';
+// import Axios from 'axios'
+
+import { Route , Routes} from 'react-router-dom';
+import './App.css';
+// import TheHeader from './Components/OtherHeader';
+import LogsEmployee from './pages/LogsEmployee';
+// 
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+// import 'bootstrap-icons/font/bootstrap-icons.css'
+// import 'remixicon/fonts/remixicon.css'
+
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/js/bootstrap.min.js'
 
 // Phoebe
 import Header from './Components/AdminHeader/Header';
@@ -35,9 +43,9 @@ import TheHeader from './Components/UserHeader/UserHeader';
 
 function App() {
   return (
-    <>
-      <Header/>
-      <SideBar/>
+
+    <div className='app'>
+      {/* <TheHeader/> */}
       <Routes>
         <Route index element={<EmailVerification/>} path='/Register/EmailVerification'/>
         <Route index element={<ViewImages/>} path='/Images/'/>
@@ -54,7 +62,8 @@ function App() {
         <Route path='/parking-area' element={<ParkingArea/>} />
         <Route path='/configuration' element={<Configuration/>} />
       </Routes>
-    </>
+      
+       </div>
   );
   
 };

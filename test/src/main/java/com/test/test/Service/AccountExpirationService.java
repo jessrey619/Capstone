@@ -38,8 +38,9 @@ public class AccountExpirationService {
         }
         
         for (UserEntity user : staff) {
+        	if(user.getExpirationDate().before(new Date())) {
         		user.setExpirationDate(expirationDate);
-                
+        	}    
         }
         acc.setStaffExpirationDate(expirationDate);
         accountExpirationRepository.save(acc);
@@ -60,7 +61,9 @@ public class AccountExpirationService {
         }
         
         for (UserEntity student : students) {
-            	student.setExpirationDate(expirationDate);
+        	if(student.getExpirationDate().before(new Date())) {
+        		student.setExpirationDate(expirationDate);
+        	}   
 
         }
         acc.setStudentExpirationDate(expirationDate);

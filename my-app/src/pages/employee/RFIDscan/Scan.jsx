@@ -3,11 +3,43 @@ import './Scan.css';
 
 
 function Scans() {
-    const [disclaimer, setDisclaimer] = React.useState("0659482206595")
+    const [disclaimer, setDisclaimer] = React.useState([])
     const [userId, setuserId] = React.useState("18-6969-420")
     const [type, settype] = React.useState("Pick up/ Drop-off")
     
-    
+    // useEffect(() => {
+    //     axios.get('http://localhost:8080/logs/all')
+    //       .then(response => {
+    //         setLogs(response.data);
+    //         console.log(response.data);
+    //       })
+    //       .catch(error => {
+    //         console.error('Error fetching logs:', error);
+    //       });
+
+    //       axios.get('http://localhost:8080/logs/vehicle-types/count')
+    //       .then(response => {
+    //         const fourWheel = response.data.fourWheelCount;
+    //         const twoWheel = response.data.otherCount;
+    //         const total = fourWheel + twoWheel;
+    //         setTwoWheels(twoWheel)
+    //         setTotalVehicles(total);
+    //         setFourWheels(fourWheel);
+            
+    //       })
+    //       .catch(error => {
+    //         console.error('Error fetching Counting:', error);
+    //       });
+
+    //       axios.get('http://localhost:8080/parking/active')
+    //       .then(response => {
+    //         setParkingAreas(response.data)
+            
+    //       })
+    //       .catch(error => {
+    //         console.error('Error fetching Counting:', error);
+    //       });
+    //   }, []);
     
     return (
         <div>

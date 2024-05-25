@@ -10,7 +10,7 @@ import EmployeeSidebar from "../../../Components/Navbar/Employee_SideBar/employe
 function LogsEmployee() {
 
     const [logs, setLogs] = useState([]);
-    const [filterBy, setFilterBy] = useState('');
+    // const [filterBy, setFilterBy] = useState('');
     const [twoWheels, setTwoWheels] = useState([]);
     const [fourWheels, setFourWheels] = useState([]);
     const [totalVehiclesInside, setTotalVehicles] = useState([]);
@@ -52,11 +52,11 @@ function LogsEmployee() {
           });
       }, []);
 
-    const handleFilterChange = (event) => {
-        setFilterBy(event.target.value);
-    };
+    // const handleFilterChange = (event) => {
+    //     setFilterBy(event.target.value);
+    // };
 
-    const filteredLogs = logs.filter(log => filterBy === '' || log.type === filterBy);
+    // const filteredLogs = logs.filter(log => filterBy === '' || log.type === filterBy);
 
     return (
         <div>

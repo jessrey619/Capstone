@@ -46,15 +46,18 @@ const UserAnnouncement = () => {
 
   const isRegistrationDisabled = () => {
     if (Object.keys(applications).length === 0) {
+      console.log("No registrations")
       return false; // Allow registration if no applications exist
     }
     const currentDate = new Date();
     const expirationDate = new Date(applications.expirationDate);
 
-    if(applications.approved === true){
+    if(applications.approved === false){
       if (applications.rejected === true || expirationDate < currentDate) {
+        console.log("rejected or Expired")
         return false; // Allow registration
       }else{
+        console.log("not yet approved")
         return true;
       }
     }

@@ -61,8 +61,6 @@ public class AccountExpirationService {
         userRepository.saveAll(staff);
         return("Staff Expiration Set");
     }
-
-
     
     public String setStudentGlobalExpiry(Date expirationDate) {
         List<UserEntity> students = userRepository.findAllStudents();

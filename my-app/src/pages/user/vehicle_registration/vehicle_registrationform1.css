@@ -1,0 +1,104 @@
+/* CSS for Vehicle Make, Plate No., and Color fields */
+.vehicle-make-box {
+    flex: 1;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    width: 100%;
+  }
+  
+  .plate-no-text-box {
+    flex: 1;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    width: 100%;
+  }
+  
+  .color-text-box {
+    flex: 1;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  .register-name-textfields{
+    width: 100%;
+    margin-bottom: "1rem";
+    box-sizing: "border-box";
+    margin-right: "1rem";
+  }
+
+  .student-name-textfields{
+    width: 100%;
+    margin-bottom: "1rem";
+    box-sizing: "border-box";
+    margin-right: "1rem";
+  }
+
+  .register-name-textfields div{  
+    box-sizing: "border-box";
+    margin: auto;
+    width: 20vw;
+  }
+
+  .student-name-textfields div{
+    box-sizing: border-box;
+    margin: auto;
+    width: 30.5vw;
+  }
+
+  .address-textfields div{
+    box-sizing: border-box;
+    margin: auto;
+    width: 100%;
+  }
+
+  
+
+  
+  
+  @media (max-width: 768px) {
+    /* Stack fields vertically on smaller screens */
+    .vehicle-make-box,
+    .plate-no-text-box,
+    .color-text-box {
+      flex: 3;
+      margin-right: 0;
+      width: 100%;
+    }
+
+    .register-name-textfields div{
+      width: 100%;
+      margin-bottom: "1rem";
+      box-sizing: "border-box"
+    }
+
+    .student-name-textfields div{
+      width: 100%;
+      margin-bottom: "1rem";
+      box-sizing: "border-box"
+    }
+
+    .upload-requirements-div{
+      display: flex;
+    }
+
+    .upload-requirements-div p{
+      display: block;
+      width: 100%;
+    }
+  
+    .upload-requirements-div button{
+      display: block;
+      width: 100%;
+    }
+
+    .upload-requirements-div div{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .vehicle-type-radio{
+      flex-direction: column;
+    }
+  }
+  

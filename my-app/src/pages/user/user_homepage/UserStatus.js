@@ -137,7 +137,7 @@ export default function UserStatus() {
                       cursor: "pointer",
                     }}
                   >
-                    New Registrations
+                    Registrations
                   </Typography>
                 </Paper>
               </div>

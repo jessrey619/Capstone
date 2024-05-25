@@ -46,6 +46,7 @@ public class ParkingAreaController {
         return ResponseEntity.ok(totalOccupiedSpace);
     }
 
+    @CrossOrigin
     @GetMapping("/total-space")
     public ResponseEntity<Integer> getTotalSpace() {
         int totalSpace = parkingAreaService.getTotalSpace();

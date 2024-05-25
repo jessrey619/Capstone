@@ -59,7 +59,6 @@ function AccountExpiration() {
           params:{
             expirationDate: date,
           }
-          
         },
         {
           headers: {

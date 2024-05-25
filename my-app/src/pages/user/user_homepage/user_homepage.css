@@ -21,17 +21,7 @@ body {
 }
 
 
-.userHomepageContainer {
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 40vw;
-  text-align: center; */
-  /* max-height: calc(100vh - 20rem); /* Adjust 120px according to your header and footer heights */
-  /* overflow-y: auto;  */
-}
+
 
 .userHomepageContainer {
   display: flex;
@@ -49,16 +39,17 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 2vh;
+  width: 100%;
 }
 
 
 .statusButton {
   background-color: #5F191E;
-  margin-right: 20px;
-  width: 25rem;
+  margin-right: 5%;
+  width: 60%;
   border-radius: 10px;
   color: white;
-  font-size: 20px;
+  font-size: 100%;
 }
 
 .statusButton:hover {
@@ -67,12 +58,12 @@ body {
 
 .infoButton {
   background-color: #8A252C;
-  padding: 50px;
-  margin-right: 20px;
+  padding: 10% 5%;
   width: 40%;
   border-radius: 10px;
   color: white;
-  font-size: 20px;
+  font-size: 100%;
+  text-align: center;
 }
 
 .infoButton:hover {
@@ -82,11 +73,11 @@ body {
 .registerButton {
   background-color: #efefef;
   color: #000;
-  padding: 30px;
+  padding: 5%;
   margin-right: 20px;
   width: 80%;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 100%;
 }
 
 .registerButton:hover {
@@ -95,11 +86,10 @@ body {
 
 .disclaimerButton {
   background-color: #F4C522;
-  padding: 50px;
+  padding: 5%;
     flex-grow: 1;
     border-radius: 10px;
     width: 70%;
-    margin-right: 2%;
     font-size: 20px;
 }
 
@@ -123,8 +113,8 @@ body {
 .registerButton {
   background-color: #efefef;
   color: #000;
-  padding: 30px;
-  margin-right: 20px;
+  padding: 5%;
+  margin-right: 5%;
   width: 80%;
   border-radius: 10px;
   font-size: 20px;
@@ -152,7 +142,21 @@ body {
   } */
 
   .statusButton {
-    width: 90vw;
-    font-size: 20px;
+    width: 100%;
+    font-size: 100%;
+  }
+  .registerButton {
+    width: 100%;
+    font-size: 100%;
+  }
+
+  .infoButton {
+    width: 100%;
+    font-size: 100%;
+  }
+  
+  .disclaimerButton {
+    width: 100%;
+    font-size: 100%;
   }
 }

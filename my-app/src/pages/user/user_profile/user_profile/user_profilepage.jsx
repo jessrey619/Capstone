@@ -14,6 +14,7 @@ const UserProfilePage = () => {
   const [expiration, setExpiration] = useState({});
   const [vehicles, setVehicles] = useState({});
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const [expirationDisplay, setExpirationDisplay] = useState('');
 
   // Decoding Token
   useEffect(() => {
@@ -74,6 +75,20 @@ const UserProfilePage = () => {
     }
   }, [username]);
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if(vehicles.isStaff){
+        setExpirationDisplay(expiration.staffExpirationDate);
+      } else{
+        setExpirationDisplay(expiration.studentExpirationDate);
+      }
+    };
+    if (username) {
+      fetchData();
+    }
+  },[vehicles])
+
   return (
     <div>
       {/* Main Content */}
@@ -102,8 +117,8 @@ const UserProfilePage = () => {
             <div className="user-profile-details">
               <div className="user-profile-detail">
                 <label>Expiration Date</label>
-                <span>{user.expirationDate ? formatDate(user.expirationDate) : ''}</span>
-                <span>S.Y. {expiration.currentSchoolYear || ''}</span>
+                <span>{formatDate(expirationDisplay)}</span>
+                <span>S.Y. {expiration.schoolYear || ''}</span>
               </div>
               <div className="user-profile-detail">
                 <label>Registration Type</label>

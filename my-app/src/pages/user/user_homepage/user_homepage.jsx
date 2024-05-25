@@ -67,7 +67,6 @@ const [decodedToken, setDecodedToken] = useState();
         }
       }
     };
-
     decodeJwt();
   }, [token]);
 
@@ -89,7 +88,7 @@ const [decodedToken, setDecodedToken] = useState();
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '120vh' }}>
       <div className='homepage' style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1 }}>
         <Header />
       </div>

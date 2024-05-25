@@ -1,51 +1,85 @@
+/* Ensure the content centers on the screen */
 .center {
   text-align: center;
 }
 
+/* Make text bold */
 .bold {
   font-weight: bold;
 }
 
+/* Add indentation for list items */
 .indent {
   margin-left: 1em;
+  max-width: 100%;
 }
 
+/* Style the header */
 .guidelines-header {
   text-align: center;
   font-weight: bold;
 }
 
+/* Body styling with background color */
 .guidelines-body {
   margin-top: 2em;
   background: #FEFFD6;
   padding-top: .2em;
 }
 
+/* Margin for text blocks */
 .guidelines-text-block {
   margin-top: 1em;
 }
 
+/* Table styling */
 .guidelines-text-block table {
   text-align: center;
-  margin: .5em auto;
+  margin: 5% auto;
   background: #FDFFA8;
+  font-size: 70%;
 }
+
+/* Table cells */
 .guidelines-text-block td {
   border: 1px solid black;
   border-collapse: collapse;
-  padding: .4em;
 }
 
+/* Note text styling */
 .guidelines-note {
   text-align: center;
 }
 
+/* Footer display styling */
 .guidelines-footer {
   display: flex;
   justify-content: center;
 }
 
+/* Footer button styling */
 .guidelines-footer button {
   background: #8A252C;
   color: white;
+}
+
+/* Responsive styling */
+@media only screen and (max-width: 600px) {
+  .guidelines-header {
+    font-size: 1.2em;
+  }
+
+  .guidelines-body {
+    font-size: 0.9em;
+  }
+
+  .guidelines-text-block table {
+    width: 100%;
+    font-size: 60%;
+  }
+
+  .guidelines-footer button {
+    width: 100%;
+    min-width: unset;
+  }
 }

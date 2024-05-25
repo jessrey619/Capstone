@@ -20,6 +20,10 @@
   border-radius: 50px;
 }
 
+.user-profile-container{
+  width: 100%;
+}
+
 .user-profile-footer {
   position: fixed;
   bottom: 0;

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import ModalComponent from "./SuccessModal";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import './vehicle_registrationform1.css'
+
 import {
   Typography,
   Box,
@@ -12,7 +14,6 @@ import {
   Snackbar,
   TextField,
   FormControlLabel,
-
 } from "@mui/material";
 import FileUpload from "../../vehicle_registration/uploadImage";
 import axios from "axios";
@@ -30,9 +31,12 @@ export default function RegistrationForm() {
   const [licenseFile, setLicenseFile] = useState(null);
   const [loading, setLoading] = useState(false); // State for loader
   const [modalOpen, setModalOpen] = useState(false); // State for modal
+  const [totalParkingSpace, setTotalParkingSpace] = useState(0);
+  const [numberOfParkingApplicants, setNumberOfParkingApplicants] = useState(0)
+  const [parkingIsActive, setParkingIsActive] = useState(true)
+  const [expiration, setExpiration] = useState([])
 
   const [changesMade, setChangesMade] = useState(false); // State to track changes
-  // const email = localStorage.getItem("email");
 
   const [registrationData, setRegistrationData] = useState({
     surname: "",
@@ -65,7 +69,81 @@ export default function RegistrationForm() {
   });
 
   useEffect(() => {
-  }, []);
+    axios.get('http://localhost:8080/parking/total-space')
+      .then((response) => {
+        // Handle success
+        setTotalParkingSpace(response.data)
+        // console.log("totalparking space useEffects", response.data)
+      })
+      .catch((error) => {
+        // Handle error
+        console.error('Error:', error);
+      });
+  },[registrationData]); // Remove the empty dependency array
+  
+  useEffect(()=> {
+    console.log("testing Parking space",totalParkingSpace )
+  },[registrationData])
+
+  useEffect(() => {
+    if (numberOfParkingApplicants > 0) {
+      axios.get('http://localhost:8080/config/get-expiration')
+        .then((response) => {
+          // Filter for applications where isParking === true
+          console.log("expiration useEffects", response.data)
+          setExpiration(response.data)
+        })
+        .catch((error) => {
+          // Handle error
+          console.error('Error:', error);
+        });
+    }
+  },[totalParkingSpace]);
+
+  useEffect(() => {
+      axios.get('http://localhost:8080/applicants/all')
+        .then((response) => {
+          // Filter for applications where isParking === true
+          const parkingApplications = response.data.filter(app => app.isParking === true);
+  
+          // Filter parking applicants whose expiration dates coincide with either staff or student expiration
+          console.log("expiration",expiration)
+          const coincidingExpirations = parkingApplications.filter(app => {
+            const expirationDate = new Date(app.expirationDate);
+            if (app.isStaff === true) {
+              console.log("numberOfIsStaff",new Date(expiration.staffExpirationDate).getTime())
+              return expirationDate.getTime() === new Date(expiration.staffExpirationDate).getTime();
+              
+            } else {
+              console.log("Global Expiration",expirationDate.getTime())
+              console.log("Application Expiration", expiration.staffExpirationDate)
+              return expirationDate.getTime() === new Date(expiration.studentExpirationDate).getTime();
+            }
+          });
+          console.log("numberOfYes",coincidingExpirations.length)
+          // Set the number of parking applicants with coinciding expiration dates
+          setNumberOfParkingApplicants(coincidingExpirations.length);
+        })
+        .catch((error) => {
+          // Handle error
+          console.error('Error:', error);
+        });
+  }, [expiration]);
+  
+  useEffect(()=>{
+    console.log("number of parking applicants",numberOfParkingApplicants)
+  },[registrationData])
+  
+  useEffect(() => {
+    console.log("total parking space",totalParkingSpace)
+    console.log("number of applicants",numberOfParkingApplicants)
+    if (totalParkingSpace > numberOfParkingApplicants) {
+      setParkingIsActive(true);
+    } else{
+      setParkingIsActive(false);
+    }
+    
+  }, [numberOfParkingApplicants]);
 
   useEffect(() => {
     
@@ -359,10 +437,12 @@ export default function RegistrationForm() {
   };
 
   return (
-    <Container maxWidth="lg">
-      <Header/>
+    <>
+    <Header/>
+     <Container maxWidth="lg" >
+      
       <Box sx={{ p: 2, alignItems: "center" }}>
-        <Typography sx={{ m: 2, fontSize: "1.75rem", textAlign: "center" }}>
+        <Typography sx={{ m: 2, fontSize: "1.75rem", textAlign: "center", marginTop:'7vh' }}>
           APPLICATION FORM FOR VEHICLE STICKER
         </Typography>
         <div
@@ -384,9 +464,8 @@ export default function RegistrationForm() {
             PERSONAL DATA
           </Typography>
 
-          {/* Name application */}
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div
+          <div
               style={{
                 display: "flex",
                 flexWrap: "wrap",
@@ -394,37 +473,57 @@ export default function RegistrationForm() {
                 marginBottom: "1rem",
               }}
             >
-              <TextField
-                variant="filled"
-                label="Surname"
-                value={registrationData.surname}
-                name="surname"
-                onChange={handleInputChange}
-                error={!!inputErrors.surname}
-                helperText={inputErrors.surname || "Required"}
-                sx={{ flex: 1, marginBottom: "1rem", marginRight: "1rem" }}
-              />
-              <TextField
-                variant="filled"
-                label="Given Name"
-                value={registrationData.givenname}
-                name="givenname"
-                onChange={handleInputChange}
-                error={!!inputErrors.givenname}
-                helperText={inputErrors.givenname || "Required"}
-                sx={{ flex: 1, marginBottom: "1rem", marginRight: "1rem" }}
-              />
-              <TextField
-                variant="filled"
-                label="M.I."
-                value={registrationData.mi}
-                name="mi"
-                onChange={handleInputChange}
-                error={!!inputErrors.mi}
-                helperText={inputErrors.mi || "Required"}
-                sx={{ flex: 0.5, marginBottom: "1rem" }}
-              />
+              <div className="register-name-textfields" style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
+                <div>
+                  <TextField
+                    variant="filled"
+                    label="Surname"
+                    value={registrationData.surname}
+                    name="surname"
+                    onChange={handleInputChange}
+                    error={!!inputErrors.surname}
+                    helperText={inputErrors.surname || "Required"}
+                    sx={{ width: "100%" }}
+                    InputProps={{
+                      style: { backgroundColor: 'white' },
+                    }}
+                  />
+                </div>
+                <div>
+                  <TextField
+                    variant="filled"
+                    label="Given Name"
+                    value={registrationData.givenname}
+                    name="givenname"
+                    onChange={handleInputChange}
+                    error={!!inputErrors.givenname}
+                    helperText={inputErrors.givenname || "Required"}
+                    sx={{ width: "100%" }}
+                    InputProps={{
+                      style: { backgroundColor: 'white' },
+                    }}
+                  />
+                </div>
+                <div>
+                  <TextField
+                    variant="filled"
+                    label="M.I."
+                    value={registrationData.mi}
+                    name="mi"
+                    onChange={handleInputChange}
+                    error={!!inputErrors.mi}
+                    helperText={inputErrors.mi || "Required"}
+                    sx={{ width: "100%" }}
+                    InputProps={{
+                      style: { backgroundColor: 'white' },
+                    }}
+                  />
+                </div>
+              </div>
+
+
             </div>
+
           </div>
 
           {/* Name of Students and ID Number */}
@@ -437,26 +536,39 @@ export default function RegistrationForm() {
                 marginBottom: "1rem",
               }}
             >
-              <TextField
-                variant="filled"
-                label="Name of Student"
-                value={registrationData.sname}
-                name="sname"
-                onChange={handleInputChange}
-                error={!!inputErrors.sname}
-                helperText={inputErrors.sname || "Required"}
-                sx={{ flex: 1, marginBottom: "1rem", marginRight: "1rem" }}
-              />
-              <TextField
-                variant="filled"
-                label="ID Number"
-                value={registrationData.idno}
-                name="idno"
-                onChange={handleInputChange}
-                error={!!inputErrors.idno}
-                helperText={inputErrors.idno || "Required"}
-                sx={{ flex: 1, marginBottom: "1rem" }}
-              />
+              <div className="student-name-textfields" style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
+                <div>
+                  <TextField
+                    variant="filled"
+                    label="Name of Student"
+                    value={registrationData.sname}
+                    name="sname"
+                    onChange={handleInputChange}
+                    error={!!inputErrors.sname}
+                    helperText={inputErrors.sname || "Required"}
+                    sx={{ flex: 1, marginBottom: "1rem", marginRight: "1rem" }}
+                    InputProps={{
+                      style: { backgroundColor: 'white' },
+                    }}
+                  />
+                </div>
+                <div>
+                  <TextField
+                    variant="filled"
+                    label="ID Number"
+                    value={registrationData.idno}
+                    name="idno"
+                    onChange={handleInputChange}
+                    error={!!inputErrors.idno}
+                    helperText={inputErrors.idno || "Required"}
+                    sx={{ flex: 1, marginBottom: "1rem" }}
+                    InputProps={{
+                      style: { backgroundColor: 'white' },
+                    }}
+                  />
+                </div>
+
+              </div>
             </div>
           </div>
 
@@ -470,26 +582,42 @@ export default function RegistrationForm() {
                 marginBottom: "1rem",
               }}
             >
-              <TextField
-                variant="filled"
-                label="Grade/Year Level"
-                value={registrationData.yearlevel}
-                name="yearlevel"
-                onChange={handleInputChange}
-                error={!!inputErrors.yearlevel}
-                helperText={inputErrors.yearlevel || "Required"}
-                sx={{ flex: 1, marginBottom: "1rem", marginRight: "1rem" }}
-              />
-              <TextField
-                variant="filled"
-                label="Contact No"
-                value={registrationData.contactno}
-                name="contactno"
-                onChange={handleInputChange}
-                error={!!inputErrors.contactno}
-                helperText={inputErrors.contactno || "Required"}
-                sx={{ flex: 1, marginBottom: "1rem" }}
-              />
+              <div className="student-name-textfields" style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
+              <div>
+                <TextField
+                  variant="filled"
+                  label="Grade/Year Level"
+                  value={registrationData.yearlevel}
+                  name="yearlevel"
+                  onChange={handleInputChange}
+                  error={!!inputErrors.yearlevel}
+                  helperText={inputErrors.yearlevel || "Required"}
+                  sx={{ flex: 1, marginBottom: "1rem", marginRight: "1rem" }}
+                  InputProps={{
+                    style: { backgroundColor: 'white' },
+                  }}
+                />
+              </div>
+              
+              <div>
+                <TextField
+                  variant="filled"
+                  label="Contact No"
+                  value={registrationData.contactno}
+                  name="contactno"
+                  onChange={handleInputChange}
+                  error={!!inputErrors.contactno}
+                  helperText={inputErrors.contactno || "Required"}
+                  sx={{ flex: 1, marginBottom: "1rem" }}
+                  InputProps={{
+                    style: { backgroundColor: 'white' },
+                  }}
+                />
+              </div>
+
+              </div>
+              
+              
             </div>
           </div>
 
@@ -503,16 +631,25 @@ export default function RegistrationForm() {
                 marginBottom: "1rem",
               }}
             >
-              <TextField
-                variant="filled"
-                label="Address"
-                value={registrationData.address}
-                name="address"
-                onChange={handleInputChange}
-                error={!!inputErrors.address}
-                helperText={inputErrors.address || "Required"}
-                sx={{ flex: 1, marginBottom: "1rem" }}
-              />
+              <div className="address-textfields" style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
+              <div>
+                <TextField
+                  variant="filled"
+                  label="Address"
+                  value={registrationData.address}
+                  name="address"
+                  onChange={handleInputChange}
+                  error={!!inputErrors.address}
+                  helperText={inputErrors.address || "Required"}
+                  sx={{ flex: 1, marginBottom: "1rem", width: "100%" }}
+                  InputProps={{
+                    style: { backgroundColor: 'white' },
+                  }}
+                />
+              </div>
+              </div>
+              
+             
             </div>
           </div>
 
@@ -533,6 +670,7 @@ export default function RegistrationForm() {
             >
               VEHICLE DATA
             </Typography>
+
             <div style={{ display: "flex", flexDirection: "column" }}>
               {/* Vehicle Make, Plate No., Color */}
               <div
@@ -543,47 +681,62 @@ export default function RegistrationForm() {
                   marginBottom: "1rem",
                 }}
               >
-                <TextField
-                  variant="filled"
-                  label="Vehicle Make"
-                  value={registrationData.vmake}
-                  name="vmake"
-                  onChange={handleInputChange}
-                  error={!!inputErrors.vmake}
-                  helperText={inputErrors.vmake || "Required"}
-                  sx={{ flex: 2, marginBottom: "1rem", marginRight: "1rem" }}
-                />
-                <TextField
-                  variant="filled"
-                  label="Plate No"
-                  value={registrationData.plateno}
-                  name="plateno"
-                  onChange={handleInputChange}
-                  error={!!inputErrors.plateno}
-                  helperText={inputErrors.plateno || "Required"}
-                  sx={{ flex: 1, marginBottom: "1rem", marginRight: "1rem" }}
-                />
-                <TextField
-                  variant="filled"
-                  label="Color"
-                  value={registrationData.color}
-                  name="color"
-                  onChange={handleInputChange}
-                  error={!!inputErrors.color}
-                  helperText={inputErrors.color || "Required"}
-                  sx={{ flex: 1, marginBottom: "1rem" }}
-                />
+                <div  className="register-name-textfields" style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
+                  <div>
+                  <TextField
+                    variant="filled"
+                    label="Vehicle Make"
+                    value={registrationData.vmake}
+                    name="vmake"
+                    onChange={handleInputChange}
+                    backgroundColor="white"
+                    error={!!inputErrors.vmake}
+                    helperText={inputErrors.vmake || "Required"}
+                    sx={{ flex: 2, marginBottom: "1rem", marginRight: "1rem",  width:'100%' }}
+                  />
+                  </div>
+
+                  <div>
+                  <TextField
+                    variant="filled"
+                    label="Plate Number"
+                    value={registrationData.plateno}
+                    name="plateno"
+                    onChange={handleInputChange}
+                    error={!!inputErrors.plateno}
+                    helperText={inputErrors.plateno || "Required"}
+                    sx={{ flex: 1, marginBottom: "1%", marginRight: "1%" ,  width:'100%'}}
+                  />
+
+                  </div>
+                  
+                  <div>
+                  <TextField
+                    variant="filled"
+                    label="Vehicle Color"
+                    value={registrationData.color}
+                    name="color"
+                    onChange={handleInputChange}
+                    error={!!inputErrors.color}
+                    helperText={inputErrors.color || "Required"}
+                    sx={{ flex: 1, marginBottom: "1rem" ,  width:'100%' }}
+                  />
+                  </div>
+                </div>
+                
               </div>
             </div>
             {/* Vehicle Type */}
             <div
+              className="vehicle-type-radio"
               style={{
                 display: "flex",
                 alignItems: "center",
                 marginBottom: "1rem",
               }}
             >
-              <Typography
+              <div  style={{width:'100%'}}>
+                <Typography
                 variant="body1"
                 sx={{ fontWeight: "bold", marginRight: "1rem" }}
               >
@@ -606,32 +759,45 @@ export default function RegistrationForm() {
                   label="4 Wheeler"
                 />
               </RadioGroup>
+              </div>
+              
+              <div style={{width:'100%'}}>
+                  {/* Sticker Type */}
+                  <Typography
+                    variant="body1"
+                    sx={{ fontWeight: "bold", marginRight: "1rem" }}
+                  >
+                    Sticker Type:
+                  </Typography>
+                  <RadioGroup
+                    name="stickerType"
+                    value={registrationData.stickerType}
+                    onChange={handleStickerChange}
+                    style={{ flexDirection: "row" }}
+                  >
+                    <FormControlLabel
+                      value="false"
+                      control={<Radio />}
+                      label="Drop-off"
+                    />
+                    {parkingIsActive ? (
+                      <FormControlLabel
+                        value="true"
+                        control={<Radio />}
+                        label="Parking"
+                      />
+                    ) : (
+                      <FormControlLabel
+                        value="true"
+                        control={<Radio disabled />}
+                        label="Parking (Unavailable)"
+                      />
+                    )}
+                  </RadioGroup>
 
-              {/* Sticker Type */}
-              <Typography
-                variant="body1"
-                sx={{ fontWeight: "bold", marginRight: "1rem" }}
-              >
-                Sticker Type:
-              </Typography>
-              <RadioGroup
-                name="stickerType"
-                value={registrationData.stickerType}
-                onChange={handleStickerChange}
-                style={{ flexDirection: "row" }}
-              >
-                <FormControlLabel
-                  value="false"
-                  control={<Radio />}
-                  label="Drop-off"
-                  a
-                />
-                <FormControlLabel
-                  value="true"
-                  control={<Radio />}
-                  label="Parking"
-                />
-              </RadioGroup>
+              </div>
+              
+
             </div>
             <div
               style={{
@@ -639,13 +805,20 @@ export default function RegistrationForm() {
                 alignItems: "center",
                 justifyContent: "center",
                 ml: "1rem",
+                flexWrap: "wrap"
               }}
             >
-              <FileUpload label="OR/CR" onChange={setORCRFile} />
-              <FileUpload label="License" onChange={setLicenseFile} />
-            </div>
+              <div className="upload-requirements-div" style={{width:'100%'}}>
+                <FileUpload label="OR/CR" onChange={setORCRFile}/>
+              </div>
+              <div className="upload-requirements-div" style={{width:'100%'}}>
+                <FileUpload label="License" onChange={setLicenseFile} />
+              </div>
+              
           </div>
-
+          </div>
+          
+          
           <Button
             variant="contained"
             sx={{
@@ -671,11 +844,8 @@ export default function RegistrationForm() {
           </Backdrop>
       )}
 
-
-        {/* ModalComponent */}
       <ModalComponent open={modalOpen} onClose={() => setModalOpen(false)} />
       
-      {/* Snackbar for displaying validation errors */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
@@ -685,5 +855,7 @@ export default function RegistrationForm() {
       />
       <Footer/>
     </Container>
+    </>
+   
   );
 }

@@ -27,12 +27,11 @@ export default function GuidelinesModal(props) {
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [messageOpen, setMessageOpen] = useState(false);
   const isStaff = localStorage.getItem("isStaff");
-  // const isStaff = false
-  const [twoWheelPU, setTwoWheelPU] = useState()
-  const [fourWheelPU, setFourWheelPU] = useState()
-  const [twoWheelPK, setTwoWheelPK] = useState()
-  const [fourWheelPK, setFourWheelPK] = useState()
-  const [schoolYear, setSchoolYear] = useState()
+  const [twoWheelPU, setTwoWheelPU] = useState();
+  const [fourWheelPU, setFourWheelPU] = useState();
+  const [twoWheelPK, setTwoWheelPK] = useState();
+  const [fourWheelPK, setFourWheelPK] = useState();
+  const [schoolYear, setSchoolYear] = useState();
   const [trigger, setTrigger] = useState(false);
   const navigate = useNavigate();
 
@@ -40,46 +39,44 @@ export default function GuidelinesModal(props) {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:8080/prices/get-prices');
-        console.log("isStaff", isStaff)
-  
+        console.log("prices", response.data);
+
         const isStaffBool = isStaff === "true"; // Convert to boolean
         if (isStaffBool) {
-          setTwoWheelPU(response.data.staffTwoWheelPickup)
-          setFourWheelPU(response.data.staffFourWheelPickup)
-          setTwoWheelPK(response.data.staffTwoWheelPickup)
-          setFourWheelPK(response.data.staffFourWheelPickup)
+          setTwoWheelPU(response.data.staffTwoWheelPickup);
+          setFourWheelPU(response.data.staffFourWheelPickup);
+          setTwoWheelPK(response.data.staffTwoWheelParking);
+          setFourWheelPK(response.data.staffFourWheelParking);
         } else {
-          setTwoWheelPU(response.data.studentTwoWheelPickup)
-          setFourWheelPU(response.data.studentFourWheelPickup)
-          setTwoWheelPK(response.data.studentTwoWheelParking)
-          setFourWheelPK(response.data.studentFourWheelParking)
+          setTwoWheelPU(response.data.studentTwoWheelPickup);
+          setFourWheelPU(response.data.studentFourWheelPickup);
+          setTwoWheelPK(response.data.studentTwoWheelParking);
+          setFourWheelPK(response.data.studentFourWheelParking);
         }
       } catch (error) {
         console.error('Error fetching data: ', error);
       }
-  
+
       try {
         const response = await axios.get('http://localhost:8080/config/get-expiration');
-        // console.log(response);
+        console.log("YESS", response);
         setSchoolYear(response.data.schoolYear);
-  
+
       } catch (error) {
         console.error('Error fetching data: ', error);
       }
     };
     fetchData();
-  }, [isStaff, trigger]); // The empty array [] means this effect will only run once
-  
+  }, [isStaff, trigger]);
 
   const handleCloseModal = () => {
-    setTrigger(!trigger)
+    setTrigger(!trigger);
     props.toggleModal(false);
   };
 
   const handleCheckboxChange = (event) => {
     setChecked((x) => !x);
   };
-
 
   const handleSubmit = () => {
     if (checked) {
@@ -88,7 +85,6 @@ export default function GuidelinesModal(props) {
       setSnackbarOpen(false);
       // Proceed to next page
       navigate("/registration");
-
     } else {
       setMessageOpen(true);
       setTimeout(() => {
@@ -126,7 +122,7 @@ export default function GuidelinesModal(props) {
                 </span>
                 &nbsp; To gain vehicular access to the University campus,
                 students, parents/guardians, faculty, staff, and administrators,
-                must apply and regsiter their vehicles at the SSD office. Once
+                must apply and register their vehicles at the SSD office. Once
                 approved, they will receive a sticker pass for their vehicles.
                 Here are the requirements for obtaining the CIT-U vehicle
                 sticker:
@@ -174,7 +170,6 @@ export default function GuidelinesModal(props) {
                       <td>2-Wheel DROP&PICK</td>
                       <td><b>PHP{twoWheelPU}</b>/{isStaff === 'true' ? 'Year' : 'Semester'}</td>
                     </tr>
-
                   </tbody>
                 </table>
                 <div className="guidelines-note bold">
@@ -193,11 +188,12 @@ export default function GuidelinesModal(props) {
                   3.1. The CIT-U Safety & Security Department personnel/guards
                   are authorized to inspect vehicles arriving and departing from
                   the campus. When approaching the campus gates, tinted windows
-                  should be rolled down for proper identification of vehicle
-                  passengers. In the evening, headlights should be dimmed when
-                  approaching the guardhouse.
+                  should be rolled down for proper identification.
+                  
                 </div>
-                <div className="indent">
+              </li>
+
+              <div className="indent">
                   3.2. Faculty members, administrative personnel, and college students are eligible to request
                   vehicle stickers for parking purposes. However, applicants from the Basic Education department
                   (Elementary to SHS) are limited to obtaining stickers specifically for drop-off and pick-up purposes.
@@ -252,45 +248,41 @@ export default function GuidelinesModal(props) {
                   <br />
                 </li>
 
-              </li>
             </ol>
+
             <div className="guidelines-footer">
-              <FormGroup style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <FormControlLabel
-                  required
-                  control={
-                    <Checkbox
-                      checked={checked}
-                      onChange={handleCheckboxChange}
-                    />
-                  }
-                  label="I have read and understood the Guidelines"
-                />
-                <div>
+            <FormGroup style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <FormControlLabel
+                required
+                control={
+                  <Checkbox
+                    checked={checked}
+                    onChange={handleCheckboxChange}
+                  />
+                }
+                label="I have read and understood the Guidelines"
+              />
+              <div>
                 {messageOpen && (
                   <div className="snackbar" style={{ color: "red", padding: ".5rem", display: "flex", alignItems: "center", justifyContent: "center"  }}>{snackbarMessage}</div>
                 )}
-                </div>
-                
-                <Button variant="contained" onClick={handleSubmit}  sx={{ minWidth: "25rem" }}>
-                  Submit
-                </Button>
-              </FormGroup>
+              </div>
+              <Button variant="contained" onClick={handleSubmit} sx={{ minWidth: "25rem", marginTop: "1rem" }}>
+                Submit
+              </Button>
+            </FormGroup>
             </div>
-            
           </div>
+
+          <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={3000}
+            onClose={handleSnackbarClose}
+            message={snackbarMessage}
+            className="snackbar"
+          />
         </Box>
       </Modal>
-      {/* <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-        message="Please agree to the terms and conditions before submitting"
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-      /> */}
     </div>
   );
 }

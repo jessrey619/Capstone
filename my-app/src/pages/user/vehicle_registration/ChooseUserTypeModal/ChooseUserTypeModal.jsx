@@ -58,7 +58,7 @@ export default function ChooseUserTypeModal({ isOpen, toggleModal }) {
           {/* Modal Content */}
           <div className="choose-user-header">Choose Type Of User</div>
           {/* Close button */}
-          <Button onClick={handleClose} style={{ position: 'absolute', top: '8px', right: '8px' }}>Close</Button>
+          <Button onClick={handleClose} style={{ position: 'absolute', top: '2%', right: '2%' }}>Close</Button>
           <div  className="choose-user-buttons">
             <Button variant="contained" onClick={handleStudent} style={{ background: "#8A252C" }}>
               Student

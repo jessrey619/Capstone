@@ -2,29 +2,29 @@ import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useState } from "react";
 
-function Slider() {
-  const [value, setValue] = useState("1"); // Define value state variable
+function Slider({ tabs }) { // Accept 'tabs' prop to define tab labels and values
+  const [value, setValue] = useState(tabs[0].value); // Set initial value based on the first tab value
   const handleChange = (event, newValue) => {
-    setValue(newValue); // Define handleChange function
+    setValue(newValue);
   };
 
   return (
-    <>
-      <div>
-        <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Item One" value="1" />
-              <Tab label="Item Two" value="2" />
-              <Tab label="Item Three" value="3" />
-            </TabList>
-          </Box>
-          <TabPanel value="1">Pending</TabPanel>
-          <TabPanel value="2">Approved</TabPanel>
-          <TabPanel value="3">Delete</TabPanel>
-        </TabContext>
-      </div>
-    </>
+    <div>
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <TabList onChange={handleChange} aria-label="lab API tabs example">
+            {tabs.map(tab => (
+              <Tab key={tab.value} label={tab.label} value={tab.value} /> // Render tabs dynamically
+            ))}
+          </TabList>
+        </Box>
+        {tabs.map(tab => (
+          <TabPanel key={tab.value} value={tab.value}>
+            {tab.content}
+          </TabPanel>
+        ))}
+      </TabContext>
+    </div>
   );
 }
 

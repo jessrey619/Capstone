@@ -1,4 +1,3 @@
-// PageTitle.jsx
 import React from 'react';
 import './pageTitle.css';
 import Breadcrumb from './breadcrumb';
@@ -8,7 +7,7 @@ function PageTitle({ page }) {
     <div className='pagetitle'>
       <h1>{page}</h1>
       <nav>
-        <Breadcrumb page={page} />
+        <Breadcrumb />
       </nav>
     </div>
   );

@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 import './App.css';
-import { Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'remixicon/fonts/remixicon.css'
 
@@ -18,6 +18,9 @@ import Statistics from './pages/admin/Statistics'
 import ParkingArea from './pages/admin/ParkingArea'
 import Configuration from './pages/admin/Configuration';
 import StickerPricing from './pages/admin/StickerPricing';
+import UserManagement from './pages/admin/UserManagement';
+import ParkingManagement from './pages/admin/ParkingManagement';
+import AccountExpiration from './pages/admin/AccountExpiration';
  
 // Therese
 import Homepage from './pages/homepage';
@@ -46,8 +49,13 @@ function App() {
         <Route path='/logs' element={<Logs/>} />
         <Route path='/statistics' element={<Statistics/>} />
         <Route path='/parking-area' element={<ParkingArea/>} />
-        <Route path='/configuration' element={<Configuration/>} />
-        <Route path="/configuration/sticker-pricing" component={StickerPricing} />
+        <Route path="/configuration/*" element={<Configuration />}>
+          <Route path="sticker-pricing" element={<StickerPricing />} />
+          <Route path="user-management" element={<UserManagement />} />
+          <Route path="parking-management" element={<ParkingManagement />} />
+          <Route path="account-expiration" element={<AccountExpiration />} />
+        </Route>
+        {/* Add other routes as needed */}
       </Routes>
     </>
   );

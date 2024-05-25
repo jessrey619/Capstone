@@ -1,23 +1,47 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../../Components/Main/main.css';
 import PageTitle from '../../Components/Main/PageTitle';
-import Card from '../../Components/Card/Card';
+import CardsContainer from '../../Components/Card/CardsContainer'; // Ensure this import path is correct
 
 function Dashboard() {
+  const [vehicleCounts, setVehicleCounts] = useState({
+    totalVehicles: 0,
+    fourWheelers: 0,
+    twoWheelers: 0,
+  });
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/logs/vehicle-types/count')
+      .then(response => {
+        const fourWheel = response.data.fourWheelCount;
+        const twoWheel = response.data.otherCount;
+        const total = fourWheel + twoWheel;
+        setVehicleCounts({
+          totalVehicles: total,
+          fourWheelers: fourWheel,
+          twoWheelers: twoWheel,
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching vehicle counts:', error);
+      });
+  }, []);
+
+  const cardsData = [
+    { title: 'Total Vehicles', count: vehicleCounts.totalVehicles, iconClass: 'bi-car-front' },
+    { title: 'Total 4 Wheelers', count: vehicleCounts.fourWheelers, iconClass: 'bi-truck' },
+    { title: 'Total 2 Wheelers', count: vehicleCounts.twoWheelers, iconClass: 'bi-bicycle' },
+  ];
+
   return (
     <main id='main' className='main'>
-      <PageTitle page="Dashboard"/>
+      <PageTitle page="Dashboard" />
       <section className='dashboard section'>
-        <div className='row'>
-          <div className='col-lg-9'>
-            <div className='row'>
-            <Card/>
-            </div>
-          </div>
-        </div>
+        <CardsContainer cards={cardsData} />
       </section>
     </main>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

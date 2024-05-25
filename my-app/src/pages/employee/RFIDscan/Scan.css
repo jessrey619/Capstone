@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap');
 /*body*/
 
-body {
+.RFIDbg {
     background-color: rgb(255, 255, 255);
     font-family: 'Kumbh Sans', sans-serif;
-    background-image: url('C:\Users\REINA LUZ\Documents\GitHub\Capstone\my-app\public\RFID_background.png'); 
+    /* background-image: url('C:\Users\REINA LUZ\Documents\GitHub\Capstone\my-app\public\RFID_background.png');  */
     background-repeat: no-repeat;
     background-position: top; 
     width: 50vw;  

@@ -42,7 +42,7 @@ function Scans() {
     //   }, []);
     
     return (
-        <div>
+        <div className="RFIDbg">
         <div className="top">
         <img src="/citu-logoSmall.png" alt="CITULogo" className="topImage" />
         </div>

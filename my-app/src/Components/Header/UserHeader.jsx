@@ -47,8 +47,8 @@ const TheHeader = () => {
           <DropdownMenu/>
         ) : (
           <>
-            <a href="#home">Home</a>
-            <a href="#about">About Us</a>
+            <a href="/homepage">Home</a>
+            <a href="/user_aboutus">About Us</a>
           </>
         )}
       </nav>

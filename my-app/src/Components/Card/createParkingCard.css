@@ -1,0 +1,17 @@
+.plus-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.plus-button:hover {
+  background-color: #0077b3;
+}
+

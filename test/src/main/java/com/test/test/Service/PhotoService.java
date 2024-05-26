@@ -18,38 +18,33 @@ import com.test.test.Repository.PhotoRepository;
 public class PhotoService {
 	@Autowired
 	private PhotoRepository photoRepository;
-	
-//	public ResponseEntity<List<Photo>> getAllPhotos() {
-//        List<Photo> photos = photoRepository.getAllPhotos();
-//        return ResponseEntity.ok(photos);
-//    }
 
-    public ResponseEntity<?> savePhoto(MultipartFile file, String name, int type, String username) {
-    	try {
-            Photo existingPhoto = photoRepository.getPhotoByName(name);
-            if (existingPhoto != null) {
-                // Update the existing photo
-                existingPhoto.setName(name);
-                existingPhoto.setImage(file.getBytes());
-                existingPhoto.setType(type); //1 = license, 2 = OR/CR, 3 = proofofpayment, 0 =default
-                existingPhoto.setUsername(username);
-                photoRepository.save(existingPhoto);
-                return ResponseEntity.ok(existingPhoto.getName());
-            } else {
-                // Create a new photo
-                Photo newPhoto = new Photo();
-                newPhoto.setName(name);
-                newPhoto.setImage(file.getBytes());
-                newPhoto.setType(type); //1 = license, 2 = OR/CR, 3 = proofofpayment, 0 =default
-                newPhoto.setUsername(username);
-                photoRepository.save(existingPhoto);
-                return ResponseEntity.ok(newPhoto.getName());
-            }
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body("Failed to upload photo: " + e.getMessage());
-        }
-    }
-    
+	public ResponseEntity<?> savePhoto(MultipartFile file, String name, int type, String username) {
+		try {
+			Photo existingPhoto = photoRepository.getPhotoByName(name);
+			if (existingPhoto != null) {
+			// Update the existing photo
+				existingPhoto.setName(name);
+				existingPhoto.setImage(file.getBytes());
+				existingPhoto.setType(type);
+				existingPhoto.setUsername(username);
+				photoRepository.save(existingPhoto);
+				return ResponseEntity.ok(existingPhoto.getName());
+			} else {
+			// Create a new photo
+				Photo newPhoto = new Photo();
+				newPhoto.setName(name);
+				newPhoto.setImage(file.getBytes());
+				newPhoto.setType(type);
+				newPhoto.setUsername(username);
+				photoRepository.save(newPhoto); // Use newPhoto here instead of existingPhoto
+				return ResponseEntity.ok(newPhoto.getName());
+			}
+		} catch (IOException e) {
+			return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body("Failed to upload photo: " + e.getMessage());
+		}
+	}
+	    
     public ResponseEntity<byte[]> getPhotoById(@PathVariable Long id) {
         Photo photo = photoRepository.getPhotoById(id);
         if (photo != null && photo.getImage() != null) {

@@ -1,5 +1,6 @@
 package com.test.test.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,23 @@ public class PricesService {
     @Autowired
     private PricesRepository pricesRepository;
 
-    public void editStudentPrices(PricesEntity prices) {
+    
+    public PricesEntity getPrice() {
+    	return pricesRepository.findFirst();
+    }
+    
+    public String editStudentPrices(PricesEntity prices) {
         // Find the PricesEntity by its id
-        Optional<PricesEntity> existingPricesOptional = pricesRepository.findById(1);
+        PricesEntity existingPricesOptional = pricesRepository.findFirst();
 
+        if(existingPricesOptional==null) {
+        	existingPricesOptional = new PricesEntity();
+        }
+        
         // Update the values of the existingPrices entity with the new prices
-        PricesEntity existingPrices = existingPricesOptional.orElseGet(() -> new PricesEntity());
+        PricesEntity existingPrices = existingPricesOptional;
+        
+        
 
         // Update existingPrices with the new prices entity
         existingPrices.setStudentTwoWheelPickup(prices.getStudentTwoWheelPickup());
@@ -29,14 +41,18 @@ public class PricesService {
 
         // Save the updated entity back to the database
         pricesRepository.save(existingPrices);
+        
+        return "Student Prices Editted Successfully";
     }
     
-    public void editStaffPrices(PricesEntity prices) {
+    public String editStaffPrices(PricesEntity prices) {
         // Find the PricesEntity by its id
-        Optional<PricesEntity> existingPricesOptional = pricesRepository.findById(1);
-
+        PricesEntity existingPricesOptional = pricesRepository.findFirst();
+        if(existingPricesOptional==null) {
+        	existingPricesOptional = new PricesEntity();
+        }
         // Update the values of the existingPrices entity with the new prices
-        PricesEntity existingPrices = existingPricesOptional.orElseGet(() -> new PricesEntity());
+        PricesEntity existingPrices = existingPricesOptional;
 
         // Update existingPrices with the new prices entity
         existingPrices.setStaffTwoWheelPickup(prices.getStaffTwoWheelPickup());
@@ -47,6 +63,8 @@ public class PricesService {
 
         // Save the updated entity back to the database
         pricesRepository.save(existingPrices);
+        
+        return "Staff Prices Editted Successfully";
     }
 
 

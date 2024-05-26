@@ -1,10 +1,13 @@
 package com.test.test.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.test.test.Entity.AdminEntity;
 import com.test.test.Entity.AuthenticationResponse;
 import com.test.test.Entity.ChangePasswordRequest;
+import com.test.test.Entity.DecodedJwt;
 import com.test.test.Entity.EmployeeEntity;
+import com.test.test.Entity.Role;
 import com.test.test.Entity.UserEntity;
+import com.test.test.Repository.EmployeeRepository;
+import com.test.test.Repository.UserRepository;
 import com.test.test.Service.AuthenticationService;
 import com.test.test.Service.UserService;
 
@@ -28,6 +35,12 @@ public class AuthenticationController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	@CrossOrigin
 	@PostMapping("/register")
@@ -111,4 +124,61 @@ public class AuthenticationController {
         }
     }
 	
+	@CrossOrigin
+    @PostMapping("/decode")
+    public DecodedJwt decodeJwt(@RequestParam String token) {
+        return authService.decodeJwt(token);
+    }
+	
+	@CrossOrigin
+	@PostMapping("/getrole")
+	public Role getRole(@RequestParam String email) {
+		return userService.getRole(email);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/get-user")
+	public UserEntity getUser(@RequestParam String username) {
+		return userService.getUserByUsername(username);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/get-employee")
+	public EmployeeEntity getEmployee(@RequestParam String username) {
+		return userService.getEmployeeByUsername(username);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/getallemployee")
+	public List<EmployeeEntity> getAllEmployee(){
+		return employeeRepository.findAll();
+	}
+	
+	@CrossOrigin
+	@PostMapping("/updateapprover")
+	public String updateApprove(@RequestParam String username, @RequestParam boolean action){
+		userService.updateApprover(username, action);
+		return "success";
+	}
+	
+	@CrossOrigin
+	@PostMapping("/updateverifier")
+	public String updateVerifier(@RequestParam String username, @RequestParam boolean action){
+		userService.updateVerifier(username, action);
+		return "success";
+	}
+	
+	@CrossOrigin
+	@PostMapping("/updatelogger")
+	public String updateLogger(@RequestParam String username, @RequestParam boolean action){
+		userService.updateLogger(username, action);
+		return "success";
+	}
+	
+	
+	@CrossOrigin
+	@GetMapping("/getallusers")
+	public List<UserEntity> getAllUsers(){
+		return userRepository.findAll();
+	}
 }

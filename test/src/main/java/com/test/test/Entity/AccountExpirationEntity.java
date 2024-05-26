@@ -18,10 +18,13 @@ public class AccountExpirationEntity {
 	
     private Date studentExpirationDate;
     private Date staffExpirationDate;
+    private String schoolYear;
+    private String semester;
 
     
     public AccountExpirationEntity() {
     	this.id = 1; 
+    	this.semester = "2025-2026";
 	}
 
 	public Date getStudentExpirationDate() {
@@ -39,5 +42,21 @@ public class AccountExpirationEntity {
     public void setStaffExpirationDate(Date staffExpirationDate) {
         this.staffExpirationDate = staffExpirationDate;
     }
+
+	public String getSchoolYear() {
+		return schoolYear;
+	}
+
+	public void setSchoolYear(String schoolYear) {
+		this.schoolYear = schoolYear;
+	}
+
+	public String getSemester() {
+		return semester;
+	}
+
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
     
 }

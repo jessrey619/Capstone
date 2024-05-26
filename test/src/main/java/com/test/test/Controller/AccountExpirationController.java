@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +29,33 @@ public class AccountExpirationController {
         return ResponseEntity.ok("Account expiration saved successfully");
     }
     
+    @CrossOrigin
     @PostMapping("/setStaffGlobalExpiry")
-    public void setStaffGlobalExpiry(@RequestParam("expirationDate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate) {
-    	accService.setStaffGlobalExpiry(expirationDate);
+    public String  setStaffGlobalExpiry(@RequestParam("expirationDate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate) {
+    	return accService.setStaffGlobalExpiry(expirationDate);
     }
 
+    @CrossOrigin
     @PostMapping("/setStudentGlobalExpiry")
-    public void setStudentGlobalExpiry(@RequestParam("expirationDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate) {
-    	accService.setStudentGlobalExpiry(expirationDate);
+    public String setStudentGlobalExpiry(@RequestParam("expirationDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate) {
+    	return accService.setStudentGlobalExpiry(expirationDate);
+    }
+    
+    @CrossOrigin
+    @PostMapping("/set-schoolyear")
+    public String setSchoolYear(@RequestParam String schoolyear) {
+    	return accService.setSchoolYear(schoolyear);
+    }
+    
+    @CrossOrigin
+    @PostMapping("/set-semester")
+    public String setSemester(@RequestParam String semester) {
+    	return accService.setSemester(semester);
+    }
+    
+    @CrossOrigin
+    @GetMapping("/get-expiration")
+    public AccountExpirationEntity getAccountExpiration() {
+    	return accService.getAccountExpiration();
     }
 }

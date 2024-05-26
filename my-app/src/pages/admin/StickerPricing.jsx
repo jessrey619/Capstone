@@ -1,84 +1,112 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../../Components/Main/main.css';
-import StickerPricingCard from '../../Components/Card/StickerPricingCard'; // Import StickerPricingCard component
+import StickerPricingCard from '../../Components/Card/StickerPricingCard';
+import Swal from 'sweetalert2';
 
 function StickerPricing() {
-  const [prices, setPrices] = useState({}); // State to store pricing data
-  const [isLoading, setIsLoading] = useState(true); // Flag for loading state
+  const [prices, setPrices] = useState({
+    student_two_wheel_pickup: '',
+    student_four_wheel_pickup: '',
+    student_two_wheel_parking: '',
+    student_four_wheel_parking: '',
+    staff_two_wheel_pickup: '',
+    staff_four_wheel_pickup: '',
+    staff_two_wheel_parking: '',
+    staff_four_wheel_parking: ''
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Function to fetch initial pricing data from the database (replace with your API endpoint)
   const fetchPrices = async () => {
     try {
-      const response = await fetch('/api/prices');
-      const data = await response.json();
-      setPrices(data);
+      const response = await axios.get('http://localhost:8080/prices/get-prices');
+      setPrices(response.data);
     } catch (error) {
-      console.error('Error fetching prices:', error);
+      setError(error.message);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Function to handle changes in price input fields
-  const handlePriceChange = (event, userType, field) => {
-    setPrices((prevPrices) => ({
+  const handlePriceChange = (userType, field, value) => {
+    setPrices(prevPrices => ({
       ...prevPrices,
-      [`${userType}_${field}`]: event.target.value,
+      [`${userType}_${field}`]: value
     }));
   };
 
-  // Function to handle changes in start and end date pickers
-  const handleDateChange = (event, userType, field) => {
-    setPrices((prevPrices) => ({
-      ...prevPrices,
-      [field]: event.target.value,
-    }));
-  };
+  const handleSave = async userType => {
+    const endpoint = userType === 'student' ? '/update-student-prices' : '/update-staff-prices';
+    const payload = {
+      studentTwoWheelPickup: parseFloat(prices.student_two_wheel_pickup),
+      studentFourWheelPickup: parseFloat(prices.student_four_wheel_pickup),
+      studentTwoWheelParking: parseFloat(prices.student_two_wheel_parking),
+      studentFourWheelParking: parseFloat(prices.student_four_wheel_parking),
+      staffTwoWheelPickup: parseFloat(prices.staff_two_wheel_pickup),
+      staffFourWheelPickup: parseFloat(prices.staff_four_wheel_pickup),
+      staffTwoWheelParking: parseFloat(prices.staff_two_wheel_parking),
+      staffFourWheelParking: parseFloat(prices.staff_four_wheel_parking)
+    };
 
-  // Function to handle saving pricing changes (implementation depends on backend)
-  const handleSave = async (userType) => {
+    console.log("Sending payload:", payload);
+
     try {
-      const response = await fetch('/api/prices', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ [userType]: prices[userType] }),
+      await axios.put(`http://localhost:8080/prices${endpoint}`, payload);
+      Swal.fire({
+        title: 'Success',
+        text: `${userType.charAt(0).toUpperCase() + userType.slice(1)} prices saved successfully!`,
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        // Clear the input fields
+        setPrices({
+          student_two_wheel_pickup: '',
+          student_four_wheel_pickup: '',
+          student_two_wheel_parking: '',
+          student_four_wheel_parking: '',
+          staff_two_wheel_pickup: '',
+          staff_four_wheel_pickup: '',
+          staff_two_wheel_parking: '',
+          staff_four_wheel_parking: ''
+        });
       });
-      if (response.ok) {
-        console.log('Prices saved successfully!');
-      } else {
-        console.error('Error saving prices:', await response.text());
-      }
     } catch (error) {
-      console.error('Error saving prices:', error);
+      Swal.fire({
+        title: 'Error',
+        text: `Error saving ${userType} prices: ${error.message}`,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     }
   };
 
   useEffect(() => {
     fetchPrices();
-  }, []); // Fetch data on component mount
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   return (
     <div className="card-container">
       <StickerPricingCard
         title="Faculty"
-        prices={prices} 
-        userType="faculty"
+        prices={prices}
+        userType="staff"
         onPriceChange={handlePriceChange}
-        onStartDateChange={handleDateChange}
-        onEndDateChange={handleDateChange}
         onSave={handleSave}
       />
       <StickerPricingCard
         title="Student"
-        prices={prices} 
+        prices={prices}
         userType="student"
         onPriceChange={handlePriceChange}
-        onStartDateChange={handleDateChange}
-        onEndDateChange={handleDateChange}
         onSave={handleSave}
       />
     </div>

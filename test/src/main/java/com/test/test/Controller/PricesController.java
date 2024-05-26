@@ -13,13 +13,21 @@ public class PricesController {
     @Autowired
     private PricesService pricesService;
 
+    @CrossOrigin
     @PutMapping("/update-student-prices")
-    public void editStudentPrices(@RequestBody PricesEntity prices) {
-        pricesService.editStudentPrices(prices);
+    public String editStudentPrices(@RequestBody PricesEntity prices) {
+        return pricesService.editStudentPrices(prices);
     }
     
+    @CrossOrigin
     @PutMapping("/update-staff-prices")
-    public void editStaffPrices(@RequestBody PricesEntity prices) {
-        pricesService.editStaffPrices(prices);
+    public String editStaffPrices(@RequestBody PricesEntity prices) {
+        return pricesService.editStaffPrices(prices);
+    }
+    
+    @CrossOrigin
+    @GetMapping("/get-prices")
+    public PricesEntity getPrices() {
+    	return pricesService.getPrice();
     }
 }

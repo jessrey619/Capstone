@@ -1,7 +1,12 @@
 package com.test.test.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.weaving.DefaultContextLoadTimeWeaver;
+import org.springframework.http.HttpStatus;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.test.test.Entity.AccountExpirationEntity;
 import com.test.test.Entity.ApplicantEntity;
@@ -12,18 +17,26 @@ import com.test.test.Repository.ApplicantRepository;
 import com.test.test.Repository.UserRepository;
 import com.test.test.Repository.VehicleRepository;
 
+import ch.qos.logback.core.joran.conditional.IfAction;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.validation.constraints.Email;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ApplicantService {
@@ -40,6 +53,12 @@ public class ApplicantService {
 	@Autowired
 	private AccountExpirationRepository accountExpirationRepository;
 	
+	@Autowired
+	private AccountExpirationService expirationService;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
 //	@UPLOAD PHOTOS WILL BE DONE IN THE PHOTO CONTROLLER
 	
 //    public String uploadImageToDrive(File file, String name) {
@@ -47,12 +66,14 @@ public class ApplicantService {
 //        return ""; // Return the URL of the uploaded image
 //    }
 	public String verifyCredentials(ApplicantEntity applicant) {
-	    ApplicantEntity existingApplicant = applicantRepository.findByEmail(applicant.getEmail());
+	    List<ApplicantEntity> existingApplicants = applicantRepository.findAllByEmail(applicant.getEmail());
 	    String res = "";
-
-	    if (existingApplicant == null) {
-	        // Applicant with the given email does not exist
-	        throw new RuntimeException("Applicant not found with email: " + applicant.getEmail());
+	    ApplicantEntity existingApplicant;
+	    
+	    if(existingApplicants.size()>0) {
+	    	existingApplicant = existingApplicants.get(existingApplicants.size()-1);
+	    }else {
+	    	throw new RuntimeException("Applicant not found with email: " + applicant.getEmail());
 	    }
 
 	    existingApplicant.setVerified(true);
@@ -63,92 +84,117 @@ public class ApplicantService {
 
 
     public String registerApplicant(ApplicantEntity applicant) {
-    	if (!isValidName(applicant.getFirstName()) || !isValidName(applicant.getLastName()) || !isValidName(applicant.getMiddleInitial())) {
-            throw new IllegalArgumentException("Name contains invalid characters");
-        }
+	    if (!isValidName(applicant.getFirstName()) || !isValidName(applicant.getLastName()) || !isValidName(applicant.getMiddleInitial())) {
+	        throw new IllegalArgumentException("Name contains invalid characters");
+	    }
+	
+	    List<ApplicantEntity> applicantsByEmail = applicantRepository.findAllByEmail(applicant.getEmail());
+	    List<ApplicantEntity> applicantsByName = 
+	        applicantRepository.findAllByFirstNameAndMiddleInitialAndLastName(
+	            applicant.getFirstName().toUpperCase(), 
+	            applicant.getMiddleInitial().toUpperCase(), 
+	            applicant.getLastName().toUpperCase()
+	        );
+	
+	    UserEntity user = userRepository.findByUsername(applicant.getEmail());
+	    AccountExpirationEntity expirationEntity = expirationService.getAccountExpiration();
+	    Date expirationDate = new Date();
+	    
+	    if (applicant.getIsStaff()) {
+	        expirationDate = expirationEntity.getStaffExpirationDate();
+	    } else {
+	        expirationDate = expirationEntity.getStudentExpirationDate();
+	    }
+	    
+	    if (user == null) {
+	        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not Found");
+	    }
+	    
+	    if (!applicantsByName.isEmpty()) {
+	        if (applicantsByName.get(applicantsByName.size() - 1).isRejected()) {
+	            processApplicant(applicant, user, expirationDate);
+	            return "Registration Submitted Successfully";
+	        }
+	        
+	        boolean expired = applicantsByName.get(applicantsByName.size() - 1).getExpirationDate().before(new Date());
+	        if (expired) {
+	            processApplicant(applicant, user, expirationDate);
+	            return "Registration Submitted Successfully";
+	        } else {
+	            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User with same Name Already has an Application");
+	        }
+	    } else if (!applicantsByEmail.isEmpty()) {
+	        if (applicantsByEmail.get(applicantsByEmail.size() - 1).isRejected()) {
+	            processApplicant(applicant, user, expirationDate);
+	            return "Registration Submitted Successfully";
+	        }
+	        
+	        boolean expired = applicantsByEmail.get(applicantsByEmail.size() - 1).getExpirationDate().before(new Date());
+	        if (expired) {
+	            processApplicant(applicant, user, expirationDate);
+	            return "Registration Submitted Successfully";
+	        } else {
+	            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User Email Already has an Application");
+	        }
+	    } else {
+	        processApplicant(applicant, user, expirationDate);
+	        return "Registration Submitted Successfully";
+	    }
+	}
 
-        ApplicantEntity existingApplicant = applicantRepository.findByEmail(applicant.getEmail());
-        UserEntity user = userRepository.findByUsername(applicant.getEmail());
-        
-        if(user == null) {
-        	return "User not Found";
-        }
-        
-        if (existingApplicant != null) {
-        	
-        	user.setDateApplied(new Date());
-        	userRepository.save(user);
-        	
-            // Update existing applicant
-            existingApplicant.setFirstName(applicant.getFirstName());
-            existingApplicant.setLastName(applicant.getLastName());
-            existingApplicant.setMiddleInitial(applicant.getMiddleInitial());
-            existingApplicant.setStudentName(applicant.getStudentName());
-            existingApplicant.setIdNumber(applicant.getIdNumber());
-            existingApplicant.setGradeLevel(applicant.getGradeLevel());
-            existingApplicant.setContactNumber(applicant.getContactNumber());
-            existingApplicant.setAddress(applicant.getAddress());
-            existingApplicant.setVehicleMake(applicant.getVehicleMake());
-            existingApplicant.setPlateNo(applicant.getPlateNo());
-            existingApplicant.setColor(applicant.getColor());
-            existingApplicant.setVehicleType(applicant.getVehicleType());
-            existingApplicant.setApplicantid(applicant.getApplicantid());
-            existingApplicant.setIsParking(applicant.getIsParking());
-            existingApplicant.setIsStaff(applicant.getIsStaff());
-            
-            existingApplicant.setDatesubmitted(applicant.getDatesubmitted());
-            existingApplicant.setVerified(applicant.getVerified());
-            existingApplicant.setApproved(applicant.isApproved());
-            existingApplicant.setPaid(applicant.isPaid());
-            existingApplicant.setRejected(false);
-
-
-            applicantRepository.save(existingApplicant);
-            
-            
-        } else {
-            // Create new applicant
-        	applicant.setRejected(false);
-        	user.setDateApplied(new Date());
-        	applicantRepository.save(applicant);
-            userRepository.save(user);
-        }
-        
-        return "Registration Submitted Successfully";
-    }
-    
+	private void processApplicant(ApplicantEntity applicant, UserEntity user, Date expirationDate) {
+	    applicant.setRejected(false);
+	    applicant.setExpirationDate(expirationDate);
+	    applicant.setDatesubmitted(new Date());
+	
+	    user.setAddress(applicant.getAddress());
+	    user.setContactNumber(applicant.getContactNumber());
+	    user.setFname(applicant.getFirstName());
+	    user.setMname(applicant.getMiddleInitial());
+	    user.setLname(applicant.getLastName());
+	    user.setSchoolId(applicant.getIdNumber());
+	    user.setSchoolIdOwner(applicant.getStudentName());
+	    user.setIsParking(applicant.getIsParking());
+	    user.setIsStaff(applicant.getIsStaff());
+	    user.setIsEnabled(false);
+	    user.setEmail(applicant.getEmail());
+	    user.setDateApplied(new Date());
+	    user.setUsername(applicant.getEmail());
+	
+	    VehicleEntity vehicleEntity = new VehicleEntity();
+	    List<VehicleEntity> vehicles = vehicleRepository.findByPlateNo(applicant.getPlateNo());
+	    
+	    if (vehicles != null && !vehicles.isEmpty()) {
+	        vehicleEntity = vehicles.get(0);
+	        if (!vehicleEntity.getName().equalsIgnoreCase(applicant.getFirstName() + " " + applicant.getMiddleInitial() + " " + applicant.getLastName())) {
+	            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Vehicle Belongs to Someone Else Please Contact School");
+	        }
+	    }
+	    
+	    vehicleEntity.setColor(applicant.getColor());
+	    vehicleEntity.setIsParking(applicant.getIsParking());
+	    vehicleEntity.setName(applicant.getFirstName() + " " + applicant.getMiddleInitial() + " " + applicant.getLastName());
+	    vehicleEntity.setPlateNo(applicant.getPlateNo());
+	    vehicleEntity.setStickerId(0);
+	    vehicleEntity.setUsername(applicant.getEmail());
+	    vehicleEntity.setVehicleMake(applicant.getVehicleMake());
+	    vehicleEntity.setVehicleType(applicant.getVehicleType());
+	    vehicleEntity.setExpirationDate(expirationDate);
+	    
+	    vehicleRepository.save(vehicleEntity);
+	    applicantRepository.save(applicant);
+	    userRepository.save(user);
+	}
     private boolean isValidName(String name) {
         return name.matches("^[a-zA-Z ]+$"); // Checks if the name contains only letters and spaces
     }
-
-//    DONE IN PHOTO CONTROLLER
-//    public String uploadRequirements(String email, File orcrimg, File licenseimg) {
-//        try {
-//            String orname = email + ":orcr";
-//            String liname = email + ":license";
-//            String or = uploadImageToDrive(orcrimg, orname);
-//            String li = uploadImageToDrive(licenseimg, liname);
-//            ApplicantEntity applicant = applicantRepository.findByEmail(email);
-//            if (applicant != null) {
-//                applicant.setOrcrimg(or);
-//                applicant.setLicenseimg(li);
-//                applicantRepository.save(applicant);
-//                return "Images Submitted successfully!" + "ORCR: " + or + "\nLICENSE: " + li;
-//            } else {
-//                return "Applicant not found!";
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return "Failed to submit images";
-//        }
-//    }
 
     public List<ApplicantEntity> getAllApplicants() {
         return applicantRepository.findAll();
     }
 
-    public ApplicantEntity getApplicantById(String applicantid) {
-        return applicantRepository.findByApplicantid(applicantid);
+    public ApplicantEntity getApplicantById(int applicantid) {
+        return applicantRepository.findById(applicantid);
     }
 
     
@@ -196,12 +242,19 @@ public class ApplicantService {
 
 //  Approval
     public String approveApplicant(String email) {
-        ApplicantEntity applicant = applicantRepository.findByEmail(email);
+    	List<ApplicantEntity> applicants = applicantRepository.findAllByEmail(email);
+    	
+        ApplicantEntity applicant = applicants.get(applicants.size()-1);
         UserEntity user = userRepository.findByUsername(email);
         VehicleEntity vehicle = vehicleRepository.findByUsername(email);
-        Optional<AccountExpirationEntity> expirationEntity = accountExpirationRepository.findById(1);
         
-        if (applicant != null) {
+        List<AccountExpirationEntity> expirations= accountExpirationRepository.findAll();
+        AccountExpirationEntity expirationEntity = expirations.get(0);
+
+        if (applicants.isEmpty()==false) {
+        	if(applicant.isRejected()) {
+            	return "Application was Rejected";
+            }
         	if(user != null) {
         		
         		applicant.setApproved(true);
@@ -220,9 +273,9 @@ public class ApplicantService {
         		
         		if(expirationEntity!=null) {
         			if(user.getIsStaff()) {
-        				user.setExpirationDate(expirationEntity.get().getStaffExpirationDate());
+        				user.setExpirationDate(expirationEntity.getStaffExpirationDate());
         			}else {
-        				user.setExpirationDate(expirationEntity.get().getStudentExpirationDate());
+        				user.setExpirationDate(expirationEntity.getStudentExpirationDate());
         			}
         		}
         		
@@ -234,26 +287,13 @@ public class ApplicantService {
             		vehicle.setVehicleType(applicant.getVehicleType());
             		vehicle.setIsParking(applicant.getIsParking());
             		vehicle.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
-            		
+            		vehicle.setStickerId(findMissingStickerId());
+            		vehicleRepository.save(vehicle);
         		} else {
-        			vehicle = new VehicleEntity();
-            		vehicle.setColor(applicant.getColor());
-            		vehicle.setPlateNo(applicant.getPlateNo());
-            		vehicle.setUsername(email);
-            		vehicle.setVehicleMake(applicant.getVehicleMake());
-            		vehicle.setVehicleType(applicant.getVehicleType());
-            		vehicle.setIsParking(applicant.getIsParking());
-            		vehicle.setName(applicant.getFirstName()+" "+applicant.getMiddleInitial()+" "+applicant.getLastName());
-            		
-            		Integer maxStickerId = vehicleRepository.findMaxStickerId();
-                    if (maxStickerId == null) {
-                        maxStickerId = 0;
-                    }
-                    vehicle.setStickerId(maxStickerId + 1);
-            		
+        			return "Vehicle with Username not Found";
         		}
         		//@TODO TEST THIS LATER
-        		vehicleRepository.save(vehicle);
+        		
                 applicantRepository.save(applicant);
                 userRepository.save(user);
                 return "Application approved successfully!";
@@ -266,7 +306,81 @@ public class ApplicantService {
         }
     }
     
-    public ApplicantEntity getApplicantByEmail(String email) {
-        return applicantRepository.findByEmail(email);
+    public List<ApplicantEntity> getApplicantByEmail(String email) {
+        return applicantRepository.findAllByEmail(email);
     }
+    
+    public void rejectApplication(String email, String message) throws Exception {
+    	List<ApplicantEntity> applicants = applicantRepository.findAllByEmail(email);
+    	ApplicantEntity applicantEntity = applicants.get(applicants.size()-1);
+    	if(applicants.size()==0) {
+    		throw new Exception();
+    	}
+    	applicantEntity.setRejected(true);
+    	applicantRepository.save(applicantEntity);
+    	String subject = "Rejected Application"; 
+    	
+    	sendMail(email, applicantEntity.getFirstName(), message, subject);
+    }
+    
+    public List<ApplicantEntity> searchApplicants(String searchText) {
+        return applicantRepository.findByFirstNameOrLastNameOrEmail(searchText.toLowerCase());
+    }
+    
+    public List<VehicleEntity> findByPlateNo(String plateNo) {
+    	return vehicleRepository.findByPlateNo(plateNo);
+    }
+    
+    
+    
+    
+//    SUPPORTING FUNCTIONS
+    public int findMissingStickerId() {
+        // Fetch all vehicle entities
+        List<VehicleEntity> vehicles = vehicleRepository.findAll();
+
+        // Create a set to store the present sticker IDs
+        Set<Integer> presentStickerIds = new HashSet<>();
+        for (VehicleEntity vehicle : vehicles) {
+            presentStickerIds.add(vehicle.getStickerId());
+        }
+
+        // Find the smallest sticker ID and the largest sticker ID in the list
+        int minStickerId = Integer.MAX_VALUE;
+        int maxStickerId = Integer.MIN_VALUE;
+        for (int stickerId : presentStickerIds) {
+            if (stickerId < minStickerId) {
+                minStickerId = stickerId;
+            }
+            if (stickerId > maxStickerId) {
+                maxStickerId = stickerId;
+            }
+        }
+
+        // Iterate through the range of sticker IDs to find the first missing one
+        for (int stickerId = minStickerId; stickerId <= maxStickerId; stickerId++) {
+            if (!presentStickerIds.contains(stickerId)) {
+                return stickerId;
+            }
+        }
+
+        // If no missing stickerId is found, return the next available stickerId after the last element
+        return maxStickerId + 1;
+    }
+    
+    private void sendMail(String email,String fname, String message, String subject) throws MessagingException{
+		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+		MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+		mimeMessageHelper.setTo(email);
+		mimeMessageHelper.setSubject(subject);
+		String messageContent = "<html><body><h2>Good day, " + fname + "</h2>" +
+                "<h4>" + message + "</h4>" +
+                "<br>" +
+                "<h4>Best regards,</h4>" +
+                "<h4><i>VehicleVista</i></h4></body></html>";
+        //@TODO We can Edit the Text Later On 
+		mimeMessageHelper.setText(messageContent, true);
+		javaMailSender.send(mimeMessage);
+	}
 }
+

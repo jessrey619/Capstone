@@ -1,31 +1,37 @@
 import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { useState } from "react";
+// import { useState } from "react";
+import PropTypes from 'prop-types';
 
-function Slider({ tabs }) { // Accept 'tabs' prop to define tab labels and values
-  const [value, setValue] = useState(tabs[0].value); // Set initial value based on the first tab value
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
+function Slider({ tabs, value, onChange }) {
   return (
-    <div>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            {tabs.map(tab => (
-              <Tab key={tab.value} label={tab.label} value={tab.value} /> // Render tabs dynamically
-            ))}
-          </TabList>
-        </Box>
-        {tabs.map(tab => (
-          <TabPanel key={tab.value} value={tab.value}>
-            {tab.content}
-          </TabPanel>
-        ))}
-      </TabContext>
-    </div>
+    <TabContext value={value}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <TabList onChange={onChange} aria-label="lab API tabs example">
+          {tabs.map(tab => (
+            <Tab key={tab.value} label={tab.label} value={tab.value} />
+          ))}
+        </TabList>
+      </Box>
+      {tabs.map(tab => (
+        <TabPanel key={tab.value} value={tab.value}>
+          {tab.content}
+        </TabPanel>
+      ))}
+    </TabContext>
   );
 }
+
+Slider.propTypes = {
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      content: PropTypes.node,
+    })
+  ).isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Slider;

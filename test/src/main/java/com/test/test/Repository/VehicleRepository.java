@@ -12,8 +12,10 @@ import com.test.test.Entity.VehicleEntity;
 public interface VehicleRepository extends CrudRepository<VehicleEntity, Integer> {
 	VehicleEntity findByUsername(String username);
 	VehicleEntity findByStickerId(int stickerId);
+	List<VehicleEntity> findByPlateNo(String plateNo);
 	
 	List<VehicleEntity> findAllByUsername(String username);
+	List<VehicleEntity> findAll();
 	
 	@Query("SELECT MAX(v.stickerId) FROM VehicleEntity v")
     Integer findMaxStickerId();

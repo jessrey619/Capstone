@@ -1,13 +1,19 @@
 package com.test.test.Service;
 
+import java.io.IOException;
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.test.Entity.AdminEntity;
 import com.test.test.Entity.AuthenticationResponse;
+import com.test.test.Entity.DecodedJwt;
 import com.test.test.Entity.EmployeeEntity;
 import com.test.test.Entity.Role;
 import com.test.test.Entity.UserEntity;
@@ -125,6 +131,21 @@ public class AuthenticationService {
         String token = jwtService.generateToken(user);
 
         return new AuthenticationResponse(token);
+    }
+    
+    public DecodedJwt decodeJwt(String token) {
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+
+        String payload = new String(decoder.decode(chunks[1]));
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            JsonNode payloadJson = mapper.readTree(payload);
+            return new DecodedJwt(payloadJson);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to parse JWT", e);
+        }
     }
 
 }

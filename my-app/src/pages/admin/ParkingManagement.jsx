@@ -1,9 +1,7 @@
-// ParkingManagement.jsx
-
 import React, { useState } from 'react';
 import InputBoxes from '../../Components/InputBoxes/InputBoxes';
 import CreateParkingCard from '../../Components/Card/CreateParkingCard';
-import axios from 'axios'; // Import axios for HTTP requests
+import axios from 'axios'; 
 
 function ParkingManagement() {
   const [showCreateParking, setShowCreateParking] = useState(false);

@@ -84,7 +84,7 @@ input:checked + .slider:before {
 }
 
 .checkbox-container input[type="checkbox"]:checked {
-  background-color: #007bff; /* Change background color when checked */
+  background-color: #007bff; 
 }
 
 .checkbox-container label {
@@ -94,15 +94,15 @@ input:checked + .slider:before {
 
 /* Save Button CSS */
 .save-button {
-  background-color: #007bff; /* Blue color */
-  color: white; /* Text color */
+  background-color: #007bff; 
+  color: white; 
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px; /* Adjust as needed */
+  margin-top: 20px; 
 }
 
 .save-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; 
 }

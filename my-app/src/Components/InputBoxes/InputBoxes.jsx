@@ -3,10 +3,9 @@ import axios from 'axios';
 import './inputBoxes.css';
 
 function InputBoxes({ labels, className, includeCheckboxes, totalSpace, onSave, parkingAreaId }) {
-  // Initialize state for toggle switches
+
   const [toggleStates, setToggleStates] = useState(labels.map(() => false));
 
-  // Function to toggle the state of a toggle switch
   const toggleSwitch = (index) => {
     setToggleStates(prevStates => {
       const newStates = [...prevStates];
@@ -15,7 +14,7 @@ function InputBoxes({ labels, className, includeCheckboxes, totalSpace, onSave, 
     });
   };
 
-  // Function to handle save button click
+
   const handleSave = () => {
     const updatedData = {
       totalSpace: totalSpace,
@@ -25,11 +24,11 @@ function InputBoxes({ labels, className, includeCheckboxes, totalSpace, onSave, 
     axios.put(`/parking/${parkingAreaId}`, updatedData)
       .then(response => {
         console.log(response.data);
-        onSave(); // Callback to parent component
+        onSave(); 
       })
       .catch(error => {
         console.error('Error updating parking area:', error);
-        // Handle error
+
       });
   };
 
@@ -44,7 +43,7 @@ function InputBoxes({ labels, className, includeCheckboxes, totalSpace, onSave, 
               <span className="slider"></span>
             </label>
           )}
-          {label !== 'Name of Parking Area' && <input type="number" />} {/* Exclude toggle switch for "Name of Parking Area" */}
+          {label !== 'Name of Parking Area' && <input type="number" />} 
         </div>
       ))}
       {includeCheckboxes && (

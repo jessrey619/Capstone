@@ -9,7 +9,10 @@ function VehicleDisplay({ title }) {
     const [type, setType] = useState("");
     const [plateNo, setPlateNo] = useState("");
     const [color, setColor] = useState("");
+    const [vehicle1, setVehicle1] = useState({})
+    const [vehicle2, setVehicle2] = useState({})
     const [searchValue, setSearchValue] = useState("");
+
     const [applicants, setApplicants] = useState([])
 
     function handleInputChange(event) {
@@ -25,42 +28,28 @@ function VehicleDisplay({ title }) {
             console.log('Search query:', searchValue);
             
             // Make a search request using axios.get with query parameters
-            axios.get('http://localhost:8080/applicants/search', {
-                params: { searchText: searchValue }
-            })
+            axios.get(`http://localhost:8080/vehicles/find-by-sticker-id/${searchValue}`)
             .then(response => {
-                setApplicants(response.data);
+                if (response.data.length > 0) {
+                    const vehicle = response.data[0]; 
+                    setVehicle1(response.data)
+                    console.log("Vehicle return Response:",response.data)
+                } else {
+                    console.error('No vehicles found for this username');
+                }
             })
             .catch(error => {
-                console.error('Error searching applicants:', error);
+                console.error('Error fetching vehicle details:', error);
             });
     
+        // Return false to prevent the form from actually submitting
+        return false;
             // Return false to prevent the form from actually submitting
             return false;
         }
 
 
-    //     axios.get(`http://localhost:8080/vehicles/find-by-username/${searchValue}`)
-    //         .then(response => {
-    //             if (response.data.length > 0) {
-    //                 const vehicle = response.data[0]; 
-    //                 setSticker(vehicle.stickerId); 
-    //                 setExpire(new Date(vehicle.expirationDate).toLocaleDateString()); 
-    //                 setName(vehicle.name); 
-    //                 setType(vehicle.isParking ? "Parking" : "Pick up/ Drop-off");  
-    //                 setPlateNo(vehicle.plateNo); 
-    //                 setColor(vehicle.color); 
-    //             } else {
-    //                 console.error('No vehicles found for this username');
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching vehicle details:', error);
-    //         });
-    
-    //     // Return false to prevent the form from actually submitting
-    //     return false;
-    // }
+        
     
     return (
         <div className="OuterContainer">

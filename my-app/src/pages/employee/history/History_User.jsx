@@ -86,9 +86,9 @@ function ApplicationHistory(){
         </section>
             <div id="cover">
                 <div className="tb">
-                    <div className="td">
+                    <div className="td-input">
                     <input
-                            className="historyInput"
+                          
                             id="searchText"
                             type="text"
                             placeholder="Search"

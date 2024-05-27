@@ -84,7 +84,7 @@ function ApplicationHistory(){
         <section className="HistoryTitle">
             <h1>Application History</h1>
         </section>
-            <div id="cover">
+            <div id="cover" classname = "TheSubmit">
                 <div className="tb">
                     <div className="td-input">
                     <input

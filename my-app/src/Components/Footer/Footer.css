@@ -7,7 +7,7 @@
     font-family: 'Kumbh Sans', sans-serif;
     height: min-content;
     background-color: white;
-    flex-shrink: 0; 
+    flex-shrink: 0%; 
     bottom: 0%;
   }
   

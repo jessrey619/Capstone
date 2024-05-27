@@ -1,189 +1,148 @@
-import React from "react";
-import './Scan.css';
+import React, { useState } from 'react';
+import axios from 'axios';
+import "./Scan.css"
 
+function VehicleDisplay({ title }) {
+    const [sticker, setSticker] = useState("");
+    const [expire, setExpire] = useState("");
+    const [name, setName] = useState("");
+    const [type, setType] = useState("");
+    const [plateNo, setPlateNo] = useState("");
+    const [color, setColor] = useState("");
+    const [searchValue, setSearchValue] = useState("");
+    const [applicants, setApplicants] = useState([])
 
-function Scans() {
-    const [disclaimer, setDisclaimer] = React.useState([])
-    const [userId, setuserId] = React.useState("18-6969-420")
-    const [type, settype] = React.useState("Pick up/ Drop-off")
+    function handleInputChange(event) {
+        setSearchValue(event.target.value);
+    }
+
+    function handleSubmit() {
+     
+            // Get the value of the search input
+            var searchValue = document.getElementById('searchText').value;
+        
+            // Log the search input value to the console
+            console.log('Search query:', searchValue);
+            
+            // Make a search request using axios.get with query parameters
+            axios.get('http://localhost:8080/applicants/search', {
+                params: { searchText: searchValue }
+            })
+            .then(response => {
+                setApplicants(response.data);
+            })
+            .catch(error => {
+                console.error('Error searching applicants:', error);
+            });
     
-    // useEffect(() => {
-    //     axios.get('http://localhost:8080/logs/all')
-    //       .then(response => {
-    //         setLogs(response.data);
-    //         console.log(response.data);
-    //       })
-    //       .catch(error => {
-    //         console.error('Error fetching logs:', error);
-    //       });
+            // Return false to prevent the form from actually submitting
+            return false;
+        }
 
-    //       axios.get('http://localhost:8080/logs/vehicle-types/count')
-    //       .then(response => {
-    //         const fourWheel = response.data.fourWheelCount;
-    //         const twoWheel = response.data.otherCount;
-    //         const total = fourWheel + twoWheel;
-    //         setTwoWheels(twoWheel)
-    //         setTotalVehicles(total);
-    //         setFourWheels(fourWheel);
-            
-    //       })
-    //       .catch(error => {
-    //         console.error('Error fetching Counting:', error);
-    //       });
 
-    //       axios.get('http://localhost:8080/parking/active')
-    //       .then(response => {
-    //         setParkingAreas(response.data)
-            
-    //       })
-    //       .catch(error => {
-    //         console.error('Error fetching Counting:', error);
-    //       });
-    //   }, []);
+    //     axios.get(`http://localhost:8080/vehicles/find-by-username/${searchValue}`)
+    //         .then(response => {
+    //             if (response.data.length > 0) {
+    //                 const vehicle = response.data[0]; 
+    //                 setSticker(vehicle.stickerId); 
+    //                 setExpire(new Date(vehicle.expirationDate).toLocaleDateString()); 
+    //                 setName(vehicle.name); 
+    //                 setType(vehicle.isParking ? "Parking" : "Pick up/ Drop-off");  
+    //                 setPlateNo(vehicle.plateNo); 
+    //                 setColor(vehicle.color); 
+    //             } else {
+    //                 console.error('No vehicles found for this username');
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching vehicle details:', error);
+    //         });
+    
+    //     // Return false to prevent the form from actually submitting
+    //     return false;
+    // }
     
     return (
-        <div className="RFIDbg">
-        <div className="top">
-        <img src="/citu-logoSmall.png" alt="CITULogo" className="topImage" />
-        </div>
-
-        {/* contents */}
-        <div className="display">
-
-            <div className="OuterContainer">
-
-                <div className="firstInner">
-                    <p>Sticker ID: </p> 
-                    <div className="input">
-                        {/* CHANGE */}
-                    <p> {disclaimer}</p>
+        <div className="OuterContainer">
+            <div className="firstInner">
+                <p>Sticker ID: </p> 
+                <div className="infoInput"style={{ marginTop:'2%', marginRight:'2%'}} >
+                    <div className="stickerSearch">
+                        <div className="stickerInput">
+                            <input
+                                id="searchInput"
+                                type="text"
+                                placeholder="Sticker ID"
+                                value={searchValue}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div className="stickerBtn">
+                            <button type="button" onClick={handleSubmit}>
+                                Search
+                            </button>
+                        </div>
                     </div>
                 </div>
-
-                <div className="firstInner">
-                    <p style={{margin:'auto'}}>User ID: <br/> <br/> Name: </p> 
-                   
-                   <div>
-                    {/* CHANGE */}
-                    <div className="input" style={{ width:'25vw', height:'8vh', marginTop:'5px', marginRight:'10px'}}>
-                    <p> {userId}</p>
-                    </div>
-                    {/* CHANGE */}
-                    <div className="input" style={{ width:'25vw', height:'8vh', marginTop:'10px',marginRight:'10px' }}>
-                    <p> {disclaimer}</p>
-                    </div>
-
-                    </div>
-
-                </div>
-                
-                <div className="secondInner">
-
-                    <div class="left-section">
-
-                    <p style={{margin:'0 auto', textAlign:'center', width:'10vw'}}>Sticker Type:</p> 
-                    {/* CHANGE */}
-                    <div className="input" style={{ width:'11.5vw', height:'22vh', margin:'0 auto', alignItems:'center'}}>
-                    <p style={{ margin:'40px auto', alignItems:'center'}}> {type}</p>
-                    </div>
-                    
-                    </div>
-                        <div class="right-section">
-
-                        <div class="top-right" style={{display:'flex', flexDirection:'row',}}>
-                        <p style={{marginTop: '37px', marginLeft:'10px'}}>Plate No.:</p> 
-                        {/* CHANGE */}
-                        <div className="input" style={{ width:'13vw', height:'10vh',}}>
-                            <p style={{ margin:'17px auto', alignItems:'center'}}> {disclaimer}</p>
-                        </div>
-
-                        </div>
-
-                        <div class="bottom-right" style={{display:'flex', flexDirection:'row',}}>
-                        <p style={{marginTop: '37px', marginLeft:'10px', flexDirection:'row',}}>Color:</p> 
-                        {/* CHANGE */}
-                        <div className="input" style={{ width:'13vw', height:'10vh', marginRight:'15px'}}>
-                            <p style={{ margin:'17px auto', alignItems:'center'}}> {disclaimer}</p>
-                        </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                </div>
-
-            {/* SECOND */}
-
-            <div className="OuterContainer">
-
-                <div className="firstInner">
-                    <p>Sticker ID: </p> 
-                    <div className="input">
-                        {/* CHANGE */}
-                    <p> {disclaimer}</p>
-                    </div>
-                </div>
-
-                <div className="firstInner">
-                    <p style={{margin:'auto'}}>User ID: <br/> <br/> Name: </p> 
-                   
-                   <div>
-                    {/* CHANGE */}
-                    <div className="input" style={{ width:'25vw', height:'8vh', marginTop:'5px', marginRight:'10px'}}>
-                    <p> {userId}</p>
-                    </div>
-                    {/* CHANGE */}
-                    <div className="input" style={{ width:'25vw', height:'8vh', marginTop:'10px',marginRight:'10px' }}>
-                    <p> {disclaimer}</p>
-                    </div>
-
-                    </div>
-
-                </div>
-                
-                <div className="secondInner">
-
-                    <div class="left-section">
-
-                    <p style={{margin:'0 auto', textAlign:'center', width:'10vw'}}>Sticker Type:</p> 
-                    {/* CHANGE */}
-                    <div className="input" style={{ width:'11.5vw', height:'22vh', margin:'0 auto', alignItems:'center'}}>
-                    <p style={{ margin:'40px auto', alignItems:'center'}}> {type}</p>
-                    </div>
-                    
-                    </div>
-                        <div class="right-section">
-
-                        <div class="top-right" style={{display:'flex', flexDirection:'row',}}>
-                        <p style={{marginTop: '37px', marginLeft:'10px'}}>Plate No.:</p> 
-                        {/* CHANGE */}
-                        <div className="input" style={{ width:'13vw', height:'10vh',}}>
-                            <p style={{ margin:'17px auto', alignItems:'center'}}> {disclaimer}</p>
-                        </div>
-
-                        </div>
-
-                        <div class="bottom-right" style={{display:'flex', flexDirection:'row',}}>
-                        <p style={{marginTop: '37px', marginLeft:'10px', flexDirection:'row',}}>Color:</p> 
-                        {/* CHANGE */}
-                        <div className="input" style={{ width:'13vw', height:'10vh', marginRight:'15px'}}>
-                            <p style={{ margin:'17px auto', alignItems:'center'}}> {disclaimer}</p>
-                        </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                </div>
-                
             </div>
 
+            <div className="firstInner">
+                <p style={{margin:'auto'}}>Status: <br/> <br/> Name: </p> 
+                <div>
+                    <div className="infoInput" style={{ width:'25vw', height:'8vh', marginTop:'5px', marginRight:'10px'}}>
+                        <p>{expire}</p>
+                    </div>
+                    <div className="infoInput" style={{ width:'25vw', height:'8vh', marginTop:'10px',marginRight:'10px' }}>
+                        <p>{name}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div className="secondInner">
+                <div className="left-section">
+                    <p style={{margin:'0 auto', textAlign:'center', width:'10vw'}}>Sticker Type:</p> 
+                    <div className="infoInput" style={{ width:'11.5vw', height:'22vh', margin:'0 auto', alignItems:'center'}}>
+                        <p style={{ margin:'40px auto', alignItems:'center'}}>{type}</p>
+                    </div>
+                </div>
+                <div className="right-section">
+                    <div className="top-right" style={{display:'flex', flexDirection:'row',}}>
+                        <p style={{marginTop: '37px', marginLeft:'10px'}}>Plate No.:</p> 
+                        <div className="infoInput" style={{ width:'13vw', height:'10vh',}}>
+                            <p style={{ margin:'17px auto', alignItems:'center'}}>{plateNo}</p>
+                        </div>
+                    </div>
+
+                    <div className="bottom-right" style={{display:'flex', flexDirection:'row',}}>
+                        <p style={{marginTop: '37px', marginLeft:'10px', flexDirection:'row',}}>Color:</p> 
+                        <div className="infoInput" style={{ width:'13vw', height:'10vh', marginRight:'15px'}}>
+                            <p style={{ margin:'17px auto', alignItems:'center'}}>{color}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
     );
 }
+
+function Scans() {
+    return (
+        <div className="RFIDbg">
+            <div className="top">
+                <img src="/citu-logoSmall.png" alt="CITULogo" className="topImage" />
+            </div>
+
+            <div>
+                <img src="/RFID_background.png" alt="background" className="bgRFID" />
+            </div>
+
+            <div className="display">
+                <VehicleDisplay title="First Display" />
+                <VehicleDisplay title="Second Display" />
+            </div>
+        </div>
+    );
+}
+
 export default Scans;

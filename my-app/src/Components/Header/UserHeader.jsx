@@ -39,7 +39,7 @@ const TheHeader = () => {
 
   return (
     <div className={`header ${isMobile ? 'mobile' : ''}`}>
-      <div className="logo-container">
+      <div className="Headerlogo-container">
         <img src="/citu-logoSmall.png" alt="HeaderLogo" className="headerImage" />
       </div>
       <nav className="nav">

@@ -2,16 +2,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
     background-color: rgba(255, 255, 255, 0.5); 
     font-family: 'Kumbh Sans', sans-serif;
     height: min-content;
     background-color: white;
     flex-shrink: 0; 
+    bottom: 0%;
   }
   
 .logoContainer {
-    width: 300px;
+    width: 18vw;
     margin-left: 45px;
     margin-right: -100px;
   }

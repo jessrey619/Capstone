@@ -33,7 +33,7 @@ function EmployeeSidebar({ activeMenuItem }) {
     <>
       {isMobile ? (
         <>
-          <Button sx={{ color: "black", marginLeft: "0.5rem", marginTop: "0rem", marginBottom: "0rem", zIndex: "1000" }} onClick={handleClick}><FaBars /></Button>
+          <Button sx={{ color: "black", marginLeft: "0rem", marginTop: "0rem", marginBottom: "0rem", zIndex: "1000" }} onClick={handleClick}><FaBars /></Button>
           {Open ?
             <div className={`employee-sidebar ${isMobile ? 'mobile' : ''}`}>
               <ul className="employee-sidebar-menu">

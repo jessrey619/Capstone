@@ -8,24 +8,26 @@
     margin: 0;
     position: absolute;
     top: 100%;
-    width: max-content;
+    width: 108%;
     left: 0;
-    background-color: rgb(255, 255, 255); 
+    background-color: rgba(255, 255, 255, 0.63); 
   }
   
 .dropdown-menu li {
     cursor: pointer;
-    padding: 10px;
+    padding: 5px;
     width: 100%;
     color: black;
     font-family: 'Kumbh Sans', sans-serif;
     font-weight: 700;
+    font-size: .9em;
   }
 
 .imgMenu {
-    width: 50px;
+    width: 10vw;
 }
-button {
+.btnHeader {
     background-color: rgba(255, 255, 255, 0.0);
     border: 0cap;
+    
 }

@@ -14,7 +14,7 @@ const DropdownMenu = () => {
 
   return (
     <div>
-       <button onClick={toggleMenu}>
+       <button onClick={toggleMenu} className='btnHeader'>
         <img src={"/dropMenu.svg"} alt="Menu" className='imgMenu'/>
       </button>
       {isOpen && (

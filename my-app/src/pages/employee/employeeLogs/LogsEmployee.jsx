@@ -10,7 +10,7 @@ import EmployeeSidebar from "../../../Components/Navbar/Employee_SideBar/employe
 function LogsEmployee() {
 
     const [logs, setLogs] = useState([]);
-    // const [filterBy, setFilterBy] = useState('');
+    const [filterBy, setFilterBy] = useState('');
     const [twoWheels, setTwoWheels] = useState([]);
     const [fourWheels, setFourWheels] = useState([]);
     const [totalVehiclesInside, setTotalVehicles] = useState([]);
@@ -56,16 +56,19 @@ function LogsEmployee() {
     //     setFilterBy(event.target.value);
     // };
 
-    // const filteredLogs = logs.filter(log => filterBy === '' || log.type === filterBy);
+    const filteredLogs = logs.filter(log => filterBy === '' || log.type === filterBy);
 
     return (
+        <>
         <div>
-            <TheHeader/>
-            <div className="side">
+        <TheHeader/>
+        </div>
+        <div className="LogsBody">
+           
             <EmployeeSidebar/>
-            </div>
+            
           <div>
-             <img src="/background.png" alt="background" className="background-image" />
+             <img src="/background.png" alt="background" className="LogsBG" />
           <div className="liveContainer">
 
             <div className="total">
@@ -169,8 +172,12 @@ function LogsEmployee() {
             </div>
           </div>
 
-          <TheFooter/>
         </div>
+        <div>
+        <TheFooter/>
+        </div>
+
+        </>
     );
 }
 

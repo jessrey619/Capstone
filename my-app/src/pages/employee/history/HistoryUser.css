@@ -3,26 +3,32 @@
     outline: none;
   }
   
-  html,
-  body {
-    height: 100%;
-    min-height: 100%;
+  .backgroundHistory {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30%;
+    z-index: -1; 
   }
   
-  body {
+  .historyBG {
     margin: 0;
-    background-color: #ffffff;
     font-family: 'Kumbh Sans', sans-serif;
-      
+    height: 100%;
+    padding-top: 6.2%;
+    padding-left: 19%;
+    padding-bottom: 2%;
+    background-color: #ffffff6e;
   }
 
   /* TITLE */
-  section h1 {
+  .HistoryTitle h1 {
     font-size: 2.7em;
     margin: 35px auto auto auto;
     text-align: center;
     font-family: 'Kumbh Sans', sans-serif;
     color: #000000;
+    z-index: 5;
   }
 
   /* FORM */
@@ -38,7 +44,7 @@
   }
   
   input,
-  button {
+  .td button {
     color: #000000;
     font-family: 'Kumbh Sans', sans-serif;
     padding: 0;
@@ -63,14 +69,14 @@
   transform: scale(0.43);
 }
 
-input[type="text"] {
+.historyInput input[type="text"] {
   width: 100%;
   height: 7vh;
   font-size: 2.7em;
   line-height: 1;
 }
 
-input[type="text"]::placeholder {
+.historyInput input[type="text"]::placeholder {
   color: #878787;
 }
 
@@ -79,7 +85,7 @@ input[type="text"]::placeholder {
   padding-left: 35px;
 }
 
-button {
+.btnHistory button {
   position: relative;
   display: block;
   width: 5vw;
@@ -102,7 +108,7 @@ button {
   transition: 0.5s ease all;
 }
 
-button span {
+.btnHistory button span {
   position: absolute;
   top: 60%;
   left: 35%;
@@ -115,8 +121,8 @@ button span {
   transition: 0.5s ease all;
 }
 
-button span:before,
-button span:after {
+.btnHistory button span:before,
+.btnHistory button span:after {
   content: "";
   position: absolute;
   bottom: 0;

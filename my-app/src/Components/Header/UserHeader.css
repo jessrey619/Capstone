@@ -2,15 +2,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    top:0%;
+    padding: 5;
     color: white;
     background-color: rgba(255, 255, 255, 0.5); 
     font-family: 'Kumbh Sans', sans-serif;
   }
   
-.logo-container {
-    width: 300px;
-    margin-left: 40px;
+.Headerlogo-container {
+    width: 20%;
   }
   
 .headerImage {
@@ -43,13 +43,16 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      height: 10vh;
     }
   
-    .logo-container {
-      margin-right: 20px;
+    .Headerlogo-container {
       width: auto;
-      margin-left: 20px;
-      transition: width 0.5s ease-in-out; 
+      transform: scale(.6);
+    } 
+
+    .headerImage{
+      margin-left: 20%; 
     }
   
     .nav {

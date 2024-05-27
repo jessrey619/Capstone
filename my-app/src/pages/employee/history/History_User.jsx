@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import '../css/HistoryUser.css';
+import './HistoryUser.css';
 import axios from "axios";
-// import TheFooter from "../Components/Footer/Footer"
-//import TheHeader from "../Components/Header/UserHeader";
+import TheFooter from "../../../Components/Footer/Footer"
+import TheHeader from "../../../Components/Header/UserHeader";
 // import Header from "../Components/Header/Header";
-
+import EmployeeSidebar from "../../../Components/Navbar/Employee_SideBar/employeeSidebar";
 
 
 function ApplicationHistory(){
@@ -70,18 +70,25 @@ function ApplicationHistory(){
     }
 
     return(
+        <>
         <div>
-        {/* <Header/> */}
-        <div>
-        <img src="/background.png" alt="background" className="background-image" />
+          <TheHeader/>
         </div>
-        <section>
+
+        <div className="historyBG">
+  
+        <EmployeeSidebar/>
+        <div>
+        <img src="/background.png" alt="background" className="backgroundHistory" />
+
+        <section className="HistoryTitle">
             <h1>Application History</h1>
         </section>
             <div id="cover">
                 <div className="tb">
                     <div className="td">
                     <input
+                            className="historyInput"
                             id="searchText"
                             type="text"
                             placeholder="Search"
@@ -91,7 +98,7 @@ function ApplicationHistory(){
                         />
                     </div>
                     <div className="td" id="s-cover">
-                        <button type="button" onClick={handleSubmit}>
+                        <button className="btnHistory"  type="button" onClick={handleSubmit}>
                             <div id="s-circle"></div>
                             <span></span>
                         </button>
@@ -136,9 +143,12 @@ function ApplicationHistory(){
                 </tbody>
             </table>
         </div>
-
-        {/* <TheFooter/> */}
-        </div>    
+        </div>
+    </div>
+        <div>
+        <TheFooter/>
+        </div> 
+</>
     );
 
 }

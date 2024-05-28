@@ -48,7 +48,7 @@ const EmployeeDashboard = () => {
       let twoWheelCount = 0;
 
       vehicles.forEach(vehicle => {
-        if (vehicle.isFourWheel) {
+        if (vehicle.vehicleType) {
           fourWheelCount += 1;
         } else {
           twoWheelCount += 1;
@@ -96,7 +96,7 @@ const EmployeeDashboard = () => {
 
         <div className="ed-row-2">
           <div className="ed-item-5">
-            <p>Count of Vehicles</p>
+            
             <VehicleCountPieChart twoWheelCount={isTwoWheel} fourWheelCount={isFourWheel}/>
           </div>
           <div className="ed-item-6">
@@ -136,7 +136,7 @@ const EmployeeDashboard = () => {
         </div> */}
       </div>
 
-      <div style={{marginTop:'30vh', position: "sticky", bottom: 0, left: 0, right: 0 }}>
+      <div style={{marginTop:'30vh', position: "sticky", bottom: 0, left: 0, right: 0, zIndex:99999}}>
         <Footer />
       </div>
     </>

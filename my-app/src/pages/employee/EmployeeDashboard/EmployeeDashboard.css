@@ -56,7 +56,7 @@
   padding: 10px;
   background: #ebebeb;
   border-radius: 10px;
-  height: 200px;
+  height: 30vh;
   box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -68,6 +68,7 @@
   width: 32%;
   font-size: 100%;
   flex-direction: column;
+  height: 100%;
 }
 
 .ed-item-5  p{
@@ -76,12 +77,6 @@
   display: flex;
 }
 
-.ed-item-5 canvas{
-  display: block;
-    box-sizing: border-box;
-    height: 60%;
-    width: 60%;
-}
 
 
 .ed-item-6 {
@@ -128,6 +123,7 @@
 }
 
 @media (max-width: 600px) {
+
   .ed-row-2{
     flex-direction: column;
   }
@@ -138,7 +134,13 @@
 
   .ed-row-1{
     width: 80%;
+    height: 100%;
   }
+
+  .ed-row-1::-webkit-scrollbar{
+    display: none;
+  }
+
 
   .ed-item-5{
     width: 80%;

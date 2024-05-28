@@ -60,16 +60,17 @@ function LogsEmployee() {
             console.error('Error fetching logs:', error);
           });
 
-          axios.get('http://localhost:8080/logs/vehicle-types/count')
+          axios.get('http://localhost:8080/parking/count/motorcycles')
           .then(response => {
-            const fourWheel = response.data.fourWheelCount;
-            const twoWheel = response.data.otherCount;
-            const total = fourWheel + twoWheel;
-            setTwoWheels(twoWheel)
-            setTotalVehicles(total);
-            setFourWheels(fourWheel);
-            
-            
+            setTwoWheels(response.data)
+          })
+          .catch(error => {
+            console.error('Error fetching Counting:', error);
+          });
+
+          axios.get('http://localhost:8080/parking/count/cars')
+          .then(response => {
+            setFourWheels(response.data)
           })
           .catch(error => {
             console.error('Error fetching Counting:', error);
@@ -85,7 +86,9 @@ function LogsEmployee() {
           });
       }, [loader]);
     
-    
+    useEffect(() => {
+      setTotalVehicles(twoWheels+fourWheels)
+    }, [twoWheels, fourWheels]);
 
     const filteredLogs = logs.filter(log => filterBy === '' || log.type === filterBy);
 
@@ -101,13 +104,17 @@ function LogsEmployee() {
            
             
             
-          <div>
+          <div className="employee-logs-main-body">
              <img src="/background.png" alt="background" className="LogsBG" />
+             <div style={{textAlign:'center', width:'100%'}}>
              <Input placeholder="Log StickerID Input"
                 value={stickerId}
+                sx={{backgroundColor:'#00000010', paddingLeft: '1vw'}}
                 onChange={(e)=>{setStickerId(e.target.value)}}
                 onKeyDown={handleKeyPress}
                 />
+             </div>
+             
           <div className="liveContainer">
 
             
@@ -185,6 +192,7 @@ function LogsEmployee() {
             <th><h1>Color</h1></th>
             <th><h1>Plate No.</h1></th>
             <th><h1>Name</h1></th>
+            <th><h1>Parking Area</h1></th>
             <th><h1>Active</h1></th>
             <th><h1>Time In</h1></th>
             <th><h1>Time Out</h1></th>
@@ -202,6 +210,7 @@ function LogsEmployee() {
       <td>{log.color}</td>
       <td>{log.plateNo}</td>
       <td>{log.name}</td>
+      <td>{log.parkingAreaName}</td>
       <td style={{ color: log.active ? 'Green' : 'Red' }}>
           {log.active ? 'ACTIVE' : 'EXPIRED'}
       </td>

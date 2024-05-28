@@ -106,6 +106,18 @@ public class ParkingAreaService {
         return totalSpace;
     }
     
+    
+    public int countAllMotorcycles() {
+        return parkingAreaRepository.findAll().stream()
+                .mapToInt(ParkingAreaEntity::getNumberOfMotorcycles)
+                .sum();
+    }
+    
+    public int countAllCars() {
+        return parkingAreaRepository.findAll().stream()
+                .mapToInt(ParkingAreaEntity::getNumberOfCars)
+                .sum();
+    }
 //    public void Log(VehicleEntity vehicle) {
 //    	vehicle.
 //    }

@@ -45,14 +45,15 @@ const Header = () => {
         <img src={CITULogo} alt="HeaderLogo" className="headerImage" style={{width: '12.5rem'}}/>
       </div>
       <nav className="nav">
-        {isMobile ? (
+        {/* {isMobile ? (
           <DropdownMenu />
         ) : (
           <>
             <a href="/homepage">Home</a>
             <a href="/user_aboutus">About Us</a>
           </>
-        )}
+        )} */}
+         <a href="/homepage">Home</a>
       </nav>
     </div>
   );

@@ -1,3 +1,4 @@
+/* Default styles */
 .center {
   text-align: center;
 }
@@ -48,4 +49,19 @@
 .guidelines-footer button {
   background: #8A252C;
   color: white;
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
+  .indent {
+    margin-left: 0;
+  }
+
+  .MuiBox-root.css-i9khj9{
+    width: 90vw;
+  }
+
+  .guidelines-text-block table {
+    margin: .5em 0;
+  }
 }

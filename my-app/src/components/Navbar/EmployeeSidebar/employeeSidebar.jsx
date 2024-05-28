@@ -133,12 +133,12 @@ function EmployeeSidebar({ activeMenuItem }) {
                   </li>
                   {(employee.isViewLogger && employee.isApprover && employee.isVerifier) && (
                     <>
-                      <li className={activeMenuItem === "Logs" ? "active" : ""}>
+                      {/* <li className={activeMenuItem === "Logs" ? "active" : ""}>
                         <TaskIcon sx={{ color: "black", marginRight: "1.5rem" }} />
                           <Link to="/history">
                             View <br /> History
                           </Link>
-                      </li>
+                      </li> */}
                     </>
                   )}
                 </>

@@ -45,14 +45,9 @@ const Header = () => {
         <img src={HeaderLogo} alt="HeaderLogo" className="headerImage" style={{width: '12.5rem'}}/>
       </div>
       <nav className="nav">
-        {isMobile ? (
-          <DropdownMenu />
-        ) : (
-          <>
-            {/* <a href="/employee-homepage">Home</a> */}
-            <a href="/">Home</a>
-          </>
-        )}
+        
+        <a href="/">Home</a>
+        
       </nav>
     </div>
   );

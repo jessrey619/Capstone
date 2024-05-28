@@ -41,6 +41,16 @@ public class ParkingAreaController {
         return ResponseEntity.ok(message);
     }
     
+    @GetMapping("/count/motorcycles")
+    public int countAllMotorcycles() {
+        return parkingAreaService.countAllMotorcycles();
+    }
+
+    @GetMapping("/count/cars")
+    public int countAllCars() {
+        return parkingAreaService.countAllCars();
+    }
+    
     
     
     @CrossOrigin

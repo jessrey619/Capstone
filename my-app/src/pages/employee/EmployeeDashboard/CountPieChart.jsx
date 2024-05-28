@@ -33,19 +33,26 @@ function VehicleCountPieChart({ twoWheelCount, fourWheelCount }) {
   }, [twoWheelCount, fourWheelCount]); // Run effect when props change
 
   return (
+    <>
     <Pie
-      data={chartData}
-      options={{
-        plugins: {
-          legend: {
-            position: "right",
-            align: "middle",
+    data={chartData}
+    options={{
+      plugins: {
+        legend: {
+          position: "right",
+          align: "middle",
+          title: {
+            display: true,
+            text: 'Vehicles Registered',
+            padding: 20, // Adjust the padding if needed
           },
         },
-        maintainAspectRatio: false,
-      }}
-      style={{ margin: "0 auto", height: '80%', width: '80%'}}
-    />
+      },
+      maintainAspectRatio: false,
+    }}
+  />
+    </>
+    
   );
 }
 

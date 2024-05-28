@@ -335,18 +335,25 @@ transition-timing-function: line;
 
 
 @media (max-width: 768px) {
+    .employee-logs-main-body{
+        margin-top: 10vh;
+    }
+
+    .LogsBody{
+        padding-left: 0px;
+    }
+
     .totalContain {    
-        margin: 0 auto;
         flex-direction: column;
         display: flex;
+        width: 100%;
       }
       .liveContainer {
         height: 55vh;
-        max-width: 100vw;
-        width:90vw;
         margin: 0 auto;
         margin-top: 7%;
-        margin-left: 6%;
+        width: 95%;
+        
     }
     .liveCount {
         width: 80vw;
@@ -384,7 +391,6 @@ transition-timing-function: line;
         width:95vw;
         max-height: fit-content;
         margin: 0 auto;
-        margin-left: 20px;
         margin-bottom: 50px;
         
     }

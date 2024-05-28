@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import '../../Components/Main/main.css';
-import PageTitle from '../../Components/Main/PageTitle';
-import ConfigOptions from '../../Components/ConfigOptions/configOptions';
+import '../../components/Main/main.css';
+import PageTitle from '../../components/Main/PageTitle';
+import ConfigOptions from '../../components/ConfigOptions/configOptions';
 
 function Configuration() {
   const location = useLocation();

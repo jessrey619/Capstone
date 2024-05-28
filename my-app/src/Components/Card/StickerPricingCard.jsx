@@ -1,7 +1,7 @@
 import React from 'react';
 import PriceInput from '../Price/PriceInput';
 import './stickerPricingCard.css';
-import '../../Components/Main/main.css';
+import '../../components/Main/main.css';
 
 function NestedCard({ title, fields, prices, userType, onPriceChange }) {
   return (

@@ -9,18 +9,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
 // Phoebe
-import Header from './Components/AdminHeader/Header';
-import SideBar from './Components/SideBar/SideBar';
-import Dashboard from './pages/admin/Dashboard'
-import ApplicationList from './pages/admin/ApplicationList'
-import Logs from './pages/admin/Logs'
-import Statistics from './pages/admin/Statistics'
-import ParkingArea from './pages/admin/ParkingArea'
-import Configuration from './pages/admin/Configuration';
-import StickerPricing from './pages/admin/StickerPricing';
-import UserManagement from './pages/admin/UserManagement';
-import ParkingManagement from './pages/admin/ParkingManagement';
-import AccountExpiration from './pages/admin/AccountExpiration';
+import Header from './components/AdminHeader/Header';
+import SideBar from './components/SideBar/SideBar';
+import Dashboard from './pages/Admin/Dashboard'
+import ApplicationList from './pages/Admin/ApplicationList'
+import Logs from './pages/Admin/Logs'
+import Statistics from './pages/Admin/Statistics'
+import ParkingArea from './pages/Admin/ParkingArea'
+import Configuration from './pages/Admin/Configuration';
+import StickerPricing from './pages/Admin/StickerPricing';
+import UserManagement from './pages/Admin/UserManagement';
+import ParkingManagement from './pages/Admin/ParkingManagement';
+import AccountExpiration from './pages/Admin/AccountExpiration';
  
 // Therese
 import Homepage from './pages/homepage';
@@ -35,7 +35,7 @@ import Submit from './pages/submit';
 import ChangePassword from './pages/ChangePassword';
 
 // Reina
-import TheHeader from './Components/UserHeader/UserHeader';
+import TheHeader from './components/UserHeader/UserHeader';
 
 function App() {
   return (

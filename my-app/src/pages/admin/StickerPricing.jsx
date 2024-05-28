@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../Components/Main/main.css';
-import StickerPricingCard from '../../Components/Card/StickerPricingCard';
+import '../../components/Main/main.css';
+import StickerPricingCard from '../../components/Card/StickerPricingCard';
 import Swal from 'sweetalert2';
 
 function StickerPricing() {

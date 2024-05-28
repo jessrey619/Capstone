@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import '../../Components/Table/table.css'
+import '../../components/Table/table.css'
 
 function RolesTab({ selectedCard }) {
   // Define state variables to store different types of users

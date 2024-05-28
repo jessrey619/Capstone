@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../Components/Main/main.css';
-import PageTitle from '../../Components/Main/PageTitle';
-import CardsContainer from '../../Components/Card/CardsContainer'; // Ensure this import path is correct
+import '../../components/Main/main.css';
+import PageTitle from '../../components/Main/PageTitle';
+import CardsContainer from '../../components/Card/CardsContainer'; // Ensure this import path is correct
 
 function Dashboard() {
   const [vehicleCounts, setVehicleCounts] = useState({

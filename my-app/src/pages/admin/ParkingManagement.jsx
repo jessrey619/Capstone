@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import InputBoxes from '../../Components/InputBoxes/InputBoxes';
-import CreateParkingCard from '../../Components/Card/CreateParkingCard';
-import '../../Components/InputBoxes/inputBoxes.css';
+import InputBoxes from '../../components/InputBoxes/InputBoxes';
+import CreateParkingCard from '../../components/Card/CreateParkingCard';
+import '../../components/InputBoxes/inputBoxes.css';
 import axios from 'axios'; 
 
 const API_BASE_URL = 'http://localhost:8080/parking';

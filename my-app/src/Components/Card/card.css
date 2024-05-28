@@ -1,0 +1,43 @@
+.card-container {
+    display: flex;
+    justify-content: center; /* Center the cards horizontally */
+    margin: 20px;
+}
+
+.card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    text-align: left;
+    flex: 1 0 calc(25% - 20px); /* Adjust the width for four cards */
+    max-width: 300px; /* Ensure cards don't stretch too wide */
+}
+
+@media (max-width: 1200px) {
+    .card {
+        flex: 1 0 calc(33.33% - 20px); /* Adjust the width for three cards */
+    }
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-icon {
+    font-size: 3rem; 
+    color: #F4C522;
+}
+
+.card h5 {
+    margin: 0;
+}
+
+.card p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}

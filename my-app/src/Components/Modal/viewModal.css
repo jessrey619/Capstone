@@ -1,0 +1,37 @@
+.modal-style {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-shadow: 24px;
+  padding: 16px;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.modal-divider {
+  margin: 12px 0;
+}
+
+.modal-content {
+  margin-top: 16px;
+}
+
+.modal-button {
+  margin-top: 16px;
+}
+
+.label-value {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 8px;
+}

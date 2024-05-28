@@ -1,0 +1,39 @@
+.container {
+    margin-top: 20px;
+}
+
+.option {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 95%;
+    display: flex;
+    align-items: left;
+    text-decoration: none; 
+    transition: transform 0.2s; 
+    margin-bottom: 15px; /* Add margin to create gaps between cards */
+}
+
+.option:hover {
+    transform: scale(1.05); 
+}
+
+.option-content {
+    display: flex;
+    align-items: left;
+    justify-content: flex-start; 
+}
+
+h5 {
+    font-size: 20px;
+    margin-bottom: 0;
+    font-weight: 400; 
+    color: #000000;
+    text-decoration: none; 
+}
+
+.option-icon {
+    font-size: 30px;
+    color: #B4B4B4;
+    margin-right: 20px; 
+}

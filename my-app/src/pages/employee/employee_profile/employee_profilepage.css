@@ -18,6 +18,8 @@
   font-size: 100%;
   cursor: pointer;
   border-radius: 50px;
+  position: relative; /* Change position to relative */
+  z-index: 1; /* Ensure the button is above other elements */
 }
 
 .employee-profile-footer {
@@ -28,13 +30,18 @@
 }
 
 .employee-profile-container {
-  /* 100% - sidebar's width */
-  width: calc(100% - 600px);
-  max-width: 1280px;
-  min-width: 600px;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
-  max-height: 400px;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .employee-profile-full-container{
+    width: 80vw;
+    
+  }
 }
 
 .employee-profile-outer {

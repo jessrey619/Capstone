@@ -120,9 +120,6 @@ export default function ProofPayment() {
             <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
                 <EmployeeSideBar style={{ position: 'fixed', top: '4rem', left: 0, bottom: 0 }} />
                 <div style={{
-                    paddingTop: '5rem', // Padding to create space for the fixed header
-                    paddingLeft: '10rem', // Padding to create space for the fixed sidebar
-                    paddingBottom: '10rem', // Add padding to the bottom to create space for the footer
                     backgroundImage: `url(${HP_background})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
@@ -159,24 +156,24 @@ export default function ProofPayment() {
                                                 <div>
                                                     <Typography component="div" sx={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
                                                         <div style={{ display: "flex", alignItems: "center", }}>
-                                                            <h3>Application Name:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.firstName} {applications.middleInitial}. {applications.lastName}</p>
+                                                            <h4>Application Name:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.firstName} {applications.middleInitial}. {applications.lastName}</p>
                                                         </div>
                                                     </Typography>
                                                     <Typography component="div" sx={{ marginLeft: 'clamp(2rem, 10%, 20rem)' }}>
                                                         <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                                                            <h3 style={{ textAlign: "left" }}>User Type:</h3>&nbsp;<p>{applications.isStaff ? 'Staff' : 'Student'}</p>
+                                                            <h4 style={{ textAlign: "left" }}>User Type:</h4>&nbsp;<p>{applications.isStaff ? 'Staff' : 'Student'}</p>
                                                         </div>
                                                         <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                                                            <h3 style={{ textAlign: "left" }}>Affiliated ID Number:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.idNumber}</p>
+                                                            <h4 style={{ textAlign: "left" }}>Affiliated ID Number:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.idNumber}</p>
                                                         </div>
                                                         <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                                                            <h3 style={{ textAlign: "left" }}>Address:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.address}</p>
+                                                            <h4 style={{ textAlign: "left" }}>Address:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.address}</p>
                                                         </div>
                                                         <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                                                            <h3 style={{ textAlign: "left" }}>Contact Number:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.contactNumber}</p>
+                                                            <h4 style={{ textAlign: "left" }}>Contact Number:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.contactNumber}</p>
                                                         </div>
                                                         <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                                                            <h3 style={{ textAlign: "left" }}>Proof of Payment:</h3>&nbsp;
+                                                            <h4 style={{ textAlign: "left" }}>Proof of Payment:</h4>&nbsp;
                                                             <Button
                                                                 onClick={handlePaymentClick}
                                                                 sx={{ textTransform: "none", color: "#8A252C" }}>Click to View Image</Button>
@@ -216,7 +213,8 @@ export default function ProofPayment() {
                                                 <Button sx={{
                                                     textTransform: "none",
                                                     color: "white",
-                                                    backgroundColor: "#8A252C",
+                                                    backgroundColor: "Gold",
+                                                    color:'black',
                                                     borderRadius: "5rem",
                                                     width: 'clamp(6rem, 10vw, 15rem)',
                                                     height: 'clamp(3rem, 4vh, 5rem)',

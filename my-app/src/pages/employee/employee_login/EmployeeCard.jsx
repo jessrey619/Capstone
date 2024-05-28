@@ -169,7 +169,10 @@ export default function EmployeeCard({onLoginSuccess }) {
      
       {/* Render the modal conditionally */}
       {forgotPasswordModalOpen && (
-  <VerifyEmailModal onClose={handleCloseModal} />
+        <div className='employee-forget-password-email'>
+          <VerifyEmailModal onClose={handleCloseModal} />
+        </div>
+  
 )}
     </div>
   );

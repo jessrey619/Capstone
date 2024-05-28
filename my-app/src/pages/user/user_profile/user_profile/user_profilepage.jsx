@@ -15,6 +15,8 @@ const UserProfilePage = () => {
   const [vehicles, setVehicles] = useState({});
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [expirationDisplay, setExpirationDisplay] = useState('');
+  const [applications, setApplications] = useState({})
+  const [isActive, setIsActive] = useState(false)
 
   // Decoding Token
   useEffect(() => {
@@ -38,6 +40,28 @@ const UserProfilePage = () => {
 
     decodeJwt();
   }, [token]);
+
+
+  useEffect(() => {
+    if (Object.keys(applications).length === 0) {
+      setIsActive(false) ; // Not Active if No Applications
+    }
+    const currentDate = new Date();
+    const expirationDate = new Date(applications.expirationDate);
+
+    if(applications.approved === true){
+      if (applications.rejected === true || expirationDate < currentDate) {
+        setIsActive(false)
+      }else{
+        setIsActive(true)
+      }
+    } else{
+      setIsActive(false)
+    }
+    console.log("this is for is active",isActive)
+  },[applications]);
+
+
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -65,6 +89,9 @@ const UserProfilePage = () => {
 
         const vehiclesResponse = await axios.get('http://localhost:8080/vehicles/find-by-username/'+username);
         setVehicles(vehiclesResponse.data);
+
+        const applicationResponse = await axios.get('http://localhost:8080/applicants/get-by-email/'+username);
+        setApplications(applicationResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -90,16 +117,16 @@ const UserProfilePage = () => {
   },[vehicles])
 
   return (
-    <div>
+    <div style={{width:'70vw'}}>
       {/* Main Content */}
       <div className="user-profile-container">
-        <div className="logout-btn" style={{ textAlign: 'right', marginBottom: '1.5%', marginTop: '2%' }}>
+        <div className="profile-logout-btn" style={{ textAlign: 'right', marginBottom: '1.5%', marginTop: '2%' }}>
           <button onClick={handleLogout}>
             LOGOUT
           </button>
         </div>
         <Box className="user-profile-outer">
-          <Box className="user-profile-box user-profile-main" sx={{ boxShadow: 3 }}>
+          <Box className="user-profile-box user-profile-main" sx={{ boxShadow: 3, width:'80%',}}>
             <div className="user-profile-status">
               <div className="user-profile-avatar">
                 <Avatar sx={{ bgcolor: "purple" }}>S</Avatar>
@@ -109,7 +136,7 @@ const UserProfilePage = () => {
                   <label>Sticker No: {vehicles.stickerId === 0 ? 'N/A' : vehicles.stickerId}</label>
                 </div>
               </div>
-              <Typography color={user.isEnabled ? "green" : "red"}>{user.isEnabled ? "ACTIVE" : "INACTIVE"}</Typography>
+              <Typography color={applications.approved ? "green" : "red"}>{applications.approved ? "ACTIVE" : "INACTIVE"}</Typography>
             </div>
 
             <hr />
@@ -117,46 +144,46 @@ const UserProfilePage = () => {
             <div className="user-profile-details">
               <div className="user-profile-detail">
                 <label>Expiration Date</label>
-                <span>{formatDate(expirationDisplay)}</span>
-                <span>S.Y. {expiration.schoolYear || ''}</span>
+                <span>{isActive? formatDate(expirationDisplay):'N/A'}</span>
+                <span>{isActive? "S.Y. "+expiration.schoolYear : 'N/A'}</span>
               </div>
               <div className="user-profile-detail">
                 <label>Registration Type</label>
                 <span>
-                  {vehicles?.isFourWheel !== null && vehicles?.isFourWheel !== undefined
+                  {isActive?(vehicles?.isFourWheel !== null && vehicles?.isFourWheel !== undefined
                     ? (vehicles.isFourWheel ? "4-Wheel Vehicle" : "2-Wheel Vehicle")
-                    : ''}
+                    : ''):'N/A'}
                 </span>
                 <span>
-                  {vehicles?.isParking !== null && vehicles?.isParking !== undefined
+                  {isActive?(vehicles?.isParking !== null && vehicles?.isParking !== undefined
                     ? (vehicles.isParking ? "Parking" : "Pick-up/Drop-off")
-                    : ''}
+                    : ''):'N/A'}
                 </span>
               </div>
               <div className="user-profile-detail">
                 <label>Vehicle Type</label>
-                <span>{vehicles.vehicleMake}</span>
-                <span>{vehicles.plateNo}</span>
+                <span>{isActive? vehicles.vehicleMake:'N/A'}</span>
+                <span>{isActive? vehicles.plateNo:'N/A'}</span>
               </div>
             </div>
           </Box>
 
-          <Box className="user-profile-box user-profile-email" sx={{ boxShadow: 3 }}>
+          <Box className="user-profile-box user-profile-email" sx={{ boxShadow: 3, width:'80%', overflow:'scroll'}}>
             <label>Email</label>
-            <span>{user.email}</span>
+            <span>{username}</span>
           </Box>
-          <Box className="user-profile-box user-profile-number" sx={{ boxShadow: 3 }}>
+          <Box className="user-profile-box user-profile-number" sx={{ boxShadow: 3, width:'80%', overflow:'scroll'}}>
             <label>Phone Number</label>
-            <span>{user.contactNumber}</span>
+            <span>{isActive?user.contactNumber:'N/A'}</span>
           </Box>
-          <Box className="user-profile-box user-profile-address" sx={{ boxShadow: 3 }}>
+          <Box className="user-profile-box user-profile-address" sx={{ boxShadow: 3, width:'80%', overflow:'scroll'}}>
             <label>Address</label>
-            <span>{user.address}</span>
+            <span>{isActive?user.address:'N/A'}</span>
           </Box>
           {showChangePassword ? (
             <ChangePassword setShowChangePassword={setShowChangePassword} />
           ) : (
-            <div className="user-profile-box user-profile-changepass">
+            <div className="user-profile-box-user-profile-changepass">
               <Button sx={{ color: 'white', backgroundColor: 'green' }} onClick={() => setShowChangePassword(true)}>
                 Change Password
               </Button>

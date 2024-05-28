@@ -1,37 +1,38 @@
-.button-maroon {
-  background-color: #8A252C;
-  color: #FFFFFF;
-  padding: 0.5rem 1rem;
-  border: none;
+/* Default styles for buttons */
+.button-maroon,
+.big-icon-button {
   border-radius: 0.5rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button-maroon {
+  background-color: #8A252C;
+  color: #FFFFFF;
+  padding: 0.5rem 1rem;
+  border: none;
   margin: 0 auto; /* Center horizontally */
   margin-top: 1rem; /* Adjust vertical position */
   width: 10rem; /* Set width to 10rem */
-}
-
-.button-maroon:hover {
-  background-color: #6C1D23; /* Darken the background color on hover */
-}
-
-.button-maroon:active {
-  background-color: #57171B; /* Darken the background color when clicked */
 }
 
 .big-icon-button {
   background-color: #FFFFFF;
   color: #8A252C;
   border: none;
-  border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover and active states for buttons */
+.button-maroon:hover {
+  background-color: #6C1D23; /* Darken the background color on hover */
+}
+
+.button-maroon:active {
+  background-color: #57171B; /* Darken the background color when clicked */
 }
 
 .big-icon-button:hover {
@@ -43,7 +44,19 @@
   background-color: #57171B;
 }
 
+/* Icon size and spacing */
 .icon {
   font-size: 2rem; /* Set the size of the icon */
   margin-bottom: 0.5rem; /* Adjust spacing between icon and text */
+}
+
+/* Media queries for mobile responsiveness */
+@media only screen and (max-width: 600px) {
+  .verify-modal-entire-modal .css-1wnsr1i {
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './UserFooter.css'; // Import your CSS file for styling
 import LogoFooter from '../../assets/LogoFooter.png';
+import FooterLogo from '../../assets/footer-logo.png';
 
 
 
@@ -43,13 +44,13 @@ const Footer = () => {
       return (
         <div className={`footer ${isMobile ? 'mobile' : ''}`}>
           <div className="logoContainer">
-            <img src={LogoFooter} alt="FooterLogo"className='footerLogo'/>
+            <img src={FooterLogo} alt="FooterLogo"className='footerLogo'/>
           </div>
         
           <div className='info1'>
-            <div >
+            <div className='cit-edu-contact-part'>
                 <h6 className='this'>Contact Us</h6>
-                    <p style={{margin: 0, padding: 0}}>N. Bacalso Avenue, Cebu City <br/> Philippines 6000</p>
+                    <p style={{margin: 0, padding: 0}}>N. Bacalso Avenue, Cebu City, Philippines 6000</p>
                     <p style={{margin: 0, padding: 0}}>+63 32 411 2000 (trunkline)</p> 
                     <p style={{margin: 0, padding: 0}}>info@cit.edu</p>
             </div>

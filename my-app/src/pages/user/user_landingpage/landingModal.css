@@ -47,3 +47,9 @@
   font-size: 2rem; /* Set the size of the icon */
   margin-bottom: 0.5rem; /* Adjust spacing between icon and text */
 }
+
+@media only screen and (max-width: 600px) {
+  .MuiBox-root css-1wnsr1i{
+    width: 50vw;
+  }
+}

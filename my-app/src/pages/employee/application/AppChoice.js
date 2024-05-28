@@ -167,7 +167,7 @@ export default function AppChoice() {
                     </Grid>
                 </Grid>
             </Container>
-            <div style={{ position: "fixed", bottom: 0, left: 0, right: 0 }}>
+            <div style={{ position: "sticky", bottom: 0, left: 0, right: 0 }}>
                 <Footer />
             </div>
         </div>

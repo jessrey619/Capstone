@@ -151,10 +151,10 @@ export default function ForgetPasswordCard() {
     };
 
   return (
-    <div className="change-password-container">
-      <div className="form-container">
-        <form className="form" onSubmit={handleSubmit}>
-
+    <div className="forget-password-container">
+      <div className="forget-password-form-container">
+        <form className="forget-password-form" onSubmit={handleSubmit}>
+          <h3>Change Password</h3>
           <div className="input-container">
             <input
               type={showNewPassword ? "text" : "password"}
@@ -162,7 +162,7 @@ export default function ForgetPasswordCard() {
               name="newPassword"
               value={passwordData.newPassword}
               onChange={handleInputChange}
-              style={{ paddingRight: "2.5rem" }} // Add padding for the icon
+              style={{ paddingRight: "2.5rem", }} // Add padding for the icon
             />
             {showNewPassword ? (
               <MdVisibilityOff

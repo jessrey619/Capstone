@@ -44,7 +44,7 @@ public class SecurityConfig {
 //                        		//to delete
                         		,"/photos/upload**", "/photos**", "/photos/get-photo-by-name/**", "/applicants/**"
                         		, "/photos/get-photo-by-username/**"
-                        		,"vehicles/**"
+                        		,"/vehicles/**"
                         		,"/logs/add**","/logs/all**", "/logs/**"
                         		,"/applicants/**"
                         		,"/parking/**"

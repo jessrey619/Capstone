@@ -12,6 +12,7 @@ const UserAnnouncement = () => {
   const [applications, setApplications] = useState({});
   const [date, setDate] = useState();
   const [email, setEmail] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false)
 
   // Decoding token
   useEffect(() => {
@@ -63,21 +64,29 @@ const UserAnnouncement = () => {
     }
   };
 
-  const isActiveUser =() =>{
+  useEffect(() => {
     if (Object.keys(applications).length === 0) {
-      return false; // Not Active if No Applications
+      console.log("No registrations")
+      setIsDisabled(false) ; // Allow registration if no applications exist
     }
     const currentDate = new Date();
     const expirationDate = new Date(applications.expirationDate);
 
     if(applications.approved === true){
       if (applications.rejected === true || expirationDate < currentDate) {
-        return false;
+        console.log("rejected or Expired")
+        setIsDisabled(false)
       }else{
-        return true;
+        console.log("Approved and Still Valid")
+        setIsDisabled(true)
       }
+    } else{
+      console.log("not yet approved")
+      setIsDisabled(false)
     }
-  }
+  },[applications])
+
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -93,7 +102,6 @@ const UserAnnouncement = () => {
       } catch (error) {
         console.error(error);
       }
-      
     };
     fetchData();
   }, [email]);
@@ -106,13 +114,13 @@ const UserAnnouncement = () => {
 
       <div className="userHomepageContainer">
         <div className="userHomepagebuttonContainer">
-          <button className="statusButton">Status<br/><span style={{color: isActiveUser() ? "green" : "red"}}>{isActiveUser() ? "Active" : "InActive"}</span></button>
+          <button className="statusButton">Status<br/><span style={{color: applications.approved ? "green" : "red"}}>{applications.approved ? "ACTIVE" : "INACTIVE"}</span></button>
           <button className="infoButton">Info</button>
         </div>
         <div className="userHomepagebuttonContainer">
           <button className="registerButton" 
           onClick={handleRegisterButtonClick} 
-          disabled={isRegistrationDisabled()}  
+          disabled={isDisabled}  
           title={Object.keys(applications).length !== 0 ? "Cannot register while applications is still pending" : ""}>Register</button>
           <button className="disclaimerButton">
             Disclaimer<br/>

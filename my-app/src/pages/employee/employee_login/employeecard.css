@@ -77,9 +77,20 @@
 
 /* Media Queries */
 @media only screen and (max-width: 600px) {
+  .employee-forget-password-email{
+    width: 90%;
+  }
+
   .employee-form-container {
-    margin: auto;
-    margin-top: 10px; /* Adjust top margin as needed */
+    margin: auto; /* Adjust top margin as needed */
+    margin-left: -55vw;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .employee-form-container input{
+    padding-right: 0px;
+    margin-right: 20vw;
+    width: 92%;
   }
 
   .employee-form {

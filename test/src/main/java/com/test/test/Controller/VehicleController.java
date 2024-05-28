@@ -63,6 +63,11 @@ public class VehicleController {
         }
     }
     
+    @GetMapping("/find-by-sticker-id")
+    public VehicleEntity findVehiclesBySticker(@RequestParam int stickerId){
+    	return vehicleService.findByStickerId(stickerId);
+    }
+    
     @CrossOrigin
     @GetMapping("/all")
     public List<VehicleEntity> findAllVehicles(){

@@ -51,6 +51,10 @@
     width: 100%;
   }
 
+  .registration-form-requirements-buttons{
+    flex-direction: row;
+  }
+
   
 
   
@@ -99,6 +103,10 @@
 
     .vehicle-type-radio{
       flex-direction: column;
+    }
+
+    .upload-requirements-div{
+      width: 100%;
     }
   }
   

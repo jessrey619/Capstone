@@ -81,23 +81,21 @@ export default function RegistrationForm() {
       });
   },[registrationData]); // Remove the empty dependency array
   
-  useEffect(()=> {
-    console.log("testing Parking space",totalParkingSpace )
-  },[registrationData])
+  // useEffect(()=> {
+  //   console.log("testing Parking space",totalParkingSpace )
+  // },[registrationData])
 
   useEffect(() => {
-    if (numberOfParkingApplicants > 0) {
       axios.get('http://localhost:8080/config/get-expiration')
         .then((response) => {
           // Filter for applications where isParking === true
-          console.log("expiration useEffects", response.data)
+          // console.log("expiration useEffects", response.data)
           setExpiration(response.data)
         })
         .catch((error) => {
           // Handle error
           console.error('Error:', error);
         });
-    }
   },[totalParkingSpace]);
 
   useEffect(() => {
@@ -107,20 +105,20 @@ export default function RegistrationForm() {
           const parkingApplications = response.data.filter(app => app.isParking === true);
   
           // Filter parking applicants whose expiration dates coincide with either staff or student expiration
-          console.log("expiration",expiration)
+          // console.log("expiration",expiration)
           const coincidingExpirations = parkingApplications.filter(app => {
             const expirationDate = new Date(app.expirationDate);
             if (app.isStaff === true) {
-              console.log("numberOfIsStaff",new Date(expiration.staffExpirationDate).getTime())
+              // console.log("numberOfIsStaff",new Date(expiration.staffExpirationDate).getTime())
               return expirationDate.getTime() === new Date(expiration.staffExpirationDate).getTime();
               
             } else {
-              console.log("Global Expiration",expirationDate.getTime())
-              console.log("Application Expiration", expiration.staffExpirationDate)
+              // console.log("Global Expiration",expirationDate.getTime())
+              // console.log("Application Expiration", expiration.staffExpirationDate)
               return expirationDate.getTime() === new Date(expiration.studentExpirationDate).getTime();
             }
           });
-          console.log("numberOfYes",coincidingExpirations.length)
+          // console.log("numberOfYes",coincidingExpirations.length)
           // Set the number of parking applicants with coinciding expiration dates
           setNumberOfParkingApplicants(coincidingExpirations.length);
         })
@@ -130,9 +128,9 @@ export default function RegistrationForm() {
         });
   }, [expiration]);
   
-  useEffect(()=>{
-    console.log("number of parking applicants",numberOfParkingApplicants)
-  },[registrationData])
+  // useEffect(()=>{
+  //   console.log("number of parking applicants",numberOfParkingApplicants)
+  // },[registrationData])
   
   useEffect(() => {
     console.log("total parking space",totalParkingSpace)
@@ -801,6 +799,7 @@ export default function RegistrationForm() {
             </div>
             <div
               style={{
+                className:"registration-form-requirements-buttons",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -808,10 +807,10 @@ export default function RegistrationForm() {
                 flexWrap: "wrap"
               }}
             >
-              <div className="upload-requirements-div" style={{width:'100%'}}>
+              <div className="upload-requirements-div">
                 <FileUpload label="OR/CR" onChange={setORCRFile}/>
               </div>
-              <div className="upload-requirements-div" style={{width:'100%'}}>
+              <div className="upload-requirements-div">
                 <FileUpload label="License" onChange={setLicenseFile} />
               </div>
               

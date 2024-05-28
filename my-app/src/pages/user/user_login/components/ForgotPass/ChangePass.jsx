@@ -10,13 +10,13 @@ import Footer from '../../../../../components/Navbar/UserFooter'
 
 export default function ChangePass() {
   return (
-    <main className='main-content'>
+    <main className='main-content' style={{overflow:'hidden'}}>
       <div >
 
         {/* <Container maxWidth="lg"  > */}
         {/* <img src={login_background} alt="background2" className="bkg2" /> */}
         <Grid container xs={12} >
-        <div style={{ position: 'absolute', top: 0, width: '95%', zIndex: 1 }}>
+        <div style={{ position: 'absolute', top: 0 }}>
             {/* <AdminHeader /> */}
             <Header />
           </div>
@@ -25,6 +25,7 @@ export default function ChangePass() {
             filter: 'blur(.1rem)',
             backgroundSize: '100% 100%',
             minHeight: '100vh',
+            zIndex:'-1'
           }}>
 
 

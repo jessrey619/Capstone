@@ -8,11 +8,11 @@ import Footer from '../../../components/Navbar/UserFooter';
 
 export default function LoginPage() {
   return (
-    <main className='main-content' style={{ position: 'relative', minHeight: '100vh' }}>
+    <main className='main-content' style={{ position: 'relative', minHeight: '100vh', overflow:'hidden' }}>
       <div>
 
         <Grid container xs={12}>
-          <div style={{ position: 'absolute', top: 0, width: '95%', zIndex: 1 }}>
+          <div style={{ position: 'absolute', top: 0, zIndex: 1,width:'100vw' }}>
             <Header />
           </div>
           <Grid item xs={7} style={{
@@ -20,6 +20,7 @@ export default function LoginPage() {
             filter: 'blur(.1rem)',
             backgroundSize: '100% 100%',
             minHeight: '100vh',
+            zIndex: -1
           }}></Grid>
           <Grid item xs={5} style={{
             backgroundImage: `url(${loginWheel})`,

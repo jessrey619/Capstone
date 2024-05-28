@@ -37,6 +37,9 @@ import EmployeeProfilePage from "./pages/employee/employee_profile/employee_prof
 import EmployeeProfileFinal from "./pages/employee/employee_profile/employee_profilefinal";
 import EmployeeDashboard from "./pages/employee/EmployeeDashboard/EmployeeDashboard";
 import AdminPage from "./pages/Admin/AdminLogin/AdminLogin";
+import Scans from "./pages/employee/RFIDscan/ScanVehicleSticker";
+import ApplicationHistory from "./pages/employee/history/History_User";
+import AdminRoutes from "./Utils/AdminRoutes";
 function App() {
   const [isToken, setIsToken] = useState(false);
   const token = localStorage.getItem('token');
@@ -131,13 +134,18 @@ function App() {
         <Route path="/employee-login" element={!isToken ? <EmployeePage /> : getDefaultRoute()} />
         <Route path="/logout" element={<Profile redirectPath="/login" />} /> {/* Add logout route */}
         {/* <Route path="/employee-logout" element={<Profile redirectPath="/employee-login" />} /> Add employee logout route */}
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/configuration" element={<Configuration />} />
-          <Route path="/account-expiration" element={<AccountExpiration />} />
-          <Route path="/application-list" element={<ApplicationList />} />
-          <Route path="/sticker-pricing" element={<StickerPricing />} />
-          <Route path="/user-management" element={<UserManagement />} />
-          <Route path="/admin-login" element={<AdminPage />} />
+        <Route path="/admin-login" element={<AdminPage />} />
+
+        <Route element={<AdminRoutes/>}>
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/configuration" element={<Configuration />} />
+            <Route path="/account-expiration" element={<AccountExpiration />} />
+            <Route path="/application-list" element={<ApplicationList />} />
+            <Route path="/sticker-pricing" element={<StickerPricing />} />
+            <Route path="/user-management" element={<UserManagement />} />
+        </Route>
+          
+          
 
         {/* Employee Routes */}
         <Route element={<EmployeeRoutes />}>
@@ -151,6 +159,9 @@ function App() {
           <Route path="/proofpay" element={<ProofPayment />} />
           <Route path="/selectorcr" element={<SelectOrCr />} />
           <Route path="/verifypay" element={<VerifyPayment />} />
+          <Route path="/view-logs" element={<Scans/>} />
+          <Route path="/history" element={<ApplicationHistory />} />
+
         </Route>
 
         {/* Private User Routes */}

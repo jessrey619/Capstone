@@ -67,6 +67,14 @@ function AdminDashboard() {
 
             <div className="admin-dash-box">
               <div>
+                <span>Total Applicants</span>
+                <span>{total4Wheelers}</span>
+              </div>
+              <DirectionsCarIcon />
+            </div>
+
+            <div className="admin-dash-box">
+              <div>
                 <span>Total 2 Wheelers</span>
                 <span>{total2Wheelers}</span>
               </div>

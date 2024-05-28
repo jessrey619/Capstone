@@ -1,6 +1,6 @@
 .ed-container {
-  margin-left: 220px;
-  width: 80vw;
+  margin-left: 15%;
+  width: 80%;
 
   display: flex;
   flex-direction: column;
@@ -21,6 +21,7 @@
 .ed-row-1 {
   display: flex;
   gap: 1em;
+  overflow-x: scroll;
 }
 
 .ed-row-1>div {
@@ -61,7 +62,23 @@
 
 .ed-item-5 {
   width: 32%;
+  font-size: 100%;
+  flex-direction: column;
 }
+
+.ed-item-5  p{
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.ed-item-5 canvas{
+  display: block;
+    box-sizing: border-box;
+    height: 60%;
+    width: 60%;
+}
+
 
 .ed-item-6 {
   width: 68%;
@@ -104,4 +121,26 @@
   top: 0;
   left: 0;
   z-index: -1;
+}
+
+@media (max-width: 600px) {
+  .ed-row-2{
+    flex-direction: column;
+  }
+
+  .ed-row-1 div{
+    width: 200%;
+  }
+
+  .ed-row-1{
+    width: 80%;
+  }
+
+  .ed-item-5{
+    width: 80%;
+  }
+
+  .ed-item-6{
+    width: 80%;
+  }
 }

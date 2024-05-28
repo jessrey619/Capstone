@@ -39,7 +39,9 @@ export default function EmployeePage() {
 
 
           </Grid>
-          <Grid item xs={5} style={{
+          <Grid 
+            className='employee-login-supercontainer'
+            item xs={5} style={{
             backgroundImage: `url(${loginWheel})`,
             backgroundSize: '100% 100%',
             minHeight: '100vh',

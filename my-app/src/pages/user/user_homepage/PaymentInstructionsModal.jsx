@@ -55,15 +55,16 @@ export default function PaymentInstructionsModal({
           <div className="pay-ins-container">
             <h1>Payment through Cash via Cashier</h1>
             <span>Pay through cashier and submit proof of payment below</span>
-            <Button
+           
+          </div>
+          <Button
               variant="contained"
               color="inherit"
-              sx={{ background: "#F4C522", color: "black", fontWeight: 'bold' }}
+              sx={{ background: "#F4C522", color: "black", fontWeight: 'bold' , width: '100%' }}
               onClick={handleSeeInvoice}
             >
               See Invoice
             </Button>
-          </div>
         </Box>
       </Modal>
       <Invoice open={showInvoiceModal} handleClose={handleCloseInvoiceModal} /> {/* Render the Invoice modal */}

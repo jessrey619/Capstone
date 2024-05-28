@@ -1,13 +1,14 @@
+/* Default styles */
 .employee-sidebar {
   position: fixed;
-  top: 2rem;
+  top: 10vh;
   left: 0;
   height: 100%;
-  width: clamp(10rem, 20vw, 12rem); /* Adjust the values as needed */
+  width: clamp(10rem, 20vw, 12rem);
   background-color: rgba(255, 255, 255, 0.5);
   color: #000000;
   font-family: Arial, Helvetica, sans-serif;
-  /* z-index: 0; Adjust the value as needed */
+  z-index: 1000;
 }
 
 .employee-sidebar-menu {
@@ -20,15 +21,15 @@
   display: flex;
   align-items: center;
   padding: 1rem;
-  padding-left: clamp(1rem, 2vw, 1.7rem); /* Adjust the values as needed */
-  padding-right: clamp(1rem, 2vw, 1.8rem); /* Adjust the values as needed */
+  padding-left: clamp(1rem, 2vw, 1.7rem);
+  padding-right: clamp(1rem, 2vw, 1.8rem);
   color: #000000;
   margin: 0;
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: clamp(0.8rem, 2vw, 1rem); /* Adjust the values as needed */
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 .employee-sidebar-menu > li:hover:not(.active) {
@@ -40,16 +41,16 @@
   background-color: #f4c722a2;
 }
 
-/* Sidebar.css */
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .employee-sidebar {
+    width: 100%;
+    height: auto;
+    padding-bottom: 2rem; /* Add some padding at the bottom */
+  }
 
-/* Define button color for active item */
-.employee-sidebar-menu > .active {
-  background-color: #f4c722a2; /* Adjust the color as needed */
+  .employee-sidebar-menu > li {
+    padding: 1rem 2rem; /* Add more padding */
+    font-size: 1rem; /* Adjust the font size */
+  }
 }
-
-/* Apply hover effect to non-active items */
-.employee-sidebar-menu > li:not(.active):hover {
-  background-color: #f4c722a2; /* Adjust the color as needed */
-  transition: background-color 0.2s;
-}
-

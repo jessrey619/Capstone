@@ -44,7 +44,7 @@ function VehicleCountPieChart({ twoWheelCount, fourWheelCount }) {
         },
         maintainAspectRatio: false,
       }}
-      style={{ margin: "0 auto", height: '80%', marginTop: '1.5em' }}
+      style={{ margin: "0 auto", height: '80%', width: '80%'}}
     />
   );
 }

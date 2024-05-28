@@ -94,7 +94,7 @@ const EmployeeProfilePage = () => {
   }, [username]);
 
   return (
-    <div>
+    <div className="employee-profile-full-container">
       <div className="employee-profile-container">
         <div className="logout-btn" style={{ textAlign: "right", marginBottom: "1.5%", marginTop: "2%" }}>
           <button onClick={handleLogout}>LOGOUT</button>
@@ -143,7 +143,7 @@ const EmployeeProfilePage = () => {
         aria-labelledby="logout-modal-title"
         aria-describedby="logout-modal-description"
       >
-        <Box className="logout-modal" sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper',boxShadow: 24, p: 4 }}>
+        <Box className="logout-modal" sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '50vw', bgcolor: 'background.paper',boxShadow: 24, p: 4 }}>
           <Typography id="logout-modal-title" variant="h6" component="h2">
             Are you sure you want to log out?
           </Typography>

@@ -14,7 +14,6 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -126,21 +125,17 @@ export default function SelectOrCr() {
 
   return (
     <>
-      <Header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }} />
+      <Header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, width:'100%' }} />
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <EmployeeSideBar style={{ position: 'fixed', top: '4rem', left: 0, bottom: 0, zIndex: 500 }} />
         <div className='verifyPay' style={{
           flex: 1,
-          paddingTop: '5rem',
-          paddingLeft: '15rem',
-          paddingBottom: '10rem',
           backgroundImage: `url(${HP_background})`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
         }}>
-          <EmployeeSideBar style={{ position: 'fixed', top: '4rem', left: 0, bottom: 0, zIndex: 0 }} />
           <Container maxWidth="lg">
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -166,24 +161,24 @@ export default function SelectOrCr() {
                       <div>
                         <Typography component="div" sx={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
                           <div style={{ display: "flex", alignItems: "center", }}>
-                            <h3>Application Name:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.firstName} {applications.middleInitial}. {applications.lastName}</p>
+                            <h4>Application Name:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.firstName} {applications.middleInitial}. {applications.lastName}</p>
                           </div>
                         </Typography>
                         <Typography component="div" sx={{ marginLeft: 'clamp(2rem, 10%, 20rem)' }}>
                           <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h3 style={{ textAlign: "left" }}>User Type:</h3>&nbsp;<p>{applications.isStaff ? 'Staff' : 'Student'}</p>
+                            <h4 style={{ textAlign: "left" }}>User Type:</h4>&nbsp;<p>{applications.isStaff ? 'Staff' : 'Student'}</p>
                           </div>
                           <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h3 style={{ textAlign: "left" }}>Affiliated ID Number:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.idNumber}</p>
+                            <h4 style={{ textAlign: "left" }}>Affiliated ID Number:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.idNumber}</p>
                           </div>
                           <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h3 style={{ textAlign: "left" }}>Address:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.address}</p>
+                            <h4 style={{ textAlign: "left" }}>Address:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.address}</p>
                           </div>
                           <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h3 style={{ textAlign: "left" }}>Contact Number:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.contactNumber}</p>
+                            <h4 style={{ textAlign: "left" }}>Contact Number:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.contactNumber}</p>
                           </div>
                           <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h3 style={{ textAlign: "left" }}>License:</h3>&nbsp;
+                            <h4 style={{ textAlign: "left" }}>License:</h4>&nbsp;
                             <Button
                               onClick={handleViewLicenseClick}
                               sx={{ textTransform: "none", color: "#8A252C" }}
@@ -192,7 +187,7 @@ export default function SelectOrCr() {
                             </Button>
                           </div>
                           <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h3 style={{ textAlign: "left" }}>OR/CR:</h3>&nbsp;
+                            <h4 style={{ textAlign: "left" }}>OR/CR:</h4>&nbsp;
                             <Button
                               onClick={handleViewOrcrClick}
                               sx={{ textTransform: "none", color: "#8A252C" }}

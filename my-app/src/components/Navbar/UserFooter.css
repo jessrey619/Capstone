@@ -9,6 +9,7 @@
     background-color: rgba(255, 255, 255); 
     font-family: 'Kumbh Sans', sans-serif;
     z-index: 1000;
+    
   }
 .logoContainer {
   margin-right: 20px;
@@ -19,6 +20,12 @@
 
 .footerLogo {
   width: 80%;
+}
+
+.footer.mobile{
+  overflow: scroll;
+  font-size: 100%;
+  position:sticky;
 }
 
 .nav-footer {
@@ -109,6 +116,10 @@ h6 {
     margin-left: auto;
   }
 
+  .cit-edu-contact-part{
+    height: 100%;
+    overflow: scroll;
+  }
   .nav-footer a {
     color: #7D7D7D;
     text-decoration: none;

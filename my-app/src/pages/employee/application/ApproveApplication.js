@@ -112,8 +112,9 @@ export default function ApproveApplication() {
          <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <EmployeeSideBar style={{ position: 'fixed', top: '4rem', left: 0, bottom: 0 }} />
             <div style={{
+            flex: 1,
             paddingTop: '5rem', // Padding to create space for the fixed header
-            paddingLeft: '10rem', // Padding to create space for the fixed sidebar
+            paddingLeft: '10%', // Padding to create space for the fixed sidebar
             paddingBottom: '10rem', // Add padding to the bottom to create space for the footer
             backgroundImage: `url(${HP_background})`,
             backgroundSize: 'cover',
@@ -223,7 +224,7 @@ export default function ApproveApplication() {
 
 
             </div>
-            <Footer style={{ zIndex: 1001 }} />
+            <Footer  />
         </div>
         </>
     )

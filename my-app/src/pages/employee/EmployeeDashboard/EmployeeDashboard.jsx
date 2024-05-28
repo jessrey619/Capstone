@@ -80,11 +80,11 @@ const EmployeeDashboard = () => {
             <span>Total Vehicles:</span>
             <span>{vehicleCount}</span>
           </div>
-          <div className="ed-item-2">
+          <div className="ed-item-1">
             <span>Total 4-Wheelers:</span>
             <span>{isFourWheel}</span>
           </div>
-          <div className="ed-item-3">
+          <div className="ed-item-1">
             <span>Total 2-Wheelers:</span>
             <span>{isTwoWheel}</span>
           </div>
@@ -96,7 +96,7 @@ const EmployeeDashboard = () => {
 
         <div className="ed-row-2">
           <div className="ed-item-5">
-            <span>Count of Vehicles</span>
+            <p>Count of Vehicles</p>
             <VehicleCountPieChart twoWheelCount={isTwoWheel} fourWheelCount={isFourWheel}/>
           </div>
           <div className="ed-item-6">
@@ -136,7 +136,7 @@ const EmployeeDashboard = () => {
         </div> */}
       </div>
 
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0 }}>
+      <div style={{ position: "sticky", bottom: 0, left: 0, right: 0 }}>
         <Footer />
       </div>
     </>

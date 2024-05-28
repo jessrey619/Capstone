@@ -78,32 +78,32 @@ export default function PassCard() {
 
     console.log("Submitting password change request...");
 
-    // try {
-    //   const response = await axios.post('http://localhost:8080/jwt/change-password', {
-    //     username: email,
-    //     oldPassword: passwordData.oldPassword,
-    //     newPassword: passwordData.newPassword,
-    //     confirmPassword: passwordData.confirmNewPassword
-    //   });
-    //   console.log("Response:", response.data);
+    try {
+      const response = await axios.post('http://localhost:8080/jwt/change-password', {
+        username: email,
+        oldPassword: passwordData.oldPassword,
+        newPassword: passwordData.newPassword,
+        confirmPassword: passwordData.confirmNewPassword
+      });
+      console.log("Response:", response.data);
 
-    //   if (response.data) {
-    //     setSnackbarMessage('Password changed successfully');
-    //     setSnackbarOpen(true);
-    //     setPasswordData({
-    //       oldPassword: '',
-    //       newPassword: '',
-    //       confirmNewPassword: ''
-    //     });
-    //   } else {
-    //     setSnackbarMessage(response.data.message);
-    //     setSnackbarOpen(true);
-    //   }
-    // } catch (error) {
-    //   console.error('Error during password change:', error);
-    //   setSnackbarMessage('An error occurred while changing password. Please try again later.');
-    //   setSnackbarOpen(true);
-    // }
+      if (response.data) {
+        setSnackbarMessage('Password changed successfully');
+        setSnackbarOpen(true);
+        setPasswordData({
+          oldPassword: '',
+          newPassword: '',
+          confirmNewPassword: ''
+        });
+      } else {
+        setSnackbarMessage(response.data.message);
+        setSnackbarOpen(true);
+      }
+    } catch (error) {
+      console.error('Error during password change:', error);
+      setSnackbarMessage('An error occurred while changing password. Please try again later.');
+      setSnackbarOpen(true);
+    }
   };
 
   return (

@@ -56,7 +56,7 @@ export default function VerifyPayment() {
             <EmployeeSideBar style={{ position: 'fixed', top: '4rem', left: 0, bottom: 0, zIndex: 500 }} />
             <div className='verifyPay' style={{
                 paddingTop: '5rem', // Padding to create space for the fixed header
-                paddingLeft: '10rem', // Padding to create space for the fixed sidebar
+                paddingLeft: '10%', // Padding to create space for the fixed sidebar
                 paddingBottom: '10rem', // Add padding to the bottom to create space for the footer
                 backgroundImage: `url(${HP_background})`,
                 backgroundSize: 'cover',

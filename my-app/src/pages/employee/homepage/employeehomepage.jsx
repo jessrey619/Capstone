@@ -26,12 +26,15 @@ export default function EmployeeHomepage (){
 
     return (
         <section>
-            <Header />
+            <div className='employee-header-container'>
+                <Header />
+            </div>
+            
             {/* <EmployeeSidebar /> */}
             <div className='buttons-container'>
                 <Link to="/employee-profile"><button className='profileButton'>Profile</button></Link>
                 <Link to="/employee-dashboard"><button className='dashboardButton'>Dashboard</button></Link>
-                <Link to="/orcr"><button className='employeefeaturesButton'>Employee Features</button></Link>
+                <Link to="/employee-dashboard"><button className='employeefeaturesButton'>Employee Features</button></Link>
             </div>
 
             <div className='employeehomepage'>

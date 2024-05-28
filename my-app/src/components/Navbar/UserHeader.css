@@ -9,6 +9,11 @@
   width: 100%;
 }
 
+.header.mobile{
+  width: 80%;
+  overflow: hidden;
+}
+
 .logo-container {
   width: 300px;
   margin-left: 40px;
@@ -20,17 +25,13 @@
 
 .nav {
   display: flex;
-  margin-right: 25px;
   align-items: right;
 }
 
 .nav a {
   color: black;
   text-decoration: none;
-  margin-left: -25px;
-  margin-right: 30px;
   font-weight: 700;
-  padding-right: 40px;
   font-family: 'Kumbh Sans', sans-serif;
   align-items: right;
 }

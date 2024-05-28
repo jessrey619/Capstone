@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './EmployeeHeader.css';
 import VVLogo from '../../assets/VVLogo.png';
+import HeaderLogo from '../../assets/cit-logo.png'
 import DropdownMenu from './menu';
 
 const Header = () => {
@@ -41,7 +42,7 @@ const Header = () => {
   return (
     <div className={`header ${isMobile ? 'mobile' : ''}`}>
       <div className="logo-container">
-        <img src={VVLogo} alt="HeaderLogo" className="headerImage" style={{width: '12.5rem'}}/>
+        <img src={HeaderLogo} alt="HeaderLogo" className="headerImage" style={{width: '12.5rem'}}/>
       </div>
       <nav className="nav">
         {isMobile ? (

@@ -200,7 +200,7 @@ public class ApplicantService {
     
 //  @TODO may be updated through get by ID instead of email but to be continued...
 //  Verification
-    public String updateApplicant(String email) {
+    public String updateApplicant(String email) throws MessagingException {
     	ApplicantEntity applicant = applicantRepository.findByEmail(email);
         UserEntity user = userRepository.findByUsername(email);
         if (applicant != null) {
@@ -209,6 +209,12 @@ public class ApplicantService {
                 applicantRepository.save(applicant);
                 user.setIsVerified(applicant.getVerified());
                 userRepository.save(user);
+                
+                String fname = user.getFname();
+                
+                String message = "Your ORCR and license have been approved. You may now proceed with the payment.";
+                String subject = "Vehicle Registration: ORCR and LICENSE Verified";
+                sendEmail(email, fname, message, subject);
                 return "Applicant verified status updated successfully!";
         	}
         	else {
@@ -218,9 +224,27 @@ public class ApplicantService {
             return "Applicant not found!";
         }
     }
+    
+    private void sendEmail(String email, String fname, String message, String subject) throws MessagingException {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+        // Set recipient
+        mimeMessageHelper.setTo(email);
+        // Set email subject
+        mimeMessageHelper.setSubject(subject);
+        // Set email content
+        String messageContent = "<html><body><h2>Good day, " + fname + "</h2>" +
+                                "<h4>" + message + "</h4>" +
+                                "<br>" +
+                                "<h4>Best regards,</h4>" +
+                                "<h4><i>VehicleVista</i></h4></body></html>";
+        mimeMessageHelper.setText(messageContent, true); // Enable HTML
+        // Send email
+        javaMailSender.send(mimeMessage);
+    }
 
 //  Payment
-    public String updatePaidApplicant(String email) {
+    public String updatePaidApplicant(String email) throws MessagingException {
         ApplicantEntity applicant = applicantRepository.findByEmail(email);
         UserEntity user = userRepository.findByUsername(email);
         if (applicant != null) {
@@ -230,6 +254,12 @@ public class ApplicantService {
                 user.setIsPaid(true);
                 user.setDatePaid(new Date());
                 userRepository.save(user);
+                String fname = user.getFname();
+                
+                String message = "Your Payment has been Verified. Final Approval Pending.";
+                String subject = "Vehicle Registration: Payment Verified";
+                sendEmail(email, fname, message, subject);
+                
                 return "Applicant payment status updated successfully!";
         	}
         	else {
@@ -241,7 +271,7 @@ public class ApplicantService {
     }
 
 //  Approval
-    public String approveApplicant(String email) {
+    public String approveApplicant(String email) throws MessagingException {
     	List<ApplicantEntity> applicants = applicantRepository.findAllByEmail(email);
     	
         ApplicantEntity applicant = applicants.get(applicants.size()-1);
@@ -293,7 +323,11 @@ public class ApplicantService {
         			return "Vehicle with Username not Found";
         		}
         		//@TODO TEST THIS LATER
-        		
+        		String fname = user.getFname();
+                
+                String message = "Congratulations, Your Application has been approved.";
+                String subject = "Vehicle Registration: Application has been Approved";
+                sendEmail(email, fname, message, subject);
                 applicantRepository.save(applicant);
                 userRepository.save(user);
                 return "Application approved successfully!";

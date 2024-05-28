@@ -24,7 +24,7 @@ const LandingPage = () => {
             {/* <Link to="/login" className="loginButton"><Button>Login</Button></Link> */}
             <Link to="/login" ><Button  sx={{width: '5rem', height: '3rem', fontSize: '1.5rem', backgroundColor: '#F4C522', color: 'black', textTransform: 'none', ":hover": { backgroundColor: '#8A252C' } }}>Login</Button></Link>
           </div>
-          <div className="modalContainer">
+          <div className="registration-modal-container">
             <TransitionsModal />
           </div>
         </div>

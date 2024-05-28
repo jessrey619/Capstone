@@ -7,12 +7,91 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 
 export default function ViewApplicantModal({ isOpen, setIsOpen, applicant }) {
   console.log("applicant", applicant);
+
+  const token = localStorage.getItem('token');
+
+  const [orcrImg, setOrcrImg] = useState()
+  const [licensePhotoUrl, setLicensePhotoUrl] = useState('')
+  const [currentPhotoUrl, setCurrentPhotoUrl] = useState('')
+  const [isPhotoModalOpen,setIsPhotoModalOpen] = useState(false)
+  const [email,setEmail] = useState('')
+
+
+  const handleViewLicenseClick = async () => {
+    const url = await fetchPhoto('license');
+    if (url) {
+      setLicensePhotoUrl(url);
+      handleOpenPhotoModal(url);
+    }
+  };
+
+  const handleViewOrcrClick = async () => {
+    const url = await fetchPhoto('orcr');
+    if (url) {
+      setLicensePhotoUrl(url);
+      handleOpenPhotoModal(url);
+    }
+  };
+
+  const handleProofOfPaymentClick = async () => {
+    const url = await fetchPhoto('proof_of_payment');
+    if (url) {
+      setLicensePhotoUrl(url);
+      handleOpenPhotoModal(url);
+    }
+  };
+
+  const handleOpenPhotoModal = (photoUrl) => {
+    setCurrentPhotoUrl(photoUrl);
+    setIsPhotoModalOpen(true);
+  };
+
+  const handleClosePhotoModal = () => {
+    setIsPhotoModalOpen(false);
+  };
+
+  const fetchPhoto = async (photoType) => {
+    try {
+    // const [footer, setFooter] = useState('')
+
+      const response = await axios.get(
+        `http://localhost:8080/photos/get-photo-by-name/${applicant.email}:${photoType}`,
+        { responseType: 'arraybuffer' }
+      );
+      if (response.data) {
+        const blob = new Blob([response.data], { type: 'image/jpeg' });
+        const url = URL.createObjectURL(blob);
+        return url;
+      }
+    } catch (error) {
+      console.error('Error fetching photo:', error);
+      return null;
+    }
+  };
+
+
   return (
     <div>
       <Modal
@@ -85,31 +164,35 @@ export default function ViewApplicantModal({ isOpen, setIsOpen, applicant }) {
                 <TableRow>
                   <TableCell align="left">OR/CR:</TableCell>
                   <TableCell align="left">
-                    <a href={applicant.orcrimg} target="_blank">
-                      <Button sx={{ textTransform: "none", color: "#8A252C" }}>
+
+                      <Button
+                        onClick={handleViewOrcrClick}
+                        sx={{ textTransform: "none", color: "#8A252C" }}>
                         Click to View Image
                       </Button>
-                    </a>
+   
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell align="left">License</TableCell>
                   <TableCell align="left">
-                    <a href={applicant.licenseimg} target="_blank">
-                      <Button sx={{ textTransform: "none", color: "#8A252C" }}>
+                      <Button 
+                        onClick={handleViewLicenseClick}
+                        sx={{ textTransform: "none", color: "#8A252C" }}>
                         Click to View Image
                       </Button>
-                    </a>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell align="left">Proof of Payment</TableCell>
                   <TableCell align="left">
-                    <a href={applicant.proofofpayment} target="_blank">
-                      <Button sx={{ textTransform: "none", color: "#8A252C" }}>
+
+                      <Button
+                        onClick={handleProofOfPaymentClick}
+                        sx={{ textTransform: "none", color: "#8A252C" }}>
                         Click to View Image
                       </Button>
-                    </a>
+
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -145,6 +228,21 @@ export default function ViewApplicantModal({ isOpen, setIsOpen, applicant }) {
           </TableContainer>
         </Box>
       </Modal>
+      <Modal
+        open={isPhotoModalOpen}
+        onClose={handleClosePhotoModal}
+        aria-labelledby="photo-modal-title"
+        aria-describedby="photo-modal-description"
+        >
+        <Box sx={{ ...style, width: '100%', height: '100%' }}>
+            <Typography id="photo-modal-title" variant="h6" component="h2">
+            Photo
+            </Typography>
+            {currentPhotoUrl && (
+            <img src={currentPhotoUrl} alt="Fetched Photo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            )}
+        </Box>
+        </Modal>
     </div>
   );
 }

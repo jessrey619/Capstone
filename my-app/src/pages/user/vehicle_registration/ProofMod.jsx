@@ -23,8 +23,37 @@ export default function ProofMod() { // Define the ProofMod functional component
     const handleOpen = () => setOpen(true); // Define a function to open the modal
     const handleClose = () => setOpen(false); // Define a function to close the modal
     const [name, setName] = React.useState(null); // Initialize the state for the ORCR name
+    const [email, setEmail] = React.useState('');
 
     const [orcr, setOrcr] = React.useState(); // Initialize the state for the modal
+
+    token = localStorage.getItem('token'); 
+
+
+
+    
+
+    useEffect(() => {
+        const decodeJwt = async () => {
+          if (token) {
+            try {
+              const response = await axios.post('http://localhost:8080/jwt/decode', null, {
+                params: { token: token },
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              });
+              const decoded = response.data.payload;
+              setEmail(decoded.sub);
+            } catch (error) {
+              console.error('Error decoding token:', error);
+              localStorage.removeItem('token');
+            }
+          }
+        };
+    
+        decodeJwt();
+      }, [token]);
 
     const handleUploadClick = () => { // Define a function to trigger file input click
         document.getElementById('fileInput').click(); // Programmatically click the file input element
@@ -39,10 +68,8 @@ export default function ProofMod() { // Define the ProofMod functional component
         console.log(orcr); // Log the selected file
 
         // const token = localStorage.getItem('token'); //@TODO: PLEASE ALILI THE BELOW TOKEN TO THIS FUNCTION IF NAA NAY LOGIN
-        const token = "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqZXNzcmV5Z2FycmlkbzIyQGdtYWlsLmNvbSIsImlhdCI6MTcxNDU3OTU5NywiZXhwIjoxNzE0NjY1OTk3fQ.-eULwUZPOrCw7jgj6q-0yDlEnaWCFxoRhAcZ_TtFQJ-qOlNUsQMlFOdEB0H0xN7Z"
-        const decodedToken = jwtDecode(token); // decode your token here
-        const user = decodedToken.sub;
-        setName(`${user}:proof_of_payment`);
+        
+        setName(`${email}:proof_of_payment`);
 
         const config2 = {
             headers: {
@@ -54,16 +81,15 @@ export default function ProofMod() { // Define the ProofMod functional component
         console.log(name);
 
         const formData = new FormData();
-            formData.append('image', orcr); // Assuming imageFile is a File object from an input type="file" element
-            formData.append('name', name);
-            formData.append('email',user);
-        axios.post(`http://localhost:8080/photo/gdrive-upload`, formData, config2)
-            .then(res => {
-                console.log(res.json());
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            formData.append("file", orcr);
+            formData.append(name);
+            formData.append("username", email);
+            formData.append("type", 3);
+            axios.post(
+                "http://localhost:8080/photos/upload",
+                formData,
+                config2
+            );
     };
 
     return ( // Return the JSX for the component

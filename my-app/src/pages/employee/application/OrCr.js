@@ -46,7 +46,7 @@ export default function OrCr() {
                 <div className='verifyPay' style={{
                     flex: 1,
                     paddingTop: '5rem', // Padding to create space for the fixed header
-                    paddingLeft: '15rem', // Padding to create space for the fixed sidebar
+                    paddingLeft: '10%', // Padding to create space for the fixed sidebar
                     paddingBottom: '10rem', // Add padding to the bottom to create space for the footer
                     backgroundImage: `url(${HP_background})`,
                     backgroundSize: 'cover',

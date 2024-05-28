@@ -123,6 +123,7 @@ const handleSubmit = () => {
   return (
     <div>
       <Modal
+        
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
@@ -136,6 +137,7 @@ const handleSubmit = () => {
         }}
       >
         <Fade in={open}>
+          <div className='verify-modal-entire-modal'>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h4" component="h2">
               Email Verification
@@ -167,6 +169,8 @@ const handleSubmit = () => {
               <button className="button-maroon" onClick={handleSubmit}>Submit</button> 
             </Typography>
           </Box>
+          </div>
+          
         </Fade>
       </Modal>
       {/* Snackbar component */}

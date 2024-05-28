@@ -79,11 +79,15 @@ const ChangePassword = ({ setShowChangePassword }) => {
         username: email,
         oldPassword: currentPassword,
         newPassword: newPassword,
-        confirmPassword: confirmNewPassword,
+        confirmNewPassword: confirmNewPassword,
       });
       console.log(res.data);
       setSnackbarOpen(true);
-      setSnackbarMessage("Password changed successfully!");
+      if(res.data===true) {
+        setSnackbarMessage("Password changed successfully!");
+      } else {
+        setSnackbarMessage("Invalid Credentials");
+      }
     } catch (error) {
       console.error('There was an error making the POST request!', error);
       setSnackbarOpen(true);

@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap');
+/*body*/
+
+.RFIDbg{
+    font-family: 'Kumbh Sans', sans-serif;
+    max-height: max-content;
+    background-color:rgb(255, 255, 255);
+}
+
+
+.topImage{
+    width:20vw;
+    left:0;
+
+}
+
+.top{
+    top:0;
+    background-color:rgb(255, 255, 255);
+    height: max-content;
+    width: max-content;
+}
+
+.bgRFID{
+    z-index: -5;
+    transform: translateX(61%);
+    width: 45vw;
+    
+}
+
+.display{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    position: absolute; 
+    width: 88vw; /* Adjust the width as needed */  
+    top: 8%; /* Center vertically */
+    left: 6%;
+}
+
+ /*CONTENT*/
+ .OuterContainer{
+    width: 85vw;
+    height: 90vh;
+    background-color: #F4C522;
+    align-items: center;
+    border-radius: 5px;
+    padding:5px;
+    display: relative;
+    margin: 0px 20px;
+    box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.25);
+}
+
+.firstInner{
+    width: 37vw;
+    height: 20vh;
+    display: flex;
+    color: black;
+    background-color: #EBEBEB;
+    box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.145);
+    border-radius: 15px;
+    margin: 25px auto auto auto;
+    padding: 5px;
+}
+
+.firstInner p {
+    font-size: 1.6em;
+    font-weight: 700;
+    text-align: center;
+    margin: auto;
+    padding: 5px;
+}
+/* SEARCH SECTION */
+
+.stickerSearch{
+    padding:5px;
+}
+
+.stickerInput input[type="text"] {
+  width: 24vw;
+  height: 10vh;
+  font-size: 1.5em;
+  line-height: 1;
+  font-family: 'Kumbh Sans', sans-serif;
+  background-color: #D9D9D9;
+  border: none;
+  box-shadow: inset ;
+}
+
+.stickerInput input[type="text"]::placeholder {
+    color: #878787;
+  }
+  
+.stickerBtn{
+    position: relative;
+    display: flex;
+    width: max-content;
+    height: 5vh;
+    cursor: pointer;
+    padding: 2px;
+    margin: 3.5% auto;
+}
+
+.stickerBtn button{
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 1.2em;
+    background-color: #F4C522;
+    border: none;
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.145);
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    width: 6vw;
+    height: 5vh;
+    padding:2px
+}
+.infoInput{
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    width: 25vw;
+    height: 12vh;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+.infoInput p{
+    font-weight: 700;
+    font-size: 1.7em;
+    text-align: center;
+}
+
+/* BOTTOM CONTENT SECTION */
+
+.secondInner {
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    margin-top: 23px;
+}
+
+.left-section {
+    width: 13vw; 
+    height: 35vh; 
+    background-color: #EBEBEB; 
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.145);
+    align-items: center; 
+    justify-content: center;
+}
+.left-section p {
+    font-size: 1.6em;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 50px;
+    color: black;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-right {
+    width: 23vw; 
+    height: 16vh; 
+    background-color:#EBEBEB; 
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.145);
+}
+.top-right p {
+    font-size: 1.4em;
+    font-weight: 700;
+    text-align: left;
+    color: black;
+    padding: 5px;
+}
+
+.bottom-right {
+    width: 23vw; 
+    height: 16vh; 
+    background-color: #EBEBEB; 
+    border-radius: 5px;
+    box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.145);
+}
+.bottom-right p {
+    font-size: 1.4em;
+    font-weight: 700;
+    text-align: left;
+    color: black;
+    padding: 5px;
+}
+
+@media (max-width: 768px) {
+    .display {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .OuterContainer {
+        width: 85vw;
+        height: 90vh;
+        background-color: #F4C522;
+        display: relative;
+        margin:10px 10px 50px auto;
+    }
+}

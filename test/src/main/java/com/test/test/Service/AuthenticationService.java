@@ -107,12 +107,11 @@ public class AuthenticationService {
 //    Employee side
     public AuthenticationResponse employeeRegister(EmployeeEntity request) {
     	EmployeeEntity user = new EmployeeEntity();
-
-        // Set user details from request
+    	user = request;        // Set user details from request
         user.setUsername(request.getUsername());
         // Hash the password
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-
+        
         // Saves user
         employeeRepository.save(user);
 

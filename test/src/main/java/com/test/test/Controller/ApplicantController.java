@@ -93,19 +93,19 @@ public class ApplicantController {
     
     @CrossOrigin
     @PutMapping("/updateVerifiedStatus/{email}")
-    public String updatePreApprovedStatus(@PathVariable String email) {
+    public String updatePreApprovedStatus(@PathVariable String email) throws MessagingException {
         return applicantService.updateApplicant(email);
     }
     
     @CrossOrigin
     @PutMapping("/updatePaidStatus/{email}")
-    public String updatePaidStatus(@PathVariable String email) {
+    public String updatePaidStatus(@PathVariable String email) throws MessagingException {
         return applicantService.updatePaidApplicant(email);
     }
     
     @CrossOrigin
     @PutMapping("/approveApplicant/{email}")
-    public String approveApplicant(@PathVariable String email) {
+    public String approveApplicant(@PathVariable String email) throws MessagingException {
         return applicantService.approveApplicant(email);
     }
     

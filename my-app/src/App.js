@@ -27,7 +27,7 @@ import PrivateRoutes from "./Utils/PrivateRoutes";
 import EmployeeRoutes from "./Utils/EmployeeRoutes";
 import Profile from "./pages/employee/application/Profile"; // Import the Profile component
 import AccountExpiration from "./pages/Admin/AccountExpiration/AccountExpiration";
-// import ApplicationList from "./pages/Admin/ApplicationList/ApplicationList";
+import ApplicationList from "./pages/Admin/ApplicationList/ApplicationList";
 // import Configuration from "./pages/Admin/Configuration/Configuration";
 // import StickerPricing from "./pages/Admin/StickerPricing/StickerPricing";
 // import UserManagement from "./pages/Admin/UserManagement/UserManagement";
@@ -50,7 +50,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import Header from './components/AdminHeader/Header';
 import SideBar from './components/SideBar/SideBar';
 import Dashboard from './pages/Admin/Dashboard'
-import ApplicationList from './pages/Admin/ApplicationList'
+// import ApplicationList from './pages/Admin/ApplicationList'
 import Logs from './pages/Admin/Logs'
 import Statistics from './pages/Admin/Statistics'
 import ParkingArea from './pages/Admin/ParkingArea'

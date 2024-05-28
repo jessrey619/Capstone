@@ -44,7 +44,7 @@ function ApplicationList() {
   return (
     <>
       <AdminHeader />
-      <AdminSidebar />
+      {/* <AdminSidebar /> */}
       <main className="admin-container">
         <div className="admin-title">
           <h1>Application List</h1>

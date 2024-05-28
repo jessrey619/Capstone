@@ -42,12 +42,16 @@ function ParkingArea() {
       };
 
     return (
+      <>
+      <div className="bodyPA">
         <div>
         <Header/>
         <div className="side">
         <SideBar/>
         </div>
-        <img src="/background.png" alt="background" className="backgroundImage" /> 
+        <div>
+        <img src="/background.png" alt="background" className="bgImagePA" /> 
+        </div>
         <section className="top">
           <h1>Parking Areas</h1>
           <div className="limit">
@@ -62,7 +66,7 @@ function ParkingArea() {
                         <div className="box-top">
                             <h2 className="box-title">{area.name}</h2>
                             <img className="box-image" src="/parkingAreaIcon.svg" alt="Parking Area Icon" />
-                            <div className="space"><h3>Space:</h3> 
+                            <div className="spaceP"><h3>Space:</h3> 
                             <p>{area.totalSpace}</p>
                             </div>
                             <h3 className="status">{area.isFull ? "Full" : "Open"}</h3>
@@ -72,14 +76,19 @@ function ParkingArea() {
                                 <p>Occupied Space: {area.occupiedSpace}</p>
                             </div>
                         </div>
-                        <button onClick={() => toggleIsFull(area.id, area.isFull)}>
+                        <button className= "ParkingAreaBtn" onClick={() => toggleIsFull(area.id, area.isFull)}>
                             {area.isFull ? "Open" : "Close"}
                         </button>
                     </div>
                 ))}
             </div>
+
+            <div>
             <TheFooter />
+            </div>
         </div>
+      </div>
+    </>
     );
   
 }

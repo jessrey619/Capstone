@@ -3,19 +3,12 @@ import axios from 'axios';
 import "./Scan.css"
 
 function VehicleDisplay({ title }) {
-    const [sticker, setSticker] = useState("");
-    const [expire, setExpire] = useState("");
-    const [name, setName] = useState("");
-    const [type, setType] = useState("");
-    const [plateNo, setPlateNo] = useState("");
-    const [color, setColor] = useState("");
     const [vehicle1, setVehicle1] = useState({})
     const [applicant1, setApplicant1] = useState({})
-    const [vehicle2, setVehicle2] = useState({})
+   // const [vehicle2, setVehicle2] = useState({})
     const [searchValue, setSearchValue] = useState(0);
     const [isExpired, setIsExpired] = useState(false)
 
-    const [applicants, setApplicants] = useState([])
 
     function handleInputChange(event) {
         console.log(event.target.value)

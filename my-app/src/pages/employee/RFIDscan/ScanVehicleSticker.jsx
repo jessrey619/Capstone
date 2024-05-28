@@ -5,7 +5,7 @@ import "./Scan.css"
 function VehicleDisplay({ title }) {
     const [vehicle1, setVehicle1] = useState({})
     const [applicant1, setApplicant1] = useState({})
-   // const [vehicle2, setVehicle2] = useState({})
+   //const [vehicle2, setVehicle2] = useState({})
     const [searchValue, setSearchValue] = useState(0);
     const [isExpired, setIsExpired] = useState(false)
 
@@ -81,7 +81,7 @@ function VehicleDisplay({ title }) {
         <div className="OuterContainer">
             <div className="firstInner">
                 <p>Sticker ID: </p> 
-                <div className="infoInput"style={{ marginTop:'2vh', marginRight:'2%'}} >
+                <div className="infoInput" >
                     <div className="stickerSearch">
                         <div className="stickerInput">
                             <input
@@ -104,11 +104,11 @@ function VehicleDisplay({ title }) {
 
             <div className="firstInner">
                 <p style={{margin:'auto'}}>Status: <br/> <br/> Name: </p> 
-                <div>
-                    <div className="infoInput" style={{ width:'25vw', height:'8vh', marginTop:'1vh', marginRight:'1vw', overflow:'hidden'}}>
+                <div className='duo'>
+                    <div className="infoInput1" style={{ marginRight:'4%'}}>
                         <p>{isExpired?'EXPIRED':'ACTIVE'}</p>
                     </div>
-                    <div className="infoInput" style={{ width:'25vw', height:'8vh', marginTop:'1vh',marginRight:'1vw' }}>
+                    <div className="infoInput1" style={{ marginTop:'3%'}}>
                         <p>{vehicle1.name}</p>
                     </div>
                 </div>
@@ -116,23 +116,23 @@ function VehicleDisplay({ title }) {
             
             <div className="secondInner">
                 <div className="left-section">
-                    <p style={{margin:'0 auto', textAlign:'center', width:'10vw'}}>Sticker Type:</p> 
-                    <div className="infoInput" style={{ width:'11.5vw', height:'22vh', margin:'0 auto', alignItems:'center'}}>
-                        <p style={{ margin:'40px auto', alignItems:'center'}}>{applicant1.isParking? 'Four Wheel':'Two Wheel'}</p>
+                    <p style={{margin:'0 auto', textAlign:'center'}}>Sticker Type:</p> 
+                    <div className="infoInput2" style={{alignItems:'center'}}>
+                        <p style={{ alignItems:'center'}}>{applicant1.isParking? 'Four Wheel':'Two Wheel'}</p>
                     </div>
                 </div>
                 <div className="right-section">
                     <div className="top-right" style={{display:'flex', flexDirection:'row',}}>
-                        <p style={{marginTop: '37px', marginLeft:'10px'}}>Plate No.:</p> 
-                        <div className="infoInput" style={{ width:'13vw', height:'10vh',}}>
-                            <p style={{ margin:'17px auto', alignItems:'center'}}>{vehicle1.plateNo}</p>
+                        <p style={{marginTop: '10%', marginLeft:'3%'}}>Plate No.:</p> 
+                        <div className="infoInput3">
+                            <p style={{ margin:'10% auto', alignItems:'center'}}>{vehicle1.plateNo}</p>
                         </div>
                     </div>
 
                     <div className="bottom-right" style={{display:'flex', flexDirection:'row',}}>
-                        <p style={{marginTop: '37px', marginLeft:'10px', flexDirection:'row',}}>Color:</p> 
-                        <div className="infoInput" style={{ width:'13vw', height:'10vh', marginRight:'15px'}}>
-                            <p style={{ margin:'17px auto', alignItems:'center'}}>{vehicle1.color}</p>
+                        <p style={{flexDirection:'row'}}>Color:</p> 
+                        <div className="infoInput4">
+                            <p style={{ margin:'9% auto', alignItems:'center'}}>{vehicle1.color} </p>
                         </div>
                     </div>
                 </div>

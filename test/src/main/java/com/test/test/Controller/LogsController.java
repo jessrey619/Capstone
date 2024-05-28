@@ -56,6 +56,7 @@ public class LogsController {
         return ResponseEntity.ok(response);
     }
     
+    @CrossOrigin
     @PostMapping("/log-in")
     public ResponseEntity<String> log(@RequestParam int stickerId) {
         try {

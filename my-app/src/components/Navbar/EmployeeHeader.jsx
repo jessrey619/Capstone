@@ -50,7 +50,7 @@ const Header = () => {
         ) : (
           <>
             {/* <a href="/employee-homepage">Home</a> */}
-            <a href="/user_aboutus">About Us</a>
+            <a href="/">Home</a>
           </>
         )}
       </nav>

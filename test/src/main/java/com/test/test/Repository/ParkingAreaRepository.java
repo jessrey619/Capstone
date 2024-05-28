@@ -10,4 +10,5 @@ import com.test.test.Entity.ParkingAreaEntity;
 @Repository
 public interface ParkingAreaRepository extends JpaRepository<ParkingAreaEntity, Integer> {
 	List<ParkingAreaEntity> findAllByIsActiveTrue();
+	ParkingAreaEntity findByName(String name);
 }

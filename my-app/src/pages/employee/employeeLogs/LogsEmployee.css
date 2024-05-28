@@ -5,8 +5,10 @@
     max-height: max-content;
     padding-top: 7.9%;
     padding-bottom: 5%;
-    padding-left: 19%;
+    padding-left: 15%;
     background-color: #ffffff6e;
+    position: relative;
+    font-size: 100%;
 }
 
 .LogsBG {
@@ -44,7 +46,6 @@
   border-radius: 5px;
   width: 25vw;
   height: 15vh;
-  margin-top: -50px;
 }
 
 .totalLive{
@@ -95,8 +96,6 @@
  color: black;
  text-align: left;
  display:flex;
- margin-left: 125px;
- margin-top: -40px
 }
 
 /*LOGS*/
@@ -141,10 +140,6 @@
     height: 65vh;
     width:73vw;
     margin: auto;
-    margin-right: 40px;
-    border-radius: 5px;
-    margin-bottom: 40px;
-    margin-top: 30px;
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.25);
     display: flex; 
     justify-content: center; 

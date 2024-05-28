@@ -36,10 +36,9 @@
     align-items: center;
     margin: auto;
     position: absolute; 
-    width: 55vw; 
+    width: 33%; 
     top: 10%; 
-    left: 15vw;
-    
+    left: 30%;  
 }
 
  /*CONTENT*/
@@ -63,7 +62,7 @@
     background-color: #EBEBEB;
     box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.145);
     border-radius: 15px;
-    margin: 25px auto auto auto;
+    margin: 1vh auto auto auto;
     padding: 5px;
 }
 
@@ -134,7 +133,7 @@
     justify-content: space-between;
     display: flex;
     flex-direction: column;
-    margin: 5% auto;
+    margin: 2vh auto;
 }
 
 .infoInput1{
@@ -329,6 +328,9 @@ margin: 12% 0 auto auto;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        left: 0;
+        margin: 5% 5% 5% 5%;
+        width:90%;
     }
     .OuterContainer {
         width: 85vw;
@@ -427,7 +429,7 @@ margin: 12% 0 auto auto;
       
     @media (max-width:426px){
         .firstInner p , .left-section p, .right-section p, .bottom-right p{
-            font-size: 1.4em;
+            font-size: 100%;
           }
           .infoInput{
             width: 50vw;

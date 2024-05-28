@@ -128,9 +128,19 @@ function EmployeeSidebar({ activeMenuItem }) {
                   <li className={activeMenuItem === "RFID" ? "active" : ""}>
                     <TaskIcon sx={{ color: "black", marginRight: "1.5rem" }} />
                       <Link to="/scan-rfid">
-                        Scan <br /> RFID
+                        Check User <br /> Status
                       </Link>
                   </li>
+                  {(employee.isViewLogger && employee.isApprover && employee.isVerifier) && (
+                    <>
+                      <li className={activeMenuItem === "Logs" ? "active" : ""}>
+                        <TaskIcon sx={{ color: "black", marginRight: "1.5rem" }} />
+                          <Link to="/history">
+                            View <br /> History
+                          </Link>
+                      </li>
+                    </>
+                  )}
                 </>
               )}
                 <li className={activeMenuItem === "Profile" ? "active" : ""}>
@@ -191,6 +201,17 @@ function EmployeeSidebar({ activeMenuItem }) {
                     <TaskIcon sx={{ color: "black", marginRight: "1.5rem" }} />
                       <Link to="/scan-rfid">
                         Scan <br /> RFID
+                      </Link>
+                  </li>
+                </>
+              )}
+
+              {(employee.isViewLogger && employee.isApprover && employee.isVerifier) && (
+                <>
+                  <li className={activeMenuItem === "Logs" ? "active" : ""}>
+                    <TaskIcon sx={{ color: "black", marginRight: "1.5rem" }} />
+                      <Link to="/history">
+                        View <br /> History
                       </Link>
                   </li>
                 </>

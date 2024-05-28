@@ -28,6 +28,7 @@ public class LogsEntity {
 	private String name;
 	private Date timeIn;
 	private Date timeOut;
+	private boolean isActive;
 	
 	public LogsEntity() {
 		super();
@@ -111,6 +112,14 @@ public class LogsEntity {
 
 	public void setParkingAreaName(String parkingAreaName) {
 		this.parkingAreaName = parkingAreaName;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 	
 	

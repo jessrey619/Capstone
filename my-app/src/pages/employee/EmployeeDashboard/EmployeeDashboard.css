@@ -24,6 +24,10 @@
   overflow-x: scroll;
 }
 
+.ed-row-1::-webkit-scrollbar{
+  display: none;
+}
+
 .ed-row-1>div {
   width: 100%;
   display: flex;

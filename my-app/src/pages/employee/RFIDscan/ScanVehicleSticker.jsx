@@ -3,13 +3,14 @@ import axios from 'axios';
 import "./Scan.css"
 import EmployeeSidebar from '../../../components/Navbar/EmployeeSidebar/employeeSidebar';
 import LogsEmployee from '../employeeLogs/LogsEmployee';
+import Header from '../../../components/Navbar/EmployeeHeader';
 
 function VehicleDisplay({ title }) {
     const [vehicle1, setVehicle1] = useState({})
     const [applicant1, setApplicant1] = useState({})
    //const [vehicle2, setVehicle2] = useState({})
     const [searchValue, setSearchValue] = useState(0);
-    const [isExpired, setIsExpired] = useState(false)
+    const [isExpired, setIsExpired] = useState(true)
 
 
     function handleInputChange(event) {
@@ -67,16 +68,18 @@ function VehicleDisplay({ title }) {
             };
     
             fetchData();
-        }, [searchValue]);
+        }, [vehicle1]);
 
         useEffect(() => {
             if(new Date(vehicle1.expirationDate).getTime()<new Date().getTime()) {
                 setIsExpired(true);
+                console.log("APPLICANT EXPIRED",isExpired)
             }
             else{
                 setIsExpired(false);
+                console.log("APPLICANT GOODS",isExpired)
             }
-        }, [applicant1]);
+        }, [vehicle1]);
         
     
     return (
@@ -96,12 +99,13 @@ function VehicleDisplay({ title }) {
                                 onChange={handleInputChange}
                                 required
                             />
+                            <div className="stickerBtn">
+                                <button type="button" onClick={handleSubmit}>
+                                    Search
+                                </button>
+                            </div>
                         </div>
-                        <div className="stickerBtn">
-                            <button type="button" onClick={handleSubmit}>
-                                Search
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -110,7 +114,9 @@ function VehicleDisplay({ title }) {
                 <p style={{margin:'auto'}}>Status: <br/> <br/> Name: </p> 
                 <div className='duo'>
                     <div className="infoInput1" style={{ marginRight:'4%'}}>
-                        <p>{isExpired?'EXPIRED':'ACTIVE'}</p>
+                    <p style={{ color: isExpired ? 'red' : 'green' }}>
+                        {isExpired === '' ? '' : isExpired ? 'EXPIRED' : 'ACTIVE'}
+                    </p>
                     </div>
                     <div className="infoInput1" style={{ marginTop:'3%'}}>
                         <p>{vehicle1.name}</p>
@@ -149,11 +155,9 @@ function VehicleDisplay({ title }) {
 
 function Scans() {
     return (
+        <>
+        <Header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }} />
         <div className="RFIDbg">
-            <div className="topHeader">
-                <img src="/citu-logoSmall.png" alt="CITULogo" className="topImage" />
-            </div>
-
             <div>
                 <img src="/RFID_background.png" alt="background" className="bgRFID" />
             </div>
@@ -165,8 +169,12 @@ function Scans() {
                 <VehicleDisplay title="First Display" />
                 {/* <VehicleDisplay title="Second Display" /> */}
             </div>
-                <LogsEmployee/>
+                
         </div>
+
+        {/* <LogsEmployee/> */}
+        </>
+        
     );
 }
 

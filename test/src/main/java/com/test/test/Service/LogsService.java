@@ -126,7 +126,8 @@ public class LogsService {
             logsEntity.setIsParking(true);
             logsEntity.setTimeIn(new Date());
             logsEntity.setParkingAreaName(selectedParkingArea.getName());
-            
+//            System.out.println(vehicle.getExpirationDate().after(new Date()));
+            logsEntity.setActive(vehicle.getExpirationDate().after(new Date()));
             logsEntity.setIsFourWheel(vehicle.getVehicleType());
             logsEntity.setColor(vehicle.getColor());
             logsEntity.setPlateNo(vehicle.getPlateNo());
@@ -155,9 +156,11 @@ public class LogsService {
             
             return logsEntity.getParkingAreaName();
         }
-        //checks if 
+        //checks if there is login but no logout OR Vehicle is Still in the Premises
         else if(existingLog.getTimeIn()!=null && existingLog.getTimeOut()==null) {
         	Date logOut = new Date();
+        	
+        	ParkingAreaEntity existingParkingArea = parkingAreaRepository.findByName(existingLog.getParkingAreaName());
         	
         	if(logOut.before(new Date(existingLog.getTimeIn().getTime()+60000))) {
         		 throw new RuntimeException("Logout time must be at least 1 minute after login time.");
@@ -166,16 +169,16 @@ public class LogsService {
         		//TODO insert Plus and Minus Logic for Parking Area Spaces here FOR THE PARKING AREA MOTOR COUNT
         		logsRepository.save(existingLog);
         		
-        		selectedParkingArea.setOccupiedSpace(selectedParkingArea.getOccupiedSpace()-1);
-                selectedParkingArea.setAvailableSpace(selectedParkingArea.getAvailableSpace()+1);
+        		existingParkingArea.setOccupiedSpace(existingParkingArea.getOccupiedSpace()-1);
+        		existingParkingArea.setAvailableSpace(existingParkingArea.getAvailableSpace()+1);
                 
                 if(vehicle.getVehicleType()) {
-                	selectedParkingArea.setNumberOfCars(selectedParkingArea.getNumberOfCars()-1);
+                	existingParkingArea.setNumberOfCars(existingParkingArea.getNumberOfCars()-1);
                 } else {
-                	selectedParkingArea.setNumberOfMotorcycles(selectedParkingArea.getNumberOfMotorcycles()-1);
+                	existingParkingArea.setNumberOfMotorcycles(existingParkingArea.getNumberOfMotorcycles()-1);
                 }
                 
-                parkingAreaRepository.save(selectedParkingArea);
+                parkingAreaRepository.save(existingParkingArea);
         		return existingLog.getParkingAreaName();
         	}
         }

@@ -30,7 +30,7 @@
 }
 
 .employee-profile-container {
-  width: 100%;
+  width: 50vw;
   margin: 0 auto;
   text-align: center;
 }
@@ -39,9 +39,17 @@
 
 @media screen and (max-width: 600px) {
   .employee-profile-full-container{
-    width: 80vw;
+    width: 100vw;
     
   }
+  .employee-profile-container {
+    width: 80vw;
+    margin: 0;
+    text-align: center;
+    left: 0;
+    margin-left: 5vw;
+  }
+  
 }
 
 .employee-profile-outer {

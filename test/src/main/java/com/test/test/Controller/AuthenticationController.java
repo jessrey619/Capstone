@@ -21,6 +21,7 @@ import com.test.test.Entity.DecodedJwt;
 import com.test.test.Entity.EmployeeEntity;
 import com.test.test.Entity.Role;
 import com.test.test.Entity.UserEntity;
+import com.test.test.Repository.AdminRepository;
 import com.test.test.Repository.EmployeeRepository;
 import com.test.test.Repository.UserRepository;
 import com.test.test.Service.AuthenticationService;
@@ -42,6 +43,9 @@ public class AuthenticationController {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
+	@Autowired
+	private AdminRepository adminRepository;
+	
 	@CrossOrigin
 	@PostMapping("/register")
 	public ResponseEntity<AuthenticationResponse> register(@RequestBody UserEntity request){
@@ -57,6 +61,8 @@ public class AuthenticationController {
 				return ResponseEntity.ok(authService.authenticate(request));
 		
 	}
+	
+	
 	
 	@CrossOrigin
 	@GetMapping("/total-user-count")
@@ -169,6 +175,12 @@ public class AuthenticationController {
 	@GetMapping("/getallemployee")
 	public List<EmployeeEntity> getAllEmployee(){
 		return employeeRepository.findAll();
+	}
+	
+	@CrossOrigin
+	@GetMapping("/getalladmin")
+	public List<AdminEntity> getAllAdmin(){
+		return adminRepository.findAll();
 	}
 	
 	@CrossOrigin

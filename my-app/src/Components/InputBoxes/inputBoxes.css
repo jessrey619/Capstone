@@ -15,7 +15,8 @@
 }
 
 .data-input label {
-  margin-right: 10px;
+  margin-right: 5px;
+  padding: 3px;
 }
 
 /* Toggle CSS */
@@ -100,9 +101,27 @@ input:checked + .slider:before {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px; 
+  margin-left: 10px;
 }
 
 .save-button:hover {
   background-color: #0056b3; 
+}
+
+/* Additional Styles for the Input Box Container */
+.input-box-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.input-save-container {
+  display: flex;
+  align-items: center;
+}
+
+.input-save-container input {
+  margin-right: 10px;
 }

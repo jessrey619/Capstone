@@ -1,62 +1,62 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import './inputBoxes.css';
 
-function InputBoxes({ labels, className, includeCheckboxes, totalSpace, onSave, parkingAreaId }) {
+function InputBoxes({ labels, className, totalSpace, isActive, parkingAreaId, onTotalSpaceChange, onToggleActive, onSave }) {
+  const [localTotalSpace, setLocalTotalSpace] = useState(totalSpace);
+  const [localIsActive, setLocalIsActive] = useState(isActive);
 
-  const [toggleStates, setToggleStates] = useState(labels.map(() => false));
+  useEffect(() => {
+    setLocalTotalSpace(totalSpace);
+  }, [totalSpace]);
 
-  const toggleSwitch = (index) => {
-    setToggleStates(prevStates => {
-      const newStates = [...prevStates];
-      newStates[index] = !newStates[index];
-      return newStates;
+  useEffect(() => {
+    setLocalIsActive(isActive);
+  }, [isActive]);
+
+  const handleTotalSpaceChange = (e) => {
+    const value = e.target.value;
+    setLocalTotalSpace(value);
+    onTotalSpaceChange(parkingAreaId, value);
+  };
+
+  const handleToggleActive = () => {
+    setLocalIsActive(!localIsActive);
+    onToggleActive(parkingAreaId, localIsActive);
+  };
+
+  const handleSave = () => {
+    onSave(parkingAreaId, localTotalSpace);
+    Swal.fire({
+      title: 'Success',
+      text: 'Total space updated successfully!',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    }).then(() => {
+      setLocalTotalSpace('');
     });
   };
 
-
-  const handleSave = () => {
-    const updatedData = {
-      totalSpace: totalSpace,
-      isActive: toggleStates[labels.findIndex(label => label === 'Is Active')],
-    };
-
-    axios.put(`/parking/${parkingAreaId}`, updatedData)
-      .then(response => {
-        console.log(response.data);
-        onSave(); 
-      })
-      .catch(error => {
-        console.error('Error updating parking area:', error);
-
-      });
-  };
-
   return (
-    <div className={`input-container ${className}`}>
-      {labels.map((label, index) => (
+    <div className={className}>
+      {labels && labels.map((label, index) => (
         <div className='data-input' key={index}>
           <label>{label}</label>
-          {label.includes('Parking Area') && (
+          <div className="input-save-container">
             <label className="toggle-switch">
-              <input type="checkbox" checked={toggleStates[index]} onChange={() => toggleSwitch(index)} />
+              <input type="checkbox" checked={localIsActive} onChange={handleToggleActive} />
               <span className="slider"></span>
             </label>
-          )}
-          {label !== 'Name of Parking Area' && <input type="number" />} 
+            <input 
+              type="number" 
+              value={localTotalSpace} 
+              onChange={handleTotalSpaceChange} 
+              className="total-space-input"
+            />
+            <button className="save-button" onClick={handleSave}>Save</button>
+          </div>
         </div>
       ))}
-      {includeCheckboxes && (
-        <div className="data-input checkbox-container">
-          <label>
-            <input type="checkbox" /> Allow Cars
-          </label>
-          <label>
-            <input type="checkbox" /> Allow Motorcycles
-          </label>
-        </div>
-      )}
-      <button className="save-button" onClick={handleSave}>Save</button>
     </div>
   );
 }

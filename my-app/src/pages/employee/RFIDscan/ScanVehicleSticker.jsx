@@ -144,7 +144,7 @@ function VehicleDisplay({ title }) {
 function Scans() {
     return (
         <div className="RFIDbg">
-            <div className="top">
+            <div className="topHeader">
                 <img src="/citu-logoSmall.png" alt="CITULogo" className="topImage" />
             </div>
 
@@ -152,7 +152,7 @@ function Scans() {
                 <img src="/RFID_background.png" alt="background" className="bgRFID" />
             </div>
 
-            <div className="display">
+            <div className="displayUI">
                 <VehicleDisplay title="First Display" />
                 <VehicleDisplay title="Second Display" />
             </div>

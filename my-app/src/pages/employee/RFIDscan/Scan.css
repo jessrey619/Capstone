@@ -14,7 +14,7 @@
 
 }
 
-.top{
+.topHeader{
     top:0;
     background-color:rgb(255, 255, 255);
     height: max-content;
@@ -28,7 +28,7 @@
     
 }
 
-.display{
+.displayUI{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -317,7 +317,7 @@ margin: 12% 0 auto auto;
 }
 
 @media (max-width: 769px) {
-    .display {
+    .displayUI {
         display: flex;
         flex-direction: column;
         justify-content: space-between;

@@ -131,7 +131,7 @@ function ApplicationHistory(){
                                 <button className="appBtn">
                                     <img src="/appFormIcon.svg" alt="App-icon" className="btn-icon" />
                                     <p
-                                        className="btn-text"
+                                        className="appBtn-text"
                                         onClick={() => {handleView(applicant.id)}}
                                     >
                                         View

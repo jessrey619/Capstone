@@ -31,7 +31,7 @@
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.25);
 }
 
-.total {    
+.totalContain {    
   margin: auto;
   align-items: center;
   justify-content: space-evenly;
@@ -135,7 +135,7 @@
     margin-left: 130px;
 }
 
-.outer{
+.outerLogs{
     background-color: #8A252C;
     max-height: 500vh;
     height: 65vh;
@@ -151,7 +151,7 @@
     align-items: center;
 }
 
-.inner{
+.innerLogs{
     background-color: #EFEFEF;
     width:70vw;
     height: 61vh;
@@ -164,7 +164,7 @@
 
 /*TABLE*/
 
-.container th h1 {
+.tb-container th h1 {
     font-weight: bold;
     font-size: 1em;
     text-align: left;
@@ -173,7 +173,7 @@
     font-family: 'Kumbh Sans', sans-serif;
 }
 
-.container td {
+.tb-container td {
     font-weight: normal;
     font-size: 1em;
 -webkit-box-shadow: 0 2px 2px -2px #0E1119;
@@ -181,14 +181,14 @@
           box-shadow: 0 2px 2px -2px #0E1119;
 }
 
-.container tr {
+.tb-container tr {
     max-height: 70vh;
     max-width: 70vw;
     height: 5vh;
     color: #000000;
 }
 
-.container {
+.tb-container {
     text-align: center;
     max-width: 100vw;
     width: 67vw;
@@ -212,35 +212,35 @@
     pointer-events: auto;
 }
 
-.container td {
+.tb-container td {
   padding: 5px;
   border-radius: 2px;
   height: 5vh;
 }
 
-.container tr:nth-child(odd) {
+.tb-container tr:nth-child(odd) {
     background-color: #d1d1d1;
 }
 
 /* Background-color of the even rows */
-.container tr:nth-child(even)  {
+.tb-container tr:nth-child(even)  {
     background-color: #E5E5E5;
 }
 
-.container th {
+.tb-container th {
     background-color: #F4C522;
     padding: 10px;
     top: 0;
     border-radius: 2px;
 }
-.container thead{
+.tb-container thead{
     /* position: -webkit-sticky; */
     position: sticky;
     top: 0;
 }
-.container td:first-child { color: #000000; }
+.tb-container td:first-child { color: #000000; }
 
-.container tr:hover {
+.tb-container tr:hover {
  background-color: #f4c7228d;
  color: #000000;
 -webkit-box-shadow: 0 6px 6px -6px #0E1119;
@@ -248,7 +248,7 @@
           box-shadow: 0 6px 6px -6px #0E1119;
 }
 
-.container td:hover {
+.tb-container td:hover {
 background-color: #F4C522;
 color: #000000;
 font-weight: bold;
@@ -264,7 +264,7 @@ transition-timing-function: line;
 /*RESPONSIVENESS*/
 
 @media (max-width: 1024px) {
-    .total {    
+    .totalContain {    
      margin: 0 auto;
       }
       .liveContainer {
@@ -292,13 +292,13 @@ transition-timing-function: line;
     padding: 1px;
     font-size: 1em;
  }
-    .outer{
+    .outerLogs{
         width:71vw;
         margin-right: 50px;
         margin-bottom: 70px;
         
     }
-    .inner{
+    .innerLogs{
        
         width:68vw;
         overflow: hidden;
@@ -315,14 +315,14 @@ transition-timing-function: line;
     .Btitle {
         margin-right: 300px;
     }
-    .container {
+    .tb-container {
         width: 100vw;
         margin: 0 auto;
         max-height: 300px; 
         height: 70px;
         margin-top: 5px;
     }
-    .container td, .container th, .container tr{
+    .tb-container td, .tb-container th, .tb-container tr{
         padding-top: 2px;
         padding-bottom: 2px;
         font-size: 15px;
@@ -340,7 +340,7 @@ transition-timing-function: line;
 
 
 @media (max-width: 768px) {
-    .total {    
+    .totalContain {    
         margin: 0 auto;
         flex-direction: column;
         display: flex;
@@ -385,7 +385,7 @@ transition-timing-function: line;
     font-size: 1em;
  }
  
- .outer{
+ .outerLogs{
         width:95vw;
         max-height: fit-content;
         margin: 0 auto;
@@ -393,7 +393,7 @@ transition-timing-function: line;
         margin-bottom: 50px;
         
     }
-    .inner{
+    .innerLogs{
         width: 90vw;
         max-width: 90vw;
         max-height: min-content;
@@ -421,7 +421,7 @@ transition-timing-function: line;
     }
 
   
-.container {
+.tb-container {
     max-width: 100vw;
     width: 67vw;
     max-height: 80vh;
@@ -436,7 +436,7 @@ transition-timing-function: line;
     height: 56vh;
    
 }
-    .container td, .container th, .container tr{
+    .tb-container td, .tb-container th, .tb-container tr{
         padding-top: 2px;
         padding-bottom: 2px;
         font-size: 14px;

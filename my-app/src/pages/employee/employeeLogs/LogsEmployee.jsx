@@ -71,7 +71,7 @@ function LogsEmployee() {
              <img src="/background.png" alt="background" className="LogsBG" />
           <div className="liveContainer">
 
-            <div className="total">
+            <div className="totalContain">
 
             <table className="liveCount">
                 <thead>
@@ -123,8 +123,8 @@ function LogsEmployee() {
           </div>
             <div>
                 <h1 className="Btitle">Logs</h1>
-                <div className="outer">
-                    <div className="inner">
+                <div className="outerLogs">
+                    <div className="innerLogs">
                          
                         {/* <div className="filterPart">
                         <label htmlFor="filter">Filter By:</label>
@@ -135,7 +135,7 @@ function LogsEmployee() {
                         </select>
                         </div> */}
                         <div className="logs">
-                    <table className="container">
+                    <table className="tb-container">
     <thead>
         <tr>
             <th><h1>Log ID</h1></th>

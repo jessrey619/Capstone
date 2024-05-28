@@ -32,14 +32,14 @@
   }
 
   /* FORM */
-  .tb {
+  /* .tb {
     display: table;
     width:2%;
     height: 22vh;
     margin: -11% auto auto -10%;
     align-items: center;
     padding:5px;
-  }
+  } */
   
   .td , .td-input{
     display: table-cell;
@@ -59,7 +59,7 @@
   position: absolute;
   top: 29%;
   left: 60%;
-  width: 35vw;
+  width: 33vw;
   height: 10vh;
   padding: 35px;
   margin: 0 auto 0 auto;
@@ -75,28 +75,36 @@
   padding: 5px;
   width: fit-content;
   height: fit-content;
+  font-family: 'Kumbh Sans', sans-serif;
 }
 
 #searchText{
-  width: 35%;
+  width: 23vw;
   height: 15vh;
   font-size: 2.7em;
   line-height: 1;
+  margin-top:-3%;
   background-color: #00000000;
   border: none;
+  font-family: 'Kumbh Sans', sans-serif;
 }
 
 #searchText input[type="text"]::placeholder {
   color: #878787;
+  font-family: 'Kumbh Sans', sans-serif;
 }
 
 #s-cover {
-  width: 1px;
-  padding-left: 35px;
+  width: fit-content;
+  padding: 3px;
+  font-family: 'Kumbh Sans', sans-serif;
+  transform: translateY(-20%);
+  height: 5vh;
 }
 
+/* SEARCH BTN */
 .td{
-  transform: translateX(10%);
+  transform: translateX(-15%);
 }
 .td button{
   position: relative;
@@ -104,19 +112,12 @@
   width: 10vw;
   height: 15vh;
   cursor: pointer;
+  margin: auto 20% auto auto;
 }
-/* .btnHistory button {
-  position: relative;
-  display: block;
-  width: 5vw;
-  height: 15vh;
-  margin-top: -20%;
-  cursor: pointer;
-} */
 
 #s-circle {
   position: relative;
-  top: 3%;
+  top: -6%;
   left: 35%;
   width: 27%;
   height: 33%;
@@ -130,8 +131,8 @@
 
 .btnHistory span {
   position: absolute;
-  top: 80%;
-  left: 65%;
+  top: 70%;
+  left: 63%;
   display: block;
   width: 45px;
   height: 15px;
@@ -156,7 +157,7 @@
 }
 
 #s-cover:hover #s-circle {
-  top: 15%;
+  top: 10%;
   left:25%;
   width: 60%;
   height: 15%;
@@ -198,7 +199,7 @@
   padding: 10px 10px;
   text-decoration: none;
   display:flex;
-  margin: 2px 9px;
+  margin: 0 auto;
   left: 33%; 
   cursor: pointer; 
   border-radius: 5px; 
@@ -209,13 +210,13 @@
 }
 
 .appBtn:hover {
-  background-color: #ddb522;
+  background-color: #c6a42b;
 }
 
 .btn-icon {
   width: fit-content; 
   height: 4vh; 
-  margin: -7px 5px auto 8px;
+  margin: -7% 7% auto 5%;
   align-items: center;
  }
 
@@ -224,7 +225,7 @@
   color: rgb(0, 0, 0);
   font-weight: bold; 
   text-align: center; 
-  margin-top:-3%;
+  margin-top: 1%;
 }
 /* CLEAR BUTTON */
 
@@ -247,6 +248,7 @@
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.268);
   font-family: 'Kumbh Sans', sans-serif;
   border: none;
+  transition: background 0.5s ease, transform 0.5s ease;
 }
 .clear p {
   color: #ffffff;
@@ -254,7 +256,12 @@
   width: 10vw;
   font-size: 2.5em;
   font-weight: bold;
+}
 
+.clear button:hover{
+  background-color: #8A252C;
+  color: #ffffff;
+  transform: scale(1.1)
 }
 /* Table Styles */
 
@@ -370,27 +377,81 @@
   font-size: 2.3em;
 }
 
-input[type="text"] {
-  width: 110%;
+#searchText {
+  width: 100%;
   height: 7vh;
   font-size: 2.6em;
   line-height: 1;
+  margin-bottom: 15%;
 }
 
 #cover {
-  top: 35%;
+  top: 30%;
   left: 53%;
-  transform: scale(0.47);
+  height: 5vh;
+  transform: scale(0.45);
 }
 
-button {
+.td button {
   position: relative;
   display: block;
-  width: 7vw;
+  width: 10vw;
   height: 15vh;
-  margin-top: -20%;
-  left: 15%;
+  margin: 0 auto;
+  left: -2%;
   cursor: pointer;
+}
+
+#s-circle {
+  top: -20%;
+  left: 25%;
+  width: 30%;
+  height: 27%;
+  margin-top: 0;
+  transition: 0.5s ease all;
+}
+
+.btnHistory span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 45px;
+  height: 15px;
+  background-color: transparent;
+  border-radius: 10px;
+  transform: rotateZ(52deg);
+  transition: 0.5s ease all;
+}
+
+.btnHistory span:before,
+.btnHistory span:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80%;
+  height: 15px;
+  background-color: #000000;
+  border-radius: 10px;
+  transform: rotateZ(0);
+  transition: 0.5s ease all;
+}
+
+#s-cover:hover #s-circle {
+  top: 20%;
+  left: 20%;
+  width: 65%;
+  height: 15%;
+  border-width: 0;
+  background-color: #000000;
+  border-radius: 20px;
+}
+
+s-cover:hover span {
+  top: 70%;
+  left: 70%;
+
 }
 }
 
@@ -398,6 +459,7 @@ button {
   .fl-table {
       display: block;
       width: 100%;
+      margin-top: -1%;
   }
   .table-wrapper:before{
       content: "Scroll horizontally >";
@@ -475,20 +537,23 @@ button {
     left: 48%;
     right: 40%;
     width: 45vw;
-    height: 15vh;
-    transform: scale(0.45)
+    height: 10vh;
+    transform: scale(0.43)
   }
-
-  .td input[type="text"] {
-    width: 125%;
-    height: 6vh;
-    font-size: 2.5em;
+  #searchText{
+    width: 30vw;
+    height: 15vh;
+    font-size: 2.7em;
     line-height: 1;
+    margin-top:-3%;
+    background-color: #00000000;
+    border: none;
+    font-family: 'Kumbh Sans', sans-serif;
   }
   
   
 .appBtn {
-  margin: -3% auto auto 15%;
+  margin: -3% auto auto auto;
   max-height: 5.5vh;
   max-width: 15vw;
   width: 9vw;
@@ -508,10 +573,10 @@ button {
 .td button {
   position: relative;
   display: block;
-  width: 10vw;
-  height: 15vh;
-  margin-bottom: -55%;
-  margin-top: -70%;
+  width: 15vw;
+  height: 20vh;
+  margin-bottom: -40%;
+  margin-top: -40%;
   margin-left: 16%;
   cursor: pointer;
 }
@@ -520,7 +585,7 @@ button {
   width: 13vw;
   height: 12vh;
   left: 135%;
-  transform: translateY(30%);
+  transform: translateY(-40%);
 }
 .clear p {
   width: 10vw;
@@ -529,12 +594,65 @@ button {
   font-size: 2.3em;
 }
 
+#s-circle {
+  top: -12%;
+  left: 25%;
+  width: 20%;
+  height: 18%;
+  margin-top: 0;
+  transition: 0.5s ease all;
 }
 
-@media (max-width: 428px){
-  section h1 {
-    font-size: 2.3em;
-    margin: 25px auto auto auto;
+.btnHistory span {
+  position: absolute;
+  top: 55%;
+  left: 45%;
+  display: block;
+  width: 50px;
+  height: 13px;
+  background-color: transparent;
+  border-radius: 10px;
+  transform: rotateZ(52deg);
+  transition: 0.5s ease all;
+}
+
+.btnHistory span:before,
+.btnHistory span:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80%;
+  height: 15px;
+  background-color: #000000;
+  border-radius: 10px;
+  transform: rotateZ(0);
+  transition: 0.5s ease all;
+}
+
+#s-cover:hover #s-circle {
+  top: 5%;
+  left: 20%;
+  width: 65%;
+  height: 13%;
+  border-width: 0;
+  background-color: #000000;
+  border-radius: 20px;
+}
+#s-cover:hover span {
+  top: 57%;
+  left: 70%;
+}
+}
+
+@media (max-width: 427px){
+  .historyBG{
+    padding-left: 10%;
+    padding-top: 25%;
+  }
+  .HistoryTitle h1 {
+    font-size: 1.8em;
+    margin: 2% auto auto auto;
     text-align: center;
     font-family: 'Kumbh Sans', sans-serif;
     color: #000000;
@@ -553,9 +671,8 @@ button {
     padding: 0 0 10px;
 }
 .table-wrapper{
-  margin-top: 35%;
-  margin-left: 5%;
-  width: 90%;
+  margin: 45% 55% auto auto;
+  width: 95%;
 }
 .fl-table thead, .fl-table tbody, .fl-table thead th {
     display: block;
@@ -595,36 +712,54 @@ button {
 
 
 #cover {
-  width: 70vw;
-  height: 15vh;
+  width: 90vw;
+  height: 9vh;
   padding: 35px;
-  margin: -25% -40% 0 auto;
+  margin: 2% -47% 0 auto;
   background-color: #f8f8f8;
   border-radius: 20px;
   box-shadow: 0 10px 30px #ff969d, 0 0 0 20px #8A252C;
-  transform: scale(0.42);
+  transform: scale(0.35);
 }
 
-button span {
-  position: absolute;
-  top: 60%;
-  left: 35%;
+.td button {
+  position: relative;
   display: block;
-  width: 45px;
-  height: 15px;
+  width: 25vw;
+  height: 20vh;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+#s-circle {
+  top: -12%;
+  left: 25%;
+  width: 20%;
+  height: 18%;
+  margin-top: 0;
+  transition: 0.5s ease all;
+}
+
+.btnHistory span {
+  position: absolute;
+  top: 55%;
+  left: 45%;
+  display: block;
+  width: 50px;
+  height: 13px;
   background-color: transparent;
   border-radius: 10px;
   transform: rotateZ(52deg);
   transition: 0.5s ease all;
 }
 
-button span:before,
-button span:after {
+.btnHistory span:before,
+.btnHistory span:after {
   content: "";
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 40px;
+  width: 80%;
   height: 15px;
   background-color: #000000;
   border-radius: 10px;
@@ -633,22 +768,36 @@ button span:after {
 }
 
 #s-cover:hover #s-circle {
-  top: -1%;
-  width: 61px;
-  height: 15px;
+  top: 5%;
+  left: 20%;
+  width: 65%;
+  height: 13%;
   border-width: 0;
   background-color: #000000;
   border-radius: 20px;
 }
-
 #s-cover:hover span {
-  top: 52%;
-  left: 56%;
-  width: 25px;
-  margin-top: -9px;
-  transform: rotateZ(0);
+  top: 57%;
+  left: 70%;
 }
 
+.td-input{
+  margin: 0% auto;
+  transform: translate(0%, -20%);
+  height: fit-content;
+}
+
+#searchText{
+  width: 65vw;
+  height: 10vh;
+  font-size: 2.7em;
+  align-items: center;
+  margin: 0 auto;
+  line-height: 1;
+  background-color: #00000000;
+  border: none;
+  font-family: 'Kumbh Sans', sans-serif;
+}
   .appBtn {
     max-height: 5.5vh;
     max-width: 15vw;
@@ -658,20 +807,16 @@ button span:after {
     display: none;
    }
    .btn-text {
-    margin-top: -8%;
-    margin-left: 16%;
+    margin: 0 5% auto -25%;
   }
   .clear button{
-    width: 23vw;
-    max-width:20vw;
+    width: 34vw;
     height: 12vh;
-    left: 135%;
-    transform: translateY(30%);
+    margin: 0% auto 0% -50%;
   }
   .clear p {
     width: 10vw;
     text-align: center;
-    margin-left: 4%;
-    font-size: 2.3em;
+    font-size: 2.5em;
   }
 } 

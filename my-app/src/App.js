@@ -164,11 +164,13 @@ function App() {
 
         <Route element={<AdminRoutes/>}>
             <Route path="/admin-dashboard" element={<Dashboard/>} />
-            <Route path="/configuration" element={<Configuration />} />
-            <Route path="/account-expiration" element={<AccountExpiration />} />
-            <Route path="/application-list" element={<ApplicationList />} />
-            <Route path="/sticker-pricing" element={<StickerPricing />} />
-            <Route path="/user-management" element={<UserManagement />} />
+            <Route path="application-list" element={<ApplicationList />} />
+            <Route path="/configuration" element={<Configuration />}>
+              <Route path="sticker-pricing" element={<StickerPricing />} />
+              <Route path="parking-management" element={<ParkingManagement />} />
+              <Route path="user-management" element={<UserManagement />} />
+              <Route path="account-expiration" element={<AccountExpiration />} />
+            </Route>
         </Route>
           
           

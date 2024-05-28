@@ -68,7 +68,9 @@ const AdminRoutes = () => {
   <div className="admin-layout">
     <Header/>
     <SideBar />
-    <Outlet/>
+    <main>
+      <Outlet />
+    </main>
 </div>) : <Navigate to="/admin-login" />;
 };
 

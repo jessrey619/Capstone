@@ -1,7 +1,3 @@
-import AdminHeader from "../../../components/AdminHeader/AdminHeader";
-import AdminSidebar from "../../../components/AdminSidebar/AdminSidebar";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Link from "@mui/material/Link";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, Snackbar } from "@mui/material";
 
@@ -140,30 +136,11 @@ function AccountExpiration() {
 
   return (
     <>
-      <AdminHeader />
-      <AdminSidebar />
-      <main className="admin-container">
-        {/* Breadcrumbs Navigation */}
-        <div role="presentation">
-          <Breadcrumbs
-            aria-label="breadcrumb"
-            style={{ fontSize: "2em", marginTop: "1em" }}
-          >
-            <Link
-              underline="hover"
-              color="inherit"
-              href="/configuration"
-              style={{ color: "#8A252C" }}
-            >
-              Configuration
-            </Link>
-            <span>Account Expiration</span>
-          </Breadcrumbs>
-        </div>
+      <main>
 
         {/* Some Text */}
         <div className="accexp-info">
-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum tortor at lorem faucibus condimentum. Etiam id bibendum nibh. Vestibulum et turpis cursus.
         </div>
 
         <div className="accexp-input-container">

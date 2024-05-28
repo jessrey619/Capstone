@@ -27,10 +27,10 @@ import PrivateRoutes from "./Utils/PrivateRoutes";
 import EmployeeRoutes from "./Utils/EmployeeRoutes";
 import Profile from "./pages/employee/application/Profile"; // Import the Profile component
 import AccountExpiration from "./pages/Admin/AccountExpiration/AccountExpiration";
-import ApplicationList from "./pages/Admin/ApplicationList/ApplicationList";
-import Configuration from "./pages/Admin/Configuration/Configuration";
-import StickerPricing from "./pages/Admin/StickerPricing/StickerPricing";
-import UserManagement from "./pages/Admin/UserManagement/UserManagement";
+// import ApplicationList from "./pages/Admin/ApplicationList/ApplicationList";
+// import Configuration from "./pages/Admin/Configuration/Configuration";
+// import StickerPricing from "./pages/Admin/StickerPricing/StickerPricing";
+// import UserManagement from "./pages/Admin/UserManagement/UserManagement";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import "./pages/Admin/Admin.css";
 import EmployeeProfilePage from "./pages/employee/employee_profile/employee_profilepage";
@@ -40,6 +40,32 @@ import AdminPage from "./pages/Admin/AdminLogin/AdminLogin";
 import Scans from "./pages/employee/RFIDscan/ScanVehicleSticker";
 import ApplicationHistory from "./pages/employee/history/History_User";
 import AdminRoutes from "./Utils/AdminRoutes";
+
+//phoebe imports
+import 'bootstrap-icons/font/bootstrap-icons.css'
+// import 'remixicon/fonts/remixicon.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+
+import Header from './components/AdminHeader/Header';
+import SideBar from './components/SideBar/SideBar';
+import Dashboard from './pages/Admin/Dashboard'
+import ApplicationList from './pages/Admin/ApplicationList'
+import Logs from './pages/Admin/Logs'
+import Statistics from './pages/Admin/Statistics'
+import ParkingArea from './pages/Admin/ParkingArea'
+import Configuration from './pages/Admin/Configuration';
+import StickerPricing from './pages/Admin/StickerPricing';
+import UserManagement from './pages/Admin/UserManagement';
+import ParkingManagement from './pages/Admin/ParkingManagement';
+import AdminHeader from "./components/AdminHeader/AdminHeader";
+import LogsEmployee from "./pages/employee/employeeLogs/LogsEmployee";
+
+// import AccountExpiration from './pages/Admin/AccountExpiration';
+
+
+
+
 function App() {
   const [isToken, setIsToken] = useState(false);
   const token = localStorage.getItem('token');
@@ -124,7 +150,7 @@ function App() {
   };
 
   return (
-
+    <>
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={!isToken ? <LoginPage /> : getDefaultRoute()} />
@@ -137,7 +163,7 @@ function App() {
         <Route path="/admin-login" element={<AdminPage />} />
 
         <Route element={<AdminRoutes/>}>
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/admin-dashboard" element={<Dashboard/>} />
             <Route path="/configuration" element={<Configuration />} />
             <Route path="/account-expiration" element={<AccountExpiration />} />
             <Route path="/application-list" element={<ApplicationList />} />
@@ -159,21 +185,27 @@ function App() {
           <Route path="/proofpay" element={<ProofPayment />} />
           <Route path="/selectorcr" element={<SelectOrCr />} />
           <Route path="/verifypay" element={<VerifyPayment />} />
-          <Route path="/view-logs" element={<Scans/>} />
+          <Route path="/view-logs" element={<LogsEmployee/>} />
           <Route path="/history" element={<ApplicationHistory />} />
+          <Route path="/scan-rfid" element={<Scans/>} />
 
         </Route>
 
         {/* Private User Routes */}
         <Route element={<PrivateRoutes />}>
-          <Route path="/homepage" element={<UserHomepage />} />
-          <Route path="/registration" element={<RegistrationForm />} />
-          <Route path="/choose-user-type" element={<ChooseUserTypeModal />} />
-          <Route path="/applist" element={<UserStatus />} />
-          <Route path="/invoice" element={<Invoice />} />
-          <Route path="/profile" element={<UserProfilePage />} />
+           <Route path='/application-list' element={<ApplicationList/>} />
+          <Route path='/logs' element={<Logs/>} />
+          <Route path='/statistics' element={<Statistics/>} />
+          <Route path='/parking-area' element={<ParkingArea/>} />
+          <Route path='/configuration' element={<Configuration />}/>
+          <Route path='/configuration/sticker-pricing' element={<StickerPricing />} />
+          <Route path="/configuration/user-management" element={<UserManagement />} />
+          <Route path="/configuration/parking-management" element={<ParkingManagement />} />
+          <Route path="/configuration/account-expiration" element={<AccountExpiration />} />
         </Route>
       </Routes>
+    </>
+     
 
   );
 }

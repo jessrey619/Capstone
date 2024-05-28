@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-// import './HistoryUser.css';
+import './HistoryUser.css';
 import axios from "axios";
-// import TheFooter from "../../../Components/Footer/Footer"
-// import TheHeader from "../../../Components/Header/UserHeader";
+import TheFooter from "../../../components/Footer/Footer"
+// import TheHeader from "../../../components/Header/UserHeader";
+import EmployeeSidebar from "../../../components/Navbar/EmployeeSidebar/employeeSidebar";
 // import Header from "../Components/Header/Header";
-// import EmployeeSidebar from "../../../Components/Navbar/Employee_SideBar/employeeSidebar";
 
 
 function ApplicationHistory(){
@@ -75,17 +75,20 @@ function ApplicationHistory(){
           {/* <TheHeader/> */}
         </div>
 
+            <EmployeeSidebar style={{ position: 'fixed', top: '4rem', left: 0, bottom: 0, zIndex: 500 }} />
+
+        
         <div className="historyBG">
   
-        {/* <EmployeeSidebar/> */}
+        
         <div>
         <img src="/background.png" alt="background" className="backgroundHistory" />
 
         <section className="HistoryTitle">
             <h1>Application History</h1>
         </section>
-            <div id="cover">
-                <div className="tb">
+            <div id="cover" classname = "TheSubmit">
+                <div>
                     <div className="td-input">
                     <input
                           
@@ -131,7 +134,7 @@ function ApplicationHistory(){
                                 <button className="appBtn">
                                     <img src="/appFormIcon.svg" alt="App-icon" className="btn-icon" />
                                     <p
-                                        className="btn-text"
+                                        className="appBtn-text"
                                         onClick={() => {handleView(applicant.id)}}
                                     >
                                         View
@@ -146,7 +149,7 @@ function ApplicationHistory(){
         </div>
     </div>
         <div>
-        {/* <TheFooter/> */}
+        <TheFooter/>
         </div> 
 </>
     );

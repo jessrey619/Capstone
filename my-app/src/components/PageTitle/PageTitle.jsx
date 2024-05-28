@@ -1,6 +1,6 @@
 import React from 'react';
 import './pageTitle.css';
-import Breadcrumb from './breadcrumb';
+import Breadcrumb from '../Main/breadcrumb';
 
 function PageTitle({ page }) {
   return (

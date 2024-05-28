@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../Components/Main/main.css';
-import CardsContainer from '../../Components/Card/CardsContainer'; 
-import Slider from '../../Components/Slider/Slider';
+import '../../components/Main/main.css';
+import CardsContainer from '../../components/Card/CardsContainer'; 
+import Slider from '../../components/Slider/Slider';
 
 function UserManagement() {
   const [userCounts, setUserCounts] = useState({

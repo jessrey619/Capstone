@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../Components/Main/main.css';
-import PageTitle from '../../Components/Main/PageTitle';
-import CardsContainer from '../../Components/Card/CardsContainer'; // Ensure this import path is correct
+import '../../components/Main/main.css';
+import PageTitle from '../../components/PageTitle/PageTitle';
+import CardsContainer from '../../components/Card/CardsContainer'; // Ensure this import path is correct
+import AdminHeader from '../../components/AdminHeader/AdminHeader';
 
 function Dashboard() {
   const [vehicleCounts, setVehicleCounts] = useState({
@@ -35,12 +36,17 @@ function Dashboard() {
   ];
 
   return (
-    <main id='main' className='main'>
-      <PageTitle page="Dashboard" />
+    
+    <>
+      
+      <main id='main' className='main'>
+      <PageTitle page="Dashboard"/>
       <section className='dashboard section'>
         <CardsContainer cards={cardsData} />
       </section>
     </main>
+    </>
+    
   );
 }
 

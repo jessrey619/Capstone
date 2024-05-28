@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../Components/Main/main.css';
-import StickerPricingCard from '../../Components/Card/StickerPricingCard';
+import '../../components/Main/main.css';
+import StickerPricingCard from '../../components/Card/StickerPricingCard';
 import Swal from 'sweetalert2';
+import Header from '../../components/AdminHeader/Header';
 
 function StickerPricing() {
   const [prices, setPrices] = useState({
@@ -94,6 +95,7 @@ function StickerPricing() {
   }
 
   return (
+    <>
     <div className="card-container">
       <StickerPricingCard
         title="Faculty"
@@ -110,6 +112,9 @@ function StickerPricing() {
         onSave={handleSave}
       />
     </div>
+    
+    </>
+    
   );
 }
 

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
+import AdminHeader from "../components/AdminHeader/AdminHeader";
+import SideBar from "../components/SideBar/SideBar";
+import Header from "../components/AdminHeader/Header";
 
 const AdminRoutes = () => {
   const token = localStorage.getItem('token');
@@ -61,7 +64,12 @@ const AdminRoutes = () => {
     }
   }, [role]);
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/admin-login" />;
+  return isAuthenticated ? (
+  <div className="admin-layout">
+    <Header/>
+    <SideBar />
+    <Outlet/>
+</div>) : <Navigate to="/admin-login" />;
 };
 
 export default AdminRoutes;

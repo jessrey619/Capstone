@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.test.test.Entity.ParkingAreaEntity;
+import com.test.test.Repository.ParkingAreaRepository;
 import com.test.test.Service.ParkingAreaService;
 
 import java.util.List;
@@ -15,6 +16,9 @@ public class ParkingAreaController {
 
     @Autowired
     private ParkingAreaService parkingAreaService;
+    
+    @Autowired
+    private ParkingAreaRepository parkingAreaRepository;
 
     @PostMapping("/create")
     public ResponseEntity<String> createParkingArea(@RequestBody ParkingAreaEntity parkingArea) {
@@ -22,16 +26,38 @@ public class ParkingAreaController {
         return ResponseEntity.ok(message);
     }
     
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<String> updateParkingArea(@PathVariable int id, @RequestBody ParkingAreaEntity parkingArea) {
         parkingArea.setId(id); // Set the ID from the path variable
         String message = parkingAreaService.updateParkingArea(parkingArea);
         return ResponseEntity.ok(message);
     }
+    
+    @CrossOrigin
+    @PutMapping("/update-total-space/{id}")
+    public ResponseEntity<String> updateParkingArea(@PathVariable int id, @RequestParam int totalSpace) {
+        String message = parkingAreaService.updateTotalSpace(id, totalSpace);
+        return ResponseEntity.ok(message);
+    }
+    
+    
+    
+    @CrossOrigin
+    @PutMapping("/update-active-status/{id}")
+    public ResponseEntity<String> updateActiveStatus(@PathVariable int id, @RequestParam boolean activeStatus) {
+        String message = parkingAreaService.updateActiveStatus(id, activeStatus);
+        return ResponseEntity.ok(message);
+    }
 
     @GetMapping("/active")
     public List<ParkingAreaEntity> findAllActiveParkingAreas() {
         return parkingAreaService.findAllActiveParkingAreas();
+    }
+    
+    @GetMapping("/all")
+    public List<ParkingAreaEntity> findAll() {
+        return parkingAreaRepository.findAll();
     }
     
     @GetMapping("/total-available-space")

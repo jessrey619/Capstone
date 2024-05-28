@@ -5,6 +5,7 @@
     font-family: 'Kumbh Sans', sans-serif;
     max-height: max-content;
     background-color:rgb(255, 255, 255);
+    
 }
 
 
@@ -14,7 +15,7 @@
 
 }
 
-.top{
+.topHeader{
     top:0;
     background-color:rgb(255, 255, 255);
     height: max-content;
@@ -28,16 +29,17 @@
     
 }
 
-.display{
+.displayUI{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin: auto;
     position: absolute; 
-    width: 88vw; /* Adjust the width as needed */  
-    top: 8%; /* Center vertically */
-    left: 6%;
+    width: 55vw; 
+    top: 10%; 
+    left: 15vw;
+    
 }
 
  /*CONTENT*/
@@ -65,6 +67,10 @@
     padding: 5px;
 }
 
+.duo{
+    padding: 2px;
+}
+
 .firstInner p {
     font-size: 1.6em;
     font-weight: 700;
@@ -83,8 +89,9 @@
   height: 10vh;
   font-size: 1.5em;
   line-height: 1;
+  margin-left: 2%;
   font-family: 'Kumbh Sans', sans-serif;
-  background-color: #D9D9D9;
+  background-color: #d9d9d900;
   border: none;
   box-shadow: inset ;
 }
@@ -100,7 +107,7 @@
     height: 5vh;
     cursor: pointer;
     padding: 2px;
-    margin: 3.5% auto;
+    margin: -.8% auto;
 }
 
 .stickerBtn button{
@@ -116,17 +123,76 @@
     height: 5vh;
     padding:2px
 }
+
+/* INFORMATION DISPLAY */
 .infoInput{
     background-color: #D9D9D9;
     border-radius: 5px;
     width: 25vw;
-    height: 12vh;
+    height: 10vh;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    margin: 5% auto;
+}
+
+.infoInput1{
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    width: 25vw;
+    height: 8vh;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    margin: 2% auto auto -3%;
+}
+
+.infoInput2{
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    width: 11.5vw;
+    height: 23vh;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    margin: 5% auto;
+}
+.infoInput2 p {
+    margin-top: 28%;
+}
+
+.infoInput3{
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    width: 13vw;
+    height: 10vh;
     align-items: center;
     justify-content: space-between;
     display: flex;
     flex-direction: column;
     margin: auto;
+}   
+
+.infoInput4{
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    width: 15vw;
+    height: 10vh;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}   
+.bottom-right p{
+text-align: center;
+margin: 12% 0 auto auto;
 }
+
+
 .infoInput p{
     font-weight: 700;
     font-size: 1.7em;
@@ -197,13 +263,73 @@
     padding: 5px;
 }
 
-@media (max-width: 768px) {
-    .display {
+@media(max-width:1025px){
+    
+    .stickerBtn button{
+        font-family: 'Kumbh Sans', sans-serif;
+        font-size: 1.2em;
+        background-color: #F4C522;
+        border: none;
+        box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.145);
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+        width: 8vw;
+        height: 5vh;
+        padding:2px
+    }
+    .stickerInput input[type="text"] {
+        font-size: 1.2em;
+        font-family: 'Kumbh Sans', sans-serif;
+        background-color: #d9d9d900;
+      }
+    
+    .firstInner p , .left-section p, .right-section p, .bottom-right p{
+        font-size: 1.3em;
+      }
+
+    .infoInput1 p, .infoInput2 p, .infoInput3 p ,.infoInput4 p {
+        font-size: 1.3em;
+      }
+      .top-right p{
+        width: 8vw;
+      }
+    .infoInput2 {
+        width: 11.5vw;
+        height: 18.5vh;
+    }
+    .infoInput3{
+        width: 14.5vw;
+        height: 10vh;
+        margin-left: -10%;
+    }
+    .infoInput4{
+        width: 14vw;
+        height: 10vh;
+        margin-left: -1%;
+    }
+    .bottom-right p {
+       margin: auto;
+    }
+    .infoInput2 p {
+        margin-top: 25%;
+    }
+
+    
+}
+
+@media (max-width: 769px) {
+    .scan-vehicle-employee-sidebar{
+        position: absolute;
+        top: 0vh;
+        left: -2vw;
+    }
+
+    .displayUI {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
-    
     .OuterContainer {
         width: 85vw;
         height: 90vh;
@@ -211,4 +337,147 @@
         display: relative;
         margin:10px 10px 50px auto;
     }
+    .firstInner{
+        width: 80vw;
+        height: 20vh;
+        display: flex;
+        margin: 15px auto auto auto;
+    }
+    
+    .left-section {
+        width: 30vw; 
+        height: 35vh; 
+    }
+
+    .right-section {
+        display: flex;
+        flex-direction: column;
+    }
+    .top-right, .bottom-right {
+        width: 50vw; 
+        height: 16vh; 
+        background-color:#EBEBEB; 
+    }
+    /* INPUTS */
+
+    .infoInput{
+        width: 55vw;
+        height: 10vh;
+        margin: 3.5% auto auto auto ;
+    }
+    
+    .stickerInput input[type="text"] {
+    width: 50vw;
+    height: 10vh;
+    font-size: 1.4em;
+    margin: 0 auto;
+    }
+    .stickerBtn{
+        position: relative;
+        display: flex;
+        width: max-content;
+        height: 5vh;
+        margin: -.8% auto;
+    }
+    
+    .stickerBtn button{
+        width: 10vw;
+        height: 5vh;
+        padding:2px
+    }
+    
+    .infoInput1{
+        width: 54vw;
+        height: 8vh;
+        display: flex;
+        flex-direction: column;
+        margin: 2% auto -1% -5%;
+    }
+    
+    .infoInput2{
+        width: 25vw;
+        height: 23vh;
+        margin: 3% auto;
+    }
+
+    .infoInput3{
+        width: 28vw;
+        height: 10vh;
+        margin: auto 8% auto auto;
+    }   
+    
+    .infoInput4{
+        width: 30vw;
+        height: 10vh;
+        margin: auto auto auto auto;
+    }  
+    .firstInner p , .left-section p, .right-section p, .bottom-right p{
+        font-size: 1.5em;
+      }
+
+    .infoInput1 p, .infoInput2 p, .infoInput3 p ,.infoInput4 p {
+        font-size: 1.3em;
+      }
+      .top-right p{
+        width: 15vw;
+      }
+      .bottom-right p {
+        margin: auto;
+     }
+      
+    @media (max-width:426px){
+        .firstInner p , .left-section p, .right-section p, .bottom-right p{
+            font-size: 1.4em;
+          }
+          .infoInput{
+            width: 50vw;
+            height: 10vh;
+            margin: 3.5% 5% auto auto ;
+        }
+        
+        .stickerInput input[type="text"] {
+        width: 50vw;
+        height: 10vh;
+        font-size: 1.4em;
+        margin: 0 auto auto;
+        }
+
+        .stickerBtn{
+            height: 5vh;
+            margin: 2% auto;
+        }
+        
+        .stickerBtn button{
+            width: 17vw;
+            height: 5vh;
+            padding:2px
+        }
+        
+        .infoInput1{
+            width: 50vw;
+            height: 8vh;
+            display: flex;
+            flex-direction: column;
+            margin: 4% auto -1% -5%;
+        }
+        
+        .infoInput2{
+            width: 25vw;
+            height: 20vh;
+            margin: 3% auto;
+        }
+    
+        .infoInput3{
+            width: 28vw;
+            height: 10vh;
+            margin: auto 7% auto auto;
+        }   
+        
+        .infoInput4{
+            width: 27vw;
+            height: 10vh;
+            margin: auto 6% auto auto;
+        }    
+    }
+    
 }

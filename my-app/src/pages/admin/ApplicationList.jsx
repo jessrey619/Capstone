@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import '../../Components/Main/main.css';
-import PageTitle from '../../Components/Main/PageTitle';
-import Header from '../../Components/AdminHeader/Header';
-import SideBar from '../../Components/SideBar/SideBar';
-import '../../Components/Table/table.css';
-import Filter from '../../Components/Filter/Filter';
-import Slider from '../../Components/Slider/Slider';
-import ViewModal from '../../Components/Modal/ViewModal'; 
+import '../../components/Main/main.css';
+
+import '../../components/Table/table.css';
+import Filter from '../../components/Filter/Filter';
+import Slider from '../../components/Slider/Slider';
+import ViewModal from '../../components/Modal/ViewModal'; 
+
+import Header from '../../components/Navbar/UserHeader';
+import SideBar from '../../components/SideBar/SideBar';
+import PageTitle from '../../components/PageTitle/PageTitle';
+import AdminHeader from '../../components/AdminHeader/AdminHeader';
 
 function ApplicationList() {
   const [applications, setApplications] = useState([]);
@@ -93,8 +96,7 @@ function ApplicationList() {
 
   return (
     <main id='main' className='main'>
-      <Header />
-      <SideBar />
+
       <PageTitle page="Application List" />
       <Slider tabs={tabs} onTabChange={handleTabChange} />
       <Filter />

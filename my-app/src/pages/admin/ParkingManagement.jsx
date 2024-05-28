@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import InputBoxes from '../../Components/InputBoxes/InputBoxes';
-import CreateParkingCard from '../../Components/Card/CreateParkingCard';
-import '../../Components/InputBoxes/inputBoxes.css';
+import InputBoxes from '../../components/InputBoxes/InputBoxes';
+import CreateParkingCard from '../../components/Card/CreateParkingCard';
+import '../../components/InputBoxes/inputBoxes.css';
 import axios from 'axios'; 
 
 const API_BASE_URL = 'http://localhost:8080/parking';
@@ -12,7 +12,7 @@ function ParkingManagement() {
 
   useEffect(() => {
     // Fetch existing parking areas on component mount
-    axios.get(`${API_BASE_URL}/active`)
+    axios.get(`${API_BASE_URL}/all`)
       .then(response => setParkingAreas(response.data))
       .catch(error => console.error('Error fetching parking areas:', error));
   }, []);
@@ -28,7 +28,11 @@ function ParkingManagement() {
   };
 
   const handleToggleActive = (parkingAreaId, isActive) => {
-    axios.put(`${API_BASE_URL}/${parkingAreaId}`, { isActive: !isActive })
+    axios.put(`${API_BASE_URL}/update-active-status/${parkingAreaId}`,null, { 
+      params:{
+        activeStatus: !isActive // to be changed
+      }
+    })
       .then(response => {
         console.log(response.data);
         // Update local state to reflect changes
@@ -41,8 +45,15 @@ function ParkingManagement() {
 
   const handleSave = (parkingAreaId, totalSpace) => {
     const parkingArea = parkingAreas.find(area => area.id === parkingAreaId);
-    axios.put(`${API_BASE_URL}/${parkingAreaId}`, { totalSpace, isActive: parkingArea.isActive })
+
+    axios.put(`${API_BASE_URL}/update-total-space/${parkingAreaId}`,null, {
+      params:{
+        totalSpace: totalSpace,
+      }
+      
+      })
       .then(response => {
+        console.log(response);
         setParkingAreas(prevAreas => prevAreas.map(area =>
           area.id === parkingAreaId ? { ...area, totalSpace } : area
         ));

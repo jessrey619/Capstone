@@ -1,11 +1,11 @@
 import React from 'react'
-import '../../Components/Main/main.css';
-import PageTitle from '../../Components/Main/PageTitle';
+import '../../components/Main/main.css';
+import PageTitle from '../../components/PageTitle/PageTitle';
 
 function Statistics() {
   return (
     <main id='main' className='main'>
-       <PageTitle page="Statistics"/>
+      <PageTitle page="Statistics"/>
     </main>
   )
 }

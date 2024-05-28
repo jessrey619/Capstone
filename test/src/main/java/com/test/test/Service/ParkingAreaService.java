@@ -38,6 +38,26 @@ public class ParkingAreaService {
         return "Parking Update Failed";
     }
     
+    public String updateTotalSpace(int id ,int totalSpace) {
+    	ParkingAreaEntity existingParkingArea = parkingAreaRepository.findById(id).orElse(null);
+    	if (existingParkingArea != null) {
+        	existingParkingArea.setTotalSpace(totalSpace);
+            parkingAreaRepository.save(existingParkingArea);
+            return "Parking Area updated Successfully";
+        }
+    	return "Parking Update Failed";
+    }
+    
+    public String updateActiveStatus(int id ,boolean active) {
+    	ParkingAreaEntity existingParkingArea = parkingAreaRepository.findById(id).orElse(null);
+    	if (existingParkingArea != null) {
+        	existingParkingArea.setIsActive(active);
+            parkingAreaRepository.save(existingParkingArea);
+            return "Parking Area updated Successfully";
+        }
+    	return "Parking Update Failed";
+    }
+    
 //    //IMPORTANT 
 //    //Sumpay Ni siya sa Logs like if mu update ang logs ... update ni siya
 //    public String updateParkingSpace(int parkingAreaId, boolean isEntry) {

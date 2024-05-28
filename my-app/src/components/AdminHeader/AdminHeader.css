@@ -9,7 +9,7 @@
   padding-bottom: 0.7rem;
   -webkit-box-shadow: 1px 6px 3px 0px #A2A2A2;
   box-shadow: 1px 6px 3px 0px #A2A2A2;
-  z-index: 99;
+  z-index: 1;
 }
 
 body {

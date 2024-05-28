@@ -136,7 +136,7 @@ const EmployeeDashboard = () => {
         </div> */}
       </div>
 
-      <div style={{ position: "sticky", bottom: 0, left: 0, right: 0 }}>
+      <div style={{marginTop:'30vh', position: "sticky", bottom: 0, left: 0, right: 0 }}>
         <Footer />
       </div>
     </>

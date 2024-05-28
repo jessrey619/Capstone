@@ -82,9 +82,15 @@ const UserAnnouncement = () => {
             setIsDisabled(true)
           }
         } else{
-          console.log("not yet approved")
-          console.log("length",Object.keys(applications).length)
-          setIsDisabled(true)
+          if (applications.rejected === true || expirationDate < currentDate) {
+            console.log("rejected or Expired")
+            setIsDisabled(false)
+          } else{
+            console.log("not yet approved")
+            console.log("length",Object.keys(applications).length)
+            setIsDisabled(true)
+          }
+          
         }
     }
     
@@ -118,7 +124,9 @@ const UserAnnouncement = () => {
 
       <div className="userHomepageContainer">
         <div className="userHomepagebuttonContainer">
-          <button className="statusButton">Status<br/><span style={{color: applications.approved ? "green" : "red"}}>{applications.approved ? "ACTIVE" : "INACTIVE"}</span></button>
+          <button className="statusButton">Status<br/> <span style={{ color: applications.approved && !applications.rejected && (new Date(applications.expirationDate).getTime()>new Date().getTime())? "green" : "red" }}>
+          {applications.approved && !applications.rejected && (new Date(applications.expirationDate).getTime()>new Date().getTime()) ? "ACTIVE" : "INACTIVE"}
+  </span></button>
           <button className="infoButton">Info</button>
         </div>
         <div className="userHomepagebuttonContainer">

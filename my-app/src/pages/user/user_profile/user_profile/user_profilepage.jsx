@@ -43,19 +43,9 @@ const UserProfilePage = () => {
 
 
   useEffect(() => {
-    if (Object.keys(applications).length === 0) {
-      setIsActive(false) ; // Not Active if No Applications
-    }
-    const currentDate = new Date();
-    const expirationDate = new Date(applications.expirationDate);
-
-    if(applications.approved === true){
-      if (applications.rejected === true || expirationDate < currentDate) {
-        setIsActive(false)
-      }else{
-        setIsActive(true)
-      }
-    } else{
+    if(applications.approved && !applications.rejected && (new Date(applications.expirationDate).getTime()>new Date().getTime()) ){
+      setIsActive(true)
+    }else{
       setIsActive(false)
     }
     console.log("this is for is active",isActive)
@@ -136,7 +126,7 @@ const UserProfilePage = () => {
                   <label>Sticker No: {vehicles.stickerId === 0 ? 'N/A' : vehicles.stickerId}</label>
                 </div>
               </div>
-              <Typography color={applications.approved ? "green" : "red"}>{applications.approved ? "ACTIVE" : "INACTIVE"}</Typography>
+              <Typography color={isActive ? "green" : "red"}>{isActive ? "ACTIVE" : "INACTIVE"}</Typography>
             </div>
 
             <hr />
@@ -144,8 +134,8 @@ const UserProfilePage = () => {
             <div className="user-profile-details">
               <div className="user-profile-detail">
                 <label>Expiration Date</label>
-                <span>{isActive? formatDate(expirationDisplay):'N/A'}</span>
-                <span>{isActive? "S.Y. "+expiration.schoolYear : 'N/A'}</span>
+                <span>{isActive? formatDate(expirationDisplay):'EXPIRED/ N/A'}</span>
+                <span>{isActive? "S.Y. "+expiration.schoolYear : ''}</span>
               </div>
               <div className="user-profile-detail">
                 <label>Registration Type</label>
@@ -157,13 +147,13 @@ const UserProfilePage = () => {
                 <span>
                   {isActive?(vehicles?.isParking !== null && vehicles?.isParking !== undefined
                     ? (vehicles.isParking ? "Parking" : "Pick-up/Drop-off")
-                    : ''):'N/A'}
+                    : ''):''}
                 </span>
               </div>
               <div className="user-profile-detail">
                 <label>Vehicle Type</label>
                 <span>{isActive? vehicles.vehicleMake:'N/A'}</span>
-                <span>{isActive? vehicles.plateNo:'N/A'}</span>
+                <span>{isActive? vehicles.plateNo:''}</span>
               </div>
             </div>
           </Box>

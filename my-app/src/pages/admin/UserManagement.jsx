@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../Components/Main/main.css';
 import CardsContainer from '../../Components/Card/CardsContainer'; 
-import Slider from '../../Components/Slider/Slider';
+import { Box, Tab } from "@mui/material";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
+import RolesTab from "./RolesTab";
+import PermissionsTab from "./PermissionsTab";
 
 function UserManagement() {
+  const [tabValue, setTabValue] = useState("1");
   const [userCounts, setUserCounts] = useState({
     totalUsers: 0,
     students: 0,
     employees: 0,
     faculty: 0,
   });
+  const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
     axios.get('YOUR_API_ENDPOINT_HERE')
@@ -35,31 +40,32 @@ function UserManagement() {
     { title: 'Total Faculty', count: userCounts.faculty, iconClass: 'bi-person' },
   ];
 
-  const tabs = [
-    { label: 'Roles', value: '1'},
-    { label: 'Permissions', value: '2'},
-  ];
+  const handleCardClick = (title) => {
+    setSelectedCard(title);
+  };
 
   return (
     <div>
       <div>
-        <Slider tabs={tabs} />
-        <CardsContainer cards={cardsData} />
+        <CardsContainer cards={cardsData} onCardClick={handleCardClick} />
       </div>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Role</th>
-            <th scope="col">Last Active</th>
-            <th scope="col">Action</th>    
-          </tr>
-        </thead>
-        <tbody>
-            {/* {renderTableRows()} */}
-        </tbody>
-      </table>
+      <TabContext value={tabValue}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <TabList
+            aria-label="Tabs example"
+            onChange={(e, newValue) => setTabValue(newValue)}
+          >
+            <Tab label="Roles" value="1" />
+            <Tab label="Permissions" value="2" />
+          </TabList>
+        </Box>
+        <TabPanel value="1">
+          <RolesTab selectedCard={selectedCard} />
+        </TabPanel>
+        <TabPanel value="2">
+          <PermissionsTab />
+        </TabPanel>
+      </TabContext>
     </div>
   );
 }

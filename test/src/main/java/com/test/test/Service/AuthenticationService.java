@@ -2,6 +2,7 @@ package com.test.test.Service;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -72,7 +73,6 @@ public class AuthenticationService {
         return new AuthenticationResponse(token);
     }
 
-    
 //  ADMIN SIDE
     public AuthenticationResponse adminRegister(AdminEntity request) {
     	AdminEntity user = new AdminEntity();
@@ -103,7 +103,6 @@ public class AuthenticationService {
         return new AuthenticationResponse(token);
     }
 
-    
 //    Employee side
     public AuthenticationResponse employeeRegister(EmployeeEntity request) {
     	EmployeeEntity user = new EmployeeEntity();
@@ -146,5 +145,19 @@ public class AuthenticationService {
             throw new RuntimeException("Failed to parse JWT", e);
         }
     }
-
+    
+    public int countAllUsers() {
+    	List<UserEntity> allUsers = userRepository.findAll();
+    	return allUsers.size();
+    }
+    
+    public int countAllAdmin() {
+    	List<AdminEntity> allUsers = adminRepository.findAll();
+    	return allUsers.size();
+    }
+    
+    public int countAllEmployee() {
+    	List<EmployeeEntity> allUsers = employeeRepository.findAll();
+    	return allUsers.size();
+    }
 }

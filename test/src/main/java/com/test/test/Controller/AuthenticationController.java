@@ -58,6 +58,23 @@ public class AuthenticationController {
 		
 	}
 	
+	@CrossOrigin
+	@GetMapping("/total-user-count")
+	public ResponseEntity<Integer> countAllUsers(){
+		return ResponseEntity.ok(authService.countAllUsers());
+	}
+	
+	@CrossOrigin
+	@GetMapping("/total-admin-count")
+	public ResponseEntity<Integer> countAllAdmin(){
+		return ResponseEntity.ok(authService.countAllAdmin());
+	}
+	
+	@CrossOrigin
+	@GetMapping("/total-employee-count")
+	public ResponseEntity<Integer> countAllEmployee(){
+		return ResponseEntity.ok(authService.countAllEmployee());
+	}
 	
 //	Admin Side
 	@CrossOrigin

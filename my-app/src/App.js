@@ -56,10 +56,12 @@ import Statistics from './pages/Admin/Statistics'
 import ParkingArea from './pages/Admin/ParkingArea'
 import Configuration from './pages/Admin/Configuration';
 import StickerPricing from './pages/Admin/StickerPricing';
-import UserManagement from './pages/Admin/UserManagement';
+// import UserManagement from './pages/Admin/UserManagement';
 import ParkingManagement from './pages/Admin/ParkingManagement';
 import AdminHeader from "./components/AdminHeader/AdminHeader";
 import LogsEmployee from "./pages/employee/employeeLogs/LogsEmployee";
+import RolesTab from "./pages/Admin/RolesTab";
+import UserManagement from "./pages/Admin/UserManagement";
 
 // import AccountExpiration from './pages/Admin/AccountExpiration';
 
@@ -168,16 +170,16 @@ function App() {
             <Route path="/account-expiration" element={<AccountExpiration />} />
             <Route path="/application-list" element={<ApplicationList />} />
             <Route path="/sticker-pricing" element={<StickerPricing />} />
-            <Route path="/user-management" element={<UserManagement />} />
+            <Route path="/user-management" element={<RolesTab />} />
             <Route path='/logs' element={<Logs/>} />
             <Route path='/statistics' element={<Statistics/>} />
             <Route path='/parking-area' element={<ParkingArea/>} />
             <Route path='/configuration' element={<Configuration />}/>
             <Route path='/configuration/sticker-pricing' element={<StickerPricing />} />
-            <Route path="/configuration/user-management" element={<UserManagement />} />
+            <Route path="/configuration/user-management" element={<UserManagement/>} />
             <Route path="/configuration/parking-management" element={<ParkingManagement />} />
             <Route path="/configuration/account-expiration" element={<AccountExpiration />} />
-            <Route path='/application-list' element={<ApplicationList/>} />
+            {/* <Route path='/application-list' element={<ApplicationList/>} /> */}
         </Route>
           
           

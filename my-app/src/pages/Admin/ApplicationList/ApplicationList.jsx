@@ -43,9 +43,9 @@ function ApplicationList() {
 
   return (
     <>
-      <AdminHeader />
+      {/* <AdminHeader /> */}
       {/* <AdminSidebar /> */}
-      <main className="admin-container">
+      <main className="admin-container" style={{margin:'0px', paddingLeft:'0px', float:'center'}}>
         <div className="admin-title">
           <h1>Application List</h1>
         </div>

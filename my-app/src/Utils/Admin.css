@@ -1,0 +1,31 @@
+/* Admin.css */
+
+.admin-layout {
+    display: flex;
+    min-height: 50vh;
+    flex-direction: column;
+  }
+  
+  .admin-layout header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the header is above other content */
+  }
+  
+  .admin-layout .sidebar {
+    position: fixed;
+    top: 60px; /* Adjust this based on your header height */
+    left: 0;
+    height: calc(100% - 60px); /* Adjust this based on your header height */
+    width: 40vh; /* Adjust based on your sidebar width */
+    z-index: 1000; /* Ensure the sidebar is above other content */
+  }
+  
+  .admin-layout main {
+    margin-top: 10vh; /* Adjust this based on your header height */
+    margin-left: 20vw; /* Adjust based on your sidebar width */
+    padding: 20px; /* Add some padding for the main content */
+    flex: 1;
+  }
+  

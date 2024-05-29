@@ -4,6 +4,7 @@ import axios from "axios";
 import AdminHeader from "../components/AdminHeader/AdminHeader";
 import SideBar from "../components/SideBar/SideBar";
 import Header from "../components/AdminHeader/Header";
+// import './Admin.css'
 
 const AdminRoutes = () => {
   const token = localStorage.getItem('token');

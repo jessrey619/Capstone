@@ -29,7 +29,9 @@
     cursor: pointer;
   }
   
-  .student-sidebar-menu > li:hover:not(.active) {
+/* Akung gi comment kay gi overwrite niya amung css na code e uncomment lang balik *
+
+  /* .student-sidebar-menu > li:hover:not(.active) {
     transition: .2s;
     background-color: #f4c722a2;
   }
@@ -42,7 +44,7 @@
     background-color: #f4c722a2;
   }
   
-  /* Remove hover effect for active item */
+  /* Remove hover effect for active item 
   .student-sidebar-menu > .active:hover {
     background-color: #f4c722a2; 
-  }
+  } */

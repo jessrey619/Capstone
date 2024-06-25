@@ -53,9 +53,9 @@
   background-color: #f4c722a2;
 }
 
-.active {
+/* .active {
   background-color: #f4c722a2;
-}
+} */
 
 /* Mobile responsiveness */
 @media screen and (max-width: 768px) {

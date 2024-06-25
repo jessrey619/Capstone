@@ -50,10 +50,9 @@ a {
 
 .accexp-input-group {
   background: white;
-  border: 2px solid grey;
-  height: 320px;
-  min-width: 380px;
-  padding: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .accexp-input-header {
@@ -95,10 +94,11 @@ a {
 
 .accexp-current-set-group {
   background: white;
-  border: 2px solid grey;
-  height: 130px;
-  min-width: 200px;
-  padding: 10px;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  height: 210px;
+  min-width: 220px;
 }
 
 .accexp-current-set-header {

@@ -8,6 +8,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import '../../../components/Main/main.css'
+
 
 function AccountExpiration() {
   const [type, setType] = useState("");
@@ -136,8 +138,7 @@ function AccountExpiration() {
 
   return (
     <>
-      <main>
-
+      <main id='main' className='main'>
         {/* Some Text */}
         <div className="accexp-info">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum tortor at lorem faucibus condimentum. Etiam id bibendum nibh. Vestibulum et turpis cursus.

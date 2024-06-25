@@ -174,11 +174,12 @@ function App() {
             <Route path='/logs' element={<Logs/>} />
             <Route path='/statistics' element={<Statistics/>} />
             <Route path='/parking-area' element={<ParkingArea/>} />
-            <Route path='/configuration' element={<Configuration />}/>
-            <Route path='/configuration/sticker-pricing' element={<StickerPricing />} />
-            <Route path="/configuration/user-management" element={<UserManagement/>} />
-            <Route path="/configuration/parking-management" element={<ParkingManagement />} />
-            <Route path="/configuration/account-expiration" element={<AccountExpiration />} />
+            <Route path="/configuration" element={<Configuration />} >
+              <Route path="sticker-pricing" element={<StickerPricing />} />
+              <Route path="user-management" element={<UserManagement />} />
+              <Route path="parking-management" element={<ParkingManagement />} />
+              <Route path="account-expiration" element={<AccountExpiration />} />
+          </Route>
             {/* <Route path='/application-list' element={<ApplicationList/>} /> */}
         </Route>
           

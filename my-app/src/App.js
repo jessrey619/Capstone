@@ -179,7 +179,7 @@ function App() {
               <Route path="user-management" element={<UserManagement />} />
               <Route path="parking-management" element={<ParkingManagement />} />
               <Route path="account-expiration" element={<AccountExpiration />} />
-          </Route>
+            </Route>
             {/* <Route path='/application-list' element={<ApplicationList/>} /> */}
         </Route>
           
@@ -205,7 +205,7 @@ function App() {
 
         {/* Private User Routes */}
         <Route element={<PrivateRoutes />}>
-        <Route path="/homepage" element={<UserHomepage />} />
+          <Route path="/homepage" element={<UserHomepage />} />
           <Route path="/registration" element={<RegistrationForm />} />
           <Route path="/choose-user-type" element={<ChooseUserTypeModal />} />
           <Route path="/applist" element={<UserStatus />} />

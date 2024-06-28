@@ -56,7 +56,7 @@ const PrivateRoutes = () => {
 
   useEffect(() => {
     if (role) {
-      if (role !== "USER") {
+      if (role !== "USER" || role !== "EMPLOYEE") {
         setIsAuthenticated(false);
       }
     }

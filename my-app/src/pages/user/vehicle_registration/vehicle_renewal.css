@@ -1,0 +1,24 @@
+.renewal-page-main-body{
+    min-height: 85vh;
+    padding-top: 10vh;
+}
+
+.renewal-page-sidebar{
+    width: 13vw;
+    background-color: red;
+}
+
+.renewal-page-middle-content{
+    display: flex;
+    flex-direction: row;
+}
+
+.renewal-page-form-background{
+    background-color: pink;
+    
+}
+
+.renewal-page-checkboxes{
+    display: flex;
+    flex-direction: row;
+}

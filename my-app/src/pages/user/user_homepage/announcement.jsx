@@ -14,6 +14,13 @@ const UserAnnouncement = () => {
   const [email, setEmail] = useState('');
   const [isDisabled, setIsDisabled] = useState(false)
 
+  // for renewal
+  const [isRenewable, setIsRenewable] = useState(false);
+
+  const handleRenewal = () =>{
+
+  }
+
   // Decoding token
   useEffect(() => {
     const decodeJwt = async () => {
@@ -45,25 +52,25 @@ const UserAnnouncement = () => {
     setIsModalOpen(true);
   };
 
-  const isRegistrationDisabled = () => {
-    if (Object.keys(applications).length === 0) {
-      console.log("No registrations")
-      return false; // Allow registration if no applications exist
-    }
-    const currentDate = new Date();
-    const expirationDate = new Date(applications.expirationDate);
+  // const isRegistrationDisabled = () => {
+  //   if (Object.keys(applications).length === 0) {
+  //     console.log("No registrations")
+  //     return false; // Allow registration if no applications exist
+  //   }
+  //   const currentDate = new Date();
+  //   const expirationDate = new Date(applications.expirationDate);
 
-    if(applications.approved === false){
-      if (applications.rejected === true || expirationDate < currentDate) {
-        console.log("rejected or Expired")
-        return false; // Allow registration
-      }else{
-        console.log("not yet approved")
+  //   if(applications.approved === false){
+  //     if (applications.rejected === true || expirationDate < currentDate) {
+  //       console.log("rejected or Expired")
+  //       return false; // Allow registration
+  //     }else{
+  //       console.log("not yet approved")
         
-        return true;
-      }
-    }
-  };
+  //       return true;
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     if (Object.keys(applications).length === 0) {
@@ -74,17 +81,26 @@ const UserAnnouncement = () => {
         const expirationDate = new Date(applications.expirationDate);
 
         if(applications.approved === true){
-          if (applications.rejected === true || expirationDate < currentDate) {
-            console.log("rejected or Expired")
+          if (applications.rejected === true) {
+            console.log("rejected")
             setIsDisabled(false)
-          }else{
+          } else if (expirationDate < currentDate) {
+            console.log("Expired")
+            setIsDisabled(false)
+            setIsRenewable(true)
+          }
+          else{
             console.log("Approved and Still Valid")
             setIsDisabled(true)
           }
         } else{
-          if (applications.rejected === true || expirationDate < currentDate) {
-            console.log("rejected or Expired")
+          if (applications.rejected === true) {
+            console.log("rejected")
             setIsDisabled(false)
+          } else if (expirationDate < currentDate) {
+            console.log("Expired")
+            setIsDisabled(false)
+            setIsRenewable(true)
           } else{
             console.log("not yet approved")
             console.log("length",Object.keys(applications).length)
@@ -130,11 +146,20 @@ const UserAnnouncement = () => {
           <button className="infoButton">Info</button>
         </div>
         <div className="userHomepagebuttonContainer">
-          <button className="registerButton" 
-          onClick={handleRegisterButtonClick} 
-          disabled={isDisabled}  
-          title={Object.keys(applications).length !== 0 ? "Cannot register while applications is still pending" : ""}>Register</button>
-          <button className="disclaimerButton">
+          {isRenewable?
+            (<button 
+                className="registerButton">
+                  Renew Application
+              </button>):
+            (<button className="registerButton" 
+              onClick={handleRegisterButtonClick} 
+              disabled={isDisabled}  
+              title={Object.keys(applications).length !== 0 ? "Cannot register while applications is still pending" : ""}>
+                Register</button>
+            )
+          }
+
+         <button className="disclaimerButton">
             Disclaimer<br/>
             <div className="disclaimer">
               <span>{disclaimer}</span>

@@ -42,20 +42,20 @@ const Footer = () => {
       }, []);
     
       return (
-        <div className={`footer ${isMobile ? 'mobile' : ''}`}>
+        <div className={`footer ${isMobile ? 'mobile' : ''}`} >
           <div className="logoContainer">
             <img src={FooterLogo} alt="FooterLogo"className='footerLogo'/>
           </div>
         
           <div className='info1'>
             <div className='cit-edu-contact-part'>
-                <h6 className='this'>Contact Us</h6>
-                    <p style={{margin: 0, padding: 0}}>N. Bacalso Avenue, Cebu City, Philippines 6000</p>
-                    <p style={{margin: 0, padding: 0}}>+63 32 411 2000 (trunkline)</p> 
-                    <p style={{margin: 0, padding: 0}}>info@cit.edu</p>
+                <div className='this'>Contact Us</div>
+                    <div style={{margin: 0, padding: 0}}>N. Bacalso Avenue, Cebu City, Philippines 6000</div>
+                    <div style={{margin: 0, padding: 0}}>+63 32 411 2000 (trunkline)</div> 
+                    <div style={{margin: 0, padding: 0}}>info@cit.edu</div>
             </div>
             <div className='info2'>
-                <h6 className='title'>Quick Links</h6>
+                <div className='title'>Quick Links</div>
                     <nav className="nav-footer">
                     <a href="https://cit.edu" style={{margin: 0, padding: 0}}>Cit.edu</a>
                     <a href="https://lair.education" style={{margin: 0, padding: 0}}>Lair</a>

@@ -1,0 +1,54 @@
+.reservation-main-body{
+    display: flex;
+    flex-direction: horizontal;
+}
+
+h5{
+    margin-bottom: 3vh;
+}
+
+.reservation-left-column{
+    width: 50%;
+    border-radius: 2vw;
+
+    padding-bottom: 2vh;
+    padding-top: 2vh;
+
+    padding-left: 2vw;
+}
+
+.reservation-left-contents{
+    width: 90%;
+    padding-left: 2vw;
+}
+
+.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.css-1flxxu0-MuiListItem-root{
+    margin-bottom: 1vh;
+}
+
+.reservation-right-column{
+    width: 50%;
+    border-radius: 2vw;
+    padding-bottom: 2vh;
+    padding-top: 2vh;
+    padding-right: 2vw;
+    padding-left: 2vw;
+    
+}
+
+@media (max-width: 768px) { /* Adjust styles for tablets and larger screens */
+    .reservation-main-body {
+        flex-direction: column; /* Arrange columns side by side */
+    }
+
+    h5{
+        margin-bottom: 2vh;
+    }
+    
+
+    .reservation-left-column,
+    .reservation-right-column {
+        width: 100%; /* Each column takes 50% width on larger screens */
+        margin-bottom: 0; /* Remove margin between columns */
+    }
+}

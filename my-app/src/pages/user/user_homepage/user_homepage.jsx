@@ -21,17 +21,7 @@ const UserHomepage = () => {
 
 
 const token = localStorage.getItem('token');
-const [decodedToken, setDecodedToken] = useState();
-
-
-
-// // const email = decodedToken.payload.sub;
-// console.log("decodedToken:",decodedToken.exp);
-// // console.log("decodedToken:",decodedToken.payload);
-// // console.log("decodedToken:",decodedToken.payload.sub);
-// console.log("token:",token);
-
-
+const [decodedToken, setDecodedToken] = useState(null);
 
 
   useEffect(() => {
@@ -61,6 +51,7 @@ const [decodedToken, setDecodedToken] = useState();
           });
           const decoded = response.data.payload;
           setDecodedToken(decoded);
+          console.log("Decoded Token", decoded)
         } catch (error) {
           console.error('Error decoding token:', error);
           localStorage.removeItem('token');
@@ -79,7 +70,7 @@ const [decodedToken, setDecodedToken] = useState();
       case "Home":
         return <UserAnnouncement />;
       case "Registration":
-        return <UserStatus />;
+          return <UserStatus />;
       case "Profile":
         return <UserProfilePage />;
       default:

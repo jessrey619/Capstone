@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.test.test.Entity.ApplicantEntity;
+import com.test.test.Repository.ApplicantRepository;
 import com.test.test.Service.ApplicantService;
 import com.test.test.Service.PhotoService;
 
@@ -33,6 +34,9 @@ public class ApplicantController {
 	@Autowired
     private ApplicantService applicantService;
 	
+	@Autowired
+	private ApplicantRepository applicantRepository;
+	
 
 	@CrossOrigin
 	@PostMapping("/register")
@@ -40,6 +44,37 @@ public class ApplicantController {
         return applicantService.registerApplicant(applicant);
     }
 	
+//	FOR RENEWAL
+	@PostMapping("/renew")
+    public ResponseEntity<?> renewApplication(@RequestBody ApplicantEntity applicant) {
+        boolean result = applicantService.renewApplication(applicant);
+        if (result) {
+            return ResponseEntity.ok("Application renewed successfully");
+        } else {
+            return ResponseEntity.status(400).body("Application renewal failed");
+        }
+    }
+	
+	@GetMapping("/last-approved/{email}")
+    public ResponseEntity<ApplicantEntity> getLastApprovedApplication(@PathVariable String email) {
+        List<ApplicantEntity> applicationsByEmail = applicantRepository.findAllByEmail(email);
+        ApplicantEntity latestApprovedApplication = null;
+
+        // Iterate from the last item to the first
+        for (int i = applicationsByEmail.size() - 1; i >= 0; i--) {
+            ApplicantEntity application = applicationsByEmail.get(i);
+            if (application.isApproved()) {
+                latestApprovedApplication = application;
+                break; // Exit the loop once the latest approved application is found
+            }
+        }
+
+        if (latestApprovedApplication != null) {
+            return ResponseEntity.ok(latestApprovedApplication);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 	
 //    @PostMapping("/uploadReq")
 //    public String uploadRequirementsApplicant(@RequestParam String email, @RequestParam("orcrimg") MultipartFile orcrimg, @RequestParam("licenseimg") MultipartFile licenseimg) throws IOException, GeneralSecurityException, IllegalStateException, java.io.IOException {
@@ -111,9 +146,9 @@ public class ApplicantController {
     
     @CrossOrigin
     @PostMapping("/rejectApplicant")
-    private ResponseEntity<String> rejectApplication(@RequestParam String email, @RequestParam String message) throws MessagingException {
+    private ResponseEntity<String> rejectApplication(@RequestParam String email, @RequestParam String message, @RequestParam String rejectionType) throws MessagingException {
         try {
-            applicantService.rejectApplication(email, message);
+            applicantService.rejectApplication(email, message, rejectionType);
             return ResponseEntity.ok("Application rejected successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to reject application: " + e.getMessage());
@@ -126,5 +161,11 @@ public class ApplicantController {
         return applicantService.searchApplicants(searchText);
     }
     
-    
+    @CrossOrigin
+    @PutMapping("/resend-update-status")
+    public ResponseEntity<ApplicantEntity> reuploadUpdateStatus(@RequestParam String email) {
+        ApplicantEntity updatedApplicant = applicantService.reuploadUpdateStatus(email);
+        return ResponseEntity.ok(updatedApplicant);
+    }
+
 }

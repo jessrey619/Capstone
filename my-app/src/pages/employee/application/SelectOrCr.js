@@ -32,6 +32,9 @@ export default function SelectOrCr() {
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
   const [currentPhotoUrl, setCurrentPhotoUrl] = useState('');
 
+  // for Rejection
+  const [rejectionType, setRejectionType] = useState('');
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -109,8 +112,10 @@ export default function SelectOrCr() {
 
   const handleViewOrcrClick = async () => {
     const url = await fetchPhoto('orcr');
+    
     if (url) {
       setOrcrPhotoUrl(url);
+      setRejectionType('orcr');
       handleOpenPhotoModal(url);
     }
   };
@@ -118,6 +123,7 @@ export default function SelectOrCr() {
   const handleViewLicenseClick = async () => {
     const url = await fetchPhoto('license');
     if (url) {
+      setRejectionType('license');
       setLicensePhotoUrl(url);
       handleOpenPhotoModal(url);
     }
@@ -135,8 +141,9 @@ export default function SelectOrCr() {
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
+          paddingTop:'10vh'
         }}>
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <br />
@@ -159,26 +166,28 @@ export default function SelectOrCr() {
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Paper sx={{ width: 'clamp(25rem, 40vw, 100%)', height: 'clamp(20rem, 50vh, 100%)', borderRadius: '5rem 5rem 5rem 5rem', padding: '3rem', backgroundColor: 'rgba(228, 228, 228, 0.5)' }}>
                       <div>
-                        <Typography component="div" sx={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
+                        <Typography component="div">
                           <div style={{ display: "flex", alignItems: "center", }}>
-                            <h4>Application Name:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.firstName} {applications.middleInitial}. {applications.lastName}</p>
+                            <div style={{ textAlign: "left", fontWeight:'bold' }}>Application Name:</div>&nbsp;
+                              <div style={{ textAlign: "left" }}>{applications.firstName} {applications.middleInitial}. {applications.lastName}
+                            </div>
                           </div>
                         </Typography>
-                        <Typography component="div" sx={{ marginLeft: 'clamp(2rem, 10%, 20rem)' }}>
-                          <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h4 style={{ textAlign: "left" }}>User Type:</h4>&nbsp;<p>{applications.isStaff ? 'Staff' : 'Student'}</p>
+                        <Typography component="div" sx={{ }}>
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <div style={{ textAlign: "left", fontWeight:'bold' }}>User Type:</div>&nbsp;<div>{applications.isStaff ? 'Staff' : 'Student'}</div>
                           </div>
-                          <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h4 style={{ textAlign: "left" }}>Affiliated ID Number:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.idNumber}</p>
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <div style={{ textAlign: "left", fontWeight:'bold' }}>Affiliated ID Number:</div>&nbsp;<div style={{ textAlign: "left" }}>{applications.idNumber}</div>
                           </div>
-                          <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h4 style={{ textAlign: "left" }}>Address:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.address}</p>
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <div style={{ textAlign: "left", fontWeight:'bold' }}>Address:</div>&nbsp;<div style={{ textAlign: "left" }}>{applications.address}</div>
                           </div>
-                          <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h4 style={{ textAlign: "left" }}>Contact Number:</h4>&nbsp;<p style={{ textAlign: "left" }}>{applications.contactNumber}</p>
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <div style={{ textAlign: "left", fontWeight:'bold' }}>Contact Number:</div>&nbsp;<div style={{ textAlign: "left" }}>{applications.contactNumber}</div>
                           </div>
-                          <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h4 style={{ textAlign: "left" }}>License:</h4>&nbsp;
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <div style={{ textAlign: "left", fontWeight:'bold' }}>License:</div>&nbsp;
                             <Button
                               onClick={handleViewLicenseClick}
                               sx={{ textTransform: "none", color: "#8A252C" }}
@@ -186,8 +195,8 @@ export default function SelectOrCr() {
                               Click to View Image
                             </Button>
                           </div>
-                          <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                            <h4 style={{ textAlign: "left" }}>OR/CR:</h4>&nbsp;
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <div style={{ textAlign: "left", fontWeight:'bold'}}>OR/CR:</div>&nbsp;
                             <Button
                               onClick={handleViewOrcrClick}
                               sx={{ textTransform: "none", color: "#8A252C" }}
@@ -203,7 +212,7 @@ export default function SelectOrCr() {
                     </Paper>
                   </div>
                   <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem", padding: "1rem" }}>
-                    <div>
+                    {/* <div>
                       <Button
                         sx={{
                           textTransform: "none",
@@ -218,8 +227,11 @@ export default function SelectOrCr() {
                       >
                         Reject
                       </Button>
-                    </div>
-                    <RejectModal open={isModalOpen} handleClose={handleCloseModal} email={email} relocate="/orcr" />
+                    </div> */}
+
+
+      {/* REJECTION MODAL */}
+                    <RejectModal open={isModalOpen} handleClose={handleCloseModal} email={email} rejectionType={rejectionType} relocate="/orcr" />
                     &nbsp;
                     <div>
                       <Button
@@ -252,13 +264,27 @@ export default function SelectOrCr() {
         aria-labelledby="photo-modal-title"
         aria-describedby="photo-modal-description"
         >
-        <Box sx={{ ...style, width: '100%', height: '100%' }}>
-            <Typography id="photo-modal-title" variant="h6" component="h2">
-            Photo
-            </Typography>
+        <Box sx={{ ...style, width: '90vw', height: '90vh', textAlign:'center' }}>
             {currentPhotoUrl && (
-            <img src={currentPhotoUrl} alt="Fetched Photo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              <img src={currentPhotoUrl} alt="Fetched Photo" style={{ width: '90%', height: '90%', objectFit: 'contain' }} />
             )}
+            <div style={{textAlign:'center'}}>
+              <br/>
+            <button
+                style={{
+                  extTransform: "none",
+                  color: "white",
+                  backgroundColor: "#8A252C",
+                  borderRadius: "5rem",
+                  fontSize: 'clamp(1rem, 3vw, 1.5rem)'
+                }}
+                onClick={handleOpenModal}
+            >
+              Reject
+            </button>
+            </div>
+            
+                      
         </Box>
         </Modal>
     </>

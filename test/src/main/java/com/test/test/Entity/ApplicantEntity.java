@@ -46,12 +46,19 @@ public class ApplicantEntity {
     private boolean isApproved;
     private boolean isPaid;
     private boolean isRejected;
+    private boolean isResendORCR;
+    private boolean isResendLicense;
+    private boolean isResendProof;
+    
     
     public ApplicantEntity() {
     	super();
     	this.isVerified = false;
     	this.isPaid = false;
     	this.isApproved = false;
+    	this.isResendORCR = false;
+    	this.isResendLicense = false;
+    	this.isResendProof = false;
     }
     
     public ApplicantEntity(String email, String applicantid, String firstName, String lastName, String middleInitial,
@@ -249,5 +256,29 @@ public class ApplicantEntity {
 
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
+	}
+
+	public boolean isResendORCR() {
+		return isResendORCR;
+	}
+
+	public void setResendORCR(boolean isResendORCR) {
+		this.isResendORCR = isResendORCR;
+	}
+
+	public boolean isResendLicense() {
+		return isResendLicense;
+	}
+
+	public void setResendLicense(boolean isResendLicense) {
+		this.isResendLicense = isResendLicense;
+	}
+
+	public boolean isResendProof() {
+		return isResendProof;
+	}
+
+	public void setResendProof(boolean isResendProof) {
+		this.isResendProof = isResendProof;
 	}
 }

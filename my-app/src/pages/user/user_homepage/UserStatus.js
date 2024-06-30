@@ -12,6 +12,7 @@ import axios from "axios";
 import { useUser } from "../../../context/AuthProvider";
 import { jwtDecode } from "jwt-decode";
 import PaymentInstructionsModal from "./PaymentInstructionsModal";
+import ResendORCRLicenseModal from "./ResendORCRLicenseModal";
 
 export default function UserStatus() {
   // const { token } = useUser();
@@ -19,10 +20,20 @@ export default function UserStatus() {
   const isMobile = useMediaQuery("(max-width: 37.5rem)");
   const [applications, setApplications] = useState([]);
   const [isApplicant, setIsApplicant] = useState(false);
+  const [latestApplication, setLatestApplication] = useState({});
   const [date, setDate] = useState();
   const decondedToken = jwtDecode(token);
   const [email, setEmail] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // FOR Resending License/ORCR
+  const [isOpenResendORCRModal, setIsOpenResendORCRModal] = useState(false);
+  const handleCloseResendModal = () =>{
+    setIsOpenResendORCRModal(false);
+  }
+
+  const [reload, setReload] = useState(false);
+  const handleReload = () => setReload(!reload);
 
   // Decoding token
   useEffect(() => {
@@ -56,6 +67,7 @@ export default function UserStatus() {
         if (response.data) {
           setIsApplicant(true);
           setApplications(response.data);
+          setLatestApplication(response.data[response.data.length - 1]);
           setDate(response.data.datesubmitted);
         } else{
 
@@ -65,7 +77,7 @@ export default function UserStatus() {
       }
     };
     fetchData();
-  }, [email]);
+  }, [email,reload]);
 
   
 
@@ -198,7 +210,10 @@ export default function UserStatus() {
                           <TableCell align="center">{application.paid ? 'Paid' : 'Pending'}</TableCell>
                           <TableCell align="center">{application.approved ? 'Approved' : 'Pending'}</TableCell>
                           <TableCell align="center">{application.verified && application.paid && application.approved ? 'Success' : 'Pending'}</TableCell>
-                          {application.verified === true && application.paid === false &&(
+
+
+                {/* FOR REJECTED LICENSES and ORCR */}
+                          {application.resendLicense === true || application.resendORCR &&(
                             <Button
                               sx={{
                                 backgroundColor: "#F4C522",
@@ -207,36 +222,41 @@ export default function UserStatus() {
                                 fontWeight: "bold",
                                 "&:hover": { backgroundColor: "#F4C522" },
                               }}
-                              onClick={() => setIsModalOpen(true)} // Open modal on click
+                              onClick={() => setIsOpenResendORCRModal(true)} // Open modal on click
                             >
-                              Proceed to Payment
+                              Resend License/ORCR
                             </Button>
                           )}
                           {/* {isApplicant && (
                             <TableCell align="center">You are an applicant</TableCell>
                           )} */}
+                          
                         </TableRow>
                       ))}
+                      {(applications.verified === true && applications.paid === false || latestApplication.resendProof) &&(
+                            <Button
+                            sx={{
+                              position: "absolute",
+                              bottom: "1rem",
+                              right: "1rem",
+                              backgroundColor: latestApplication.resendProof ? "maroon" : "#F4C522",
+                              color: latestApplication.resendProof ? "white" : "black",
+                              textTransform: "none",
+                              fontWeight: "bold",
+                              "&:hover": { backgroundColor: latestApplication.resendProof ? "maroon" : "#F4C522" },
+                            }}
+                            onClick={() => setIsOpenResendORCRModal(true)} // Open modal on click
+                          >
+                            {latestApplication.resendProof ? 
+                              "Reupload Proof of Payment" :
+                              "Proceed to Payment"
+                            }
+                          </Button>
+                            )}
                   </TableBody>
 
                 </Table>
-                {applications.verified === true && applications.paid === false &&(
-                 <Button
-                 sx={{
-                   position: "absolute",
-                   bottom: "1rem",
-                   right: "1rem",
-                   backgroundColor: "#F4C522",
-                   color: "black",
-                   textTransform: "none",
-                   fontWeight: "bold",
-                   "&:hover": { backgroundColor: "#F4C522" },
-                 }}
-                 onClick={() => setIsModalOpen(true)} // Open modal on click
-               >
-                 Proceed to Payment
-               </Button>
-                )}
+                
                 {/* <Button
                   sx={{
                     position: "absolute",
@@ -261,6 +281,9 @@ export default function UserStatus() {
         </Grid>
       </Container>
       <PaymentInstructionsModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      
+      {/* Resend Modal */}
+      <ResendORCRLicenseModal open={isOpenResendORCRModal} handleCloseResendModal={handleCloseResendModal} applicant={latestApplication} handleReload={handleReload}/>
     </div>
   );
 }

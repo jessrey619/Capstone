@@ -62,6 +62,9 @@ import AdminHeader from "./components/AdminHeader/AdminHeader";
 import LogsEmployee from "./pages/employee/employeeLogs/LogsEmployee";
 import RolesTab from "./pages/Admin/RolesTab";
 import UserManagement from "./pages/Admin/UserManagement";
+import ReservationManagement from "./pages/Admin/ReservationManagement/ReservationManagement";
+import RenewalForm from "./pages/user/vehicle_registration/vehicle_renewal";
+
 
 // import AccountExpiration from './pages/Admin/AccountExpiration';
 
@@ -179,7 +182,11 @@ function App() {
               <Route path="user-management" element={<UserManagement />} />
               <Route path="parking-management" element={<ParkingManagement />} />
               <Route path="account-expiration" element={<AccountExpiration />} />
+              
+              <Route path="parking-reservation" element={<ReservationManagement/>} />
             </Route>
+
+            
             {/* <Route path='/application-list' element={<ApplicationList/>} /> */}
         </Route>
           
@@ -211,6 +218,7 @@ function App() {
           <Route path="/applist" element={<UserStatus />} />
           <Route path="/invoice" element={<Invoice />} />
           <Route path="/profile" element={<UserProfilePage />} />
+          <Route path="/renewal" element={<RenewalForm/>} />
         </Route>
       </Routes>
     </>

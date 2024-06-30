@@ -52,6 +52,7 @@ public class SecurityConfig {
                         		
                         		,"/prices/**"
                         		,"/applicants/**"
+                        		,"/parking-reservations/**"
                         		)
 //                       
                                 .permitAll()

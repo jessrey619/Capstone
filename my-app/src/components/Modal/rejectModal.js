@@ -32,7 +32,7 @@ const notificationStyle = {
   zIndex: 9999
 };
 
-export default function RejectModal({ open, handleClose, email, relocate }) {
+export default function RejectModal({ open, handleClose, email, relocate, rejectionType }) {
   const [message, setMessage] = useState('');
   const token = localStorage.getItem('token');
   const [showNotification, setShowNotification] = useState(false);
@@ -48,7 +48,8 @@ export default function RejectModal({ open, handleClose, email, relocate }) {
       const res = await axios.post('http://localhost:8080/applicants/rejectApplicant', null, {
         params: {
           email: email,
-          message: message
+          message: message,
+          rejectionType: rejectionType
         },
         headers: {
           Authorization: `Bearer ${token}`

@@ -131,32 +131,32 @@ public class UserService implements UserDetailsService{
 
 	
 //	This allows a user to become a vip and will be able to register 2 vehicles
-    public String toVIP(UserEntity user) {
-    	
-    	if(userRepository.findByUsername(user.getUsername())==null) {
-			if(adminRepository.findByUsername(user.getUsername())==null) {
-				if(employeeRepository.findByUsername(user.getUsername())==null) {
-					throw new UsernameNotFoundException("Username Not Found");
-				} else {
-					UserEntity existingUser = (UserEntity) loadUserByUsername(user.getUsername());
-			    	user.setIsVIP(true);
-			    	userRepository.save(existingUser);
-					return "User Updated";
-				}
-			} else {
-				AdminEntity existingUser = (AdminEntity) loadUserByUsername(user.getUsername());
-		    	user.setIsVIP(true);
-		    	adminRepository.save(existingUser);
-				return "Admin Updated";
-			}
-		} else {
-			EmployeeEntity existingUser = (EmployeeEntity) loadUserByUsername(user.getUsername());
-	    	user.setIsVIP(true);
-	    	employeeRepository.save(existingUser);
-			return "Employee Updated";
-		} 
-    }
-    
+//    public String toVIP(String username) {
+//    	
+//    	if(userRepository.findByUsername(username)==null) {
+//			if(adminRepository.findByUsername(username)==null) {
+//				if(employeeRepository.findByUsername(username)==null) {
+//					throw new UsernameNotFoundException("Username Not Found");
+//				} else {
+//					UserEntity existingUser = (UserEntity) loadUserByUsername(user.getUsername());
+//			    	user.setIsVIP(true);
+//			    	userRepository.save(existingUser);
+//					return "User Updated";
+//				}
+//			} else {
+//				AdminEntity existingUser = (AdminEntity) loadUserByUsername(user.getUsername());
+//		    	user.setIsVIP(true);
+//		    	adminRepository.save(existingUser);
+//				return "Admin Updated";
+//			}
+//		} else {
+//			EmployeeEntity existingUser = (EmployeeEntity) loadUserByUsername(user.getUsername());
+//	    	user.setIsVIP(true);
+//	    	employeeRepository.save(existingUser);
+//			return "Employee Updated";
+//		} 
+//    }
+//    
     public Role getRole(String email) {
     	Role role = null;
     	if(userRepository.findByUsername(email)!=null) {

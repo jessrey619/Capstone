@@ -81,7 +81,7 @@ export default function AppChoice() {
             <Header />
             <EmployeeSideBar />
             <Container maxWidth="lg">
-                <Grid container spacing={2}>
+                <Grid container spacing={2} sx={{minHeight:'85vh'}}>
                     <Grid item xs={12}>
                         <br />
 
@@ -90,7 +90,7 @@ export default function AppChoice() {
                     <Grid item xs={2}>
                     </Grid>
                     <Grid item xs={8} >
-                        <div >
+                        <div style={{paddingTop:'10vh'}}>
                             <Grid item xs={12} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                                 <Grid item xs={1} sx={{ display: "flex", justifyContent: "right", alignItems: "center" }} >
 
@@ -107,26 +107,26 @@ export default function AppChoice() {
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <Paper sx={{ width: 'clamp(25rem, 40vw, 100%)', height: 'clamp(20rem, 50vh, 100%)', borderRadius: '5rem 5rem 5rem 5rem', padding: '3rem', backgroundColor: 'rgba(228, 228, 228, 0.5)', }}>
                                     <div>
-                                        <Typography component="div" sx={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
+                                        <Typography component="div">
                                             <div style={{ display: "flex", alignItems: "center", }}>
-                                                <h3>Application Name:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.firstName} {applications.middleInitial}. {applications.lastName}</p>
+                                                <div style={{ textAlign: "left", fontWeight:'bold' }}>Application Name:</div>&nbsp;<div style={{ textAlign: "left" }}>{applications.firstName} {applications.middleInitial}. {applications.lastName}</div>
                                             </div>
                                         </Typography>
-                                        <Typography component="div" sx={{ marginLeft:  'clamp(2rem, 10%, 20rem)' }}>
-                                            <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                                                <h3 style={{ textAlign: "left" }}>User Type:</h3>&nbsp;<p>{applications.isStaff ? 'Staff' : 'Student'}</p>
+                                        <Typography component="div" sx={{}}>
+                                            <div style={{ display: "flex", alignItems: "center", }}>
+                                                <div style={{ textAlign: "left", fontWeight:'bold'  }}>User Type:</div>&nbsp;<div>{applications.isStaff ? 'Staff' : 'Student'}</div>
                                             </div>
-                                            <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                                                <h3 style={{ textAlign: "left" }}>Affiliated ID Number:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.idNumber}</p>
+                                            <div style={{ display: "flex", alignItems: "center", }}>
+                                                <div style={{ textAlign: "left", fontWeight:'bold'  }}>Affiliated ID Number:</div>&nbsp;<div style={{ textAlign: "left" }}>{applications.idNumber}</div>
                                             </div>
-                                            <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                                                <h3 style={{ textAlign: "left" }}>Address:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.address}</p>
+                                            <div style={{ display: "flex", alignItems: "center", }}>
+                                                <div style={{ textAlign: "left", fontWeight:'bold'  }}>Address:</div>&nbsp;<div style={{ textAlign: "left" }}>{applications.address}</div>
                                             </div>
-                                            <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                                                <h3 style={{ textAlign: "left" }}>Contact Number:</h3>&nbsp;<p style={{ textAlign: "left" }}>{applications.contactNumber}</p>
+                                            <div style={{ display: "flex", alignItems: "center", }}>
+                                                <div style={{ textAlign: "left", fontWeight:'bold'  }}>Contact Number:</div>&nbsp;<div style={{ textAlign: "left" }}>{applications.contactNumber}</div>
                                             </div>
-                                            <div style={{ display: "flex", alignItems: "center", margin: "-1rem" }}>
-                                                <h3 style={{ textAlign: "left" }}>Status:</h3>&nbsp;<p style={{ textTransform: "none", color: "#5E6600" }}>{applications.verified === true && applications.paid === true && applications.approved === false? "Fully Verified" : "Not Fully Verified"}</p>
+                                            <div style={{ display: "flex", alignItems: "center", }}>
+                                                <div style={{ textAlign: "left", fontWeight:'bold'}}>Status:</div>&nbsp;<div style={{ textTransform: "none", color: "#5E6600" }}>{applications.verified === true && applications.paid === true && applications.approved === false? "Fully Verified" : "Not Fully Verified"}</div>
                                             </div>
                                         </Typography>
                                     </div>
@@ -147,7 +147,7 @@ export default function AppChoice() {
                                          
                                          onClick={handleOpenModal}>Reject</Button>
                                 </div>
-                                <RejectModal open={isModalOpen} handleClose={handleCloseModal} email={email}/>
+                                <RejectModal open={isModalOpen} handleClose={handleCloseModal} email={email} rejectionType='overall'/>
                                 &nbsp;
                                 <div>
                                     <Button sx={{ textTransform: "none",
@@ -167,7 +167,7 @@ export default function AppChoice() {
                     </Grid>
                 </Grid>
             </Container>
-            <div style={{ position: "sticky", bottom: 0, left: 0, right: 0 }}>
+            <div style={{zIndex:'99999'}}>
                 <Footer />
             </div>
         </div>

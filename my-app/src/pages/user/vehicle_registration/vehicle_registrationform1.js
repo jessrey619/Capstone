@@ -852,7 +852,7 @@ export default function RegistrationForm() {
         message={snackbarMessage}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       />
-      <Footer/>
+      {/* <Footer/> */}
     </Container>
     </>
    

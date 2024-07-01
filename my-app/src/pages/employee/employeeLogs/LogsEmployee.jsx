@@ -5,6 +5,8 @@ import axios from "axios";
 import EmployeeSidebar from "../../../components/Navbar/EmployeeSidebar/employeeSidebar";
 import Header from "../../../components/Navbar/EmployeeHeader";
 import { Input } from "@mui/material";
+import Scans, { VehicleDisplay } from "../RFIDscan/ScanVehicleSticker";
+import ScanVehicleSticker from "../RFIDscan/ScanVehicleSticker";
 // import TheHeader from "../../../Components/Header/UserHeader";
 
 
@@ -101,9 +103,6 @@ function LogsEmployee() {
 
         <EmployeeSidebar style={{ position: 'fixed', top: '4rem', left: 0, bottom: 0, zIndex: 500 }} />
         <div className="LogsBody">
-           
-            
-            
           <div className="employee-logs-main-body">
              <img src="/background.png" alt="background" className="LogsBG" />
              <div style={{textAlign:'center', width:'100%'}}>
@@ -114,60 +113,56 @@ function LogsEmployee() {
                 onKeyDown={handleKeyPress}
                 />
              </div>
-             
-          <div className="liveContainer">
-
-            
-            <div className="totalContain">
-
-            <table className="liveCount">
-                <thead>
-                    <tr>
-                        <th className="totalLive">Total</th>
-                        <th className="totalLive">
-                            {totalVehiclesInside}
-                        </th>
-                    </tr>
-                </thead>
+          
+          {/* 
+            <div className="liveContainer">
+                <div className="totalContain">
+                    <table className="liveCount">
+                        <thead>
+                            <tr>
+                                <th className="totalLive">Total</th>
+                                <th className="totalLive">
+                                    {totalVehiclesInside}
+                                </th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr className="liveContent">
-                        <td>
-                            Cars: {fourWheels}
-                        </td>
-                        <td>
-                            Motors: {twoWheels}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                                <td>
+                                    Cars: {fourWheels}
+                                </td>
+                                <td>
+                                    Motors: {twoWheels}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-            <table className="secondCount">
-         <thead>
-            <tr className="totalDets">
-            <th className="totalLive"></th>
-            <th className="totalLive">Cars</th>
-            <th className="totalLive">Motors</th>
-            <th className="totalLive">Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        {parkingAreas.map(area => (
-        <tr key={area.id} className="secondCont">
-            <td>{area.name}</td>
-            <td>{area.numberOfCars}</td>
-            <td>{area.numberOfMotorcycles}</td>
-            <td>{area.isActive? 'Active': 'Inactive'}</td>
-        </tr>
-    ))}
-    </tbody>
-</table>
-        </div>
+                    <table className="secondCount">
+                        <thead>
+                            <tr className="totalDets">
+                                <th className="totalLive"></th>
+                                <th className="totalLive">Cars</th>
+                                <th className="totalLive">Motors</th>
+                                <th className="totalLive">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {parkingAreas.map(area => (
+                                <tr key={area.id} className="secondCont">
+                                    <td>{area.name}</td>
+                                    <td>{area.numberOfCars}</td>
+                                    <td>{area.numberOfMotorcycles}</td>
+                                    <td>{area.isActive ? 'Active' : 'Inactive'}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          */}
 
-            {/* <h2>
-              Status: Available
-            </h2> */}
-
-          </div>
+          
             <div>
                 <h1 className="Btitle">Logs</h1>
                 <div className="outerLogs">

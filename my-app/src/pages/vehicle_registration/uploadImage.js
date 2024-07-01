@@ -28,7 +28,7 @@ export default function FileUpload({ label, onChange }) {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', ml: "1rem" }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' ,ml: '1rem',}}>
       <Typography style={{ fontSize: "1.125rem", fontWeight: 'bold', ml: '2' }}>
         {label}:
       </Typography>
@@ -62,7 +62,7 @@ export default function FileUpload({ label, onChange }) {
               variant="contained"
               component="span"
               sx={{
-                ml: '1rem',
+                
                 borderRadius: "1rem",
                 backgroundColor: '#8A252C',
                 color: '#F4C522' // Use color property to change font color

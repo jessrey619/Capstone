@@ -58,12 +58,12 @@ public class LogsController {
     
     @CrossOrigin
     @PostMapping("/log-in")
-    public ResponseEntity<String> log(@RequestParam int stickerId) {
+    public ResponseEntity<LogsEntity> log(@RequestParam int stickerId) {
         try {
-            String parkingAreaName = logsService.log(stickerId);
-            return ResponseEntity.ok(parkingAreaName);
+            LogsEntity logsEntity = logsService.log(stickerId);
+            return ResponseEntity.ok(logsEntity);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.badRequest().body(null);
         }
     }
 }

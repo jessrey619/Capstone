@@ -234,6 +234,24 @@ export default function SelectOrCr() {
                     <RejectModal open={isModalOpen} handleClose={handleCloseModal} email={email} rejectionType={rejectionType} relocate="/orcr" />
                     &nbsp;
                     <div>
+                    <Button
+                        sx={{
+                          textTransform: "none",
+                          color: "white",
+                          backgroundColor: "#8A252C",
+                          borderRadius: "5rem",
+                          fontSize: 'clamp(1rem, 3vw, 1.5rem)',
+                          width: 'clamp(10rem, 30vw, 13.25rem)',
+                          height: 'clamp(2rem, 10vh, 3.44rem)',
+                          padding: '6px 8px'
+                        }}
+                        onClick={()=>{
+                          setRejectionType('overall')
+                          handleOpenModal()
+                        }}
+                    >
+                      Reject
+                    </Button>
                       <Button
                         sx={{
                           textTransform: "none",

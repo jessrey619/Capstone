@@ -30,11 +30,12 @@ public class ParkingReservationController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("/get-by-date")
     public ResponseEntity<List<ParkingReservationEntity>> getParkingReservationsByDate(
             @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         List<ParkingReservationEntity> reservations = parkingReservationService.getParkingReservationEntityByDate(date);
-        if (reservations != null && !reservations.isEmpty()) {
+        if (reservations != null) {
             return new ResponseEntity<>(reservations, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

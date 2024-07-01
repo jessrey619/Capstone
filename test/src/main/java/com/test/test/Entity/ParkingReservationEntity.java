@@ -22,6 +22,7 @@ public class ParkingReservationEntity {
 	private Boolean cancelled;
 	private int quantity;
 	private String reason;
+	private String nameOfDriver;
 	public ParkingReservationEntity() {
 		cancelled = false;
 	}
@@ -54,6 +55,16 @@ public class ParkingReservationEntity {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	public String getNameOfDriver() {
+		return nameOfDriver;
+	}
+	public void setNameOfDriver(String nameOfDriver) {
+		this.nameOfDriver = nameOfDriver;
+	}
+	public Boolean getFourWheel() {
+		return fourWheel;
 	}
 	public Boolean getCancelled() {
 		return cancelled;

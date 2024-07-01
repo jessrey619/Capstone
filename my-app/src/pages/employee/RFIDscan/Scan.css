@@ -7,19 +7,23 @@
     background-color:rgb(255, 255, 255);
     
 }
-
-
 .topImage{
     width:20vw;
     left:0;
 
 }
 
+
+
 .topHeader{
     top:0;
     background-color:rgb(255, 255, 255);
     height: max-content;
     width: max-content;
+}
+
+.scan-vehicle-divider{
+    display: flex;
 }
 
 .bgRFID{
@@ -43,27 +47,35 @@
 
  /*CONTENT*/
  .OuterContainer{
-    width: 85vw;
-    height: 90vh;
     background-color: #F4C522;
     align-items: center;
     border-radius: 5px;
-    padding:5px;
-    display: relative;
-    margin: 0px 20px;
+    padding:1vw;
     box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.25);
+    margin-left: -10vw;
 }
 
 .firstInner{
-    width: 37vw;
-    height: 20vh;
+    width: 100%;
     display: flex;
     color: black;
     background-color: #EBEBEB;
-    box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.145);
     border-radius: 15px;
     margin: 1vh auto auto auto;
     padding: 5px;
+
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.stickerIdLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 100%;
 }
 
 .duo{
@@ -71,7 +83,7 @@
 }
 
 .firstInner p {
-    font-size: 1.6em;
+    font-size: 100%;
     font-weight: 700;
     text-align: center;
     margin: auto;
@@ -79,14 +91,11 @@
 }
 /* SEARCH SECTION */
 
-.stickerSearch{
-    padding:5px;
-}
 
 .stickerInput input[type="text"] {
-  width: 24vw;
+  width: 50vw;
   height: 10vh;
-  font-size: 1.5em;
+  font-size: 100%;
   line-height: 1;
   margin-left: 2%;
   font-family: 'Kumbh Sans', sans-serif;
@@ -100,18 +109,19 @@
   }
   
 .stickerBtn{
-    position: relative;
+    /* position: relative;
     display: flex;
     width: max-content;
     height: 5vh;
     cursor: pointer;
     padding: 2px;
-    margin: -.8% auto;
+    margin: -.8% auto; */
+    text-align: center;
 }
 
 .stickerBtn button{
     font-family: 'Kumbh Sans', sans-serif;
-    font-size: 1.2em;
+    font-size: 100%;
     background-color: #F4C522;
     border: none;
     box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.145);
@@ -127,13 +137,10 @@
 .infoInput{
     background-color: #D9D9D9;
     border-radius: 5px;
-    width: 25vw;
-    height: 10vh;
     align-items: center;
     justify-content: space-between;
     display: flex;
     flex-direction: column;
-    margin: 2vh auto;
 }
 
 .infoInput1{
@@ -151,8 +158,7 @@
 .infoInput2{
     background-color: #D9D9D9;
     border-radius: 5px;
-    width: 11.5vw;
-    height: 23vh;
+    width: 90%;
     align-items: center;
     justify-content: space-between;
     display: flex;
@@ -194,7 +200,7 @@ margin: 12% 0 auto auto;
 
 .infoInput p{
     font-weight: 700;
-    font-size: 1.7em;
+    font-size: 100%;
     text-align: center;
 }
 
@@ -205,20 +211,22 @@ margin: 12% 0 auto auto;
     align-items: center;
     justify-content: center;  
     margin-top: 23px;
+    flex-direction: column;
 }
 
 .left-section {
-    width: 13vw; 
-    height: 35vh; 
+    height: 70%; 
     background-color: #EBEBEB; 
     border-radius: 5px;
     margin-right: 10px;
     box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.145);
     align-items: center; 
     justify-content: center;
+
+    display: flex;
 }
 .left-section p {
-    font-size: 1.6em;
+    font-size: 100%;
     font-weight: 700;
     text-align: center;
     padding: 10px;
@@ -240,7 +248,7 @@ margin: 12% 0 auto auto;
     box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.145);
 }
 .top-right p {
-    font-size: 1.4em;
+    font-size: 100%;
     font-weight: 700;
     text-align: left;
     color: black;
@@ -255,7 +263,7 @@ margin: 12% 0 auto auto;
     box-shadow: 4px 4px 15px 3px rgba(0, 0, 0, 0.145);
 }
 .bottom-right p {
-    font-size: 1.4em;
+    font-size: 100%;
     font-weight: 700;
     text-align: left;
     color: black;
@@ -266,7 +274,7 @@ margin: 12% 0 auto auto;
     
     .stickerBtn button{
         font-family: 'Kumbh Sans', sans-serif;
-        font-size: 1.2em;
+        font-size: 100%;
         background-color: #F4C522;
         border: none;
         box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.145);
@@ -278,24 +286,24 @@ margin: 12% 0 auto auto;
         padding:2px
     }
     .stickerInput input[type="text"] {
-        font-size: 1.2em;
+        font-size: 100%;
         font-family: 'Kumbh Sans', sans-serif;
         background-color: #d9d9d900;
       }
     
     .firstInner p , .left-section p, .right-section p, .bottom-right p{
-        font-size: 1.3em;
+        font-size: 100%;
       }
 
     .infoInput1 p, .infoInput2 p, .infoInput3 p ,.infoInput4 p {
-        font-size: 1.3em;
+        font-size: 100%;
       }
       .top-right p{
         width: 8vw;
       }
     .infoInput2 {
-        width: 11.5vw;
-        height: 18.5vh;
+        width: 80%;
+        margin-bottom: 1vh;
     }
     .infoInput3{
         width: 14.5vw;
@@ -324,6 +332,10 @@ margin: 12% 0 auto auto;
         left: -2vw;
     }
 
+    .duo{
+        flex-direction: column;
+    }
+
     .displayUI {
         display: flex;
         flex-direction: column;
@@ -340,17 +352,12 @@ margin: 12% 0 auto auto;
         margin:10px 10px 50px auto;
     }
     .firstInner{
-        width: 80vw;
-        height: 20vh;
+        width: 90%;
         display: flex;
         margin: 15px auto auto auto;
     }
     
-    .left-section {
-        width: 30vw; 
-        height: 35vh; 
-    }
-
+  
     .right-section {
         display: flex;
         flex-direction: column;
@@ -371,7 +378,7 @@ margin: 12% 0 auto auto;
     .stickerInput input[type="text"] {
     width: 50vw;
     height: 10vh;
-    font-size: 1.4em;
+    font-size: 100%;
     margin: 0 auto;
     }
     .stickerBtn{
@@ -380,6 +387,7 @@ margin: 12% 0 auto auto;
         width: max-content;
         height: 5vh;
         margin: -.8% auto;
+        text-align: center;
     }
     
     .stickerBtn button{
@@ -397,8 +405,8 @@ margin: 12% 0 auto auto;
     }
     
     .infoInput2{
-        width: 25vw;
-        height: 23vh;
+        width: 90%;
+
         margin: 3% auto;
     }
 
@@ -414,11 +422,11 @@ margin: 12% 0 auto auto;
         margin: auto auto auto auto;
     }  
     .firstInner p , .left-section p, .right-section p, .bottom-right p{
-        font-size: 1.5em;
+        font-size: 100%;
       }
 
     .infoInput1 p, .infoInput2 p, .infoInput3 p ,.infoInput4 p {
-        font-size: 1.3em;
+        font-size: 100%;
       }
       .top-right p{
         width: 15vw;
@@ -440,13 +448,14 @@ margin: 12% 0 auto auto;
         .stickerInput input[type="text"] {
         width: 50vw;
         height: 10vh;
-        font-size: 1.4em;
+        font-size:100%;
         margin: 0 auto auto;
         }
 
         .stickerBtn{
             height: 5vh;
             margin: 2% auto;
+            text-align: center;
         }
         
         .stickerBtn button{
@@ -464,8 +473,8 @@ margin: 12% 0 auto auto;
         }
         
         .infoInput2{
-            width: 25vw;
-            height: 20vh;
+            width: 90%;
+
             margin: 3% auto;
         }
     

@@ -1,24 +1,226 @@
-.renewal-page-main-body{
+.renewal-page-main-body {
     min-height: 85vh;
     padding-top: 10vh;
+    margin-left: 7.5vw;
+    text-align: center;
 }
 
-.renewal-page-sidebar{
+.renewal-page-sidebar {
     width: 13vw;
-    background-color: red;
+
+    margin-left: -6vw;
 }
 
-.renewal-page-middle-content{
+.renewal-page-middle-content {
     display: flex;
     flex-direction: row;
 }
 
-.renewal-page-form-background{
-    background-color: pink;
+
+
+/* FOR NAMES */
+.vehicle-renewal-name-container{
+    display: flex;
+    flex-direction: row;
+    margin-left: 5%;
+    width: 100%;
+}
+.vehicle-renewal-name-subcontainer{
+    width: 30%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+/* END FOR NAMES */
+
+/* For Student name and ID No */
+.vehicle-renewal-studentinfo-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 5%;
+    text-align: center;
+}
+
+.vehicle-renewal-studentinfo-subcontainer{
+    width: 46%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+/* End for Student name and Id no */
+
+/* Address */
+.vehicle-renewal-address-subcontainer{
+    width: 94%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+/* end for address */
+
+/* for vehicle data */
+.renewal-page-form-vehicledata{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 5%;
+    text-align: center;
+}
+
+    /*for the radio groups */
+.vehicle-renewal-radio-group-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.vehicle-renewal-vehicle-type-radio-group{
+    width: 50%;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+
+
+.MuiInputBase-input.MuiFilledInput-input.Mui-disabled.css-10botns-MuiInputBase-input-MuiFilledInput-input{
+    width: 100%;
+}
+
+.renewal-page-form-mainform {
+    background-color: rgb(234, 199, 0);
+    width: 80vw;
+    margin-left: 5vw;
+    padding: 2vh;
+    border-radius: 5em;
+}
+
+.renewal-page-checkboxes {
+    display: flex;
+    flex-direction: row;
+    margin-left: 3vw;
+}
+
+.register-name-textfields{
+    width: 90%;
+}
+.register-name-textfields-containers{
+    width: 100%;
+}
+
+
+/* MOBILE RESPONSIVE */
+@media only screen and (max-width: 768px) {
+
+    /* FOR NAMES */
+    .vehicle-renewal-name-container{
+        display: flex;
+        flex-direction: column;
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 100%;
+    }
+    .vehicle-renewal-name-subcontainer{
+        width: 100%;
+    }
+
+/* END FOR NAMES */
+
+    /* For Student name and ID No */
+.vehicle-renewal-studentinfo-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+}
+
+.vehicle-renewal-studentinfo-subcontainer{
+    width: 100%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+/* End for Student name and Id no */
+
+/* Address */
+.vehicle-renewal-address-subcontainer{
+    width: 100%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+/* END FOR ADDRESS */
+
+/* FOR radio groups */
+/*for the radio groups */
+.vehicle-renewal-radio-group-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-renewal-vehicle-type-radio-group{
+    width: 100%;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+/* END FOR RADIO GROUPS */
+
+    .renewal-page-sidebar {
+        width: 40vw;
+        margin-left: -3vw;
+    }
+
+    .renewal-page-middle-content {
+        flex-direction: column;
+    }
+
+    .renewal-page-form-mainform {
+        width: 85vw;
+        margin-left: 4vw;
+    }
+
+    .renewal-page-checkboxes {
+        flex-direction: column;
+        padding-left: 5vw;
+    }
+
+    /* For buttons */
+    .upload-requirements-div button{
+        width: 50%;
+    }
+
+    .upload-requirements-div p{
+        overflow: hidden;
+    }
+
+    .upload-requirements-div div{
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .upload-requirements-div{
+        width: 90%;
+    }
+
     
 }
 
-.renewal-page-checkboxes{
-    display: flex;
-    flex-direction: row;
+@media only screen and (max-width: 480px) {
+    .renewal-page-sidebar {
+        width: 100%;
+        margin-left: -6vw;
+        margin-top: -5vw;
+    }
+
+    .renewal-page-main-body {
+        padding-top: 5vh;
+        margin-top: 15vw;
+    }
+
+    .renewal-page-form-mainform {
+        width: 85vw;
+        margin-left: 8vw;
+    }
+
+    .renewal-page-checkboxes {
+        flex-direction: column;
+        padding-left: 5vw;
+    }
 }

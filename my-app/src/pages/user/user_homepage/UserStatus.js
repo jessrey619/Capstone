@@ -196,6 +196,7 @@ export default function UserStatus() {
                   <TableBody>
                     {applications
                       .filter((application) => !application.rejected)
+                      .reverse()
                       .map((application) => (
                         <TableRow key={application.id}>
                           <TableCell align="center">

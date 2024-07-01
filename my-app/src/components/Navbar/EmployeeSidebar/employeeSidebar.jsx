@@ -206,7 +206,9 @@ function EmployeeSidebar({ activeMenuItem }) {
                 </>
               )}
 
-              {(employee.isViewLogger && employee.isApprover && employee.isVerifier) && (
+              {/* TODO TOMORROW: TRY TO MEND THE HISTORY PAGE */}
+
+              {/* {(employee.isViewLogger && employee.isApprover && employee.isVerifier) && (
                 <>
                   <li className={activeMenuItem === "Logs" ? "active" : ""}>
                     <TaskIcon sx={{ color: "black", marginRight: "1.5rem" }} />
@@ -215,7 +217,7 @@ function EmployeeSidebar({ activeMenuItem }) {
                       </Link>
                   </li>
                 </>
-              )}
+              )} */}
               
               <li className={activeMenuItem === "Profile" ? "active" : ""}>
                 <PersonIcon sx={{ color: "black", marginRight: "1.5rem" }} />

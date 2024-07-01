@@ -37,7 +37,6 @@ import EmployeeProfilePage from "./pages/employee/employee_profile/employee_prof
 import EmployeeProfileFinal from "./pages/employee/employee_profile/employee_profilefinal";
 import EmployeeDashboard from "./pages/employee/EmployeeDashboard/EmployeeDashboard";
 import AdminPage from "./pages/Admin/AdminLogin/AdminLogin";
-import Scans from "./pages/employee/RFIDscan/ScanVehicleSticker";
 import ApplicationHistory from "./pages/employee/history/History_User";
 import AdminRoutes from "./Utils/AdminRoutes";
 
@@ -64,6 +63,7 @@ import RolesTab from "./pages/Admin/RolesTab";
 import UserManagement from "./pages/Admin/UserManagement";
 import ReservationManagement from "./pages/Admin/ReservationManagement/ReservationManagement";
 import RenewalForm from "./pages/user/vehicle_registration/vehicle_renewal";
+import { Scans } from "./pages/employee/RFIDscan/ScanVehicleSticker";
 
 
 // import AccountExpiration from './pages/Admin/AccountExpiration';

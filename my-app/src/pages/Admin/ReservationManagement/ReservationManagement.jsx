@@ -52,6 +52,7 @@ function ReservationManagement() {
             fourWheel: fourWheel,
             quantity: quantity,
             reason: reason,
+            nameOfDriver: name
           });
           console.log('Reservation created:', response.data);
           setMessage(response.data)
@@ -68,12 +69,17 @@ function ReservationManagement() {
     const [cancelTrigger, setCancelTrigger] = useState(false);
     const [openConfirm, setOpenConfirm] = useState(false)
     const [message, setMessage] = useState("")
+    const [name, setName] = useState('')
 
     const handleClickOpen = (id) => {
         console.log(id);
         setChosenId(id);
         setOpen(true);
     };
+
+    const handleNameChange = (e) => {
+        setName(e.target.value);
+    }
 
     const handleClose = () => {
         setOpen(false);
@@ -145,6 +151,14 @@ function ReservationManagement() {
                             inputProps={{ min: 1 }}
                         />
                         <br />
+                        <TextField
+                            label="Name of Driver"
+                            value={name}
+                            onChange={handleNameChange}
+                            variant="outlined"
+                            fullWidth
+                            margin="dense"
+                        />
                         <TextField
                             label="Reason"
                             value={reason}

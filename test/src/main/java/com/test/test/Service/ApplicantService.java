@@ -355,6 +355,12 @@ public class ApplicantService {
     }
     
     
+    
+//    check if Viable for Registration
+//    public boolean checkForAvailableForRegistration(String email) {
+//    	List<ApplicantEntity> allApplicationsByApplicant = applicantRepository.findAllByEmail(email);
+//    	
+//    }
 
     public List<ApplicantEntity> getAllApplicants() {
         return applicantRepository.findAll();

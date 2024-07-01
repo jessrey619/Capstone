@@ -64,13 +64,9 @@ public class LogsService {
         int countOther = (int) logs.stream().filter(log -> !log.getIsFourWheel()).count();
         return new VehicleTypeCountResponse(countFourWheel, countOther);
     }
-    
-    
-    
-    
-    
+
     //TODO ask ETO ug unsaon ni style
-    public String log(int stickerId) {
+    public LogsEntity log(int stickerId) {
     // Get all parking areas
     List<ParkingAreaEntity> parkingAreas = parkingAreaRepository.findAll();
     VehicleEntity vehicle = vehicleRepository.findByStickerId(stickerId);
@@ -110,8 +106,7 @@ public class LogsService {
     List<LogsEntity> existingLogs = logsRepository.findByStickerId(stickerId);
     
     //finds the vehicle by sticker Id
-    
-    
+
     if(vehicle == null) {
     	throw new RuntimeException("There is no Vehicle with that Id");
     }
@@ -152,9 +147,11 @@ public class LogsService {
             } else {
             	selectedParkingArea.setNumberOfMotorcycles(selectedParkingArea.getNumberOfMotorcycles()+1);
             }
+            
+//            SAVES UPDATED PARKING AREA
             parkingAreaRepository.save(selectedParkingArea);
             
-            return logsEntity.getParkingAreaName();
+            return logsEntity;
         }
         //checks if there is login but no logout OR Vehicle is Still in the Premises
         else if(existingLog.getTimeIn()!=null && existingLog.getTimeOut()==null) {
@@ -167,6 +164,7 @@ public class LogsService {
         	} else {
         		existingLog.setTimeOut(logOut);
         		//TODO insert Plus and Minus Logic for Parking Area Spaces here FOR THE PARKING AREA MOTOR COUNT
+//        		SAVES LOGS NA MI LOGOUT
         		logsRepository.save(existingLog);
         		
         		existingParkingArea.setOccupiedSpace(existingParkingArea.getOccupiedSpace()-1);
@@ -179,7 +177,7 @@ public class LogsService {
                 }
                 
                 parkingAreaRepository.save(existingParkingArea);
-        		return existingLog.getParkingAreaName();
+        		return existingLog;
         	}
         }
         else if(existingLog.getTimeIn()==null){
@@ -197,7 +195,8 @@ public class LogsService {
         logsEntity.setColor(vehicle.getColor());
         logsEntity.setPlateNo(vehicle.getPlateNo());
         logsEntity.setName(vehicle.getName());
-
+        
+//        SAVES EXISTING LOGS
         logsRepository.save(logsEntity);
         
         selectedParkingArea.setOccupiedSpace(selectedParkingArea.getOccupiedSpace()+1);
@@ -210,9 +209,9 @@ public class LogsService {
         }
         
         parkingAreaRepository.save(selectedParkingArea);
-        return logsEntity.getParkingAreaName();
+        return logsEntity;
     }
-	return "Failed ";
+	return new LogsEntity();
 }
 
     

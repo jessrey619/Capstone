@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ChooseUserTypeModal from '../vehicle_registration/ChooseUserTypeModal/ChooseUserTypeModal';
 import axios from 'axios';
 import './user_homepage.css';
+import { useNavigate } from 'react-router-dom';
 
 const UserAnnouncement = () => {
   const [activeStatus, setActiveStatus] = useState("");
@@ -13,12 +14,13 @@ const UserAnnouncement = () => {
   const [date, setDate] = useState();
   const [email, setEmail] = useState('');
   const [isDisabled, setIsDisabled] = useState(false)
+  const navigate = useNavigate();
 
   // for renewal
   const [isRenewable, setIsRenewable] = useState(false);
 
-  const handleRenewal = () =>{
-
+  const handleRenewalButton = () =>{
+    navigate("/renewal")
   }
 
   // Decoding token
@@ -51,6 +53,8 @@ const UserAnnouncement = () => {
   const handleRegisterButtonClick = () => {
     setIsModalOpen(true);
   };
+
+  
 
   // const isRegistrationDisabled = () => {
   //   if (Object.keys(applications).length === 0) {
@@ -132,7 +136,7 @@ const UserAnnouncement = () => {
     fetchData();
   }, [email]);
   
-  console.log('applications', applications);
+  // console.log('applications', applications);
 
   return (
     <section>
@@ -148,7 +152,9 @@ const UserAnnouncement = () => {
         <div className="userHomepagebuttonContainer">
           {isRenewable?
             (<button 
-                className="registerButton">
+                className="registerButton"
+                onClick={handleRenewalButton} 
+                disabled={isDisabled}>
                   Renew Application
               </button>):
             (<button className="registerButton" 
